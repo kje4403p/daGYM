@@ -16,7 +16,7 @@
 	<!--  VO클래스의 별칭을 작성하는 태그
 	ex) Member VO의 정식 이름(풀네임):com.kh.spring.member.model.vo.Member  -->
 	<typeAliases>
-		
+		<typeAlias type="com.kh.dagym.member.model.vo.Member" alias="Member"/>
 	</typeAliases>
 	
 	<!--  mapper.xml 파일을 등록하는 태그 -->

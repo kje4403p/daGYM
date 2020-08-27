@@ -1,16 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <head>
+	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
    <!-- Css Styles -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="${contextPath}/resources/css/style.css" type="text/css">
 </head>
 </head>
 <body>
@@ -37,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <div class="subscribe-option set-bg" data-setbg="resources/img/footer-signup.jpg">
+            <div class="subscribe-option set-bg" data-setbg="${contextPath}/resources/img/footer-signup.jpg">
                 <div class="so-text">
                     <h4>Subscribe To Our Mailing List</h4>
                     <p>Sign up to receive the latest information </p>
@@ -61,12 +62,12 @@
     <!-- Footer Section End -->
     <!-- Breadcrumb Section End -->
     <!-- Js Plugins -->
-    <script src="resources/js/jquery-3.3.1.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
-    <script src="resources/js/jquery.magnific-popup.min.js"></script>
-    <script src="resources/js/mixitup.min.js"></script>
-    <script src="resources/js/jquery.slicknav.js"></script>
-    <script src="resources/js/owl.carousel.min.js"></script>
-    <script src="resources/js/main.js"></script>
+    <script src="${contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+    <script src="${contextPath}/resources/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/resources/js/jquery.magnific-popup.min.js"></script>
+    <script src="${contextPath}/resources/js/mixitup.min.js"></script>
+    <script src="${contextPath}/resources/js/jquery.slicknav.js"></script>
+    <script src="${contextPath}/resources/js/owl.carousel.min.js"></script>
+    <script src="${contextPath}/resources/js/main.js"></script>
 </body>
 </html>

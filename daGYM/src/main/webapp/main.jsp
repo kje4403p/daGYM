@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gutim | Template</title>
-    
+    <!-- context Path를 프로젝트 전체에서 간단히 사용할 수 있도록 변수 선언 -->
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 	
     <!-- Google Font -->
@@ -41,12 +41,13 @@
             <div class="nav-menu">
                 <nav class="mainmenu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
-                        <li><a href="./about-us.html">About</a></li>
-                        <li><a href="./classes.html">Classes</a></li>
-                        <li><a href="WEB-INF/views/common/header.jsp">Blog</a></li>
-                        <li><a href="./gallery.html">Gallery</a></li>
-                        <li><a href="./contact.html">Contacts</a></li>
+                    	<li><a href="member/login">Login</a></li>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li class="active"><a href="#">Blog</a></li>
+                        <li><a href="#">Gallery</a></li>
+                        <li><a href="#">Contacts</a></li>
                     </ul>
                 </nav>
                 <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
@@ -347,7 +348,7 @@
                     <div class="banner-text">
                         <h2>Get training today</h2>
                         <p>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industry’s standard.</p>
+                            industryâs standard.</p>
                         <a href="#" class="primary-btn banner-btn">Contact Now</a>
                     </div>
                 </div>
