@@ -25,7 +25,7 @@
             <div class="nav-menu">
                 <nav class="mainmenu mobile-menu">
                     <ul>
-                    	<li><a href="member/login">Login</a></li>
+                    	<li><a href="${contextPath}/member/login">Login</a></li>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">소개</a></li>
                         <li><a href="trainer/trainerView">트레이너 예약</a></li>

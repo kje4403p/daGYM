@@ -33,29 +33,7 @@
     </div> 
 
     <!-- Header Section Begin -->
-    <header class="header-section">
-        <div class="container">
-            <div class="logo">
-                <a href="${contextPath}">
-                    <img src="resources/img/logo3.png" alt="" width="150px">
-                </a>
-            </div>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                    	<li><a href="member/login">Login</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">소개</a></li>
-                        <li><a href="trainer/trainerView">트레이너 예약</a></li>
-                        <li class="active"><a href="#">커뮤니티</a></li>
-                        <li><a href="#">고객센터</a></li>
-                    </ul>
-                </nav>
-                <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
+  	<jsp:include page="WEB-INF/views/common/header.jsp"/>
     <!-- Header End -->
 
     <!-- Hero Section Begin -->
