@@ -10,7 +10,7 @@
 	<jsp:include page="../common/header.jsp"/>
 	<div class="container mt-5 pt-5" id="content-main">
 		<div>
-			<img>.
+			<img>..
 			<img>
 		</div>
 	</div>
