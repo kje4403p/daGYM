@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Component
 @RequestMapping("/trainer/*")
-public class trainerController {
+public class TrainerController {
 	
 	
 	//트레이너화면
