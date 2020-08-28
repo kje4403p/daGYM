@@ -6,13 +6,12 @@ import org.springframework.stereotype.Repository;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.community.model.dao.EventDAO;
 
-@Repository
+//@Repository
 public class EventService {
 	
 	private EventDAO eventDAO;
 	private PageInfo pInfo;
 	
-	@Autowired
 	public EventService(EventDAO eventDAO, PageInfo pInfo) {
 		super();
 		this.eventDAO = eventDAO;
