@@ -2,7 +2,12 @@
 # Edit at https://www.gitignore.io/?templates=java,eclipse
 
 */target/**
+
+/target/
+**/target
+
 /jspwork/
+
 *.properties
 ### Eclipse ###
 .metadata
