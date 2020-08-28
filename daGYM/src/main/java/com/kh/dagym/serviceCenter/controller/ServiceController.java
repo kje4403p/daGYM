@@ -13,7 +13,7 @@ import com.kh.dagym.serviceCenter.service.ServiceBoard;
 @Controller
 @RequestMapping("/service/*")
 public class ServiceController {
-	
+	    //
 	@Autowired
 	private ServiceBoard serviceBoard;
 	
