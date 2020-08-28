@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -8,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gutim | Template</title>
-    <!-- context Path를 프로젝트 전체에서 간단히 사용할 수 있도록 변수 선언 -->
+    <!-- context Pathë¥¼ íë¡ì í¸ ì ì²´ìì ê°ë¨í ì¬ì©í  ì ìëë¡ ë³ì ì ì¸ -->
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 	
     <!-- Google Font -->
@@ -43,11 +45,10 @@
                     <ul>
                     	<li><a href="member/login">Login</a></li>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Classes</a></li>
-                        <li class="active"><a href="#">Blog</a></li>
-                        <li><a href="#">Gallery</a></li>
-                        <li><a href="#">Contacts</a></li>
+                        <li><a href="#">소개</a></li>
+                        <li><a href="trainer/trainerView">트레이너 예약</a></li>
+                        <li class="active"><a href="#">커뮤니티</a></li>
+                        <li><a href="#">고객센터</a></li>
                     </ul>
                 </nav>
                 <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
@@ -348,7 +349,7 @@
                     <div class="banner-text">
                         <h2>Get training today</h2>
                         <p>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industryâs standard.</p>
+                            industryÃ¢ÂÂs standard.</p>
                         <a href="#" class="primary-btn banner-btn">Contact Now</a>
                     </div>
                 </div>
