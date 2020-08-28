@@ -18,7 +18,7 @@
     <header class="header-section">
         <div class="container">
             <div class="logo">
-                <a href="./index.html">
+                <a href="${contextPath}">
                     <img src="${contextPath}/resources/img/logo3.png" alt="" width="150px">
                 </a>
             </div>
