@@ -52,6 +52,7 @@
                     </ul>
                 </nav>
                 <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
+                <a href="admin/adminView" class="primary-btn signup-btn">관리자 페이지</a>
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>
