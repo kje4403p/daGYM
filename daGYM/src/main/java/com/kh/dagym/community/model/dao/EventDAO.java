@@ -4,13 +4,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class EventDAO {
 	
 	private SqlSessionTemplate sqlSession;
 	
 	
-	@Autowired
 	public EventDAO(SqlSessionTemplate sqlSession) {
 		super();
 		this.sqlSession = sqlSession;

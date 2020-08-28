@@ -17,16 +17,16 @@ public class EventController {
 	
 	private final int BOARD_TYPE = 1;
 	
-	@Autowired
-	public EventController(EventService eventService) {
-		super();
-		this.eventService = eventService;
-	}
+//	@Autowired
+//	public EventController(EventService eventService) {
+//		super();
+//		this.eventService = eventService;
+//	}
 
 	@GetMapping("list")
 	public String eventList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
 		
-		PageInfo pInfo = eventService.pagenation(BOARD_TYPE, cp);
+//		PageInfo pInfo = eventService.pagenation(BOARD_TYPE, cp);
 		
 		return null;
 	}
