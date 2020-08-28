@@ -18,6 +18,10 @@ public class PageInfo {
 	private String category;
 	
 	
+	public PageInfo() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	
 	public PageInfo(int currentPage, int listCount, int boardType) {
         super();
