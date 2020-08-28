@@ -28,7 +28,7 @@
                     	<li><a href="${contextPath}/member/login">Login</a></li>
                         <li><a href="#">Home</a></li>
                         <li><a href="#">소개</a></li>
-                        <li><a href="trainer/trainerView">트레이너 예약</a></li>
+                        <li><a href="${contextPath}/trainer/trainerView">트레이너 예약</a></li>
                         <li class="active"><a href="#">커뮤니티</a></li>
                         <li><a href="#">고객센터</a></li>
                     </ul>
