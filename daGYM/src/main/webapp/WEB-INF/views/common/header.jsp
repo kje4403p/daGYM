@@ -18,7 +18,7 @@
     <header class="header-section">
         <div class="container">
             <div class="logo">
-                <a href="./index.html">
+                <a href="${contextPath}">
                     <img src="${contextPath}/resources/img/logo3.png" alt="" width="150px">
                 </a>
             </div>
@@ -27,11 +27,10 @@
                     <ul>
                     	<li><a href="${contextPath}/member/login">Login</a></li>
                         <li><a href="#">Home</a></li>
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Classes</a></li>
-                        <li class="active"><a href="#">Blog</a></li>
-                        <li><a href="#">Gallery</a></li>
-                        <li><a href="#">Contacts</a></li>
+                        <li><a href="#">소개</a></li>
+                        <li><a href="${contextPath}/trainer/trainerView">트레이너 예약</a></li>
+                        <li class="active"><a href="#">커뮤니티</a></li>
+                        <li><a href="#">고객센터</a></li>
                     </ul>
                 </nav>
                 <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
