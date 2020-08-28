@@ -21,6 +21,6 @@
 	
 	<!--  mapper.xml 파일을 등록하는 태그 -->
 	<mappers>
-		
+		<mapper resource="/mapper/member-mapper.xml"/>
 	</mappers>
 </configuration>

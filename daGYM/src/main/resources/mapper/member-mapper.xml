@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<resultMap id="memberResultSet" type="Member" >
+	
+		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
+		<id property="memberNo" column="MEMBER_NO"/>
+		
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberPwd" column="MEMBER_PWD" />
+		<result property="memberName" column="MEMBER_NM" />
+		<result property="memberPhone" column="MEMBER_PHONE" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DT" />
+		<result property="memberStatus" column="MEMBER_STATUS" />
+		<result property="memberGrade" column="MEMBER_GRADE" />
+	
+	</resultMap>
+
+
+	<insert id="signUp" parameterType="Member">
+	INSERT INTO MEMBER 
+	VALUES (SEQ_MNO.NEXTVAL, #{memberId}, #{memberPwd}, #{memberName}, #{memberPhone}, #{memberEmail}, SYSDATE, DEFAULT, DEFAULT)
+	</insert>
+</mapper>
