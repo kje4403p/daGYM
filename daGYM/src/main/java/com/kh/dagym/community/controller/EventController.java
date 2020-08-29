@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.dagym.common.PageInfo;
-import com.kh.dagym.community.service.EventService;
-import com.kh.dagym.community.service.EventServiceImpl;
+import com.kh.dagym.community.model.service.EventService;
+import com.kh.dagym.community.model.service.EventServiceImpl;
 
 @Controller
 @RequestMapping("/event/*")

@@ -9,7 +9,7 @@ public class EventDAO {
 	
 	private SqlSessionTemplate sqlSession;
 	
-	
+	@Autowired
 	public EventDAO(SqlSessionTemplate sqlSession) {
 		super();
 		this.sqlSession = sqlSession;

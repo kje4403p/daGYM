@@ -1,4 +1,4 @@
-package com.kh.dagym.community.service;
+package com.kh.dagym.community.model.service;
 
 import com.kh.dagym.common.PageInfo;
 
