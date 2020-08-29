@@ -1,5 +1,8 @@
 package com.kh.dagym.common;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PageInfo {
 	
 	private int currentPage;	// 현재 페이지 번호
@@ -14,6 +17,10 @@ public class PageInfo {
 	private int boardType; // 게시글 타입
 	private String category;
 	
+	
+	public PageInfo() {
+		// TODO Auto-generated constructor stub
+	}
 	
 	
 	public PageInfo(int currentPage, int listCount, int boardType) {
