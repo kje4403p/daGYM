@@ -1,10 +1,10 @@
 package com.kh.dagym.common;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Board {
 	private int boardNo;
-	private int memberNo;
+	private String boardWriter;
 	private int boardType;
 	private String boardTitle;
 	private String boardContent;
@@ -20,12 +20,12 @@ public class Board {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Board(int boardNo, int memberNo, int boardType, String boardTitle, String boardContent,
+	public Board(int boardNo, String boardWriter, int boardType, String boardTitle, String boardContent,
 			Timestamp boardEnrollDate, Timestamp boardModiftDate, String boardStatus, int qnaCode, Timestamp startDate,
 			Timestamp endDate, int views) {
 		super();
 		this.boardNo = boardNo;
-		this.memberNo = memberNo;
+		this.boardWriter = boardWriter;
 		this.boardType = boardType;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
@@ -46,12 +46,12 @@ public class Board {
 		this.boardNo = boardNo;
 	}
 
-	public int getMemberNo() {
-		return memberNo;
+	public String getMemberNo() {
+		return boardWriter;
 	}
 
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
+	public void setMemberNo(String boardWriter) {
+		this.boardWriter = boardWriter;
 	}
 
 	public int getBoardType() {
@@ -136,7 +136,7 @@ public class Board {
 
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", memberNo=" + memberNo + ", boardType=" + boardType + ", boardTitle="
+		return "Board [boardNo=" + boardNo + ", memberNo=" + boardWriter + ", boardType=" + boardType + ", boardTitle="
 				+ boardTitle + ", boardContent=" + boardContent + ", boardEnrollDate=" + boardEnrollDate
 				+ ", boardModiftDate=" + boardModiftDate + ", boardStatus=" + boardStatus + ", qnaCode=" + qnaCode
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", views=" + views + "]";
@@ -154,7 +154,7 @@ public class Board {
 		result = prime * result + ((boardTitle == null) ? 0 : boardTitle.hashCode());
 		result = prime * result + boardType;
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + memberNo;
+		result = prime * result + ((boardWriter == null) ? 0 : boardWriter.hashCode());
 		result = prime * result + qnaCode;
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + views;
@@ -204,7 +204,7 @@ public class Board {
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
-		if (memberNo != other.memberNo)
+		if (boardWriter != other.boardWriter)
 			return false;
 		if (qnaCode != other.qnaCode)
 			return false;

@@ -1,8 +1,11 @@
 package com.kh.dagym.community.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.community.model.dao.EventDAO;
 
@@ -30,5 +33,17 @@ public class EventServiceImpl implements EventService{
 		
 		return pInfo;
 	}
+
+
+	/** 게시글 목록 조회
+	 * @param pInfo
+	 * @return eventList
+	 */ 
+	@Override
+	public List<Board> selectList(PageInfo pInfo) {
+		return eventDAO.selectList(pInfo);
+	}
+	
+	
 
 }

@@ -1,8 +1,14 @@
 package com.kh.dagym.community.model.dao;
 
+import java.util.List;
+
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.kh.dagym.common.Board;
+import com.kh.dagym.common.PageInfo;
 
 @Repository
 public class EventDAO {
@@ -22,6 +28,14 @@ public class EventDAO {
 	 */
 	public int getListCount() {
 		return sqlSession.selectOne("eventMapper.getListCount");
+	}
+
+
+	public List<Board> selectList(PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("eventMapper.selectList", null, rowBounds);
 	}
 
 }
