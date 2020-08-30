@@ -21,5 +21,19 @@ public class MemberServiceImpl implements MemberService{
 		int result = memberDAO.signUp(signUpMember);
 		return result;
 	}
+
+	// 로그인 Service구현
+	@Override
+	public Member login(Member member) {
+		Member loginMember = memberDAO.login(member);
+	
+		
+		return loginMember;
+	}
+	// 아이디 중복체크 Service 구현
+	@Override
+	public int idDupCheck(String memberId) {
+		return memberDAO.idDupCheck(memberId);
+	}
 	
 	}

@@ -27,9 +27,6 @@
 <link href='${contextPath}/resources/fonts/FontAwesome.otf' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="${contextPath}/resources/css/linear-icons.css">
 
-<script src="${contextPath}/resources/js/validator.min.js" type="text/javascript"></script>
-<script src="${contextPath}/resources/js/form-scripts.js" type="text/javascript"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 
 
@@ -56,7 +53,8 @@
          
 
             <!-- register form 1 -->
-          <form method="POST" action="signUpAction" name="signUpForm" onsubmit="return validate();">
+          
+          <form method="POST" action="signUpAction" name="signUpForm" id="signUp" onsubmit="return validate();">
             <div class="col-sm-6">
                 <div id="register-form">
                     <h3 class="log-title">회원가입</h3>
@@ -85,7 +83,10 @@
                     <div class="form-group">
                     
                         <input type="email" class="form-control" id="memberEmail" name="memberEmail"  placeholder="이메일" required>
+                        <button type="submit" name="emailCheck" id="emailCk-btn" onsubmit="return emailCheck();">이메일 인증</button>
+                        
                         <div class="help-block with-errors"><span id="checkEmail">&nbsp;</span></div>
+                       
                     </div>
                     
                     <!-- log-line -->
@@ -106,6 +107,7 @@
                     </div>
                 </div>
                 </form>
+               
             </div><!-- / col-sm-6 -->
             <!-- / register form 1 -->
         </div><!-- / row -->
@@ -117,9 +119,23 @@
 <!-- / forms -->
 <!--  
 <script>
+ $("#emailCk-btn").on("click", function(){
+	 form.attr("action","auth.do");
+	 
+ });
+ 
+ $("#signUp").on("click", function(){
+	 form.attr("action","signUpAction");
+	 
+ });
+-->
+	
+</script>
+
+<script>
 	var signUpCheck={
 		"id" : false,
-		"pwd" : false,
+		"pwd1" : false,
 		"pwd2" : false,
 		"name" : false,
 		"phone" : false,
@@ -130,6 +146,7 @@
 	var $id = $("#memberId");
 	var $pwd1 = $("#memberPwd");
 	var $pwd2 = $("#memberPwd2");
+	var $pwd = $("#memberPwd, #memberPwd2")
 	var $name = $("#memberName");
 	var $phone = $("#memberPhone");
 	var $email = $("#memberEmail");
@@ -138,7 +155,7 @@
 		signUpCheck.id=false;
 		console.log("체크" +signUpCheck.id)
 		var regExp = /^[a-zA-Z\d]{6,12}$/;
-		
+		console.log($id.val())
 		if(!regExp.test($id.val())){
 			$("#checkId").text("아이디 형식이 유효하지 않습니다.").css("color","red");
 			signUpCheck.id=false;
@@ -166,23 +183,26 @@
 		
 	});
 	
-	$pwd1.on("input", function(){
+	$pwd.on("input", function(){
 		var regExp = /^[A-Za-z0-9]{6,12}$/;
+		console.log($("#memberPwd").val())
+		console.log("22 : " + $pwd2.val())
 		
-		if(!regExp.test($("#memberPwd1").val())){
-			$("#checkPwd1").text("비밀번호 형식이 유효하지 않습니다.").css("color", "red");
+		if(!regExp.test($("#memberPwd").val())){
+			$("#checkPwd").text("비밀번호 형식이 유효하지 않습니다.").css("color", "red");
 			signUpCheck.pwd1 = false;
 			
 		}else{
-			$("#checkPwd1").text("사용 가능한 비밀번호 입니다.").css("color", "blue");
-			signUpCheck.pwd2 = true;
+			$("#checkPwd").text("사용 가능한 비밀번호 입니다.").css("color", "blue");
+			signUpCheck.pwd1 = true;
 		}
 		
 		if(!signUpCheck.pwd1 && $pwd2.val().length > 0){
-			swal("유효한 비밀번호를 작성해 주세요.");
+			console.log("불일치")
 			$pwd2.val("");
 			$pwd1.focus();
 		}else if(signUpCheck.pwd1 && $pwd2.val().length > 0){
+			console.log("일치")
 			if($pwd1.val().trim() != $pwd2.val().trim()){
 				$("#checkPwd2").text("비밀번호 불일치").css("color","red");
 				signUpCheck.pwd2 = false;
@@ -196,19 +216,19 @@
 	
 	$name.on("input", function(){
 		var regExp = /^[가-힣]{2,}$/;
-		
+		console.log("이름 " + $name.val())
 		if(!regExp.test($name.val())){
 			$("#checkName").text("한글 두 글자 이상을 입력하세요.").css("color", "red");
-			signUpcheck.name = false;
+			signUpCheck.name = false;
 		}else{
 			$("#checkName").text("유효한 이름입니다.").css("color", "blue");
-			signUpcheck.name = true;
+			signUpCheck.name = true;
 		}
 		
 	});
 	
 	$phone.on("input", function(){
-		var regExp =  /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/g;
+		var regExp =  /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/;
 		
 		if(!regExp.test($phone.val())){
 			$("#checkPhone").text("전화번호가 유효하지 않습니다.").css("color", "red");
@@ -257,9 +277,10 @@
 
 </script>
 
--->
+
 
 	<jsp:include page="../common/footer.jsp"/>
+	
 </body>
 
 
