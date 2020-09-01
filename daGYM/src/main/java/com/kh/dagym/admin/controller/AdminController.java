@@ -1,3 +1,4 @@
+
 package com.kh.dagym.admin.controller;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class AdminController {
 		 * List<Member> mList = adminService.selectMList(); model.addAttribute("mList",
 		 * mList);
 		 */
+
 		return "admin/memberList";
 	}
 	
