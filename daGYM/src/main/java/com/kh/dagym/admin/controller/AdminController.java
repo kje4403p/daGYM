@@ -28,6 +28,7 @@ public class AdminController {
 		 * List<Member> mList = adminService.selectMList(); model.addAttribute("mList",
 		 * mList);
 		 */
+
 		return "admin/memberList";
 	}
 	
