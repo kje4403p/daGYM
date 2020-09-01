@@ -11,6 +11,8 @@
 <style type="text/css">
 	#dataTable > tbody {
 	color: white;}
+	.table-hover tbody tr:hover {
+  	color: white;}
 </style>
 </head>
 <body>
@@ -31,48 +33,53 @@
                                     <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
-                                                <th>회원 번호</th>
+                                                <th>트레이너 번호</th>
                                                 <th>아이디</th>
-                                                <th>이름</th>
+                                                <th>이름(성별)</th>
                                                 <th>전화번호</th>
-                                                <th>이메일</th>
-                                                <th>가입일</th>
+                                                <th>경력</th>
+                                                <th>회원수</th>
+                                                <th>1회 수업료</th>
+                                                <th>입사일</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
-                                                <th>회원 번호</th>
+                                                <th>트레이너 번호</th>
                                                 <th>아이디</th>
-                                                <th>이름</th>
+                                                <th>이름(성별)</th>
                                                 <th>전화번호</th>
-                                                <th>이메일</th>
-                                                <th>가입일</th>
+                                                <th>경력</th>
+                                                <th>회원수</th>
+                                                <th>1회 수업료</th>
+                                                <th>입사일</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>user01</td>
-                                                <td>유저일</td>
-                                                <td>010-1111-1111</td>
-                                                <td>user01@naver.com</td>
-                                                <td>2011/04/25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>user02</td>
-                                                <td>유저이</td>
-                                                <td>010-2222-2222</td>
-                                                <td>user02@naver.com</td>
-                                                <td>2011/04/25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>user03</td>
-                                                <td>유저삼</td>
-                                                <td>010-3333-3333</td>
-                                                <td>user03@naver.com</td>
-                                                <td>2009/01/12</td>
+                                                <c:choose>
+                                            	<c:when test="${empty tList}">
+                                            		<tr><td colspan="8">회원 없음</td></tr>
+                                            	</c:when>
+                                            	
+                                            	<c:otherwise>
+                                            		<c:forEach var="trainer" items="${tList}">
+                                            			<tr>
+                                            				<td>${trainer.trainerNo}</td>
+                                            				<td>${trainer.trainerId}</td>
+                                            				<td>${trainer.trainerName}(${trainer.trainerGender})</td>
+                                            				<td>${trainer.trainerPhone}</td>
+                                            				<td>${trainer.trainerCareer}</td>
+                                            				<td>${trainer.trainerMemberCount}</td>
+                                            				<td>${trainer.trainerPrice}</td>
+                                            				<td>
+                                            					<fmt:formatDate var="enrollDate" value="${trainer.trainerEnrollDate}" pattern="yyyy-MM-dd"/>
+                                            					${enrollDate}
+                                            				</td>
+                                            			</tr>
+                                            		</c:forEach>
+                                            	</c:otherwise>
+                                            </c:choose>
                                             </tr>
                                         </tbody>
                                     </table>

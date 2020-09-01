@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kh.dagym.admin.model.service.AdminService;
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.admin.model.vo.Trainer;
 
 @Component
 @RequestMapping("/admin/*")
@@ -24,16 +25,17 @@ public class AdminController {
 	
 	@RequestMapping("memberList")
 	public String memberListView(Model model) {
-		/*
-		 * List<Member> mList = adminService.selectMList(); model.addAttribute("mList",
-		 * mList);
-		 */
+		List<Member> mList = adminService.selectMList(); 
+		model.addAttribute("mList", mList);
 
 		return "admin/memberList";
 	}
 	
 	@RequestMapping("trainerList")
-	public String trainerListView() {
+	public String trainerListView(Model model) {
+		List<Trainer> tList = adminService.selectTList(); 
+		model.addAttribute("tList", tList);
+		
 		return "admin/trainerList";
 	}
 }
