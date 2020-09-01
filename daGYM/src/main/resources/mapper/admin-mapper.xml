@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+	<resultMap id="memberResultSet" type="AMember" >
+		<id property="memberNo" column="MEMBER_NO"/>
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberPwd" column="MEMBER_PWD" />
+		<result property="memberName" column="MEMBER_NM" />
+		<result property="memberPhone" column="MEMBER_PHONE" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE" />
+		<result property="memberStatus" column="MEMBER_STATUS" />
+		<result property="memberGrade" column="MEMBER_GRADE" />
+	</resultMap>
+	
+	<resultMap id="trainerResultSet" type="ATrainer" >
+		<id property="trainerNo" column="TRAINER_NO"/>
+		<result property="trainerId" column="TRAINER_ID" />
+		<result property="trainerPwd" column="TRAINER_PWD" />
+		<result property="trainerName" column="TRAINER_NM" />
+		<result property="trainerGender" column="TRAINER_GENDER" />
+		<result property="trainerPhone" column="TRAINER_PHONE" />
+		<result property="trainerCareer" column="TRAINER_CAREER" />
+		<result property="trainerMemberCount" column="TRAINER_M_CNT" />
+		<result property="trainerEnrollDate" column="TRAINER_ENROLL_DATE" />
+		<result property="trianerStatus" column="TRAINER_STATUS" />
+		<result property="trainerPrice" column="TRAINER_PRICE" />
+	</resultMap>
+	
+	<!-- 회원 전체 조회 -->
+	<select id="selectMList" resultMap="memberResultSet">
+		SELECT * FROM MEMBER
+		WHERE MEMBER_STATUS='Y'
+		ORDER BY MEMBER_NO
+	</select>
+	
+	<!-- 트레이너 전체 조회 -->
+	<select id="selectTList" resultMap="trainerResultSet">
+		SELECT * FROM TRAINER
+		WHERE TRAINER_STATUS='Y'
+		ORDER BY TRAINER_NO
+	</select>
+</mapper>

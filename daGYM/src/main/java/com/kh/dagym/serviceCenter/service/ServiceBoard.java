@@ -11,11 +11,4 @@ public interface ServiceBoard {
 	PageInfo pagination(int type, int cp);
 
 	
-	/** 게시글 목록 조회 Service
-	 * @param pInfo
-	 * @return boardList
-	 */
-	List<Board> selectList(PageInfo pInfo);
-
-	
 }
