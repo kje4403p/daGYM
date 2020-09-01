@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,8 @@
 <style type="text/css">
 	#dataTable > tbody {
 	color: white;}
+	.table-hover tbody tr:hover {
+  	color: white;}
 </style>
 </head>
 <body>
@@ -50,30 +53,27 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>user01</td>
-                                                <td>유저일</td>
-                                                <td>010-1111-1111</td>
-                                                <td>user01@naver.com</td>
-                                                <td>2011/04/25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>user02</td>
-                                                <td>유저이</td>
-                                                <td>010-2222-2222</td>
-                                                <td>user02@naver.com</td>
-                                                <td>2011/04/25</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>user03</td>
-                                                <td>유저삼</td>
-                                                <td>010-3333-3333</td>
-                                                <td>user03@naver.com</td>
-                                                <td>2009/01/12</td>
-                                            </tr>
+                                            <c:choose>
+                                            	<c:when test="${empty mList}">
+                                            		<tr><td colspan="6">회원 없음</td></tr>
+                                            	</c:when>
+                                            	
+                                            	<c:otherwise>
+                                            		<c:forEach var="member" items="${mList}">
+                                            			<tr>
+                                            				<td>${member.memberNo}</td>
+                                            				<td>${member.memberId}</td>
+                                            				<td>${member.memberName}</td>
+                                            				<td>${member.memberPhone}</td>
+                                            				<td>${member.memberEmail}</td>
+                                            				<td>
+                                            					<fmt:formatDate var="enrollDate" value="${member.memberEnrollDate}" pattern="yyyy-MM-dd"/>
+                                            					${enrollDate}
+                                            				</td>
+                                            			</tr>
+                                            		</c:forEach>
+                                            	</c:otherwise>
+                                            </c:choose>
                                         </tbody>
                                     </table>
                                 </div>

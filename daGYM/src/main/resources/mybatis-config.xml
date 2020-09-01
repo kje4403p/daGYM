@@ -27,5 +27,6 @@
 		<mapper resource="/mapper/event-mapper.xml"/>
 		<mapper resource="/mapper/service-mapper.xml"/>
 		<mapper resource="/mapper/trainer-mapper.xml"/>
+		<mapper resource="/mapper/admin-mapper.xml"/>
 	</mappers>
 </configuration>

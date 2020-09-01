@@ -8619,7 +8619,7 @@ pre {
   background-color: #000000; }
 
 .table-hover tbody tr:hover {
-  color: #212529;
+  color: white;
   background-color: #000000; }
 
 .table-primary,
