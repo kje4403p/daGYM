@@ -20,5 +20,22 @@ public class MemberDAO {
 
 		return sqlSession.insert("memberMapper.signUp", signUpMember);
 	}
+
+	/** 로그인 DAO
+	 * @param member
+	 * @return loginMember
+	 */
+	public Member login(Member member) {
+		return sqlSession.selectOne("memberMapper.loginMember", member);
+	}
+
+	/** 아이디 중복체크 DAO
+	 * @param memberId
+	 * @return result
+	 */
+	public int idDupCheck(String memberId) {
+		return sqlSession.selectOne("memberMapper.idDupCheck",memberId);
+	}
+	
 	
 }
