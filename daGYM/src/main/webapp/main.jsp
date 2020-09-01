@@ -49,7 +49,7 @@
                         <li><a href="#">소개</a></li>
                         <li><a href="trainer/trainerView">트레이너 예약</a></li>
                         <li><a href="#">커뮤니티</a></li>
-                        <li><a href="#">고객센터</a></li>
+                        <li><a href="${contextPath}/service/questionList/3">고객센터</a></li>
                     </ul>
                 </nav>
                 <a href="#" class="primary-btn signup-btn">Sign Up Today</a>

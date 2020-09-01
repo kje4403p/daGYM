@@ -1,6 +1,6 @@
 package com.kh.dagym.common;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 
 public class Board {
 	private int boardNo;
