@@ -1,4 +1,4 @@
-package com.kh.dagym.trainer.model.controller;
+package com.kh.dagym.trainer.controller;
 
 import java.util.List;
 
