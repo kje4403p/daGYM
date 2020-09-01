@@ -55,7 +55,31 @@ public class MemberController {
 			@RequestMapping("myschedule")
 			public String myScheduleView() {
 				return "member/mySchedule";
-		}	
+		}
+			
+	// 회원정보 체크 화면 전환 메소드
+			@RequestMapping("memberProfileCk")
+			public String memberProfileCk() {
+				return "member/memberProfileCk";
+		}
+			
+	// 회원정보 체크 화면 전환 메소드
+				@RequestMapping("memberProfile")
+				public String memberProfile() {
+					return "member/memberProfile";
+			}
+				
+	// PT이용권/결제정보 화면 전환 메소드
+			@RequestMapping("memberPass")
+			public String memberPass() {
+				return "member/memberPass";
+		}
+			
+	// 회원탈퇴 화면 전환 메소드
+				@RequestMapping("memberRemove")
+				public String memberRemove() {
+					return "member/memberRemove";
+			}
 			
 			// 회원가입 화면 전환 메소드
 			@RequestMapping(value="signUp", method=RequestMethod.GET)
@@ -179,11 +203,6 @@ public class MemberController {
 				
 				return mv;
 			}
-			
-			
-			
-			
-			
 			
 			
 }
