@@ -18,7 +18,7 @@
 	<typeAliases>
 		<typeAlias type="com.kh.dagym.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.dagym.common.Board" alias="Board"/>
-		
+		<typeAlias type="com.kh.dagym.trainer.model.vo.Trainer" alias="Trainer"/>
 	</typeAliases>
 	
 	<!--  mapper.xml 파일을 등록하는 태그 -->
@@ -26,5 +26,6 @@
 		<mapper resource="/mapper/member-mapper.xml"/>
 		<mapper resource="/mapper/event-mapper.xml"/>
 		<mapper resource="/mapper/service-mapper.xml"/>
+		<mapper resource="/mapper/trainer-mapper.xml"/>
 	</mappers>
 </configuration>
