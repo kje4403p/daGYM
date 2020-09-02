@@ -11,4 +11,7 @@ public interface TrainerService {
 	 */
 	List<Trainer> selectList();
 
+	Trainer selectTrainer(int boardNo);
+
+
 }

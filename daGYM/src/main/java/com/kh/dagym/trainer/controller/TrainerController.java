@@ -33,7 +33,7 @@ public class TrainerController {
 	
 	//트레이너 상세 조회
 	@RequestMapping("trainerView/{trainerNo}")
-	public String selectTrainer(@PathVariable int type, @PathVariable int boardNo, Model model, 
+	public String selectTrainer(@PathVariable int boardNo, Model model, 
 			RedirectAttributes rdAttr, HttpServletRequest request) {
 
 		Trainer Trainer = trainerService.selectTrainer(boardNo);
