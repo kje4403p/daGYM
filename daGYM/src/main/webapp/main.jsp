@@ -4,26 +4,13 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Gutim Template">
-    <meta name="keywords" content="Gutim, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gutim | Template</title>
+   
+    
     <!-- context Pathë¥¼ íë¡ì í¸ ì ì²´ìì ê°ë¨í ì¬ì©í  ì ìëë¡ ë³ì ì ì¸ -->
-	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+	
 	
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+   
 </head>
 
 <body>
@@ -32,50 +19,8 @@
         <div class="loader"></div>
     </div> 
 
-    <!-- Header Section Begin -->
-    <header class="header-section">
-        <div class="container">
-            <div class="logo">
-                <a href="${contextPath}">
-                    <img src="resources/img/logo3.png" alt="" width="150px">
-                </a>
-            </div>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                    	<li><a href="member/login">Login</a></li>
-                    	<li><a href="${contextPath}/member/mypage">마이페이지</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">소개</a></li>
-                        <li><a href="trainer/trainerView">트레이너 예약</a></li>
-                        <li><a href="${contextPath }/event/list">커뮤니티</a></li>
-                        <li><a href="${contextPath}/service/faq/4">고객센터</a></li>
-                    </ul>
-                </nav>
-                <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
-                <a href="admin/adminView" class="primary-btn signup-btn">관리자 페이지</a>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
-
-    <!-- Hero Section Begin -->
-    <section class="hero-section set-bg" data-setbg="resources/img/hero-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="hero-text">
-                        <span>FITNESS ELEMENTS</span>
-                        <h1>BMI CALCULATOR</h1>
-                        <p>Gutim comes packed with the user-friendly BMI Calculator<br /> shortcode which lets</p>
-                        <a href="#" class="primary-btn">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+  
+  
 
     <!-- About Section Begin -->
     <section class="about-section spad">

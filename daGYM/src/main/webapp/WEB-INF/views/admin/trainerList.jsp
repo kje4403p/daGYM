@@ -56,10 +56,9 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <tr>
-                                                <c:choose>
+                                            <c:choose>
                                             	<c:when test="${empty tList}">
-                                            		<tr><td colspan="8">회원 없음</td></tr>
+                                            		<tr><td colspan="8">트레이너 없음</td></tr>
                                             	</c:when>
                                             	
                                             	<c:otherwise>
@@ -72,15 +71,11 @@
                                             				<td>${trainer.trainerCareer}</td>
                                             				<td>${trainer.trainerMemberCount}</td>
                                             				<td>${trainer.trainerPrice}</td>
-                                            				<td>
-                                            					<fmt:formatDate var="enrollDate" value="${trainer.trainerEnrollDate}" pattern="yyyy-MM-dd"/>
-                                            					${enrollDate}
-                                            				</td>
+                                            				<td>${trainer.trainerEnrollDate}</td>
                                             			</tr>
                                             		</c:forEach>
                                             	</c:otherwise>
                                             </c:choose>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>

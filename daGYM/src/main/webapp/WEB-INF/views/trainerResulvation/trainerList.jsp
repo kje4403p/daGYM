@@ -19,11 +19,14 @@
                     </div>
                 </div>
             </div>
+            
+           
             <div class="row">
+              <c:forEach var="trainer" items="${trainerList}">
+            
                 <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                    <c:forEach var="trainer" items="${trainerList}">
-                    <a href="${contextPath}/trainer/trainerList">
+                    <div class="single-trainer-item">     
+                    <a href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
                         <img src="${contextPath}/resources/img/trainer/trainer-1.jpg" alt="">
                         <div class="trainer-text">
                             <h5>${trainer.trainerName}</h5>
@@ -33,11 +36,11 @@
                        
                         </div>
                         </a>
-                       </c:forEach>
+                      
                     </div>
                 </div>
-          
-              
+            
+          		 </c:forEach>            
             </div>
         </div>
     </section>

@@ -2,7 +2,9 @@ package com.kh.dagym.admin.model.service;
 
 import java.util.List;
 
+import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
 
 public interface AdminService {
@@ -16,5 +18,16 @@ public interface AdminService {
 	 * @return tList
 	 */
 	public abstract List<Trainer> selectTList();
+
+	/** 1:1 문의 조회 Service
+	 * @return iList
+	 */
+	public abstract List<Board> selectIList();
+
+	/** 1:1 문의 답변 Service
+	 * @param reply
+	 * @return result
+	 */
+	public abstract int insertAnswer(Reply reply);
 
 }
