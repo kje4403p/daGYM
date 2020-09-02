@@ -31,6 +31,7 @@ import com.kh.dagym.member.model.vo.Member;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
 	JavaMailSender mailSender;
 	
 	//로그인 화면 전환 메소드
@@ -160,14 +161,14 @@ public class MemberController {
 				
 				return "redirect:/";
 			}
-			
-			@RequestMapping(value = "auth.do", method=RequestMethod.POST)
-			public ModelAndView mailSending(HttpServletRequest request, String email, HttpServletResponse response) throws IOException {
+			@ResponseBody
+			@RequestMapping(value = "sendEmail", method=RequestMethod.GET)
+			public String mailSending(HttpServletRequest request, String email, HttpServletResponse response) throws IOException {
 				Random r = new Random();
 				int dice=r.nextInt(4589362) + 49311;
-				
+				System.out.println("랜덤 : "+ r);
 				String setfrom = "kljklj28561@gmail.com";
-				String tomail = request.getParameter("email");
+				String tomail = request.getParameter("memberEmail");
 				String title = "회원가입 인증 이메일 입니다.";
 				String content = 
 						System.getProperty("line.separator")+
@@ -190,19 +191,17 @@ public class MemberController {
 				}catch (Exception e) {
 					e.printStackTrace();
 				}
-				ModelAndView mv = new ModelAndView();
-				mv.setViewName("/member/emailCheck");
-				mv.addObject("dice", dice);
 				
-				System.out.println("mv : " + mv);
+				System.out.println(dice);
+				String code = dice+"";
 				
-				response.setContentType("text/html; charset=UTF-8");
-				PrintWriter out_email = response.getWriter();
-				out_email.println("<script>alert('이메일이 발송되었습니다. 인증번호를 입력해주세요.');</script>");
-				out_email.flush();
-				
-				return mv;
+				return code;
 			}
+			
+			
+			
+			
+			
 			
 			
 }
