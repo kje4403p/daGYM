@@ -18,4 +18,9 @@ public class TrainerDAO {
 		return sqlSession.selectList("trainerMapper.selectList",null);
 	}
 
+	public Trainer selectTrainer(int boardNo) {
+		
+		return sqlSession.selectOne("trainerMapper.selectTrainer",boardNo);
+	}
+
 }

@@ -22,4 +22,9 @@
 	<select id="selectList" resultMap="trainerResultSet">
 	SELECT * FROM TRAINER
 	</select>
+	
+	
+	<select id="selectTrainer" parameterType="_int" resultMap="trainerResultSet">
+	SELECT * FROM TRAINER WHERE TRAINER_STATUS='Y' AND TRAINER_NO=#{trainerNo}
+	</select>
 </mapper>
