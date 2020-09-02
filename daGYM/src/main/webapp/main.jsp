@@ -14,12 +14,12 @@
 </head>
 
 <body>
-<jsp:include page="WEB-INF/views/common/header.jsp"/>
     <!--  Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div> 
 
+  
   
 
     <!-- About Section Begin -->
@@ -582,7 +582,6 @@
     <script src="resources/js/jquery.slicknav.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/main.js"></script>
-    	<jsp:include page="WEB-INF/views/common/footer.jsp"/>
 </body>
 
 </html>
