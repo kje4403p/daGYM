@@ -11,7 +11,7 @@
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
         <div class="col-sm-5">
-            <form action="memberProfile" method="POST"
+            <form action="checkPwd" method="POST"
                 onsubmit="return validate();">
                     <h1>회원정보</h1>
                     <div class="row mb-3 form-row">
@@ -20,7 +20,7 @@
                     		<td id="profile" style ="text-align: center;">회원정보를 수정하기 위해선 비밀번호 확인이 필요 합니다.</td>
                         </tr>
                         <tr>
-                    		<td id="pass" style ="text-align: center;">비밀번호 <input type="password"> <button style="background-color: red">확인</button></td>
+                    		<td style ="text-align: center;">비밀번호 <input id="memberPwd" name="memberPwd" type="password"> <button style="background-color: red">확인</button></td>
                         </tr>
                 	</table>
                 </div>
