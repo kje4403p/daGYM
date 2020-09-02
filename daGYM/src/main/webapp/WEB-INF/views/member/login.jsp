@@ -38,13 +38,13 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-90 p-b-30">
-				<form class="login100-form validate-form">
+				<form action="loginAction" method="POST" class="login100-form validate-form">
 					<span class="login100-form-title p-b-40">
 						Login
 					</span>
 
 					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email: ex@abc.xyz">
-						<input class="input100" type="text" name="id" placeholder="Id">
+						<input class="input100" type="text" name="memberId" placeholder="Id">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -52,7 +52,7 @@
 						<span class="btn-show-pass">
 							<i class="fa fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass" placeholder="Password">
+						<input class="input100" type="password" name="memberPwd" placeholder="Password">
 						<span class="focus-input100"></span>
 					</div>
 

@@ -13,7 +13,7 @@
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
         <div class="col-sm-5">
-            <form action="${contextPath}/member/purchase.do" method="POST"
+            <form method="POST"
                 onsubmit="return validate();">
                     <h1>내 스케줄</h1>
                     <div class="row mb-3 form-row">

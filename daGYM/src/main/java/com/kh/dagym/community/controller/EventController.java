@@ -33,8 +33,12 @@ public class EventController {
 		
 		System.out.println((end - start)/1000 + "초");
 		
-		List<Board> boardList = eventService.selectList(pInfo);
-		boardList.stream().forEach(System.out::println);
+		List<Board> eventList = eventService.selectList(pInfo);
+		eventList.stream().forEach(System.out::println);
+		
+		model.addAttribute("eventList",eventList);
+		model.addAttribute("pInfo",pInfo);
+		
 
 		return "community/eventList";
 	}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="trainerMapper">
+		<resultMap id="trainerResultSet" type="Trainer" >
+		
+		<id property="trainerNo" column="TRAINER_NO"/>
+		
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="trainerId" column="TRAINER_ID" />
+		<result property="trainerPwd" column="TRAINER_PWD" />
+		<result property="trainerName" column="TRAINER_NM" />
+		<result property="trainerGender" column="TRAINER_GENDER" />
+		<result property="trainerPhone" column="TRAINER_PHONE" />
+		<result property="trainerCareer" column="TRAINER_CAREER" />
+		<result property="trainerMcnt" column="TRAINER_M_CNT" />
+		<result property="trainerEnrollDate" column="TRAINER_ENROLL_DATE" />
+		<result property="trianerStatus" column="TRAINER_STATUS" />
+		<result property="trainerPrice" column="TRAINER_PRICE" />	
+	</resultMap>
+	
+	
+	<select id="selectList" resultMap="trainerResultSet">
+	SELECT * FROM TRAINER
+	</select>
+</mapper>
