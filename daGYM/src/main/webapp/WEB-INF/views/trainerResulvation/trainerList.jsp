@@ -31,9 +31,10 @@
                         <div class="trainer-text">
                             <h5>${trainer.trainerName}</h5>
                             <span>Leader</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                       
+                            <p>Phone: ${trainer.trainerPhone}</p>
+                            <p>회원 수: ${trainer.trainerMcnt}</p>
+                      	    <p>경력: ${trainer.trainerCareer}년</p>
+                      	    <p>PT(기본 10회)가격: ${trainer.trainerPrice}원</p>
                         </div>
                         </a>
                       
@@ -47,24 +48,4 @@
     <!-- Trainer Section End -->
 	<jsp:include page="../common/footer.jsp"/>
 </body>
-<script>
-	$(function(){
-			$(".single-trainer-item a").on("click", function(){
-				// 글번호
-				var boardNo = $(this).parent().children().eq(0).text();
-				
-				// 게시글 상세조회 요청 주소
-				var boardUrl = "${contextPath}/board/${pInfo.boardType}/"+ boardNo + "?cp=${pInfo.currentPage}";
-				
-				// @PathVariable 방식 : 구분되어야 하는 리소스를 호출하는 url로 사용
-				// spring/board/1/500?cp=3
-				
-				// 파라미터(쿼리스트링) : 정렬, 필터링
-				// spring/board?type=1&boardNo=500&cp=3
-				
-			// 게시글 상세 조회 요청
-			location.href = boardUrl;
-			});
-		});
-</script>
 </html>
