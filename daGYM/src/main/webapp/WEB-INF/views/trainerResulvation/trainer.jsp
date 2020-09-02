@@ -23,7 +23,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">
                     <c:forEach var="trainer" items="${trainerList}">
-                    <a href="${contextPath}/trainer/trainerList">
+                    <a href="${contextPath}/trainer/trainerList/${trainer.trainerNo}">
                         <img src="${contextPath}/resources/img/trainer/trainer-1.jpg" alt="">
                         <div class="trainer-text">
                             <h5>${trainer.trainerName}</h5>
