@@ -48,7 +48,7 @@
                 <nav class="mainmenu mobile-menu">
                     <ul>
                     	
-                        <li><a href="#">소개</a></li>
+                        <li><a href="${contextPath}/intro">소개</a></li>
                         <li><a href="${contextPath}/trainer/trainerList">트레이너 예약</a></li>
                         <li><a href="${contextPath }/event/list">커뮤니티</a></li>
                         <li><a href="${contextPath}/service/faq/4">고객센터</a></li>
