@@ -22,17 +22,17 @@ public class TrainerController {
 	private TrainerService trainerService;
 
 	//트레이너 예약 화면 이동
-	@RequestMapping("trainer")
+	@RequestMapping("trainerList")
 	public String trainerList(Model model) {
 		List<Trainer> trainerList = trainerService.selectList();
 
 		model.addAttribute("trainerList",trainerList);
 
-		return "trainerResulvation/trainer";
+		return "trainerResulvation/trainerList";
 	}
 	
 	//트레이너 상세 조회
-	@RequestMapping("trainerList/{trainerNo}")
+	@RequestMapping("trainerView/{trainerNo}")
 	public String selectTrainer(@PathVariable int type, @PathVariable int boardNo, Model model, 
 			RedirectAttributes rdAttr, HttpServletRequest request) {
 
@@ -45,7 +45,7 @@ public class TrainerController {
 	}else {
 		rdAttr.addFlashAttribute("status","error");
 		rdAttr.addFlashAttribute("msg","해당 트레이너가 존재하지 않습니다..");
-		url="redirect:/trainer/trainer";
+		url="redirect:/trainer/trainerList";
 	}
 	return url;
 }
