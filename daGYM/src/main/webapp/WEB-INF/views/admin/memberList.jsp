@@ -66,10 +66,7 @@
                                             				<td>${member.memberName}</td>
                                             				<td>${member.memberPhone}</td>
                                             				<td>${member.memberEmail}</td>
-                                            				<td>
-                                            					<fmt:formatDate var="enrollDate" value="${member.memberEnrollDate}" pattern="yyyy-MM-dd"/>
-                                            					${enrollDate}
-                                            				</td>
+                                            				<td>${member.memberEnrollDate}</td>
                                             			</tr>
                                             		</c:forEach>
                                             	</c:otherwise>
