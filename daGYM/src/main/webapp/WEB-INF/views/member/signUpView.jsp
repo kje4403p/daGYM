@@ -83,7 +83,7 @@
                     <div class="form-group">
                     
                         <input type="email" class="form-control" id="memberEmail" name="memberEmail"  placeholder="이메일" required>
-                        <button type="submit" name="emailCheck" id="emailCk-btn" onsubmit="return emailCheck();">이메일 인증</button>
+                        <button type="button" name="emailCheck" id="emailCk-btn" onclick="showPopup();">이메일 인증</button>
                         
                         <div class="help-block with-errors"><span id="checkEmail">&nbsp;</span></div>
                        
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="pull-right">
-                            <button type="submit" id="reg-submit" class="btn btn-md btn-success-filled btn-log">회원가입</button>
+                            <button type="submit" id="reg-submit" class="btn btn-md btn-success-filled btn-log" >회원가입</button>
                             <div id="msgSubmit" class="h3 text-center hidden"></div>
                             <div class="clearfix"></div>
                         </div>
@@ -117,18 +117,12 @@
     </div><!-- / container -->
 </div>
 <!-- / forms -->
-<!--  
-<script>
- $("#emailCk-btn").on("click", function(){
-	 form.attr("action","auth.do");
-	 
- });
  
- $("#signUp").on("click", function(){
-	 form.attr("action","signUpAction");
-	 
- });
--->
+<script>
+	function showPopup(){
+		window.open("emailCheck","이메일 인증", "width=400, height=300, left=100, top=50");
+		
+	}
 	
 </script>
 

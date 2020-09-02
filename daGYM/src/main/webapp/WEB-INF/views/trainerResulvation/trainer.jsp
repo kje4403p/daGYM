@@ -22,50 +22,46 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">
-                    <a href="#">
+                    <c:forEach var="trainer" items="${trainerList}">
+                    <a href="${contextPath}/trainer/trainerList">
                         <img src="${contextPath}/resources/img/trainer/trainer-1.jpg" alt="">
                         <div class="trainer-text">
-                            <h5>Patrick Cortez</h5>
+                            <h5>${trainer.trainerName}</h5>
                             <span>Leader</span>
                             <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
                                 voluptatem.</p>
                        
                         </div>
                         </a>
+                       </c:forEach>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                    <a href="#">
-                        <img src="${contextPath}/resources/img/trainer/trainer-2.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Gregory Powers</h5>
-                            <span>Gym coach</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                    
-                        </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                    <a href="#">
-                        <img src="${contextPath}/resources/img/trainer/trainer-3.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Walter Wagner</h5>
-                            <span>Dance trainer</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-    
-                        </div>
-                        </a>
-                    </div>
-                </div>
+          
+              
             </div>
         </div>
     </section>
     <!-- Trainer Section End -->
 	<jsp:include page="../common/footer.jsp"/>
 </body>
+<script>
+	$(function(){
+			$(".single-trainer-item a").on("click", function(){
+				// 글번호
+				var boardNo = $(this).parent().children().eq(0).text();
+				
+				// 게시글 상세조회 요청 주소
+				var boardUrl = "${contextPath}/board/${pInfo.boardType}/"+ boardNo + "?cp=${pInfo.currentPage}";
+				
+				// @PathVariable 방식 : 구분되어야 하는 리소스를 호출하는 url로 사용
+				// spring/board/1/500?cp=3
+				
+				// 파라미터(쿼리스트링) : 정렬, 필터링
+				// spring/board?type=1&boardNo=500&cp=3
+				
+			// 게시글 상세 조회 요청
+			location.href = boardUrl;
+			});
+		});
+</script>
 </html>
