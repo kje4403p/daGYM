@@ -83,9 +83,10 @@
                     <div class="form-group">
                     
                         <input type="email" class="form-control" id="memberEmail" name="memberEmail"  placeholder="이메일" required>
-                        <button type="button" name="emailCheck" id="emailCk-btn" onclick="showPopup();">이메일 인증</button>
-                        
                         <div class="help-block with-errors"><span id="checkEmail">&nbsp;</span></div>
+                        <button type="button" name="emailCheck" id="emailCk-btn" onclick="sendEmail();" disabled >이메일 인증</button>
+                         <input type="text" class="form-control" id="code" name="code"  placeholder="인증번호" required>
+                        <div class="help-block with-errors"><span id="checkCode">&nbsp;</span></div>
                        
                     </div>
                     
@@ -119,10 +120,7 @@
 <!-- / forms -->
  
 <script>
-	function showPopup(){
-		window.open("emailCheck","이메일 인증", "width=400, height=300, left=100, top=50");
-		
-	}
+	
 	
 </script>
 
@@ -133,7 +131,8 @@
 		"pwd2" : false,
 		"name" : false,
 		"phone" : false,
-		"email" : false
+		"email" : false,
+		"code" : false
 			
 	};
 	
@@ -144,6 +143,11 @@
 	var $name = $("#memberName");
 	var $phone = $("#memberPhone");
 	var $email = $("#memberEmail");
+	var $code = $("#code");
+	
+
+	
+	
 	
 	$id.on("input", function(){
 		signUpCheck.id=false;
@@ -240,11 +244,52 @@
 		if(!regExp.test($email.val())){
 			$("#checkEmail").text("유효하지 않은 이메일입니다.").css("color","red");
 			signUpCheck.email = false;
+			
 		}else{
 			$("#checkEmail").text("유효한 이메일입니다.").css("color","blue");
 			signUpCheck.email = true;
+			$("#emailCk-btn").prop("disabled", false)
+			
 		}
 	});
+	function sendEmail(){
+		
+		var $memberEmail =$("#memberEmail"); 
+		$.ajax({
+			url : "sendEmail",
+			data : {"memberEmail":$memberEmail.val()},
+			type : "GET",
+			success : function(code){
+				console.log("다이스"+code);
+				
+				if(code!=null){
+					alert("인증번호를 입력해주세요.")
+					codeCheck(code);
+				}else{
+					alert("이메일을 다시 입력해주세요.")
+				}
+			},error:function(){
+				console.log("통신실패");
+			}
+			
+		});
+	}
+	
+	
+		function codeCheck(code){
+			console.log("다이다이" + code);
+			console.log("코드"+$code.val());
+			$code.on("input", function(){
+			if($code.val()==code){
+				$("#checkCode").text("인증번호 일치").css("color","blue");
+				signUpCheck.code=true;
+			}else{
+				$("#checkCode").text("인증번호 불일치").css("color","red");
+				signUpCheck.code=false;
+			}
+			});
+		}
+	
 	
 	function validate(){
 		
@@ -256,7 +301,8 @@
 				case "pwd" : msg="비밀번호가 " ; break;		
 				case "name" : msg="이름이 "; break;		
 				case "phone" : msg="전화번호가 "; break;		
-				case "email" : msg="이메일이 "; break;		
+				case "email" : msg="이메일이 "; break;	
+				case "code" : msg="인증번호가 "; break;
 				
 				}
 				alert(msg+"유효하지 않습니다.");
