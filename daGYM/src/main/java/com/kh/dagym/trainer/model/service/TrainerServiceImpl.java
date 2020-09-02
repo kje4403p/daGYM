@@ -22,9 +22,9 @@ public class TrainerServiceImpl implements TrainerService{
 	}
 
 	@Override
-	public Trainer selectTrainer(int boardNo) {
+	public Trainer selectTrainer(int trainerNo) {
 		
-		return trainerDAO.selectTrainer(boardNo);
+		return trainerDAO.selectTrainer(trainerNo);
 	}
 
 }

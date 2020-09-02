@@ -33,14 +33,14 @@ public class TrainerController {
 	
 	//트레이너 상세 조회
 	@RequestMapping("trainerView/{trainerNo}")
-	public String selectTrainer(@PathVariable int boardNo, Model model, 
+	public String selectTrainer(@PathVariable int trainerNo, Model model, 
 			RedirectAttributes rdAttr, HttpServletRequest request) {
 
-		Trainer Trainer = trainerService.selectTrainer(boardNo);
+		Trainer trainer = trainerService.selectTrainer(trainerNo);
 		String url = null;
 
-		if(Trainer!=null) {
-		model.addAttribute("Trainer",Trainer);
+		if(trainer!=null) {
+		model.addAttribute("trainer",trainer);
 		url="trainerResulvation/trainerView";
 	}else {
 		rdAttr.addFlashAttribute("status","error");
