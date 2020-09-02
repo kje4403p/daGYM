@@ -38,6 +38,18 @@
 	
 	#register-form{
 	width : 100%;}
+	body > header > div > div.logo > a > img{
+	width : 150px;}
+	#signUp > div{
+		margin : 0 auto;
+	}
+	#register-form{
+		width : 500px;
+		margin-top : 30px;
+		margin-bottom : 30px;
+	}
+	#forms{
+	 background-color: #f5f5f5;}
 
 </style>
 
