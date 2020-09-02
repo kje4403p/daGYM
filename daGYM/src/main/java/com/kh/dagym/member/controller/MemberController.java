@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -63,13 +64,34 @@ public class MemberController {
 			public String memberProfileCk() {
 				return "member/memberProfileCk";
 		}
+	
 			
-	// 회원정보 체크 화면 전환 메소드
-				@RequestMapping("memberProfile")
-				public String memberProfile() {
-					return "member/memberProfile";
-			}
+	
+			
+	// 회원정보 화면 전환 메소드
+			@RequestMapping("checkPwd")
+			public String memberProfileAction(String memberPwd, Model model, RedirectAttributes rdAttr, HttpServletResponse response) {
+				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+				int result = memberService.checkPwd(memberPwd,memberNo);
+				String status = null;
+				String msg = null;
+				String text = null;
+				String link = null;
+				if(result > 0) {
+					link = "member/memberProfile";
+				} else {
+					status = "error";
+					msg = "오류 발생";
+					text = "현재 비밀번호를 확인해 주세요";	
+					link = "member/memberProfileCk";
+				}
 				
+				rdAttr.addFlashAttribute("msg", msg);
+				rdAttr.addFlashAttribute("status", status);
+				rdAttr.addFlashAttribute("text", text);
+				return link;
+		}
+			
 	// PT이용권/결제정보 화면 전환 메소드
 			@RequestMapping("memberPass")
 			public String memberPass() {
