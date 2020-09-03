@@ -2,13 +2,16 @@ package com.kh.dagym.serviceCenter.service;
 
 
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.serviceCenter.Search;
 import com.kh.dagym.serviceCenter.ServiceDAO;
 
 
@@ -56,6 +59,19 @@ public class ServiceBoardImpl implements ServiceBoard{
 		
 		
 		return board;
+	}
+
+	// 검색 조건이 추가된 faq페이징 처리 구현
+	@Override
+	public PageInfo pagination(int type, int cp, Search search) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("search", search);
+		map.put("type",type);
+		
+		int searchListCount = serviceDAO.getSearchListCount(map);
+		
+		return null;
 	}
 	
 	

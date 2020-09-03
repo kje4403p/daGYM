@@ -1,6 +1,7 @@
 package com.kh.dagym.serviceCenter;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -45,6 +46,16 @@ public class ServiceDAO {
 	 */
 	public int increaseCount(int boardNo) {
 		return sqlSession.update("serviceMapper.increaseCount",boardNo);
+	}
+
+	
+	/** 검색 조건이 추가된 faq 페이징 처리 DAO
+	 * @param map
+	 * @return
+	 */
+	public int getSearchListCount(Map<String, Object> map) {
+		
+		return sqlSession.selectOne("serviceMapper.getSearchListCount", map);
 	}
 
 }
