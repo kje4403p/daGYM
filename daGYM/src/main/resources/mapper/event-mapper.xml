@@ -13,14 +13,45 @@
 		<result property="boardWriter" column="MEMBER_ID"/>
 		<result property="views" column="VIEWS"/>
 		<result property="boardEnrollDate" column="BOARD_ENROLL_DATE" javaType="java.sql.Timestamp"/>
-		<result property="startDate" column="START_DATE" javaType="java.sql.Timestamp"/>
-		<result property="endDate" column="END_DATE" javaType="java.sql.Timestamp"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="endDate" column="END_DATE"/>
 	</resultMap>
+	
+    <resultMap type="Attachment" id="attachmentResultSet">
+    	<id property="fileNo" column="FILE_NO"></id>
+    	<result property="parentBoardNo" column="PARENT_BOARD_NO"/>
+    	<result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
+    	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+    	<result property="filePath" column="FILE_PATH"/>
+    	<result property="fileLevel" column="FILE_LEVEL"/>
+    </resultMap>
 	
 	<select id="selectList" resultMap="boardRs">
 		SELECT * FROM V_EVENT
 		WHERE END_DATE >= SYSDATE
 		ORDER BY BOARD_NO DESC
 	</select>
+	
+	<!-- 게시글 삽입시 필요한 보드넘버 -->
+	<select id="selectNextNo" resultType="_int">
+		SELECT SEQ_BNO.NEXTVAL FROM DUAL
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD
+		VALUES(#{boardNo}, #{boardWriter}, #{boardType}, #{boardTitle}, #{boardContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
+				#{startDate}, #{endDate}, DEFAULT)
+	</insert>
+	
+	<insert id="insertAttachment" parameterType="Attachment">
+	   	INSERT INTO ATTACHMENT VALUES(
+   			SEQ_FNO.NEXTVAL, #{parentBoardNo},
+   			#{fileOriginName}, #{fileChangeName}, #{filePath}, #{fileLevel}, DEFAULT
+   		)
+	</insert>
+	<delete id="deleteAttachment" parameterType="_int">
+   		DELETE FROM ATTACHMENT
+   		WHERE PARENT_BOARD_NO = #{boardNo}
+    </delete>
   
 </mapper>

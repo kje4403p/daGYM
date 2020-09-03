@@ -1,5 +1,8 @@
 @CHARSET "utf-8";
 
+.pagination { justify-content: center };
+
+
 
 .event {width: 100%; padding-top:50px;}
 .event *{font-family: "InfinitySans-RegularA1"; box-sizing: content-box;}

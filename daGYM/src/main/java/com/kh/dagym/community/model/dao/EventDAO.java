@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 
@@ -36,6 +37,37 @@ public class EventDAO {
 		
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		return sqlSession.selectList("eventMapper.selectList", null, rowBounds);
+	}
+
+
+	/** 게시글 삽입시 필요한 보드넘버 가져오기
+	 * @return
+	 */
+	public int selectNextNo() {
+		return sqlSession.selectOne("eventMapper.selectNextNo");
+	}
+
+
+	/** 게시글 삽입
+	 * @param board
+	 * @return int
+	 */
+	public int insertBoard(Board board) {
+		return sqlSession.insert("eventMapper.insertBoard", board);
+	}
+
+
+	/** 파일정보 삽입 DAO
+	 * @param at
+	 * @return int
+	 */
+	public int insertAttachment(Attachment at) {
+		return sqlSession.insert("eventMapper.insertAttachment", at);
+	}
+
+	// 파일 저장 오류시 삭제 DAO
+	public void deleteAttachment(int boardNo) {
+		sqlSession.delete("eventDAO.deleteAttachment", boardNo);
 	}
 
 }
