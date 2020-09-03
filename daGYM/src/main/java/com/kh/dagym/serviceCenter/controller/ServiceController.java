@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.serviceCenter.Search;
 import com.kh.dagym.serviceCenter.service.ServiceBoard;
 
 
@@ -39,6 +40,7 @@ public class ServiceController {
 		return "serviceCenter/questionList";
 	}
 	
+	//faq 리스트 조회
 	@RequestMapping("faq/{type}")
 	public String faq(@PathVariable int type,@RequestParam(value="cp",required=false, defaultValue="1") int cp,
 			Model model) {
@@ -67,6 +69,19 @@ public class ServiceController {
 			Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 			return gson.toJson(board);
 		}
+		return null;
+	}
+	
+	//게시글 검색
+	@RequestMapping("search/{type}")
+	public String search(@PathVariable int type,
+			@RequestParam(value="cp",required=false,defaultValue="1")int cp,
+			Search search, Model model){
+		System.out.println(type);
+		System.out.println(search);
+		
+		PageInfo pInfo = serviceBoard.pagination(type, cp,search);
+	
 		return null;
 	}
 
