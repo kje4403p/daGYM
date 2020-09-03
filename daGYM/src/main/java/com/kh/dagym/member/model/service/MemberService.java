@@ -28,6 +28,13 @@ public interface MemberService {
 	 * @return result
 	 */
 	int checkPwd(String memberPwd, int memberNo);
+	
+	
+	/** 회원 정보 수정용 Service
+	 * @param upMember
+	 * @return
+	 */
+	int updateMember(Member upMember);
 
 	
 

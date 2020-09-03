@@ -61,7 +61,7 @@
                     		</c:when>
                     		<c:otherwise>
                     			<a href="${contextPath}/member/mypage" class="primary-btn signup-btn">Mypage</a>
-                    		 <a href="${contextPath}/member/login" class="primary-btn signup-btn">Logout</a>
+                    		 <a href="${contextPath}/member/logout" class="primary-btn signup-btn">Logout</a>
                     		
                     		</c:otherwise>
                     	</c:choose>
