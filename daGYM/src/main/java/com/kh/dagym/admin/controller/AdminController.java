@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dagym.admin.model.service.AdminService;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
 
@@ -46,9 +48,13 @@ public class AdminController {
 	
 	// 1:1 문의 조회
 	@RequestMapping("inquiryList")
-	public String inquiryListView(Model model) {
-		List<Board> iList = adminService.selectIList();
+	public String inquiryListView(Model model, @RequestParam(value="cp", required=false, defaultValue="1") int cp) {
+		int type = 3;
+		Page pInfo = adminService.pagination(type, cp);
+		
+		List<Board> iList = adminService.selectIList(pInfo);
 		model.addAttribute("iList", iList);
+		model.addAttribute("pInfo", pInfo);
 		
 		return "admin/inquiryList";
 	}
@@ -68,5 +74,17 @@ public class AdminController {
 		}
 		
 		return "redirect:inquiryList";
+	}
+	
+	// 월별 매출 조회
+	@RequestMapping("monthChart")
+	public String monthChartView() {
+		return "admin/monthChart";
+	}
+	
+	// 트레이너별 매출 조회
+	@RequestMapping("trainerChart")
+	public String trainerChartView() {
+		return "admin/trainerChart";
 	}
 }
