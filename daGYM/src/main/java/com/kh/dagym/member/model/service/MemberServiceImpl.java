@@ -47,4 +47,29 @@ public class MemberServiceImpl implements MemberService{
 		return memberDAO.idDupCheck(memberId);
 	}
 	
+	// 회원 비밀번호 확인용 Service 구현
+	@Override
+	public int checkPwd(String memberPwd, int memberNo) { 
+		String savePwd = memberDAO.checkPwd(memberNo);
+		int result = 0;
+		
+		if(savePwd != null) {
+			// 조회한 PWD와 입력받은 PWD가 같은지 비교
+			if(bcPwd.matches(memberPwd, savePwd)) {
+				result= 1;
+				memberPwd = null;
+			}
 	}
+		return result;
+
+	}
+
+	// 마이페이지 수정 Service 구현
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int updateMember(Member upMember){
+			String encPwd = bcPwd.encode(upMember.getMemberPwd());
+			upMember.setMemberPwd(encPwd);
+			return memberDAO.updateMember(upMember);
+		}
+}

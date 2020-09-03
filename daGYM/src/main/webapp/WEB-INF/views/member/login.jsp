@@ -37,7 +37,7 @@
 	<jsp:include page="../common/header.jsp"/>
 	<div class="limiter">
 		<div class="container-login100">
-			<div class="wrap-login100 p-t-90 p-b-30">
+			<div class="wrap-login100 p-b-30">
 				<form action="loginAction" method="POST" class="login100-form validate-form">
 					<span class="login100-form-title p-b-40">
 						Login
@@ -62,8 +62,8 @@
 						</button>
 					</div>
 
-					<div class="flex-col-c p-t-224">
-						<span class="txt2 p-b-10">
+					<div class="flex-col-c ">
+						<span class="txt2 p-t-10 p-b-10">
 							Don’t have an account?
 						</span>
 

@@ -10,5 +10,17 @@ public interface ServiceBoard {
 
 	PageInfo pagination(int type, int cp);
 
+	/** faq 리스트 조회 service
+	 * @param pInfo
+	 * @return bList
+	 */
+	List<Board> selectFaqList(PageInfo pInfo);
+
+	/** faq 게시글 상세 조회 Service
+	 * @param boardNo
+	 * @return
+	 */
+	Board selectFaqBoard(int boardNo);
+
 	
 }

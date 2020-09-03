@@ -21,4 +21,10 @@ public class TrainerServiceImpl implements TrainerService{
 		return trainerDAO.selectList();
 	}
 
+	@Override
+	public Trainer selectTrainer(int trainerNo) {
+		
+		return trainerDAO.selectTrainer(trainerNo);
+	}
+
 }

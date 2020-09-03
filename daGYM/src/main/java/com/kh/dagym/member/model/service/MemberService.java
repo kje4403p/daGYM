@@ -23,4 +23,19 @@ public interface MemberService {
 	 */
 	int idDupCheck(String memberId);
 
+	/** 회원 비밀번호 확인용 Service
+	 * @param loginMember
+	 * @return result
+	 */
+	int checkPwd(String memberPwd, int memberNo);
+	
+	
+	/** 회원 정보 수정용 Service
+	 * @param upMember
+	 * @return
+	 */
+	int updateMember(Member upMember);
+
+	
+
 }

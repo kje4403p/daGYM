@@ -4,78 +4,23 @@
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Gutim Template">
-    <meta name="keywords" content="Gutim, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gutim | Template</title>
-    <!-- context Pathë¥¼ íë¡ì í¸ ì ì²´ìì ê°ë¨í ì¬ì©í  ì ìëë¡ ë³ì ì ì¸ -->
-	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
-	
+   
+    
+    <!-- context Pathë¥¼ í  ë¡ ì  í ¸ ì  ì²´ì  ì   ê° ë ¨í   ì ¬ì ©í   ì   ì  ë  ë¡  ë³ ì   ì  ì ¸ -->
+   
+   
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="resources/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="resources/css/style.css" type="text/css">
+   
 </head>
 
 <body>
+<jsp:include page="WEB-INF/views/common/header.jsp"/>
     <!--  Page Preloder -->
     <div id="preloder">
         <div class="loader"></div>
     </div> 
 
-    <!-- Header Section Begin -->
-    <header class="header-section">
-        <div class="container">
-            <div class="logo">
-                <a href="${contextPath}">
-                    <img src="resources/img/logo3.png" alt="" width="150px">
-                </a>
-            </div>
-            <div class="nav-menu">
-                <nav class="mainmenu mobile-menu">
-                    <ul>
-                    	<li><a href="member/login">Login</a></li>
-                    	<li><a href="${contextPath}/member/mypage">마이페이지</a></li>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">소개</a></li>
-                        <li><a href="trainer/trainerView">트레이너 예약</a></li>
-                        <li><a href="${contextPath }/event/list">커뮤니티</a></li>
-                        <li><a href="#">고객센터</a></li>
-                    </ul>
-                </nav>
-                <a href="#" class="primary-btn signup-btn">Sign Up Today</a>
-                <a href="admin/adminView" class="primary-btn signup-btn">관리자 페이지</a>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
-
-    <!-- Hero Section Begin -->
-    <section class="hero-section set-bg" data-setbg="resources/img/hero-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="hero-text">
-                        <span>FITNESS ELEMENTS</span>
-                        <h1>BMI CALCULATOR</h1>
-                        <p>Gutim comes packed with the user-friendly BMI Calculator<br /> shortcode which lets</p>
-                        <a href="#" class="primary-btn">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
+  
 
     <!-- About Section Begin -->
     <section class="about-section spad">
@@ -351,7 +296,7 @@
                     <div class="banner-text">
                         <h2>Get training today</h2>
                         <p>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industryÃ¢ÂÂs standard.</p>
+                            industryÃ¢Â Â s standard.</p>
                         <a href="#" class="primary-btn banner-btn">Contact Now</a>
                     </div>
                 </div>
@@ -552,82 +497,9 @@
     </section>
     <!-- Latest Blog Section End -->
 
-    <!-- Footer Banner Section Begin -->
-    <section class="footer-banner">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="footer-banner-item set-bg" data-setbg="resources/img/footer-banner/footer-banner-1.jpg">
-                        <span>New member</span>
-                        <h2>7 days for free</h2>
-                        <p>Complete the training sessions with us, surely you will be happy</p>
-                        <a href="#" class="primary-btn">Get Started</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="footer-banner-item set-bg" data-setbg="resources/img/footer-banner/footer-banner-2.jpg">
-                        <span>contact us</span>
-                        <h2>09 746 204</h2>
-                        <p>If you trust us on your journey they dark sex does not disappoint you!</p>
-                        <a href="#" class="primary-btn">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer Banner Section End -->
 
-    <!-- Footer Section Begin -->
-    <footer class="footer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="contact-option">
-                        <span>Phone</span>
-                        <p>(123) 118 9999 - (123) 118 9999</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="contact-option">
-                        <span>Address</span>
-                        <p>72 Kangnam, 45 Opal Point Suite 391</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="contact-option">
-                        <span>Email</span>
-                        <p>contactcompany@Gutim.com</p>
-                    </div>
-                </div>
-            </div>
-            <div class="subscribe-option set-bg" data-setbg="resources/img/footer-signup.jpg">
-                <div class="so-text">
-                    <h4>Subscribe To Our Mailing List</h4>
-                    <p>Sign up to receive the latest information </p>
-                </div>
-                <form action="#" class="subscribe-form">
-                    <input type="text" placeholder="Enter Your Mail">
-                    <button type="submit"><i class="fa fa-send"></i></button>
-                </form>
-            </div>
-            <div class="copyright-text">
-                <ul>
-                    <li><a href="#">Term&Use</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                </ul>
-                <p>&copy;<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-  <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></p>
-                <div class="footer-social">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-dribbble"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
+
+    
 
     <!-- Js Plugins -->
     <script src="resources/js/jquery-3.3.1.min.js"></script>
@@ -637,6 +509,7 @@
     <script src="resources/js/jquery.slicknav.js"></script>
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/main.js"></script>
+       <jsp:include page="WEB-INF/views/common/footer.jsp"/>
 </body>
 
 </html>

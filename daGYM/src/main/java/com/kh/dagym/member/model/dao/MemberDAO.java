@@ -36,6 +36,20 @@ public class MemberDAO {
 	public int idDupCheck(String memberId) {
 		return sqlSession.selectOne("memberMapper.idDupCheck",memberId);
 	}
+
+	/** 회원 비밀번호 확인용 DAO
+	 * @param memberNo
+	 * @return result
+	 */
+	public String checkPwd(int memberNo) {
+		return sqlSession.selectOne("memberMapper.checkPwd",memberNo);
+	}
+
+	public int updateMember(Member upMember) {
+		return sqlSession.insert("memberMapper.updateMember", upMember);
+	}
+
+
 	
 	
 }
