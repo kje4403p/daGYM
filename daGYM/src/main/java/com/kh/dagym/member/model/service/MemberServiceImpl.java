@@ -63,4 +63,13 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 
 	}
+
+	// 마이페이지 수정 Service 구현
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int updateMember(Member upMember){
+			String encPwd = bcPwd.encode(upMember.getMemberPwd());
+			upMember.setMemberPwd(encPwd);
+			return memberDAO.updateMember(upMember);
+		}
 }
