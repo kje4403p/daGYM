@@ -140,7 +140,36 @@ public class MemberController {
 				public String memberRemove() {
 					return "member/memberRemove";
 			}
-			
+	// 회원탈퇴 메소드
+				@RequestMapping("memberRemoveAction")
+				public String removeMember(String memberPwd, Model model, RedirectAttributes rdAttr, HttpServletRequest request, SessionStatus status1) {
+					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+					
+					int result = memberService.removeMember(memberPwd,memberNo);
+					
+					String msg = null;
+					String status = null;
+					String text = null;
+					String link = null;
+					if(result > 0) {
+						msg="회원 탈퇴 성공";
+						status = "success";
+						link ="";
+						status1.setComplete();
+					}else if(result == 0){
+						msg="회원 탈퇴 실패";
+						status = "error";
+						link = "member/memberRemove";
+					}else {
+						msg="패스워드가 일치하지 않습니다.";
+						status = "error";
+						link = "member/memberRemove";
+					}
+					rdAttr.addFlashAttribute("msg", msg);
+					rdAttr.addFlashAttribute("status", status);
+					return "redirect:/" +link;
+				}	
+				
 			// 회원가입 화면 전환 메소드
 			@RequestMapping(value="signUp", method=RequestMethod.GET)
 			public String signUpView() {

@@ -1,5 +1,7 @@
 package com.kh.dagym.member.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,12 +35,13 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public Member login(Member member) {
 		Member loginMember = memberDAO.login(member);
-		if(!bcPwd.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			loginMember = null;
-		}else {
-			loginMember.setMemberPwd(null);
+		if(loginMember != null) {
+			if(!bcPwd.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+				loginMember = null;
+			}else {
+				loginMember.setMemberPwd(null);
+			}
 		}
-		
 		return loginMember;
 	}
 	// 아이디 중복체크 Service 구현
@@ -72,4 +75,21 @@ public class MemberServiceImpl implements MemberService{
 			upMember.setMemberPwd(encPwd);
 			return memberDAO.updateMember(upMember);
 		}
+
+		// 회원 탈퇴용 Service 구현
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int removeMember(String memberPwd, int memberNo) {
+			String savePwd = memberDAO.checkPwd(memberNo);
+			int result = -1;
+			
+			if(savePwd != null) {
+				// 조회한 PWD와 입력받은 PWD가 같은지 비교
+				if(bcPwd.matches(memberPwd, savePwd)) {
+					result = memberDAO.removeMember(memberNo);
+					memberPwd = null;
+				}
+		}
+			return result;
+	}
 }
