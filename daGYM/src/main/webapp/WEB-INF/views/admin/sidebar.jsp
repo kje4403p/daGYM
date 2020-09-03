@@ -67,8 +67,8 @@
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">트레이너별 매출</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html">월별 매출</a></li>
+          <li class="nav-item"> <a class="nav-link" href="trainerChart">트레이너별 매출</a></li>
+          <li class="nav-item"> <a class="nav-link" href="monthChart">월별 매출</a></li>
         </ul>
       </div>
     </li>

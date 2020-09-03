@@ -22,6 +22,8 @@
       margin-bottom: 0;}
     .listBtn{
     	float: left;}
+    .pagination {
+	    justify-content: center;}
 </style>
 </head>
 <body>
@@ -60,13 +62,13 @@
                                            			<tr>
                                            				<td>${board.boardNo}</td>
                                            				<td>${board.memberId}</td>
-                                           				<td>${board.questionCode}</td>
+                                           				<td>${board.questionType}</td>
                                            				<td>${board.boardTitle}</td>
                                            				<td>
                                            					<fmt:formatDate var="enrollDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
                                            					${enrollDate}
                                            				</td>
-                                           				<td><button class="btn btn-warning contentBtn" type="button"  data-toggle="modal" data-target="#en-modal">확인하기</button></td>
+                                           				<td><button class="btn btn-warning contentBtn btn-rounded" type="button"  data-toggle="modal" data-target="#en-modal">확인하기</button></td>
                                            				<input type="hidden" value="${board.boardContent}">
                                            			</tr>
                                            		</c:forEach>
@@ -75,7 +77,63 @@
 	                                </tbody>
 	                            </table>
                             </div>
-                        </div>
+                            
+							<!-- 페이징바 -->
+							<div class="my-4">
+					            <ul class="pagination">
+					            	
+					            	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
+						                <li>
+						                	<!-- 맨 처음으로(<<) -->
+						                    <a class="page-link text-primary" href="inquiryList?cp=1">&lt;&lt;</a>
+						                </li>
+						                
+						                <li>
+						                	<!-- 이전으로(<) -->
+						                	<!-- prev 생성 식 : (현재페이지 - 1) / 페이징바 사이즈(10) * 10 -->
+						                	<!-- fmt 태그를 이용한 소수점 제거 -->
+						                	<fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
+						                	
+						                	<c:set var="prev" value="${operand1 * 10}"/>
+						                	
+					                   		<a class="page-link text-primary" href="inquiryList?cp=${prev}">&lt;</a>
+						                </li>
+					                </c:if>
+					                
+					                <!-- 10개의 페이지 목록 -->
+					                <c:forEach var="p" begin="${pInfo.startPage}" end="${pInfo.endPage}">
+					                	<c:choose>
+					                		<c:when test="${p == pInfo.currentPage}">
+					                			<li><a class="page-link">${p}</a></li>
+					                		</c:when>
+					                		
+					                		<c:otherwise>
+						                		<li>
+						                			<a class="page-link text-primary" href="inquiryList?cp=${p}">${p}</a>
+							                	</li>
+							                </c:otherwise>
+					                	</c:choose>
+					                </c:forEach>
+					                
+					                <!-- 다음 페이지로(>) -->
+					                <!-- next 생성 식 : (현재 페이지 + 9) / 10 * 10 + 1 -->
+					                <c:if test="${pInfo.maxPage > pInfo.endPage}">
+					                
+					                	<!-- 다음 페이지(>) -->
+						                <li>
+						                	<fmt:parseNumber var="operand2" value="${(pInfo.currentPage + pInfo.pagingBarSize - 1) / pInfo.pagingBarSize}" integerOnly="true"/>
+						                	<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1}"/>
+											<a class="page-link text-primary" href="inquiryList?cp=${next}">&gt;</a>
+						                </li>
+						                
+						                <!-- 맨 끝으로(>>) -->
+						                <li>
+						                    <a class="page-link text-primary" href="inquiryList?cp=${pInfo.maxPage}">&gt;&gt;</a>
+						                </li>
+					                </c:if>
+					            </ul>
+					        </div>                            
+                	</div>
 				</div>
 				
 				<jsp:include page="../admin/footer.jsp"/>
@@ -88,7 +146,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content" style="width: 400px;">
 				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">1:1 문의 확인하기</h3>
+					<h3 class="modal-title" id="exampleModalLabel">1:1 문의 답변하기</h3>
 				    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 				    <span aria-hidden="true">&times;</span>
 				    </button>
@@ -99,7 +157,7 @@
 						<div id="content-area">
 						</div>
 						<hr>
-						<label id="label-title" class="modal-left">요청 내용 입력</label> <br>
+						<label id="label-title" class="modal-left">답변 내용 입력</label> <br>
 						<textarea name="replyContent" cols="50" rows="5" style="resize: none; margin-bottom: 20px;" class="modal-left"></textarea> 
 						<br>
 					

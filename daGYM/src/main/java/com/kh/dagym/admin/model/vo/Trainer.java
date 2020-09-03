@@ -7,9 +7,8 @@ public class Trainer {
 	private String trainerId;
 	private String trainerPwd;
 	private String trainerName;
-	private String trainerGender;
 	private String trainerPhone;
-	private int trainerCareer;
+	private String trainerCareer;
 	private int trainerMemberCount;
 	private Date trainerEnrollDate;
 	private String trianerStatus;
@@ -17,15 +16,14 @@ public class Trainer {
 	
 	public Trainer() {}
 
-	public Trainer(int trainerNo, String trainerId, String trainerPwd, String trainerName, String trainerGender,
-			String trainerPhone, int trainerCareer, int trainerMemberCount, Date trainerEnrollDate, String trianerStatus,
+	public Trainer(int trainerNo, String trainerId, String trainerPwd, String trainerName,
+			String trainerPhone, String trainerCareer, int trainerMemberCount, Date trainerEnrollDate, String trianerStatus,
 			int trainerPrice) {
 		super();
 		this.trainerNo = trainerNo;
 		this.trainerId = trainerId;
 		this.trainerPwd = trainerPwd;
 		this.trainerName = trainerName;
-		this.trainerGender = trainerGender;
 		this.trainerPhone = trainerPhone;
 		this.trainerCareer = trainerCareer;
 		this.trainerMemberCount = trainerMemberCount;
@@ -66,14 +64,6 @@ public class Trainer {
 		this.trainerName = trainerName;
 	}
 
-	public String getTrainerGender() {
-		return trainerGender;
-	}
-
-	public void setTrainerGender(String trainerGender) {
-		this.trainerGender = trainerGender;
-	}
-
 	public String getTrainerPhone() {
 		return trainerPhone;
 	}
@@ -82,11 +72,11 @@ public class Trainer {
 		this.trainerPhone = trainerPhone;
 	}
 
-	public int getTrainerCareer() {
+	public String getTrainerCareer() {
 		return trainerCareer;
 	}
 
-	public void setTrainerCareer(int trainerCareer) {
+	public void setTrainerCareer(String trainerCareer) {
 		this.trainerCareer = trainerCareer;
 	}
 
@@ -125,7 +115,7 @@ public class Trainer {
 	@Override
 	public String toString() {
 		return "Trainer [trainerNo=" + trainerNo + ", trainerId=" + trainerId + ", trainerPwd=" + trainerPwd
-				+ ", trainerName=" + trainerName + ", trainerGender=" + trainerGender + ", trainerPhone=" + trainerPhone
+				+ ", trainerName=" + trainerName + ", trainerPhone=" + trainerPhone
 				+ ", trainerCareer=" + trainerCareer + ", trainerMemberCount=" + trainerMemberCount + ", trainerEnrollDate="
 				+ trainerEnrollDate + ", trianerStatus=" + trianerStatus + ", trainerPrice=" + trainerPrice + "]";
 	}

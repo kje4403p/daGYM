@@ -55,18 +55,21 @@
                     </ul>
                 </nav>
                 <c:choose>
-                    		<c:when test="${empty loginMember }">
-                    			 <a href="${contextPath}/member/login" class="primary-btn signup-btn">Login</a>
-                    			
-                    		</c:when>
-                    		<c:otherwise>
-                    			<a href="${contextPath}/member/mypage" class="primary-btn signup-btn">Mypage</a>
-                    		 <a href="${contextPath}/member/logout" class="primary-btn signup-btn">Logout</a>
-                    		
-                    		</c:otherwise>
-                    	</c:choose>
+                		<c:when test="${empty loginMember }">
+                			 <a href="${contextPath}/member/login" class="primary-btn signup-btn">Login</a>
+                			
+                		</c:when>
+                		<c:otherwise>
+                			<c:if test="${loginMember.memberGrade == 'G'}">
+                				<a href="${contextPath}/member/mypage" class="primary-btn signup-btn">Mypage</a>
+                		 	</c:if>
+                		 	<c:if test="${loginMember.memberGrade == 'A'}">
+			                	<a href="${contextPath}/admin/adminView" class="primary-btn signup-btn">관리자 페이지</a>
+			                </c:if>
+                		 	<a href="${contextPath}/member/logout" class="primary-btn signup-btn">Logout</a>
+                		</c:otherwise>
+                </c:choose>
                     	
-                <a href="admin/adminView" class="primary-btn signup-btn">관리자 페이지</a>
             </div>
             <div id="mobile-menu-wrap"></div>
         </div>

@@ -18,7 +18,6 @@
 		<result property="trainerId" column="TRAINER_ID" />
 		<result property="trainerPwd" column="TRAINER_PWD" />
 		<result property="trainerName" column="TRAINER_NM" />
-		<result property="trainerGender" column="TRAINER_GENDER" />
 		<result property="trainerPhone" column="TRAINER_PHONE" />
 		<result property="trainerCareer" column="TRAINER_CAREER" />
 		<result property="trainerMemberCount" column="TRAINER_M_CNT" />
@@ -36,7 +35,7 @@
 		<result property="boardEnrollDate" column="BOARD_ENROLL_DATE"/>
 		<result property="boardModifyDate" column="BOARD_MODIFY_DATE"/>
 		<result property="boardStatus" column="BOARD_STATUS"/>
-		<result property="questionCode" column="QUESTION_CODE"/>
+		<result property="questionType" column="QUESTION_TYPE"/>
 		<result property="startDate" column="START_DATE"/>
 		<result property="endDate" column="END_DATE"/>
 		<result property="views" column="VIEWS"/>
@@ -57,11 +56,10 @@
 	</select>
 	
 	<!-- 1:1 문의 조회 -->
-	<select id="selectIList" resultMap="boardResultSet">
-		SELECT * FROM S_BOARD
-		WHERE BOARD_TYPE=3
+	<select id="selectIList" parameterType="_int" resultMap="boardResultSet">
+		SELECT * FROM A_BOARD
+		WHERE BOARD_TYPE=#{boardType}
 		AND NOT EXISTS (SELECT 1 FROM REPLY WHERE PARENT_BOARD_NO = BOARD_NO)
-		AND BOARD_STATUS='Y'
 		ORDER BY BOARD_NO
 	</select>
 	
@@ -70,4 +68,10 @@
 		INSERT INTO REPLY
 		VALUES(SEQ_RNO.NEXTVAL, #{parentBoardNo}, 1, #{replyContent}, DEFAULT, DEFAULT)
 	</insert>
+	
+	<!-- 게시글 수 조회 -->
+	<select id="getListCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM A_BOARD
+		WHERE BOARD_TYPE = #{boardType}
+	</select>
 </mapper>

@@ -12,7 +12,7 @@ public class Board {
 	private Timestamp boardEnrollDate;
 	private Timestamp boardModifyDate;
 	private String boardStatus;
-	private int questionCode;
+	private String questionType;
 	private Timestamp startDate;
 	private Timestamp endDate;
 	private int views;
@@ -20,7 +20,7 @@ public class Board {
 	public Board() {}
 
 	public Board(int boardNo, String memberId, int boardType, String boardTitle, String boardContent,
-			Timestamp boardEnrollDate, Timestamp boardModifyDate, String boardStatus, int questionCode,
+			Timestamp boardEnrollDate, Timestamp boardModifyDate, String boardStatus, String questionType,
 			Timestamp startDate, Timestamp endDate, int views) {
 		super();
 		this.boardNo = boardNo;
@@ -31,7 +31,7 @@ public class Board {
 		this.boardEnrollDate = boardEnrollDate;
 		this.boardModifyDate = boardModifyDate;
 		this.boardStatus = boardStatus;
-		this.questionCode = questionCode;
+		this.questionType = questionType;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.views = views;
@@ -101,12 +101,12 @@ public class Board {
 		this.boardStatus = boardStatus;
 	}
 
-	public int getQuestionCode() {
-		return questionCode;
+	public String getQuestionType() {
+		return questionType;
 	}
 
-	public void setQuestionCode(int questionCode) {
-		this.questionCode = questionCode;
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
 	}
 
 	public Timestamp getStartDate() {
@@ -137,8 +137,8 @@ public class Board {
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", memberId=" + memberId + ", boardType=" + boardType + ", boardTitle="
 				+ boardTitle + ", boardContent=" + boardContent + ", boardEnrollDate=" + boardEnrollDate
-				+ ", boardModifyDate=" + boardModifyDate + ", boardStatus=" + boardStatus + ", questionCode="
-				+ questionCode + ", startDate=" + startDate + ", endDate=" + endDate + ", views=" + views + "]";
+				+ ", boardModifyDate=" + boardModifyDate + ", boardStatus=" + boardStatus + ", questionType="
+				+ questionType + ", startDate=" + startDate + ", endDate=" + endDate + ", views=" + views + "]";
 	}
-	
+
 }
