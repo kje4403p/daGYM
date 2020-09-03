@@ -20,8 +20,6 @@
         <div class="loader"></div>
     </div> 
 
-  
-
     <!-- About Section Begin -->
     <section class="about-section spad">
         <div class="container">
