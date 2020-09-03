@@ -4,27 +4,26 @@
 <html lang="zxx">
 
 <head>
-   
-    
-    <!-- context Pathë¥¼ íë¡ì í¸ ì ì²´ìì ê°ë¨í ì¬ì©í  ì ìëë¡ ë³ì ì ì¸ -->
-	
-	
-    <!-- Google Font -->
-   <script defer
-  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
-</script>
-      
+<style>
+
+</style>
 </head>
 
 <body>
 <jsp:include page="../common/header.jsp"/>
-    <!--  Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div> 
-
-  
-
+	<!-- Grey with black text -->
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark nav justify-content-center">
+	  <ul class="navbar-nav nav">
+	    
+	    <li class="nav-item">
+	      <a class="nav-link" href="#content1">시설 소개</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#content2">오시는 길</a>
+	    </li>
+	    
+	  </ul>
+	</nav>
     <!-- About Section Begin -->
     <section class="about-section spad">
         <div class="container">
@@ -39,7 +38,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="about-text">
-                        <h2>Story About Us</h2>
+                        <h2 id = "content1">Story About Us</h2>
                         <p class="first-para">Lorem ipsum proin gravida nibh vel velit auctor aliquet. Aenean pretium
                             sollicitudin, nascetur auci elit consequat ipsutissem niuis sed odio sit amet nibh vulputate
                             cursus a amet.</p>
@@ -174,73 +173,6 @@
     </section>
     <!-- Classes Section End -->
 
-    <!-- Trainer Section Begin -->
-    <section class="trainer-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>EXPERT TRAINERS</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                        <img src="resources/img/trainer/trainer-1.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Patrick Cortez</h5>
-                            <span>Leader</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                            <div class="trainer-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                        <img src="resources/img/trainer/trainer-2.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Gregory Powers</h5>
-                            <span>Gym coach</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                            <div class="trainer-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                        <img src="resources/img/trainer/trainer-3.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Walter Wagner</h5>
-                            <span>Dance trainer</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                            <div class="trainer-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Trainer Section End -->
-
     <!-- Testimonial Section Begin -->
     <section class="testimonial-section spad">
         <div class="container">
@@ -290,69 +222,46 @@
         </div>
     </section>
     <!-- Testimonial Section End -->
-
-    <!-- Banner Section Begin -->
-    <section class="banner-section set-bg" data-setbg="resources/img/banner-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="banner-text">
-                        <h2>Get training today</h2>
-                        <p>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industryÃ¢ÂÂs standard.</p>
-                        <a href="#" class="primary-btn banner-btn">Contact Now</a>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <img src="resources/img/banner-person.png" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Banner Section End -->
-
-  
-
-    
-
-    
-    <!-- 지도 -->
-	<div id="map" style="width:500px;height:400px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c1e469e1fb64b426f1c9b793e7d792d">
+	<section>
 	
-		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-		var options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-			level: 3 //지도의 레벨(확대, 축소 정도)
-		};
-	
-		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		 <div class="section-title">
+	                        <h2 id="content2">오시는 길</h2>
+	     </div>
+	       <div class="row">
+                <div class="col-lg-5 offset-lg-3">
+	     <div id="map" style="width:800px;height:500px;"></div>
+	     </div>
+	     </div>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c1e469e1fb64b426f1c9b793e7d792d"></script>
+		<script>
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			    mapOption = { 
+			        center: new kakao.maps.LatLng(37.567921, 126.9819415), // 지도의 중심좌표
+			        level: 4 // 지도의 확대 레벨
+			    };
+			
+			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			
+			// 마커가 표시될 위치입니다 
+			var markerPosition  = new kakao.maps.LatLng(37.567921, 126.9819415); 
+			
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			    position: markerPosition
+			});
+			
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);
+
+		
 	</script>
+                    
+                    
+	</section>
+  
+    
 
-    <!-- Footer Banner Section Begin -->
-    <section class="footer-banner">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="footer-banner-item set-bg" data-setbg="resources/img/footer-banner/footer-banner-1.jpg">
-                        <span>New member</span>
-                        <h2>7 days for free</h2>
-                        <p>Complete the training sessions with us, surely you will be happy</p>
-                        <a href="#" class="primary-btn">Get Started</a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="footer-banner-item set-bg" data-setbg="resources/img/footer-banner/footer-banner-2.jpg">
-                        <span>contact us</span>
-                        <h2>09 746 204</h2>
-                        <p>If you trust us on your journey they dark sex does not disappoint you!</p>
-                        <a href="#" class="primary-btn">Get Started</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Footer Banner Section End -->
+ 
 
     <!-- Js Plugins -->
     <script src="resources/js/jquery-3.3.1.min.js"></script>
