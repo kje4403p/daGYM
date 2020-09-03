@@ -6,6 +6,9 @@
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -27,14 +30,22 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">     
                     <a href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
-                        <img src="${contextPath}/resources/img/trainer/trainer-1.jpg" alt="">
-                        <div class="trainer-text">
+                     						<c:forEach items="${thList}" var="th">
+	                							<c:if test="${th.parentTrainerNo == trainer.trainerNo}">
+	                				
+	                								<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}" />
+	                							
+	                									<img width="370px" height="360px" src="${src}">
+	                							</c:if>
+	                						</c:forEach>
+	                						
+                        <div id="trainer-text" class="trainer-text">
                             <h5>${trainer.trainerName}</h5>
                             <span>Leader</span>
+                            <br><br>
                             <p>Phone: ${trainer.trainerPhone}</p>
                             <p>회원 수: ${trainer.trainerMcnt}</p>
-                      	    <p>경력: ${trainer.trainerCareer}년</p>
-                      	    <p>PT(기본 10회)가격: ${trainer.trainerPrice}원</p>
+                      	    <p>수상내역: ${trainer.trainerAward}</p>
                         </div>
                         </a>
                       
@@ -45,6 +56,7 @@
             </div>
         </div>
     </section>
+    <a href="${contextPath}/trainer/signUp">트레이너 추가</a>
     <!-- Trainer Section End -->
 	<jsp:include page="../common/footer.jsp"/>
 </body>

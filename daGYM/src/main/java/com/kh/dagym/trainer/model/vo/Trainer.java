@@ -7,33 +7,37 @@ public class Trainer {
 	private String trainerId;
 	private String trainerPwd;
 	private String trainerName;
-	private String trainerGender;
 	private String trainerPhone;
-	private int trainerCareer;
+	private String trainerCareer;
 	private int trainerMcnt;
 	private Date trainerEnrollDate;
 	private String trianerStatus;
 	private int trainerPrice;
+	private String trainerSNS;
+	private String trainerComment;
+	private String trainerAward;
 	
 	public Trainer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Trainer(int trainerNo, String trainerId, String trainerPwd, String trainerName, String trainerGender,
-			String trainerPhone, int trainerCareer, int trainerMcnt, Date trainerEnrollDate, String trianerStatus,
-			int trainerPrice) {
+	public Trainer(int trainerNo, String trainerId, String trainerPwd, String trainerName, String trainerPhone,
+			String trainerCareer, int trainerMcnt, Date trainerEnrollDate, String trianerStatus, int trainerPrice,
+			String trainerSNS, String trainerComment, String trainerAward) {
 		super();
 		this.trainerNo = trainerNo;
 		this.trainerId = trainerId;
 		this.trainerPwd = trainerPwd;
 		this.trainerName = trainerName;
-		this.trainerGender = trainerGender;
 		this.trainerPhone = trainerPhone;
 		this.trainerCareer = trainerCareer;
 		this.trainerMcnt = trainerMcnt;
 		this.trainerEnrollDate = trainerEnrollDate;
 		this.trianerStatus = trianerStatus;
 		this.trainerPrice = trainerPrice;
+		this.trainerSNS = trainerSNS;
+		this.trainerComment = trainerComment;
+		this.trainerAward = trainerAward;
 	}
 
 	public int getTrainerNo() {
@@ -68,14 +72,6 @@ public class Trainer {
 		this.trainerName = trainerName;
 	}
 
-	public String getTrainerGender() {
-		return trainerGender;
-	}
-
-	public void setTrainerGender(String trainerGender) {
-		this.trainerGender = trainerGender;
-	}
-
 	public String getTrainerPhone() {
 		return trainerPhone;
 	}
@@ -84,11 +80,11 @@ public class Trainer {
 		this.trainerPhone = trainerPhone;
 	}
 
-	public int getTrainerCareer() {
+	public String getTrainerCareer() {
 		return trainerCareer;
 	}
 
-	public void setTrainerCareer(int trainerCareer) {
+	public void setTrainerCareer(String trainerCareer) {
 		this.trainerCareer = trainerCareer;
 	}
 
@@ -124,13 +120,41 @@ public class Trainer {
 		this.trainerPrice = trainerPrice;
 	}
 
+	public String getTrainerSNS() {
+		return trainerSNS;
+	}
+
+	public void setTrainerSNS(String trainerSNS) {
+		this.trainerSNS = trainerSNS;
+	}
+
+	public String getTrainerComment() {
+		return trainerComment;
+	}
+
+	public void setTrainerComment(String trainerComment) {
+		this.trainerComment = trainerComment;
+	}
+
+	public String getTrainerAward() {
+		return trainerAward;
+	}
+
+	public void setTrainerAward(String trainerAward) {
+		this.trainerAward = trainerAward;
+	}
+
 	@Override
 	public String toString() {
 		return "Trainer [trainerNo=" + trainerNo + ", trainerId=" + trainerId + ", trainerPwd=" + trainerPwd
-				+ ", trainerName=" + trainerName + ", trainerGender=" + trainerGender + ", trainerPhone=" + trainerPhone
-				+ ", trainerCareer=" + trainerCareer + ", trainerMcnt=" + trainerMcnt + ", trainerEnrollDate="
-				+ trainerEnrollDate + ", trianerStatus=" + trianerStatus + ", trainerPrice=" + trainerPrice + "]";
+				+ ", trainerName=" + trainerName + ", trainerPhone=" + trainerPhone + ", trainerCareer=" + trainerCareer
+				+ ", trainerMcnt=" + trainerMcnt + ", trainerEnrollDate=" + trainerEnrollDate + ", trianerStatus="
+				+ trianerStatus + ", trainerPrice=" + trainerPrice + ", trainerSNS=" + trainerSNS + ", trainerComment="
+				+ trainerComment + ", trainerAward=" + trainerAward + "]";
 	}
+
+	
+	
 	
 	
 }
