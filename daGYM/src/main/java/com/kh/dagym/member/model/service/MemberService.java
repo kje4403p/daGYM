@@ -1,5 +1,7 @@
 package com.kh.dagym.member.model.service;
 
+import java.util.List;
+
 import com.kh.dagym.member.model.vo.Member;
 
 public interface MemberService {
@@ -32,10 +34,14 @@ public interface MemberService {
 	
 	/** 회원 정보 수정용 Service
 	 * @param upMember
-	 * @return
+	 * @return result
 	 */
 	int updateMember(Member upMember);
 
-	
-
+	/** 회원 탈퇴용 Service
+	 * @param memberPwd
+	 * @param memberNo
+	 * @return result
+	 */
+	int removeMember(String memberPwd, int memberNo);
 }

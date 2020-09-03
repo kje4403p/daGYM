@@ -13,7 +13,7 @@
 <script>
 </script>
 <div id="sideSet" class="col-sm-2 mt-1" style="left : 20px;">
-	<h3>회원 정보 수정</h3>
+	<h3>마이페이지</h3>
 	<br>
 	<ul id="side" class="list-group">
 		<li id="mypage" type="button" class="list-group-item list-group-item-action">내 정보</li>
