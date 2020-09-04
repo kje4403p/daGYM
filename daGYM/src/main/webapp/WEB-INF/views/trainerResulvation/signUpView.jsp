@@ -121,8 +121,8 @@
 					</div>
 				</div>
 				<div id="fileArea">
-				
-					<input type="file" id="img1" name="thumbnail" onchange="LoadImg(this,1)"> 
+				 
+					<input type="file" id="img1" name="thumbnail" onchange="LoadImg(this,1)" required> 
 				
 				</div>
                     
@@ -148,6 +148,11 @@
 </div>
 
 <script>
+$("#reg-submit").on("click",function(){
+	 if(!$("#img1").val()){
+		 alert("사진을 업로드 해주세요!");
+	 }
+});
 // 이미지 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 $(function () {
    $("#fileArea").hide();

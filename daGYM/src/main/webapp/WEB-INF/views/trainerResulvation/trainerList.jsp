@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
+ #trainer{
+ padding-bottom: 100px;
+ }
 </style>
 </head>
 <body>
@@ -27,7 +29,7 @@
             <div class="row">
               <c:forEach var="trainer" items="${trainerList}">
             
-                <div class="col-lg-4 col-md-6">
+                <div id="trainer" class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">     
                     <a href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
                      						<c:forEach items="${thList}" var="th">
