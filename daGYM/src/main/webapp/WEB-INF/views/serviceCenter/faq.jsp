@@ -60,6 +60,7 @@ th, td {
 	padding: 15px;
 	background-color: rgba(255, 255, 255, 0.2);
 	color: #fff;
+	cursor: pointer;
 }
 
 th {
@@ -89,6 +90,7 @@ td {
 	bottom: -9999px;
 	background-color: rgba(255, 255, 255, 0.2);
 	z-index: -1;
+	
 }
 
 }
@@ -132,6 +134,11 @@ tbody>tr>td:last-child {
 	margin-left: 60%;
 }
 
+/* 페이징바 */
+
+
+
+
 /* 사이드바 css */
 </style>
 </head>
@@ -171,12 +178,15 @@ tbody>tr>td:last-child {
 								</tr>
 							</c:when>
 							<c:otherwise>
-								<c:forEach var="board" items="${bList}">
+								<c:forEach var="board" items="${bList}"  varStatus="status">
 									<div>
 										<tr>
-											<td>${board.boardNo}</td>
+											<td>${board.boardNo}
+												<input type="hidden" value="${nList[status.index].boardNo}">
+											</td>
 											<td>${board.boardTitle}</td>
-											<td>${board.memberNo}</td>
+											<td><%-- ${board.memberNo} --%>
+												${mList[status.index].memberId}</td>
 											<td><jsp:useBean id="now" class="java.util.Date" /> <fmt:formatDate
 													var="today" value="${now}" pattern="yyyy-MM-dd" /> <fmt:formatDate
 													var="createDate" value="${board.boardEnrollDate}"
@@ -198,7 +208,10 @@ tbody>tr>td:last-child {
 						</c:choose>
 					</tbody>
 				</table>
-
+				<!-- 관리자 로그인된 경우 글쓰기 버튼 -->
+				<c:if test="${loginMember.getMemberGrade == A }">
+					<a href="#">글쓰기</a>
+				</c:if>
 				<!-- 페이징바 -->
 				<c:url var="searchParmeter" value="${pInfo.boardType}">
 					<c:if test="${!empty param.sVal}">
@@ -286,7 +299,7 @@ tbody>tr>td:last-child {
 				"click",
 				function(e) {
 
-					var boardNo = $(this).parent().children().eq(0).text();
+					var boardNo = $(this).parent().children().eq(0).children().val();
 					var this1 = $(this);
 					var boardUrl = "${contextPath}/service/${pInfo.boardType}/"
 							+ boardNo + "?cp=${pInfo.currentPage}";
@@ -307,6 +320,7 @@ tbody>tr>td:last-child {
 								height : "auto",
 								id : "td1"
 							});
+							
 							$divout = $("<div>").attr({
 								id : "tddiv",
 								height : "auto%",
