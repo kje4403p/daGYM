@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 
@@ -56,6 +57,32 @@ public class ServiceDAO {
 	public int getSearchListCount(Map<String, Object> map) {
 		
 		return sqlSession.selectOne("serviceMapper.getSearchListCount", map);
+	}
+
+	/** faq보드넘버 조회 DAO
+	 * @param pInfo
+	 * @return nList
+	 */
+	public List<Board> selectFaqBoardNo(PageInfo pInfo) {
+		int offset=(pInfo.getCurrentPage()-1) *pInfo.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("serviceMapper.selectFaqBoardNo", pInfo.getBoardType(),rowBounds);
+		
+	}
+
+	
+	/** faq 멤버ID 리스트 조회 DAO
+	 * @param pInfo
+	 * @return mList
+	 */
+	public List<Member> selectFaqMemberIdList(PageInfo pInfo) {
+		int offset=(pInfo.getCurrentPage()-1) *pInfo.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		return sqlSession.selectList("serviceMapper.selectFaqmemberIdList", pInfo.getBoardType(),rowBounds);
 	}
 
 }

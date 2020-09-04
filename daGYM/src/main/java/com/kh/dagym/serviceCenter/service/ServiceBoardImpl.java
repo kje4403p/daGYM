@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.serviceCenter.Search;
@@ -36,6 +37,7 @@ public class ServiceBoardImpl implements ServiceBoard{
 		return pInfo;
 	}
 
+	
 	//faq 리스트 조회 service구현
 	@Override
 	public List<Board> selectFaqList(PageInfo pInfo) {
@@ -48,8 +50,10 @@ public class ServiceBoardImpl implements ServiceBoard{
 	@Override
 	public Board selectFaqBoard(int boardNo) {
 		Board board = serviceDAO.selectFaqBoard(boardNo);
-		
+		System.out.println(board.toString());
 		if(board != null) {
+			
+			
 			int result = serviceDAO.increaseCount(boardNo);
 			
 			if(result>0) {
@@ -72,6 +76,20 @@ public class ServiceBoardImpl implements ServiceBoard{
 		int searchListCount = serviceDAO.getSearchListCount(map);
 		
 		return null;
+	}
+
+	// faq보드넘버 조회 service구현
+	@Override
+	public List<Board> selectBoardNo(PageInfo pInfo) {
+		
+		return serviceDAO.selectFaqBoardNo(pInfo);
+	}
+
+	//faq 멤버 Id 리스트 조회 
+	@Override
+	public List<Member> selectMemberId(PageInfo pInfo) {
+		
+		return serviceDAO.selectFaqMemberIdList(pInfo);
 	}
 	
 	

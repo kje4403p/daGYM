@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.serviceCenter.Search;
 import com.kh.dagym.serviceCenter.service.ServiceBoard;
 
-
+@SessionAttributes({"loginMember"})
 @Controller
 @RequestMapping("/service/*")
 public class ServiceController {
@@ -48,9 +51,13 @@ public class ServiceController {
 		PageInfo pInfo = serviceBoard.pagination(type, cp);
 		
 		List<Board> bList = serviceBoard.selectFaqList(pInfo);
+		List<Board> nList = serviceBoard.selectBoardNo(pInfo);
+		List<com.kh.dagym.admin.model.vo.Member> mList = serviceBoard.selectMemberId(pInfo);
 		
 		model.addAttribute("bList", bList);
 		model.addAttribute("pInfo", pInfo);
+		model.addAttribute("nList", nList);
+		model.addAttribute("mList", mList);
 		
 		return "serviceCenter/faq";
 	}
@@ -61,7 +68,7 @@ public class ServiceController {
 	public String faqView(@PathVariable int type,
 						  @PathVariable int boardNo,Model model,
 						   RedirectAttributes rdAttr,HttpServletRequest request) {
-		System.out.println("혹인");
+		System.out.println("확인");
 		Board board = serviceBoard.selectFaqBoard(boardNo);
 		
 		String url = null;
