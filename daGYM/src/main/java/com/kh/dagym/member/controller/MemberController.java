@@ -17,8 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -40,6 +42,13 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	//로그아웃 메소드
+	@RequestMapping("logout")
+	public String logout(SessionStatus status) {
+		status.setComplete();
+		return "redirect:/";
+		
+	}
 	// 마이페이지 화면 전환 메소드
 			@RequestMapping("mypage")
 			public String myPageView() {
@@ -63,13 +72,63 @@ public class MemberController {
 			public String memberProfileCk() {
 				return "member/memberProfileCk";
 		}
+	// 회원정보  화면 전환 메소드
+			@RequestMapping("memberProfile")
+			public String memberProfile() {
+				return "member/memberProfile";
+		}
 			
-	// 회원정보 체크 화면 전환 메소드
-				@RequestMapping("memberProfile")
-				public String memberProfile() {
-					return "member/memberProfile";
-			}
+	
+			
+	// 패스워드 확인 후 회원정보 화면 전환 메소드
+			@RequestMapping("checkPwd")
+			public String memberProfileAction(String memberPwd, Model model, RedirectAttributes rdAttr, HttpServletResponse response) {
+				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+				int result = memberService.checkPwd(memberPwd,memberNo);
+				String status = null;
+				String msg = null;
+				String text = null;
+				String link = null;
+				if(result > 0) {
+					link = "member/memberProfile";
+				} else {
+					status = "error";
+					msg = "오류 발생";
+					text = "현재 비밀번호를 확인해 주세요";	
+					link = "member/memberProfileCk";
+				}
 				
+				rdAttr.addFlashAttribute("msg", msg);
+				rdAttr.addFlashAttribute("status", status);
+				rdAttr.addFlashAttribute("text", text);
+				return "redirect:/" + link;
+		}
+			
+	// 회원정보 변경 메소드
+			@RequestMapping("updateAction")
+			public String updateAction(Member upMember, Model model, RedirectAttributes rdAttr, HttpServletRequest request) {
+			
+				Member loginMember = (Member)model.getAttribute("loginMember");
+				
+				upMember.setMemberNo(loginMember.getMemberNo());
+
+				int result = memberService.updateMember(upMember);
+				String msg = null;
+				String status = null;
+				if (result > 0) {
+					model.addAttribute("loginMember", upMember);
+					status="success";
+					msg = "회원정보가 수정 되었습니다.";
+				} else {
+					status="error";
+					msg = "회원정보 수정에 실패 했습니다. 지속적인 오류 발생 시 관리자에게 문의주세요.";
+				}
+				rdAttr.addFlashAttribute("status", status);
+				rdAttr.addFlashAttribute("msg", msg);
+				return "redirect:/member/mypage";
+			
+	}
+	
 	// PT이용권/결제정보 화면 전환 메소드
 			@RequestMapping("memberPass")
 			public String memberPass() {
@@ -81,7 +140,36 @@ public class MemberController {
 				public String memberRemove() {
 					return "member/memberRemove";
 			}
-			
+	// 회원탈퇴 메소드
+				@RequestMapping("memberRemoveAction")
+				public String removeMember(String memberPwd, Model model, RedirectAttributes rdAttr, HttpServletRequest request, SessionStatus status1) {
+					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+					
+					int result = memberService.removeMember(memberPwd,memberNo);
+					
+					String msg = null;
+					String status = null;
+					String text = null;
+					String link = null;
+					if(result > 0) {
+						msg="회원 탈퇴 성공";
+						status = "success";
+						link ="";
+						status1.setComplete();
+					}else if(result == 0){
+						msg="회원 탈퇴 실패";
+						status = "error";
+						link = "member/memberRemove";
+					}else {
+						msg="패스워드가 일치하지 않습니다.";
+						status = "error";
+						link = "member/memberRemove";
+					}
+					rdAttr.addFlashAttribute("msg", msg);
+					rdAttr.addFlashAttribute("status", status);
+					return "redirect:/" +link;
+				}	
+				
 			// 회원가입 화면 전환 메소드
 			@RequestMapping(value="signUp", method=RequestMethod.GET)
 			public String signUpView() {

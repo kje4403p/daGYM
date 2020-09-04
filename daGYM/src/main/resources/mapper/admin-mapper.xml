@@ -18,13 +18,27 @@
 		<result property="trainerId" column="TRAINER_ID" />
 		<result property="trainerPwd" column="TRAINER_PWD" />
 		<result property="trainerName" column="TRAINER_NM" />
-		<result property="trainerGender" column="TRAINER_GENDER" />
 		<result property="trainerPhone" column="TRAINER_PHONE" />
 		<result property="trainerCareer" column="TRAINER_CAREER" />
 		<result property="trainerMemberCount" column="TRAINER_M_CNT" />
 		<result property="trainerEnrollDate" column="TRAINER_ENROLL_DATE" />
 		<result property="trianerStatus" column="TRAINER_STATUS" />
 		<result property="trainerPrice" column="TRAINER_PRICE" />
+	</resultMap>
+	
+	<resultMap id="boardResultSet" type="ABoard">
+		<id property="boardNo" column="BOARD_NO"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="boardType" column="BOARD_TYPE"/>
+		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="boardContent" column="BOARD_CONTENT"/>
+		<result property="boardEnrollDate" column="BOARD_ENROLL_DATE"/>
+		<result property="boardModifyDate" column="BOARD_MODIFY_DATE"/>
+		<result property="boardStatus" column="BOARD_STATUS"/>
+		<result property="questionType" column="QUESTION_TYPE"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="views" column="VIEWS"/>
 	</resultMap>
 	
 	<!-- 회원 전체 조회 -->
@@ -39,5 +53,25 @@
 		SELECT * FROM TRAINER
 		WHERE TRAINER_STATUS='Y'
 		ORDER BY TRAINER_NO
+	</select>
+	
+	<!-- 1:1 문의 조회 -->
+	<select id="selectIList" parameterType="_int" resultMap="boardResultSet">
+		SELECT * FROM A_BOARD
+		WHERE BOARD_TYPE=#{boardType}
+		AND NOT EXISTS (SELECT 1 FROM REPLY WHERE PARENT_BOARD_NO = BOARD_NO)
+		ORDER BY BOARD_NO
+	</select>
+	
+	<!-- 1:1 문의 답변 -->
+	<insert id="insertAnswer" parameterType="AReply">
+		INSERT INTO REPLY
+		VALUES(SEQ_RNO.NEXTVAL, #{parentBoardNo}, 1, #{replyContent}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<!-- 게시글 수 조회 -->
+	<select id="getListCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM A_BOARD
+		WHERE BOARD_TYPE = #{boardType}
 	</select>
 </mapper>

@@ -18,11 +18,13 @@
    <typeAliases>
       <typeAlias type="com.kh.dagym.member.model.vo.Member" alias="Member"/>
       <typeAlias type="com.kh.dagym.admin.model.vo.Member" alias="AMember"/>
-         <typeAlias type="com.kh.dagym.admin.model.vo.Trainer" alias="ATrainer"/>
+      <typeAlias type="com.kh.dagym.admin.model.vo.Trainer" alias="ATrainer"/>
+      <typeAlias type="com.kh.dagym.admin.model.vo.Board" alias="ABoard"/>
+      <typeAlias type="com.kh.dagym.admin.model.vo.Reply" alias="AReply"/>
       <typeAlias type="com.kh.dagym.common.Board" alias="Board"/>
       <typeAlias type="com.kh.dagym.trainer.model.vo.Trainer" alias="Trainer"/>
       <typeAlias type="com.kh.dagym.common.Attachment" alias="Attachment"/>
-      
+      <typeAlias type="com.kh.dagym.trainer.model.vo.TrainerAttachment" alias="TrainerAttachment"/>
    </typeAliases>
    
    <!--  mapper.xml 파일을 등록하는 태그 -->

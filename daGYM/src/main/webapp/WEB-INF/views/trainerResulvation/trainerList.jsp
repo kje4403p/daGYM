@@ -6,6 +6,9 @@
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+</style>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -27,13 +30,22 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">     
                     <a href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
-                        <img src="${contextPath}/resources/img/trainer/trainer-1.jpg" alt="">
-                        <div class="trainer-text">
+                     						<c:forEach items="${thList}" var="th">
+	                							<c:if test="${th.parentTrainerNo == trainer.trainerNo}">
+	                				
+	                								<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}" />
+	                							
+	                									<img width="370px" height="360px" src="${src}">
+	                							</c:if>
+	                						</c:forEach>
+	                						
+                        <div id="trainer-text" class="trainer-text">
                             <h5>${trainer.trainerName}</h5>
                             <span>Leader</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                       
+                            <br><br>
+                            <p>Phone: ${trainer.trainerPhone}</p>
+                            <p>회원 수: ${trainer.trainerMcnt}</p>
+                      	    <p>수상내역: ${trainer.trainerAward}</p>
                         </div>
                         </a>
                       
@@ -44,27 +56,8 @@
             </div>
         </div>
     </section>
+    <a href="${contextPath}/trainer/signUp">트레이너 추가</a>
     <!-- Trainer Section End -->
 	<jsp:include page="../common/footer.jsp"/>
 </body>
-<script>
-	$(function(){
-			$(".single-trainer-item a").on("click", function(){
-				// 글번호
-				var boardNo = $(this).parent().children().eq(0).text();
-				
-				// 게시글 상세조회 요청 주소
-				var boardUrl = "${contextPath}/board/${pInfo.boardType}/"+ boardNo + "?cp=${pInfo.currentPage}";
-				
-				// @PathVariable 방식 : 구분되어야 하는 리소스를 호출하는 url로 사용
-				// spring/board/1/500?cp=3
-				
-				// 파라미터(쿼리스트링) : 정렬, 필터링
-				// spring/board?type=1&boardNo=500&cp=3
-				
-			// 게시글 상세 조회 요청
-			location.href = boardUrl;
-			});
-		});
-</script>
 </html>

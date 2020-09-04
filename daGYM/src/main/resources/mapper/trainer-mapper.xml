@@ -9,22 +9,73 @@
 		<result property="trainerId" column="TRAINER_ID" />
 		<result property="trainerPwd" column="TRAINER_PWD" />
 		<result property="trainerName" column="TRAINER_NM" />
-		<result property="trainerGender" column="TRAINER_GENDER" />
 		<result property="trainerPhone" column="TRAINER_PHONE" />
 		<result property="trainerCareer" column="TRAINER_CAREER" />
 		<result property="trainerMcnt" column="TRAINER_M_CNT" />
 		<result property="trainerEnrollDate" column="TRAINER_ENROLL_DATE" />
 		<result property="trianerStatus" column="TRAINER_STATUS" />
-		<result property="trainerPrice" column="TRAINER_PRICE" />	
+		<result property="trainerPrice" column="TRAINER_PRICE" />
+		<result property="trainerSNS" column="TRAINER_SNS" />	
+		<result property="trainerAward" column="TRAINER_AWARD" />	
+		<result property="trainerComment" column="TRAINER_COMMENT" />		
 	</resultMap>
 	
-	
+	 <resultMap type="trainerAttachment" id="trainerAttachmentResultSet">
+        <id property="fileNo" column="FILE_NO"/>
+        <result property="parentTrainerNo" column="PARENT_TRAINER_NO"/>
+        <result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
+        <result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+        <result property="filePath" column="FILE_PATH"/>
+        <result property="fileLevel" column="FILE_LEVEL"/>
+    </resultMap>
+    
 	<select id="selectList" resultMap="trainerResultSet">
-	SELECT * FROM TRAINER
+	SELECT * FROM TRAINER WHERE TRAINER_STATUS='Y'
 	</select>
 	
 	
 	<select id="selectTrainer" parameterType="_int" resultMap="trainerResultSet">
 	SELECT * FROM TRAINER WHERE TRAINER_STATUS='Y' AND TRAINER_NO=#{trainerNo}
 	</select>
+
+
+	 <select id="selectNextNo" resultType="_int">
+        SELECT SEQ_TNO.NEXTVAL FROM DUAL
+    </select>
+	
+
+	<insert id="insertTrainer" parameterType="Trainer">
+		INSERT INTO TRAINER VALUES(#{trainerNo}, #{trainerId}, #{trainerPwd},
+		 #{trainerName},#{trainerPhone}, DEFAULT, DEFAULT, DEFAULT, 
+		#{trainerPrice}, #{trainerSNS}, #{trainerComment},#{trainerCareer},#{trainerAward})
+	</insert>
+	
+
+	<!-- 파일 정보 삽입 -->
+	<insert id="insertAttachment" parameterType="TrainerAttachment">
+		INSERT INTO TRAINER_ATTACHMENT VALUES(SEQ_TFNO.NEXTVAL, #{fileOriginName}, #{fileChangeName}, #{filePath}, #{fileLevel},#{parentTrainerNo})
+	</insert>
+	
+
+     <select id="selectFiles" parameterType="_int" resultMap="trainerAttachmentResultSet">
+     	SELECT * FROM TRAINER_ATTACHMENT WHERE PARENT_TRAINER_NO=#{trainerNo} ORDER BY FILE_LEVEL
+     </select>
+
+     <delete id="deleteAttachment" parameterType="_int">
+     	DELETE FROM TRAINER_ATTACHMENT
+     	WHERE PARENT_TRAINER_NO = #{trainerNo}
+     </delete>
+	
+	  
+	<select id="selectThumbnailList" parameterType="list" resultMap="trainerAttachmentResultSet">
+		SELECT * FROM TRAINER_ATTACHMENT
+		WHERE FILE_LEVEL = 0
+		AND PARENT_TRAINER_NO IN
+		<foreach collection="list" index="i" item="trainer"
+			open="(" close=")" separator=",">
+		#{trainer.trainerNo}
+		</foreach>
+	</select>
+	
+  
 </mapper>

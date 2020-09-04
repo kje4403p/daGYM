@@ -89,7 +89,7 @@
                         <div class="help-block with-errors"><span id="checkName">&nbsp;</span></div>
                     </div>
                     <div class="form-group">
-                        <input type="phone" class="form-control" id="memberPhone" name="memberPhone"  placeholder="전화번호" required>
+                        <input type="text" class="form-control" id="memberPhone" name="memberPhone"  placeholder="전화번호" required>
                         <div class="help-block with-errors"><span id="checkPhone">&nbsp;</span></div>
                     </div>
                     <div class="form-group">

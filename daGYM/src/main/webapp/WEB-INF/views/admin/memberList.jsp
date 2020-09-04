@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +8,7 @@
 	<link href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet" crossorigin="anonymous" />
 <title>회원 조회</title>
-<style type="text/css">
+<style>
 	#dataTable > tbody {
 	color: white;}
 	.table-hover tbody tr:hover {
@@ -31,7 +30,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
+                                    <table class="table table-bordered table-hover" id="memberTable" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th>회원 번호</th>
@@ -66,10 +65,7 @@
                                             				<td>${member.memberName}</td>
                                             				<td>${member.memberPhone}</td>
                                             				<td>${member.memberEmail}</td>
-                                            				<td>
-                                            					<fmt:formatDate var="enrollDate" value="${member.memberEnrollDate}" pattern="yyyy-MM-dd"/>
-                                            					${enrollDate}
-                                            				</td>
+                                            				<td>${member.memberEnrollDate}</td>
                                             			</tr>
                                             		</c:forEach>
                                             	</c:otherwise>
@@ -88,7 +84,7 @@
 	
 	<script>
 		$(document).ready( function () {
-		    $('#dataTable').DataTable();
+		    $('#memberTable').DataTable();
 		} );
 	</script>
 	

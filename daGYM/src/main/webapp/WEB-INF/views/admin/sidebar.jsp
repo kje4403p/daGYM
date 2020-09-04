@@ -22,8 +22,20 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/admin/flag-icon.min.css">
     <link rel="stylesheet" href="${contextPath}/resources/css/admin/owl.carousel.min.css">
     <link rel="stylesheet" href="${contextPath}/resources/css/admin/owl.theme.default.min.css">
+    
+    <!-- sweetalert : alert창을 꾸밀 수 있게 해주는 라이브러리 https://sweetalert.js.org/ -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
+<c:if test="${!empty msg}">
+	<script>
+		swal({icon : "${status}",
+			  title : "${msg}",
+			  text : "${text}"});
+	</script>
+	<c:remove var="msg"/>
+</c:if>
+	
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
     <a class="sidebar-brand brand-logo" href="${contextPath}"><img src="${contextPath}/resources/img/logo3.png"></a>
@@ -55,13 +67,13 @@
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/blank-page.html">트레이너별 매출</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/samples/error-404.html">월별 매출</a></li>
+          <li class="nav-item"> <a class="nav-link" href="trainerChart">트레이너별 매출</a></li>
+          <li class="nav-item"> <a class="nav-link" href="monthChart">월별 매출</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="documentation">
+      <a class="nav-link" href="inquiryList">
         <span class="menu-title">1:1 문의 조회</span>
       </a>
     </li>
