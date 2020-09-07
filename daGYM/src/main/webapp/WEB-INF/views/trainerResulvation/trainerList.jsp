@@ -42,10 +42,10 @@
 	                						</c:forEach>
 	                						
                         <div id="trainer-text" class="trainer-text">
-                            <h5>${trainer.trainerName}</h5>
+                            <h5>${trainer.memberName}</h5>
                             <span>Leader</span>
                             <br><br>
-                            <p>Phone: ${trainer.trainerPhone}</p>
+                            <p>Phone: ${trainer.memberPhone}</p>
                             <p>회원 수: ${trainer.trainerMcnt}</p>
                       	    <p>수상내역: ${trainer.trainerAward}</p>
                         </div>
