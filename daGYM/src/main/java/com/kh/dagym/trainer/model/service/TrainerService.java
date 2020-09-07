@@ -20,7 +20,7 @@ public interface TrainerService {
 
 	List<TrainerAttachment> selectFiles(int trainerNo);
 
-	int insertBoard(Trainer trainer, List<MultipartFile> images, String savePath);
+	int insertTrainer(Trainer trainer, List<MultipartFile> images, String savePath);
 
 
 }
