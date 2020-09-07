@@ -64,7 +64,18 @@
 	
 		<section id="hello" class="home bg-mega">
 			<div class="trainerImg">
-				 <img src="${contextPath}/resources/img/trainer/trainer-1.jpg" alt="" width="400px" height="400px">
+					<c:if test="${!empty files }">
+
+                            <c:forEach var="at" items="${files}" varStatus="vs">
+                                <c:set var="src" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+
+                                <div class="carousel-item <c:if test="${vs.index == 0}"> active</c:if>">
+                                    <img width="370px" height="360px" src="${src}" />
+                                    <input type="hidden" value="${at.fileNo}">
+                                </div>
+                            </c:forEach>
+
+                </c:if>
 			</div>			
 			<div class="trainerName">
 				<div class="trainerInfo"> 
@@ -91,8 +102,7 @@
 								<h2>트레이너 한마디!</h2>
 								<div class="separator_left"></div>
 
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-
+								<p>${trainer.trainerComment}</p>
 							
 							</div>
 						</div>
@@ -102,24 +112,23 @@
 									<h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
 									<div>
 										<div class="content">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
-
+											<p>${trainer.trainerCareer}</p>
 										</div>
 									</div>
 									<!-- End off accordion item-1 -->
 
-									<h6 class="open"><i class="fa fa-angle-right"></i>수상내역</h6>
-									<div class="open">
+									<h6><i class="fa fa-angle-right"></i>수상내역</h6>
+									<div>
 										<div class="content">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
-										</div>
+											<p>${trainer.trainerAward}</p>
+											</div>
 									</div>
 									<!-- End off accordion item-2 -->
 
 									<h6> <i class="fa fa-angle-right"></i>PT 가격</h6>
 									<div>
 										<div class="content">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
+											<p>10회당 ${trainer.trainerPrice}원</p>
 										</div>
 									</div>
 									<!-- End off accordion item-3 -->
@@ -127,7 +136,7 @@
 									<h6><i class="fa fa-angle-right"></i>트레이너 SNS</h6>
 									<div>
 										<div class="content">
-											<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, </p>
+										<a href="${trainer.trainerSNS}">${trainer.trainerSNS}</a>
 										</div>
 									</div>
 									<!-- End off accordion item-4 -->

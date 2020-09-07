@@ -2,7 +2,10 @@ package com.kh.dagym.trainer.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.dagym.trainer.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 
 public interface TrainerService {
 
@@ -12,6 +15,12 @@ public interface TrainerService {
 	List<Trainer> selectList();
 
 	Trainer selectTrainer(int trainerNo);
+
+	List<TrainerAttachment> selectThumbnailList(List<Trainer> trainerList);
+
+	List<TrainerAttachment> selectFiles(int trainerNo);
+
+	int insertBoard(Trainer trainer, List<MultipartFile> images, String savePath);
 
 
 }
