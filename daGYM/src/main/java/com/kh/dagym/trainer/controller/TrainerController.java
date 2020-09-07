@@ -78,7 +78,7 @@ public class TrainerController {
 	      String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
 	            
 	
-	      int result = trainerService.insertBoard(trainer, images, savePath);
+	      int result = trainerService.insertTrainer(trainer, images, savePath);
 	      
 	      String status = null;
 	      String msg = null;

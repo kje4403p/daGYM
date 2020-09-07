@@ -45,8 +45,8 @@ public class TrainerServiceImpl implements TrainerService{
 	
 	@Transactional(rollbackFor= Exception.class)
 	@Override
-	public int insertBoard(Trainer trainer, List<MultipartFile> images, String savePath) {
-int result = 0;
+	public int insertTrainer(Trainer trainer, List<MultipartFile> images, String savePath) {
+		int result = 0;
 		
 
 		int trainerNo = trainerDAO.selectNextNo();
@@ -80,6 +80,7 @@ int result = 0;
 					if(!images.get(i).getOriginalFilename().equals("")) {
 						try {
 							images.get(i).transferTo(new File(savePath + "/" + files.get(i).getFileChangeName()));
+							System.out.println("1");
 						} catch (Exception e) {
 							e.printStackTrace();
 							trainerDAO.deleteAttachment(trainerNo);

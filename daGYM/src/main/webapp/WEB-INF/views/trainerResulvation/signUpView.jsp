@@ -6,7 +6,7 @@
 
 
 <head>
-
+	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -217,8 +217,24 @@ function LoadImg(value, num) {
 			signUpCheck.id=false;
 			
 		}else{
-				$("#checkId").text("사용 가능한 아이디입니다.").css("color","blue");
-				signUpCheck.id=true;	
+			$.ajax({
+				url : "${contextPath}/member/idDupCheck",
+				data : {"memberId": $id.val()},
+				type : "GET",
+				success : function(result){
+					if(result == 0){
+						$("#checkId").text("사용 가능한 아이디입니다.").css("color","blue");
+						signUpCheck.id=true;
+					}else{
+						$("#checkId").text("이미 사용중인 아이디입니다.").css("color","red")
+					}
+				}, error : function(){
+					console.log("통신실패");
+				}
+				
+				
+			});
+			
 		}
 		
 	});
