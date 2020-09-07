@@ -80,11 +80,11 @@
 			<div class="trainerName">
 				<div class="trainerInfo"> 
 				<hr>
-				<h4>이름:  ${trainer.trainerName}</h4>
+				<h4>이름:  ${trainer.memberName}</h4>
 				<hr>
-				<h4>번호:  ${trainer.trainerPhone}</h4>
+				<h4>번호:  ${trainer.memberPhone}</h4>
 				<hr>
-				<h4>입사일:  ${trainer.trainerEnrollDate}</h4>
+				<h4>입사일:  ${trainer.memberEnrollDate}</h4>
 				</div>
 			</div>
 		</section>

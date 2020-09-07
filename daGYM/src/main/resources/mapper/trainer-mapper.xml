@@ -6,14 +6,15 @@
 		<id property="trainerNo" column="TRAINER_NO"/>
 		
 		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
-		<result property="trainerId" column="TRAINER_ID" />
-		<result property="trainerPwd" column="TRAINER_PWD" />
-		<result property="trainerName" column="TRAINER_NM" />
-		<result property="trainerPhone" column="TRAINER_PHONE" />
+		<result property="memberId" column="MEMBER_ID" />
+		<result property="memberPwd" column="MEMBER_PWD" />
+		<result property="memberName" column="MEMBER_NM" />
+		<result property="memberPhone" column="MEMBER_PHONE" />
+		<result property="memberEmail" column="MEMBER_EMAIL" />
 		<result property="trainerCareer" column="TRAINER_CAREER" />
 		<result property="trainerMcnt" column="TRAINER_M_CNT" />
-		<result property="trainerEnrollDate" column="TRAINER_ENROLL_DATE" />
-		<result property="trianerStatus" column="TRAINER_STATUS" />
+		<result property="memberEnrollDate" column="MEMBER_ENROLL_DATE" />
+		<result property="memberStatus" column="MEMBER_STATUS" />
 		<result property="trainerPrice" column="TRAINER_PRICE" />
 		<result property="trainerSNS" column="TRAINER_SNS" />	
 		<result property="trainerAward" column="TRAINER_AWARD" />	
@@ -30,30 +31,32 @@
     </resultMap>
     
 	<select id="selectList" resultMap="trainerResultSet">
-	SELECT * FROM TRAINER WHERE TRAINER_STATUS='Y'
+SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
 	</select>
 	
 	
 	<select id="selectTrainer" parameterType="_int" resultMap="trainerResultSet">
-	SELECT * FROM TRAINER WHERE TRAINER_STATUS='Y' AND TRAINER_NO=#{trainerNo}
+	SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y' AND TRAINER_NO=#{trainerNo}
 	</select>
 
 
 	 <select id="selectNextNo" resultType="_int">
-        SELECT SEQ_TNO.NEXTVAL FROM DUAL
+        SELECT SEQ_MNO.NEXTVAL FROM DUAL
     </select>
 	
 
 	<insert id="insertTrainer" parameterType="Trainer">
-		INSERT INTO TRAINER VALUES(#{trainerNo}, #{trainerId}, #{trainerPwd},
-		 #{trainerName},#{trainerPhone}, DEFAULT, DEFAULT, DEFAULT, 
-		#{trainerPrice}, #{trainerSNS}, #{trainerComment},#{trainerCareer},#{trainerAward})
+		INSERT ALL INTO MEMBER VALUES(#{trainerNo}, #{memberId}, #{memberPwd},
+		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, DEFAULT)
+         INTO TRAINER VALUES(#{trainerNo},#{trainerCareer},DEFAULT,#{trainerPrice},
+         #{trainerSNS},#{trainerComment},#{trainerAward})
+SELECT * FROM DUAL
 	</insert>
 	
 
 	<!-- 파일 정보 삽입 -->
 	<insert id="insertAttachment" parameterType="TrainerAttachment">
-		INSERT INTO TRAINER_ATTACHMENT VALUES(SEQ_TFNO.NEXTVAL, #{fileOriginName}, #{fileChangeName}, #{filePath}, #{fileLevel},#{parentTrainerNo})
+		INSERT INTO TRAINER_ATTACHMENT VALUES(SEQ_TFNO.NEXTVAL,#{parentTrainerNo}, #{fileOriginName}, #{fileChangeName}, #{filePath}, #{fileLevel})
 	</insert>
 	
 
