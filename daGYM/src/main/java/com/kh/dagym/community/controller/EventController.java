@@ -59,7 +59,6 @@ public class EventController {
 	}
 	
 	@PostMapping("insert")
-//	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public String boardInsert(@RequestParam int boardType,Board board, Model model, RedirectAttributes rdAttr,
 								@RequestParam(value = "images", required = false) List<MultipartFile> images, HttpServletRequest request) {
 		System.out.println(board);
@@ -111,5 +110,27 @@ public class EventController {
 		}
 		return url;
 	}
+	
+	@GetMapping("{boardNo}/delete")
+	public String deleteEvent(@PathVariable int boardNo, RedirectAttributes rdAttr,HttpServletRequest request) {
+		int result = eventService.deleteEvent(boardNo);
+		String status;
+		String msg;
+		String path;
+		if (result > 0) {
+			status = "success";
+			msg = "게시글 삭제 성공";
+			path = "/event/list";
+		} else {
+			status = "error";
+			msg = "게시글 삭제 실패";
+			path = request.getHeader("referer");
+		}
+		
+		rdAttr.addFlashAttribute("status", status);
+		rdAttr.addFlashAttribute("msg",msg);
+		return "redirect:"+path;
+	}
+	
 	
 }

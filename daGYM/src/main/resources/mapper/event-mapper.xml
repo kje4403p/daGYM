@@ -51,7 +51,7 @@
 	</insert>
 	<delete id="deleteAttachment" parameterType="_int">
    		DELETE FROM ATTACHMENT
-   		WHERE PARENT_BOARD_NO = #{boardNo}
+   		WHERE BOARD_NO = #{boardNo}
     </delete>
     
     <select id="selectBoard" parameterType="_int" resultMap="boardRs">
@@ -69,5 +69,11 @@
     	SELECT * FROM ATTACHMENT
     	WHERE BOARD_NO = #{boardNo}
     </select>
+    
+    <update id="deleteEvent" parameterType="_int">
+    	UPDATE BOARD 
+    	SET BOARD_STATUS = 'N'
+    	WHERE BOARD_NO = #{boardNo}
+    </update>
   
 </mapper>

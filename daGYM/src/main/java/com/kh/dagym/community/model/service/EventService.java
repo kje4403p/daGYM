@@ -36,6 +36,12 @@ public interface EventService {
 	 * @return
 	 */
 	List<Attachment> selectFiles(int boardNo);
+
+	/** 게시글 삭제
+	 * @param boardNo
+	 * @return int
+	 */
+	int deleteEvent(int boardNo);
 	
 
 }
