@@ -59,6 +59,7 @@
         </div>
     </section>
     <a href="${contextPath}/trainer/signUp">트레이너 추가</a>
+    <a href="${contextPath}/trainer/schedule">캘린더</a>
     <!-- Trainer Section End -->
 	<jsp:include page="../common/footer.jsp"/>
 </body>

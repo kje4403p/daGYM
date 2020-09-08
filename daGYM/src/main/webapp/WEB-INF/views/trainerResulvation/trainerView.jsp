@@ -38,6 +38,14 @@
 	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/responsive.css" />
 
 	<script src="${contextPath}/resources/js/trainerView/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+	
+		<!-- calendar를 위한 라이브러리들 지우면 안됨 -->
+
+<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css'rel='stylesheet'/>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css' rel='stylesheet' media='print'/>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
+
 	<style>
 	.trainerImg{
 	float: left;
@@ -53,16 +61,54 @@
 	hr{
 	color:black;
 	}
+	.hello{
+	background-color: gray;
+	}
 	</style>
+	
+<script>
+$(document).ready(function(){
+	  $('#calendar').fullCalendar({
+	    header: {
+	      right: 'custom2 prevYear,prev,next,nextYear'
+	    },
+        // 출석체크를 위한 버튼 생성
+	    customButtons: { 
+	        custom2: {
+	          text: '출석체크하기',
+	          id: 'check',
+	          click: function() {	
+                    // ajax 통신으로 출석 정보 저장하기 
+                    // POST "/users/attendances" -> { status: "success", date:"2018-07-01"}
+                    // 통신 성공시 버튼 바꾸고, property disabled 만들기 
+	          }
+	        }
+	    },
+       // 달력 정보 가져오기 
+	    eventSources: [
+	    	{
+				// ajax 통신으로 달력 정보 가져오기 
+                // GET "/users/attendances" -> {dateList:[ date: "2016-03-21", ... ]}
+				color: 'purple',   
+			 	textColor: 'white' 
+	    	}
+	    ]
+	  }); 
+});
+</script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
 <jsp:include page="../common/header.jsp"/>
 
 	<div class="culmn">
-
+				
+					
 	
 		<section id="hello" class="home bg-mega">
+		<div class="container calendar-container">
+					<div id="calendar" style="max-width:900px; margin:40px auto;"></div>
+				</div>
 			<div class="trainerImg">
 					<c:if test="${!empty files }">
 
@@ -150,90 +196,6 @@
 			<!--End off container -->
 		</section>
 
-		<!--Skill Sections-->
-		<section id="skill" class="skill roomy-100">
-		
-			<div class="container">
-				<div class="row">
-					<div class="main_skill">
-						<div class="col-md-6">
-							<div class="skill_content wow fadeIn">
-								<h2>Our skill</h2>
-								<div class="separator_left"></div>
-
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="skill_bar sm-m-top-50">
-								<div class="teamskillbar clearfix m-top-20" data-percent="80%">
-									<h6>GRAPHIC DESIGN</h6>
-									<div class="teamskillbar-bar"></div>
-								</div>
-								<!-- End Skill Bar -->
-
-								<div class="teamskillbar clearfix m-top-50" data-percent="75%">
-									<h6>TYPOGRAPHY</h6>
-									<div class="teamskillbar-bar"></div>
-								</div>
-								<!-- End Skill Bar -->
-
-								<div class="teamskillbar clearfix m-top-50" data-percent="90%">
-									<h6>HTML / CSS</h6>
-									<div class="teamskillbar-bar"></div>
-								</div>
-								<!-- End Skill Bar -->
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--End off row-->
-			</div>
-			<!--End off container -->
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-			<div class="container">
-				<div class="row">
-					<div class="skill_bottom_content text-center">
-						<div class="col-md-3">
-							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">3468</h2>
-								<div class="separator_small"></div>
-								<h5><em>Projects Finished</em></h5>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">4638</h2>
-								<div class="separator_small"></div>
-								<h5><em>Happy Clients</em></h5>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">3468</h2>
-								<div class="separator_small"></div>
-								<h5><em>Hours of work</em></h5>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="skill_bottom_item">
-								<h2 class="statistic-counter">3468</h2>
-								<div class="separator_small"></div>
-								<h5><em>Cup of coffee</em></h5>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--End off row-->
-			</div>
-			<!--End off container -->
-		</section>
-		<!--End off Skill section -->
 
 
 
@@ -317,7 +279,7 @@
 		</section>
 		<!--End off Testimonial section -->
 
-
+			
 		<!--Pricing Section-->
 		<section id="pricing" class="pricing lightbg">
 			<div class="container">
@@ -424,12 +386,14 @@
 						</div>
 					</div>
 					<!-- End off col-md-4 -->
+
 				</div>
 				<!--End off row-->
 			</div>
 			<!--End off container -->
 		</section>
 		<!--End off Pricing section -->
+		
 <jsp:include page="../common/footer.jsp"/>
 
 		<!-- scroll up-->
@@ -453,27 +417,6 @@
 	<script src="${contextPath}/resources/js/trainerView/jquery.collapse.js"></script>
 	<script src="${contextPath}/resources/js/trainerView/bootsnav.js"></script>
 
-
-	<!-- paradise slider js -->
-
-
-	<script src="http://maps.google.com/maps/api/js?key=AIzaSyD_tAQD36pKp9v4at5AnpGbvBUsLCOSJx8"></script>
-	<script src="${contextPath}/resources/js/trainerView/gmaps.min.js"></script>
-
-	<script>
-		function showmap() {
-			var mapOptions = {
-				zoom: 8,
-				scrollwheel: false,
-				center: new google.maps.LatLng(-34.397, 150.644),
-				mapTypeId: google.maps.MapTypeId.ROADMAP
-			};
-			var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
-			$('.mapheight').css('height', '350');
-			$('.maps_text h3').hide();
-		}
-
-	</script>
 
 
 	<script src="${contextPath}/resources/js/trainerView/plugins.js"></script>

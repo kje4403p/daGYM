@@ -67,11 +67,18 @@ public class TrainerController {
 	}
 	return url;
 }
+	@RequestMapping("schedule")
+	public String schedule() {
+		
+		return "trainerResulvation/schedule";
+	}
+	
 	@RequestMapping("signUp")
 	public String signUp() {
 		
 		return "trainerResulvation/signUpView";
 	}
+	
 	
 	 @RequestMapping(value="insertAction", method=RequestMethod.POST)
 	   public String insertAction(Trainer trainer, 
