@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,29 +19,39 @@
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
         <div class="col-sm-5">
-            <form method="POST"
-                onsubmit="return validate();">
-                    <h1>내 글</h1>
+                    <h1>내 댓글</h1>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard" >내가 쓴글</button>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReply">내 댓글</button>
                     <br><br>
-                    <span style ="text-align: center">내 댓글 리스트 총 1개</span>
+                    <span style ="text-align: center">내 댓글 리스트 총 ${fn:length(myReplyList)}개</span>
                     <div class="row mb-3 form-row">
                     
                 <table class="table table-hover">
 
                     	<tr>
+                    		<td style ="text-align: center">게시글 제목</td>
                     		<td style ="text-align: center">댓글 내용</td>
                     		<td style ="text-align: center">작성일</td>
                         </tr>
+                        <c:choose>
                         
+                        <c:when test="${empty myReplyList}">
+		                     <tr>
+		                        <td colspan="6">작성하신 댓글이 없습니다.</td>
+		                     </tr>
+                 		 </c:when>
+                 		 <c:otherwise>
+                     	 <c:forEach var="reply" items="${myReplyList}">
                         <tr>
-                        	<td style ="text-align: center">임시-댓글인척</td>
-                        	<td style ="text-align: center">2020-09-07</td>
+                        	<td style ="text-align: center">${reply.rarentBoardTitle}</td>
+                        	<td style ="text-align: center">${reply.rerlyContent}</td>
+                        	<td style ="text-align: center">${reply.rerlyEnrollDt}</td>
                         </tr>
+                        </c:forEach>
+                        </c:otherwise>
+                        </c:choose>
                 	</table>
                 </div>
-            </form>
         </div>
     </div>
     <script>

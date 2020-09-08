@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyReply;
 
 @Repository
 public class MemberDAO {
@@ -62,5 +63,13 @@ public class MemberDAO {
 	 */
 	public int removeMember(int memberNo) {
 		return sqlSession.insert("memberMapper.removeMember", memberNo);
+	}
+
+	/** 내 댓글 DAO
+	 * @param memberNo
+	 * @return myReplyList
+	 */
+	public List<MyReply> myReplyList(int rerlyMemberNo) {
+		return sqlSession.selectList("memberMapper.myReplyList", rerlyMemberNo);
 	}	
 }

@@ -2,6 +2,7 @@ package com.kh.dagym.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dagym.member.model.service.MemberService;
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyReply;
 
 @SessionAttributes({"loginMember"})
 @Component
@@ -61,9 +63,12 @@ public class MemberController {
 				return "member/myBoard";
 		}
 	
-	// 내 게시글 화면 전환 메소드
+	// 내 댓글 화면 전환 메소드
 			@RequestMapping("myReply")
-			public String myReplyView() {
+			public String myReplyView(Model model) {
+				int rerlyMemberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+				List<MyReply> myReplyList = memberService.MyReplyList(rerlyMemberNo);
+				model.addAttribute("myReplyList", myReplyList);
 				return "member/myReply";
 			}
 			
