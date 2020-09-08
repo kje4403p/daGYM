@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.dao.MemberDAO;
 import com.kh.dagym.member.model.service.MemberService;
 import com.kh.dagym.member.model.vo.Member;

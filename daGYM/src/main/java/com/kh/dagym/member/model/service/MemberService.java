@@ -2,6 +2,7 @@ package com.kh.dagym.member.model.service;
 
 import java.util.List;
 
+import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyReply;
 
