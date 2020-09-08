@@ -152,10 +152,13 @@
 			$("#checkEmail").text("유효하지 않은 이메일입니다.").css("color","red");
 			signUpCheck.email = false;
 			signUpCheck.code=false;
+			$("#checkCode").text("이메일이 변경되었습니다. 다시 인증해주세요.").css("color","red");
+			$("#emailCk-btn").prop("disabled", true)
 		}else{
 			$("#checkEmail").text("유효한 이메일입니다.").css("color","blue");
 			signUpCheck.email = true;
 			signUpCheck.code=false;
+			$("#checkCode").text("이메일이 변경되었습니다. 다시 인증해주세요.").css("color","red");
 			$("#emailCk-btn").prop("disabled", false)
 			
 		}

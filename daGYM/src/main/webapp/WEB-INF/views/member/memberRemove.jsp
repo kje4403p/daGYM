@@ -35,7 +35,7 @@
                 				<br><br>
                 				<tr>
 	                				<td>비밀번호</td>
-	                				<td><input id="memberPwd" name="memberPwd" type="password" placeholder="비밀번호를 입력 해주세요"></td>
+	                				<td><input id="memberPwd" name="memberPwd" type="password" placeholder="비밀번호를 입력 해주세요" required></td>
 	                				<td><button id="deleteBtn">확인</button></td>
                 				</tr>
                 			</div>
