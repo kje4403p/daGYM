@@ -24,14 +24,15 @@
 			<c:otherwise>
 				<c:forEach var="event" items="${eventList }">
 					<li>
-						<a id="view" > 
+						<a class="view" href="${event.boardNo}?cp=${pInfo.currentPage}"> 
 							<p class="thumb"></p>
-							<p class="ing" id="${event.boardNo }">진행중</p>
+							<p class="ing" >진행중</p>
 							<p class="tit">${event.boardTitle }</p>
 							<fmt:formatDate var='startDate' value="${event.startDate}" pattern="yy-MM-dd" />
 							<fmt:formatDate var='endDate' value="${event.endDate}" pattern="yy-MM-dd" />
 							<p class="date">${startDate } ~ ${endDate }</p>
 						</a>
+					</li>
 				</c:forEach>
 			</c:otherwise>
 		</c:choose>
@@ -94,5 +95,26 @@
    <jsp:include page="sideMenu.jsp"/>
 </div>
 <%@ include file="../common/footer.jsp" %>
+
+<script>
+$(function(){
+	$("#list-table td").on("click", function(){
+		// 글번호
+		var boardNo = $(this).parent().children().eq(0).text();
+		
+		var boardUrl = "${contextPath}/board/${pInfo.boardType}/"+boardNo + "?cp=${pInfo.currentPage}";
+		
+		
+		// @pathValue 방식 : 구분되어야 하는 리소스를 호출하는 url로 사용
+		
+		location.href = boardUrl;
+	});
+});
+
+$(".view").on("mouseenter",function(){
+	
+	$(this).parent().css("cursor", "pointer");
+});
+</script>
 </body>
 </html>

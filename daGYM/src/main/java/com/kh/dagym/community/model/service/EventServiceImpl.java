@@ -115,6 +115,36 @@ public class EventServiceImpl implements EventService{
 		return result;
 	}
 	
+	
+	
+	/** 게시글 조회
+	 *
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public Board selectBoard(int boardNo) {
+		Board board = eventDAO.selectBoard(boardNo);
+		
+		if (board != null) {
+			int result = eventDAO.increaseCount(boardNo);
+
+			// 조회된 게시글(board)의 조회 수를 1증가 시킴
+			if (result > 0) 
+				board.setViews(board.getViews()+ 1);
+		}
+
+		// 조회 성공 시 조회수 증가
+		return board;
+	}
+	
+	
+
+
+	@Override
+	public List<Attachment> selectFiles(int boardNo) {
+		return eventDAO.selectFiles(boardNo);
+	}
+
 
 	// 크로스 사이트 스크립트 방지 메소드
 	private String replaceParameter(String param) {

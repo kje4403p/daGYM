@@ -67,7 +67,30 @@ public class EventDAO {
 
 	// 파일 저장 오류시 삭제 DAO
 	public void deleteAttachment(int boardNo) {
-		sqlSession.delete("eventDAO.deleteAttachment", boardNo);
+		sqlSession.delete("eventMapper.deleteAttachment", boardNo);
+	}
+
+
+	public Board selectBoard(int boardNo) {
+		return sqlSession.selectOne("eventMapper.selectBoard", boardNo);
+	}
+
+
+	/** 조회수 증가
+	 * @param boardNo
+	 * @return int
+	 */
+	public int increaseCount(int boardNo) {
+		return sqlSession.update("eventMapper.increaseCount", boardNo);
+	}
+
+
+	/** 파일 불러오기
+	 * @param boardNo
+	 * @return Attachment
+	 */
+	public List<Attachment> selectFiles(int boardNo) {
+		return sqlSession.selectList("eventMapper.selectFiles", boardNo);
 	}
 
 }
