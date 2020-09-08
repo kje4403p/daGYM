@@ -4,32 +4,42 @@ import java.sql.Date;
 
 public class Trainer {
 	private int trainerNo;
+	private int memberNo;
 	private String trainerId;
 	private String trainerPwd;
 	private String trainerName;
 	private String trainerPhone;
-	private String trainerCareer;
-	private int trainerMemberCount;
+	private String trainerEmail;
 	private Date trainerEnrollDate;
 	private String trianerStatus;
+	private String trainerGrade;
+	private String trainerCareer;
+	private int trainerMemberCount;
 	private int trainerPrice;
+	private String trainerSNS;
+	private String trainerComment;
 	
 	public Trainer() {}
 
-	public Trainer(int trainerNo, String trainerId, String trainerPwd, String trainerName,
-			String trainerPhone, String trainerCareer, int trainerMemberCount, Date trainerEnrollDate, String trianerStatus,
-			int trainerPrice) {
+	public Trainer(int trainerNo, int memberNo, String trainerId, String trainerPwd, String trainerName,
+			String trainerPhone, String trainerEmail, Date trainerEnrollDate, String trianerStatus, String trainerGrade,
+			String trainerCareer, int trainerMemberCount, int trainerPrice, String trainerSNS, String trainerComment) {
 		super();
 		this.trainerNo = trainerNo;
+		this.memberNo = memberNo;
 		this.trainerId = trainerId;
 		this.trainerPwd = trainerPwd;
 		this.trainerName = trainerName;
 		this.trainerPhone = trainerPhone;
-		this.trainerCareer = trainerCareer;
-		this.trainerMemberCount = trainerMemberCount;
+		this.trainerEmail = trainerEmail;
 		this.trainerEnrollDate = trainerEnrollDate;
 		this.trianerStatus = trianerStatus;
+		this.trainerGrade = trainerGrade;
+		this.trainerCareer = trainerCareer;
+		this.trainerMemberCount = trainerMemberCount;
 		this.trainerPrice = trainerPrice;
+		this.trainerSNS = trainerSNS;
+		this.trainerComment = trainerComment;
 	}
 
 	public int getTrainerNo() {
@@ -72,20 +82,12 @@ public class Trainer {
 		this.trainerPhone = trainerPhone;
 	}
 
-	public String getTrainerCareer() {
-		return trainerCareer;
+	public String getTrainerEmail() {
+		return trainerEmail;
 	}
 
-	public void setTrainerCareer(String trainerCareer) {
-		this.trainerCareer = trainerCareer;
-	}
-
-	public int getTrainerMemberCount() {
-		return trainerMemberCount;
-	}
-
-	public void setTrainerMemberCount(int trainerMemberCount) {
-		this.trainerMemberCount = trainerMemberCount;
+	public void setTrainerEmail(String trainerEmail) {
+		this.trainerEmail = trainerEmail;
 	}
 
 	public Date getTrainerEnrollDate() {
@@ -104,6 +106,30 @@ public class Trainer {
 		this.trianerStatus = trianerStatus;
 	}
 
+	public String getTrainerGrade() {
+		return trainerGrade;
+	}
+
+	public void setTrainerGrade(String trainerGrade) {
+		this.trainerGrade = trainerGrade;
+	}
+
+	public String getTrainerCareer() {
+		return trainerCareer;
+	}
+
+	public void setTrainerCareer(String trainerCareer) {
+		this.trainerCareer = trainerCareer;
+	}
+
+	public int getTrainerMemberCount() {
+		return trainerMemberCount;
+	}
+
+	public void setTrainerMemberCount(int trainerMemberCount) {
+		this.trainerMemberCount = trainerMemberCount;
+	}
+
 	public int getTrainerPrice() {
 		return trainerPrice;
 	}
@@ -112,12 +138,30 @@ public class Trainer {
 		this.trainerPrice = trainerPrice;
 	}
 
+	public String getTrainerSNS() {
+		return trainerSNS;
+	}
+
+	public void setTrainerSNS(String trainerSNS) {
+		this.trainerSNS = trainerSNS;
+	}
+
+	public String getTrainerComment() {
+		return trainerComment;
+	}
+
+	public void setTrainerComment(String trainerComment) {
+		this.trainerComment = trainerComment;
+	}
+
 	@Override
 	public String toString() {
-		return "Trainer [trainerNo=" + trainerNo + ", trainerId=" + trainerId + ", trainerPwd=" + trainerPwd
-				+ ", trainerName=" + trainerName + ", trainerPhone=" + trainerPhone
-				+ ", trainerCareer=" + trainerCareer + ", trainerMemberCount=" + trainerMemberCount + ", trainerEnrollDate="
-				+ trainerEnrollDate + ", trianerStatus=" + trianerStatus + ", trainerPrice=" + trainerPrice + "]";
+		return "Trainer [trainerNo=" + trainerNo + ", memberNo=" + memberNo + ", trainerId=" + trainerId
+				+ ", trainerPwd=" + trainerPwd + ", trainerName=" + trainerName + ", trainerPhone=" + trainerPhone
+				+ ", trainerEmail=" + trainerEmail + ", trainerEnrollDate=" + trainerEnrollDate + ", trianerStatus="
+				+ trianerStatus + ", trainerGrade=" + trainerGrade + ", trainerCareer=" + trainerCareer
+				+ ", trainerMemberCount=" + trainerMemberCount + ", trainerPrice=" + trainerPrice + ", trainerSNS="
+				+ trainerSNS + ", trainerComment=" + trainerComment + "]";
 	}
-	
+
 }

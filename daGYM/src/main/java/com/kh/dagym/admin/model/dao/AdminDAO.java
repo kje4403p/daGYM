@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dagym.admin.model.vo.Attachment;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
@@ -45,6 +46,26 @@ public class AdminDAO {
 	// 페이징처리 DAO
 	public int getListCount(int type) {
 		return sqlSession.selectOne("adminMapper.getListCount", type);
+	}
+
+	// 게시글 다음 번호 가져오는 DAO 
+	public int selectNextNo() {
+		return sqlSession.selectOne("adminMapper.selectNextNo");
+	}
+
+	// 이벤트 작성 DAO
+	public int insertEvent(Board board) {
+		return sqlSession.insert("adminMapper.insertEvent", board);
+	}
+
+	// 파일 삽입 DAO
+	public int insertAttachment(Attachment at) {
+		return sqlSession.insert("adminMapper.insertAttachment", at);
+	}
+
+	// 오류난 파일 삭제 DAO
+	public void deleteAttachment(int boardNo) {
+		sqlSession.delete("adminMapper.deleteAttachment", boardNo);
 	}
 
 }

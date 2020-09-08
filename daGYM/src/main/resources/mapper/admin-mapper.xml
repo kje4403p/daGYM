@@ -15,15 +15,20 @@
 	
 	<resultMap id="trainerResultSet" type="ATrainer" >
 		<id property="trainerNo" column="TRAINER_NO"/>
-		<result property="trainerId" column="TRAINER_ID" />
-		<result property="trainerPwd" column="TRAINER_PWD" />
-		<result property="trainerName" column="TRAINER_NM" />
-		<result property="trainerPhone" column="TRAINER_PHONE" />
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="trainerId" column="MEMBER_ID" />
+		<result property="trainerPwd" column="MEMBER_PWD" />
+		<result property="trainerName" column="MEMBER_NM" />
+		<result property="trainerPhone" column="MEMBER_PHONE" />
+		<result property="trainerEmail" column="MEMBER_EMAIL" />
+		<result property="trainerEnrollDate" column="MEMBER_ENROLL_DATE" />
+		<result property="trianerStatus" column="MEMBER_STATUS" />
+		<result property="trainerGrade" column="MEMBER_GRADE" />
 		<result property="trainerCareer" column="TRAINER_CAREER" />
 		<result property="trainerMemberCount" column="TRAINER_M_CNT" />
-		<result property="trainerEnrollDate" column="TRAINER_ENROLL_DATE" />
-		<result property="trianerStatus" column="TRAINER_STATUS" />
 		<result property="trainerPrice" column="TRAINER_PRICE" />
+		<result property="trainerSNS" column="TRAINER_SNS" />
+		<result property="trainerComment" column="TRAINER_COMMENT" />
 	</resultMap>
 	
 	<resultMap id="boardResultSet" type="ABoard">
@@ -50,8 +55,7 @@
 	
 	<!-- 트레이너 전체 조회 -->
 	<select id="selectTList" resultMap="trainerResultSet">
-		SELECT * FROM TRAINER
-		WHERE TRAINER_STATUS='Y'
+		SELECT * FROM A_TRAINER
 		ORDER BY TRAINER_NO
 	</select>
 	
@@ -74,4 +78,30 @@
 		SELECT COUNT(*) FROM A_BOARD
 		WHERE BOARD_TYPE = #{boardType}
 	</select>
+	
+	<!-- 게시글 다음 번호 가져오기 -->
+	<select id="selectNextNo" resultType="_int">
+		SELECT SEQ_BNO.NEXTVAL FROM DUAL
+	</select>
+	
+	<!-- 이벤트 작성 -->
+	<insert id="insertEvent" parameterType="ABoard">
+		INSERT INTO BOARD
+		VALUES(#{boardNo}, 1, #{boardType}, #{boardTitle},
+				#{boardContent}, DEFAULT, DEFAULT, DEFAULT,
+				NULL, #{startDate}, #{endDate}, DEFAULT)
+	</insert>
+	
+	<!-- 파일 삽입 -->
+	<insert id="insertAttachment" parameterType="AAttachment">
+		INSERT INTO ATTACHMENT
+		VALUES(SEQ_FNO.NEXTVAL, #{parentBoardNo}, #{fileOriginName},
+				#{fileChangeName}, #{filePath}, #{fileLevel}, DEFAULT)
+	</insert>
+	
+	<!-- 오류난 파일 삭제 -->
+	<delete id="deleteAttachment" parameterType="_int">
+		DELETE FROM ATTACHMENT
+		WHERE PARENT_BOARD_NO = #{boardNo}
+	</delete>
 </mapper>
