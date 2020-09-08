@@ -1,11 +1,11 @@
-package com.kh.dagym.serviceCenter;
+package com.kh.dagym.serviceCenter.vo;
 
 import java.util.Arrays;
 
 public class Search {
 
 	private String[] ct;
-	private String skey;
+	private String sKey;
 	private String sVal;
 	
 	public Search() {
@@ -20,12 +20,12 @@ public class Search {
 		this.ct = ct;
 	}
 
-	public String getSkey() {
-		return skey;
+	public String getsKey() {
+		return sKey;
 	}
 
-	public void setSkey(String skey) {
-		this.skey = skey;
+	public void setsKey(String sKey) {
+		this.sKey = sKey;
 	}
 
 	public String getsVal() {
@@ -38,8 +38,12 @@ public class Search {
 
 	@Override
 	public String toString() {
-		return "Search [ct=" + Arrays.toString(ct) + ", skey=" + skey + ", sVal=" + sVal + "]";
+		return "Search [ct=" + Arrays.toString(ct) + ", sKey=" + sKey + ", sVal=" + sVal + "]";
 	}
+
+	
+
+	
 	
 	
 }

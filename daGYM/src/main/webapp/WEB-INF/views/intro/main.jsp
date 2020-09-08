@@ -227,10 +227,41 @@
 		 <div class="section-title">
 	                        <h2 id="content2">오시는 길</h2>
 	     </div>
-	       <div class="row">
-                <div class="col-lg-5 offset-lg-3">
-	     <div id="map" style="width:800px;height:500px;"></div>
-	     </div>
+	       <div class="row" id="">
+                
+	     		<div class="col-lg-6 offset-lg-2">
+	     			<table class="contact" cellpadding="0" cellspacing="0" style="display:table;">
+	     				<tbody>
+	     					<tr>
+	     						<td colspan="2">
+	     						<div class="col-lg-3 offset-lg-1">
+	     							<div id="map" style="width:800px;height:500px;"></div>
+	     						</div>
+	     		
+	     						</td>
+	     					</tr>
+	     					
+	     					<tr>
+	     						<th style="padding-top:30px;">주소</th>
+	     						<td style="padding-top:30px;">서울특별시 중구 남대문로 120 대일빌딩 2F, 3F (T: 1544-9970 / F: 02-722-0858)</td>
+	     					</tr>
+	     					<tr>
+	     						<th >버스</th>
+	     						<td>우리은행 종로지점 정류장<br>
+	     							163/172/201<br>
+	     							7017/7121/7022</td>
+	     						
+	     					</tr>
+	     					<tr>
+	     						<th>지하철</th>
+	     						<td>지하철 2호선 을지로입구역 3번출구 100M / 1호선 종각역 4번, 5번 출구 200M 
+	     					</tr>	
+	     					
+	     					
+	     					
+	     				</tbody>
+	     			</table>
+	     		</div>
 	     </div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c1e469e1fb64b426f1c9b793e7d792d"></script>
 		<script>

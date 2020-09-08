@@ -63,15 +63,15 @@
 <div id="forms">
     <div class="container">
      
-        <div class="row">
-         
+        <div class="row  ">
+         <div class="col-md-3 "></div>
 
             <!-- register form 1 -->
-          
-          <form method="POST"  name="paymentForm" id="payment" >
+          <div class="col-md-6 ">
+          <form method="POST"  name="paymentForm"  >
             <div class="col-sm-6">
                 <div id="register-form">
-                    <h3 class="log-title">결제하기</h3>
+                    <h3 class="log-title">결제 확인</h3>
                         
                     <div class="form-group">
                     
@@ -100,17 +100,19 @@
                         <input type="text" class="form-control" id="memberPhone" name="memberPhone" value="${loginMember.memberPhone }" required>
                         <div class="help-block with-errors"></div>
                     </div>
+                <button class="primary-btn" type="button" id="payment">결제</button>
                   
                     </div>
                 </div>
-                <button type="text" id="payment">결제</button>
                 </form>
-                
+                </div>
                
             </div><!-- / col-sm-6 -->
             <!-- / register form 1 -->
+            <div class="col-md-3 "></div>
         </div><!-- / row -->
         <!-- / form 1 -->
+
 
 
     </div><!-- / container -->
@@ -195,7 +197,8 @@
 						
 					}
 				}).done(function(result){
-					if(everythings_fine){
+					if(result !="" ){
+						
 						var msg = "결제가 완료되었습니다.";
 						alert(msg)
 					}
