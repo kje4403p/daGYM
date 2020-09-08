@@ -2,6 +2,7 @@ package com.kh.dagym.serviceCenter.service;
 
 import java.util.List;
 
+import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.serviceCenter.Search;
@@ -30,6 +31,19 @@ public interface ServiceBoard {
 	 * @return pInfo
 	 */
 	PageInfo pagination(int type, int cp, Search search);
+
+	
+	/** faq보드 넘버 조회 service
+	 * @param pInfo
+	 * @return nList
+	 */
+	List<Board> selectBoardNo(PageInfo pInfo);
+
+	/** faq 멤버 id 리스트 조회 service
+	 * @param pInfo
+	 * @return mList
+	 */
+	List<Member> selectMemberId(PageInfo pInfo);
 
 	
 }

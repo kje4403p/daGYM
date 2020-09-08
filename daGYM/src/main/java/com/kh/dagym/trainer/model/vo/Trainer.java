@@ -4,36 +4,38 @@ import java.sql.Date;
 
 public class Trainer {
 	private int trainerNo;
-	private String trainerId;
-	private String trainerPwd;
-	private String trainerName;
-	private String trainerPhone;
+	private String memberId;
+	private String memberPwd;
+	private String memberName;
+	private String memberPhone;
+	private String memberEmail;
 	private String trainerCareer;
 	private int trainerMcnt;
-	private Date trainerEnrollDate;
-	private String trianerStatus;
+	private Date memberEnrollDate;
+	private String memberStatus;
 	private int trainerPrice;
 	private String trainerSNS;
 	private String trainerComment;
 	private String trainerAward;
-	
+
 	public Trainer() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Trainer(int trainerNo, String trainerId, String trainerPwd, String trainerName, String trainerPhone,
-			String trainerCareer, int trainerMcnt, Date trainerEnrollDate, String trianerStatus, int trainerPrice,
-			String trainerSNS, String trainerComment, String trainerAward) {
+	public Trainer(int trainerNo, String memberId, String memberPwd, String memberName, String memberPhone,
+			String memberEmail, String trainerCareer, int trainerMcnt, Date memberEnrollDate, String memberStatus,
+			int trainerPrice, String trainerSNS, String trainerComment, String trainerAward) {
 		super();
 		this.trainerNo = trainerNo;
-		this.trainerId = trainerId;
-		this.trainerPwd = trainerPwd;
-		this.trainerName = trainerName;
-		this.trainerPhone = trainerPhone;
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.memberPhone = memberPhone;
+		this.memberEmail = memberEmail;
 		this.trainerCareer = trainerCareer;
 		this.trainerMcnt = trainerMcnt;
-		this.trainerEnrollDate = trainerEnrollDate;
-		this.trianerStatus = trianerStatus;
+		this.memberEnrollDate = memberEnrollDate;
+		this.memberStatus = memberStatus;
 		this.trainerPrice = trainerPrice;
 		this.trainerSNS = trainerSNS;
 		this.trainerComment = trainerComment;
@@ -48,36 +50,44 @@ public class Trainer {
 		this.trainerNo = trainerNo;
 	}
 
-	public String getTrainerId() {
-		return trainerId;
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public void setTrainerId(String trainerId) {
-		this.trainerId = trainerId;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
-	public String getTrainerPwd() {
-		return trainerPwd;
+	public String getMemberPwd() {
+		return memberPwd;
 	}
 
-	public void setTrainerPwd(String trainerPwd) {
-		this.trainerPwd = trainerPwd;
+	public void setMemberPwd(String memberPwd) {
+		this.memberPwd = memberPwd;
 	}
 
-	public String getTrainerName() {
-		return trainerName;
+	public String getMemberName() {
+		return memberName;
 	}
 
-	public void setTrainerName(String trainerName) {
-		this.trainerName = trainerName;
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
-	public String getTrainerPhone() {
-		return trainerPhone;
+	public String getMemberPhone() {
+		return memberPhone;
 	}
 
-	public void setTrainerPhone(String trainerPhone) {
-		this.trainerPhone = trainerPhone;
+	public void setMemberPhone(String memberPhone) {
+		this.memberPhone = memberPhone;
+	}
+
+	public String getMemberEmail() {
+		return memberEmail;
+	}
+
+	public void setMemberEmail(String memberEmail) {
+		this.memberEmail = memberEmail;
 	}
 
 	public String getTrainerCareer() {
@@ -96,20 +106,20 @@ public class Trainer {
 		this.trainerMcnt = trainerMcnt;
 	}
 
-	public Date getTrainerEnrollDate() {
-		return trainerEnrollDate;
+	public Date getMemberEnrollDate() {
+		return memberEnrollDate;
 	}
 
-	public void setTrainerEnrollDate(Date trainerEnrollDate) {
-		this.trainerEnrollDate = trainerEnrollDate;
+	public void setMemberEnrollDate(Date memberEnrollDate) {
+		this.memberEnrollDate = memberEnrollDate;
 	}
 
-	public String getTrianerStatus() {
-		return trianerStatus;
+	public String getMemberStatus() {
+		return memberStatus;
 	}
 
-	public void setTrianerStatus(String trianerStatus) {
-		this.trianerStatus = trianerStatus;
+	public void setMemberStatus(String memberStatus) {
+		this.memberStatus = memberStatus;
 	}
 
 	public int getTrainerPrice() {
@@ -146,15 +156,12 @@ public class Trainer {
 
 	@Override
 	public String toString() {
-		return "Trainer [trainerNo=" + trainerNo + ", trainerId=" + trainerId + ", trainerPwd=" + trainerPwd
-				+ ", trainerName=" + trainerName + ", trainerPhone=" + trainerPhone + ", trainerCareer=" + trainerCareer
-				+ ", trainerMcnt=" + trainerMcnt + ", trainerEnrollDate=" + trainerEnrollDate + ", trianerStatus="
-				+ trianerStatus + ", trainerPrice=" + trainerPrice + ", trainerSNS=" + trainerSNS + ", trainerComment="
-				+ trainerComment + ", trainerAward=" + trainerAward + "]";
+		return "Trainer [trainerNo=" + trainerNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd
+				+ ", memberName=" + memberName + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail
+				+ ", trainerCareer=" + trainerCareer + ", trainerMcnt=" + trainerMcnt + ", memberEnrollDate="
+				+ memberEnrollDate + ", memberStatus=" + memberStatus + ", trainerPrice=" + trainerPrice
+				+ ", trainerSNS=" + trainerSNS + ", trainerComment=" + trainerComment + ", trainerAward=" + trainerAward
+				+ "]";
 	}
 
-	
-	
-	
-	
 }

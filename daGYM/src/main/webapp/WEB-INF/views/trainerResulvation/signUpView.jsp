@@ -6,7 +6,7 @@
 
 
 <head>
-
+	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -74,26 +74,31 @@
                     <h3 class="log-title">트레이너 가입</h3>
                         
                     <div class="form-group">
-                       <input type="text" class="form-control" id="trainerId" name="trainerId" placeholder="아이디" required data-error="*Please fill out this field">
+                       <input type="text" class="form-control" id="memberId" name="memberId" placeholder="아이디" required data-error="*Please fill out this field">
                         <div class="help-block with-errors"><span id="checkId">&nbsp;</span></div>
                     </div>
                     
                     <div class="form-group">
-                        <input type="password" class="form-control" id="trainerPwd" name="trainerPwd" placeholder="비밀번호" required data-error="*Please fill out this field">
+                        <input type="password" class="form-control" id="memberPwd" name="memberPwd" placeholder="비밀번호" required data-error="*Please fill out this field">
                         <div class="help-block with-errors"><span id="checkPwd">&nbsp;</span></div>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control" id="trainerPwd2"  placeholder="비밀번호 확인" required>
+                        <input type="password" class="form-control" id="memberPwd2"  placeholder="비밀번호 확인" required>
                         <div class="help-block with-errors"><span id="checkPwd2">&nbsp;</span></div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="trainerName" name="trainerName"  placeholder="이름" required>
+                        <input type="text" class="form-control" id="memberName" name="memberName"  placeholder="이름" required>
                         <div class="help-block with-errors"><span id="checkName">&nbsp;</span></div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="trainerPhone" name="trainerPhone"  placeholder="전화번호" required>
+                        <input type="text" class="form-control" id="memberPhone" name="memberPhone"  placeholder="전화번호" required>
                         <div class="help-block with-errors"><span id="checkPhone">&nbsp;</span></div>
                     </div>
+                    <div class="form-group">
+                      <input type="email" class="form-control" id="memberEmail" name="memberEmail"  placeholder="이메일" required>
+                        <div class="help-block with-errors"><span id="checkEmail">&nbsp;</span></div>
+                    </div>
+                        
 					   <div class="form-group">
                         <textarea class="form-control" id="trainerCareer" name="trainerCareer" placeholder="경력(근무지 포함)" required></textarea>
                     </div>
@@ -193,12 +198,12 @@ function LoadImg(value, num) {
 
 	};
 	
-	var $id = $("#trainerId");
-	var $pwd1 = $("#trainerPwd");
-	var $pwd2 = $("#trainerPwd2");
-	var $pwd = $("#trainerPwd, #trainerPwd2")
-	var $name = $("#trainerName");
-	var $phone = $("#trainerPhone");
+	var $id = $("#memberId");
+	var $pwd1 = $("#memberPwd");
+	var $pwd2 = $("#memberPwd2");
+	var $pwd = $("#memberPwd, #memberPwd2")
+	var $name = $("#memberName");
+	var $phone = $("#memberPhone");
 
 	
 	
@@ -212,15 +217,31 @@ function LoadImg(value, num) {
 			signUpCheck.id=false;
 			
 		}else{
-				$("#checkId").text("사용 가능한 아이디입니다.").css("color","blue");
-				signUpCheck.id=true;	
+			$.ajax({
+				url : "${contextPath}/member/idDupCheck",
+				data : {"memberId": $id.val()},
+				type : "GET",
+				success : function(result){
+					if(result == 0){
+						$("#checkId").text("사용 가능한 아이디입니다.").css("color","blue");
+						signUpCheck.id=true;
+					}else{
+						$("#checkId").text("이미 사용중인 아이디입니다.").css("color","red")
+					}
+				}, error : function(){
+					console.log("통신실패");
+				}
+				
+				
+			});
+			
 		}
 		
 	});
 	
 	$pwd.on("input", function(){
 		var regExp = /^[A-Za-z0-9]{6,12}$/;
-		console.log($("#trainerPwd").val())
+		console.log($("#memberPwd").val())
 		console.log("22 : " + $pwd2.val())
 		
 		if(!regExp.test($("#trainerPwd").val())){

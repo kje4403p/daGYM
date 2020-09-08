@@ -80,11 +80,11 @@
 			<div class="trainerName">
 				<div class="trainerInfo"> 
 				<hr>
-				<h4>이름:  ${trainer.trainerName}</h4>
+				<h4>이름:  ${trainer.memberName}</h4>
 				<hr>
-				<h4>번호:  ${trainer.trainerPhone}</h4>
+				<h4>번호:  ${trainer.memberPhone}</h4>
 				<hr>
-				<h4>입사일:  ${trainer.trainerEnrollDate}</h4>
+				<h4>입사일:  ${trainer.memberEnrollDate}</h4>
 				</div>
 			</div>
 		</section>
@@ -353,7 +353,19 @@
 
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
-									<a href="" class="btn btn-primary">CHOOSE PLAN</a>
+								<c:choose>
+									
+									<c:when test="${loginMember !=null }">
+										<c:url var="url" value="../paymentView/${trainer.trainerNo }">
+											<c:param name="classNm" value="5"/>
+										</c:url>
+										<a href="${url }"class="btn btn-primary">결제하기</a>
+									
+									</c:when>
+									<c:otherwise>
+										로그인 후 결제할 수 있습니다.
+									</c:otherwise>
+								</c:choose>
 								</div>
 							</div>
 						</div>
@@ -364,11 +376,11 @@
 						<div class="pricing_item sm-m-top-30">
 							<div class="pricing_top_border"></div>
 							<div class="pricing_head p-top-30 p-bottom-100 text-center">
-								<h3 class="text-uppercase">PREMIUM</h3>
+								<h3 class="text-uppercase">10회권</h3>
 							</div>
 							<div class="pricing_price_border text-center">
 								<div class="pricing_price">
-									<h3 class="text-white">$39</h3>
+									<h3 class="text-white">${(trainer.trainerPrice)*10 }</h3>
 									<p class="text-white">per month</p>
 								</div>
 							</div>
@@ -380,7 +392,7 @@
 									<li class="disabled"><i class="fa fa-times-circle"></i> Full Statistics</li>
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
-									<a href="" class="btn btn-primary">CHOOSE PLAN</a>
+									<a href="" class="btn btn-primary">결제하기</a>
 								</div>
 							</div>
 						</div>
@@ -390,11 +402,11 @@
 					<div class="col-md-4 col-sm-12">
 						<div class="pricing_item sm-m-top-30">
 							<div class="pricing_head p-top-30 p-bottom-100 text-center">
-								<h3 class="text-uppercase">bUSINESS</h3>
+								<h3 class="text-uppercase">20회권</h3>
 							</div>
 							<div class="pricing_price_border text-center">
 								<div class="pricing_price">
-									<h3 class="text-white">$99</h3>
+									<h3 class="text-white">${(trainer.trainerPrice)*20 }</h3>
 									<p class="text-white">per month</p>
 								</div>
 							</div>
@@ -406,7 +418,7 @@
 									<li><i class="fa fa-check-circle text-primary"></i> Full Statistics</li>
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
-									<a href="" class="btn btn-primary">CHOOSE PLAN</a>
+									<a href="" class="btn btn-primary">결제하기</a>
 								</div>
 							</div>
 						</div>
@@ -418,81 +430,6 @@
 			<!--End off container -->
 		</section>
 		<!--End off Pricing section -->
-
-
-
-
-		<!--Maps Section-->
-		<div class="main_maps text-center fix">
-			<div class="overlay"></div>
-			<div class="maps_text">
-				<h3 class="text-white" onclick="showmap()">FIND US ON THE MAP <i class="fa fa-angle-down"></i></h3>
-				<div id="map_canvas" class="mapheight"></div>
-			</div>
-		</div>
-		<!-- End off Maps Section-->
-
-
-
-		<!--Contact Us Section-->
-		<section id="contact" class="contact bg-mega fix">
-			<div class="container">
-				<div class="row">
-					<div class="main_contact roomy-100 text-white">
-						<div class="col-md-4">
-							<div class="rage_widget">
-								<div class="widget_head">
-									<h3 class="text-white">RAGE</h3>
-									<div class="separator_small"></div>
-								</div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-
-								<div class="widget_socail m-top-30">
-									<ul class="list-inline-item">
-										<li><a href=""><i class="fa fa-facebook"></i></a></li>
-										<li><a href=""><i class="fa fa-twitter"></i></a></li>
-										<li><a href=""><i class="fa fa-linkedin"></i></a></li>
-										<li><a href=""><i class="fa fa-vimeo"></i></a></li>
-										<li><a href=""><i class="fa fa-instagram"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-8 sm-m-top-30">
-							<form class="" action="subcribe.php">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="form-group">
-											<input id="first_name" name="first_name" type="text" placeholder="Name" class="form-control" required="">
-										</div>
-									</div>
-
-									<div class="col-sm-6">
-										<div class="form-group">
-											<input id="phone" name="phone" type="text" placeholder="Phone" class="form-control">
-										</div>
-									</div>
-
-									<div class="col-sm-12">
-										<div class="form-group">
-											<textarea class="form-control" rows="6" placeholder="Message"></textarea>
-										</div>
-										<div class="form-group text-center">
-											<a href="" class="btn btn-primary">SEND MESSAGE</a>
-										</div>
-									</div>
-
-								</div>
-
-							</form>
-						</div>
-					</div>
-				</div>
-				<!--End off row -->
-			</div>
-			<!--End off container -->
-		</section>
-		<!--End off Contact Section-->
 <jsp:include page="../common/footer.jsp"/>
 
 		<!-- scroll up-->

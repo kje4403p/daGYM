@@ -50,19 +50,25 @@ public class MemberController {
 		
 	}
 	// 마이페이지 화면 전환 메소드
-			@RequestMapping("mypage")
+			@RequestMapping("myPage")
 			public String myPageView() {
 				return "member/myPage";
 		}
 			
 	// 내 게시글 화면 전환 메소드
-			@RequestMapping("mytext")
-			public String myTextView() {
-				return "member/myText";
+			@RequestMapping("myBoard")
+			public String myBoardView() {
+				return "member/myBoard";
 		}
+	
+	// 내 게시글 화면 전환 메소드
+			@RequestMapping("myReply")
+			public String myReplyView() {
+				return "member/myReply";
+			}
 			
 	// 내 스케줄 화면 전환 메소드
-			@RequestMapping("myschedule")
+			@RequestMapping("mySchedule")
 			public String myScheduleView() {
 				return "member/mySchedule";
 		}
@@ -160,7 +166,7 @@ public class MemberController {
 						msg="회원 탈퇴 실패";
 						status = "error";
 						link = "member/memberRemove";
-					}else {
+					}else if(result == -1){
 						msg="패스워드가 일치하지 않습니다.";
 						status = "error";
 						link = "member/memberRemove";

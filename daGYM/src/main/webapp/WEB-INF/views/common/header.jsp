@@ -61,7 +61,7 @@
                 		</c:when>
                 		<c:otherwise>
                 			<c:if test="${loginMember.memberGrade == 'G'}">
-                				<a href="${contextPath}/member/mypage" class="primary-btn signup-btn">Mypage</a>
+                				<a href="${contextPath}/member/myPage" class="primary-btn signup-btn">Mypage</a>
                 		 	</c:if>
                 		 	<c:if test="${loginMember.memberGrade == 'A'}">
 			                	<a href="${contextPath}/admin/adminView" class="primary-btn signup-btn">관리자 페이지</a>

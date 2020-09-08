@@ -11,14 +11,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.service.TrainerService;
+import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 
-
+@SessionAttributes({"loginMember"})
 @Controller
 @RequestMapping("/trainer/*")
 public class TrainerController {
@@ -78,7 +82,7 @@ public class TrainerController {
 	      String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
 	            
 	
-	      int result = trainerService.insertBoard(trainer, images, savePath);
+	      int result = trainerService.insertTrainer(trainer, images, savePath);
 	      
 	      String status = null;
 	      String msg = null;
@@ -96,4 +100,48 @@ public class TrainerController {
 	      
 	      return "redirect:/";
 	   }
+	 
+	 // 결제 창으로 이동
+	 @RequestMapping("paymentView/{trainerNo}")
+	 public String paymentView(@PathVariable int trainerNo, @RequestParam("classNm") int classNm,
+				Model model	) {
+		Trainer trainer = trainerService.selectTrainer(trainerNo);
+		int price = trainer.getTrainerPrice();
+		trainer.setTrainerPrice(price*classNm);
+		model.addAttribute("trainer",trainer);
+		model.addAttribute("classNm",classNm);
+		model.addAttribute("price", trainer.getTrainerPrice());
+		return "trainerResulvation/payView";
+		}
+	 
+	 // 결제하기
+	 @ResponseBody
+	 @RequestMapping("payment")
+	 public String paymentAction(Payment payment, Member member, int trainerNo, Model model) {
+		 Member loginMember = (Member)model.getAttribute("loginMember");
+		 payment.setMemberNo(loginMember.getMemberNo());
+		 
+		 payment.setTrainerNo(trainerNo);
+		 System.out.println("페이"+payment);
+		 String merchantUid = trainerService.insertOrder(payment, member, trainerNo);
+		 System.out.println("payment"+payment);
+		 System.out.println("member"+member);
+		 System.out.println("trainerNo"+trainerNo);
+		 return merchantUid;
+		 
+	 }
+	 // 수강권 삽입
+	 @ResponseBody
+	 @RequestMapping("insertImpUid")
+	 public String insertImpUid(Payment payment, String impUid, String merchantUid, int trainerNo, Model model) {
+		 Member loginMember = (Member)model.getAttribute("loginMember");
+		 payment.setMemberNo(loginMember.getMemberNo());
+		 payment.setTrainerNo(trainerNo);
+		 String result = trainerService.insertCoupon(payment)+"";
+		 
+		 return result;
+	 }
+	 
+	 
+	 
 }

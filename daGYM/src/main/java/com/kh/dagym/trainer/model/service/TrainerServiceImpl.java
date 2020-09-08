@@ -3,14 +3,18 @@ package com.kh.dagym.trainer.model.service;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.dao.TrainerDAO;
+import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 
@@ -45,8 +49,8 @@ public class TrainerServiceImpl implements TrainerService{
 	
 	@Transactional(rollbackFor= Exception.class)
 	@Override
-	public int insertBoard(Trainer trainer, List<MultipartFile> images, String savePath) {
-int result = 0;
+	public int insertTrainer(Trainer trainer, List<MultipartFile> images, String savePath) {
+		int result = 0;
 		
 
 		int trainerNo = trainerDAO.selectNextNo();
@@ -80,6 +84,7 @@ int result = 0;
 					if(!images.get(i).getOriginalFilename().equals("")) {
 						try {
 							images.get(i).transferTo(new File(savePath + "/" + files.get(i).getFileChangeName()));
+							System.out.println("1");
 						} catch (Exception e) {
 							e.printStackTrace();
 							trainerDAO.deleteAttachment(trainerNo);
@@ -106,4 +111,42 @@ int result = 0;
 
         return date + "" + str + ext;
     }
+    
+    @Transactional(rollbackFor= Exception.class)
+    @Override
+	public String insertOrder(Payment payment, Member member, int trainerNo) {
+		String merchantUid = trainerDAO.createMerchantUid()+"";
+		payment.setMerchantUid(merchantUid);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("payment", payment);
+		map.put("member", member);
+		map.put("trainerNo", trainerNo);
+		System.out.println("임플pay"+payment);
+		System.out.println("임플mem"+member);
+		System.out.println("임플no"+trainerNo);
+		int result = 0;
+		if(merchantUid != null) {
+			result = trainerDAO.insertOrder(map);
+		}
+		
+		return merchantUid;
+	}
+    // 트레이너 가격 조회 구현
+	@Override
+	public int selectPrice(int trainerNo) {
+			
+		int price=trainerDAO.selectPrice(trainerNo);
+		return price;
+	}
+	
+	// 수강권 삽입 구현
+	@Transactional(rollbackFor= Exception.class)
+	@Override
+	public int insertCoupon(Payment payment) {
+		int result = trainerDAO.insertCoupon(payment);
+		System.out.println("인써트"+payment.getTrainerNo());
+		System.out.println(payment.getMemberNo());
+		System.out.println(payment.getClassNm());
+		return result;
+	}
 }
