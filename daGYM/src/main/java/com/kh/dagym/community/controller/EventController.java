@@ -8,18 +8,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.community.model.service.EventService;
+import com.kh.dagym.member.model.vo.Member;
 
 @SessionAttributes({"loginMember"})
 @Controller
@@ -57,8 +58,8 @@ public class EventController {
 		return "community/eventInsert";
 	}
 	
-//	@PostMapping("insert")
-	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	@PostMapping("insert")
+//	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public String boardInsert(@RequestParam int boardType,Board board, Model model, RedirectAttributes rdAttr,
 								@RequestParam(value = "images", required = false) List<MultipartFile> images, HttpServletRequest request) {
 		System.out.println(board);
@@ -85,4 +86,30 @@ public class EventController {
 		
 		return path;
 	}
+	
+	@GetMapping("{boardNo}")
+	public String boardView(@PathVariable int boardNo, Model model,RedirectAttributes rdAttr) {
+		
+		Board board = eventService.selectBoard(boardNo);
+		String url = "";
+		
+		if(board != null) {
+			List<Attachment> files = eventService.selectFiles(boardNo);
+			
+			if(!files.isEmpty()) {
+				model.addAttribute("files", files);
+				files.stream().forEach(System.out::println);
+			}
+			model.addAttribute("board", board);
+			url = "community/eventView";
+		} else {
+			// 존재하지 않은 게시글입니다 출력 후 이전 주소로 리다이렉트
+			rdAttr.addFlashAttribute("status","error");
+			rdAttr.addFlashAttribute("msg","해당 게시글 존재 X");
+			rdAttr.addFlashAttribute("status","error");
+			url = "redirect:/event/list";
+		}
+		return url;
+	}
+	
 }
