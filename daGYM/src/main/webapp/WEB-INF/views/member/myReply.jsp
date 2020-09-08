@@ -51,9 +51,11 @@
                         </c:otherwise>
                         </c:choose>
                 	</table>
-                </div>
+                </div> 
+</div>
         </div>
     </div>
+    
     <script>
 	    $("#myBoard").on("click", function() {
 			location.href= "myBoard";
