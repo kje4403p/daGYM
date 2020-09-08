@@ -80,5 +80,28 @@ SELECT * FROM DUAL
 		</foreach>
 	</select>
 	
+	<!-- 거래번호 생성 -->
+	<select id="createMerchantUid" resultType="_int">
+		SELECT SEQ_PAY.NEXTVAL FROM DUAL
+	</select>
+	
+	
+	<!-- 결제하기 -->
+	<insert id="insertOrder" parameterType="map">
+		INSERT INTO PAYMENT VALUES(#{payment.merchantUid}, #{payment.classNm}, #{payment.amount}, SYSDATE, #{payment.memberNo}, #{payment.trainerNo})
+	</insert>
+	 
+	
+	<!-- 트레이너 가격조회 -->
+  	<select id="selectPrice" parameterType="_int" resultType="_int">
+  		SELECT TRAINER_PRICE FROM TRAINER WHERE TRAINER_NO=#{trainerNo}
+  	</select>
+  	
+  	<!-- 수강권 삽입 -->
+  	<insert id="insertCoupon" parameterType="Payment">
+  		INSERT INTO CLASS_STATUS VALUES(#{memberNo}, #{trainerNo}, #{classNm})
+  		
+  	</insert>
+	
   
 </mapper>

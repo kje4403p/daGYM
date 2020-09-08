@@ -25,6 +25,9 @@
       <typeAlias type="com.kh.dagym.trainer.model.vo.Trainer" alias="Trainer"/>
       <typeAlias type="com.kh.dagym.common.Attachment" alias="Attachment"/>
       <typeAlias type="com.kh.dagym.trainer.model.vo.TrainerAttachment" alias="TrainerAttachment"/>
+      <typeAlias type="com.kh.dagym.trainer.model.vo.Payment" alias="Payment"/>
+      <typeAlias type="com.kh.dagym.admin.model.vo.Attachment" alias="AAttachment"/>
+      <typeAlias type="com.kh.dagym.member.model.vo.MyReply" alias="MyReply"/>
    </typeAliases>
    
    <!--  mapper.xml 파일을 등록하는 태그 -->
