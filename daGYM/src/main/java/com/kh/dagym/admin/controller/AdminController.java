@@ -2,11 +2,15 @@ package com.kh.dagym.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dagym.admin.model.service.AdminService;
@@ -42,7 +46,7 @@ public class AdminController {
 	public String trainerListView(Model model) {
 		List<Trainer> tList = adminService.selectTList(); 
 		model.addAttribute("tList", tList);
-		
+
 		return "admin/trainerList";
 	}
 	
@@ -62,7 +66,6 @@ public class AdminController {
 	// 1:1 문의 답변
 	@RequestMapping("insertAnswer")
 	public String insertAnswer(Reply reply, RedirectAttributes rdAttr) {
-		System.out.println(reply);
 		int result = adminService.insertAnswer(reply);
 		
 		if(result > 0) {
@@ -86,5 +89,34 @@ public class AdminController {
 	@RequestMapping("trainerChart")
 	public String trainerChartView() {
 		return "admin/trainerChart";
+	}
+	
+	// 이벤트 작성 화면 전환
+	@RequestMapping("insertEventView")
+	public String insertEventView() {
+		return "admin/insertEvent";
+	}
+	
+	// 이벤트 작성
+	@RequestMapping(value="insertEvent", method=RequestMethod.POST)
+	public String insertEvent(Board board, RedirectAttributes rdAttr, HttpServletRequest request,
+							@RequestParam(value="images", required=false) List<MultipartFile> images) {
+		board.setBoardType(1);
+		
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+		int result = adminService.insertEvent(board, images, savePath);
+		
+		String url = null;
+		if(result > 0) {
+			rdAttr.addFlashAttribute("status", "success");
+			rdAttr.addFlashAttribute("msg", "이벤트 작성 완료 !");
+			url = "adminView";
+		} else {
+			rdAttr.addFlashAttribute("status", "error");
+			rdAttr.addFlashAttribute("msg", "이벤트 작성 실패");
+			url = "insertEvent";
+		}
+		
+		return "redirect:" + url;
 	}
 }

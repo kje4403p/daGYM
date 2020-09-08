@@ -1,6 +1,7 @@
 package com.kh.dagym.admin.model.vo;
 
-import java.sql.Timestamp;
+import java.sql.Date;
+import java.sql.Date;
 
 public class Board {
 
@@ -9,19 +10,19 @@ public class Board {
 	private int boardType;
 	private String boardTitle;
 	private String boardContent;
-	private Timestamp boardEnrollDate;
-	private Timestamp boardModifyDate;
+	private Date boardEnrollDate;
+	private Date boardModifyDate;
 	private String boardStatus;
 	private String questionType;
-	private Timestamp startDate;
-	private Timestamp endDate;
+	private Date startDate;
+	private Date endDate;
 	private int views;
 	
 	public Board() {}
 
 	public Board(int boardNo, String memberId, int boardType, String boardTitle, String boardContent,
-			Timestamp boardEnrollDate, Timestamp boardModifyDate, String boardStatus, String questionType,
-			Timestamp startDate, Timestamp endDate, int views) {
+			Date boardEnrollDate, Date boardModifyDate, String boardStatus, String questionType,
+			Date startDate, Date endDate, int views) {
 		super();
 		this.boardNo = boardNo;
 		this.memberId = memberId;
@@ -77,19 +78,19 @@ public class Board {
 		this.boardContent = boardContent;
 	}
 
-	public Timestamp getBoardEnrollDate() {
+	public Date getBoardEnrollDate() {
 		return boardEnrollDate;
 	}
 
-	public void setBoardEnrollDate(Timestamp boardEnrollDate) {
+	public void setBoardEnrollDate(Date boardEnrollDate) {
 		this.boardEnrollDate = boardEnrollDate;
 	}
 
-	public Timestamp getBoardModifyDate() {
+	public Date getBoardModifyDate() {
 		return boardModifyDate;
 	}
 
-	public void setBoardModifyDate(Timestamp boardModifyDate) {
+	public void setBoardModifyDate(Date boardModifyDate) {
 		this.boardModifyDate = boardModifyDate;
 	}
 
@@ -109,19 +110,19 @@ public class Board {
 		this.questionType = questionType;
 	}
 
-	public Timestamp getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public Timestamp getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Timestamp endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

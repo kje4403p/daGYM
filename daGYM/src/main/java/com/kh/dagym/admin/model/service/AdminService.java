@@ -2,6 +2,8 @@ package com.kh.dagym.admin.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
@@ -36,5 +38,13 @@ public interface AdminService {
 	 * @return pInfo
 	 */
 	public abstract Page pagination(int type, int cp);
+
+	/** 이벤트 작성 Service
+	 * @param board
+	 * @param savePath 
+	 * @param images 
+	 * @return result
+	 */
+	public abstract int insertEvent(Board board, List<MultipartFile> images, String savePath);
 
 }
