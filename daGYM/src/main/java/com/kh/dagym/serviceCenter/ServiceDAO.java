@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 
@@ -84,5 +85,97 @@ public class ServiceDAO {
 		
 		return sqlSession.selectList("serviceMapper.selectFaqmemberIdList", pInfo.getBoardType(),rowBounds);
 	}
+
+	/** faq 검색 목록 조회 DAO
+	 * @param pInfo
+	 * @param map
+	 * @return boardList
+	 */
+	public List<Board> selectSearchList(PageInfo pInfo, Map<String, Object> map) {
+		int offset = (pInfo.getCurrentPage()-1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset,pInfo.getLimit());
+		return sqlSession.selectList("serviceMapper.selectSearchList",map,rowBounds);
+	}
+
+	/** faq 게시글 등록 시퀀스 조회
+	 * @param boardType
+	 * @return result
+	 */
+	public int selectNextNo(int boardType) {
+		
+		return sqlSession.selectOne("serviceMapper.selectSeq");
+	}
+
+	/** faq 게시글 등록 DAO
+	 * @param board
+	 * @return result
+	 */
+	public int insertFaq(Board board) {
+
+		return sqlSession.insert("serviceMapper.insertFaq",board);
+	}
+
+	/** faq파일 삽입 DAO
+	 * @param at
+	 * @return result
+	 */
+	public int insertFaqAttachment(Attachment at) {
+
+		return sqlSession.insert("serviceMapper.insertFaqAttachment", at);
+	}
+
+	/** 파일 저장 오류시 db에 저장된 내용 삭제 faq
+	 * @param boardNo
+	 */
+	public void deleteFaqAttachment(int boardNo) {
+		sqlSession.delete("serviceMapper.deleteFaqAttachment",boardNo);
+		
+	}
+
+	/** faq 게시글 이미지 조회 DAO
+	 * @param boardNo
+	 * @return result
+	 */
+	public List<Attachment> selectFaqFiles(int boardNo) {
+		return sqlSession.selectList("serviceMapper.selectFaqFiles",boardNo);
+	}
+
+	/** faq게시글 업데이트 DAO
+	 * @param upBoard
+	 * @return result
+	 */
+	public int updateFaqBoard(Board upBoard) {
+		
+		return sqlSession.update("serviceMapper.updateFaqBoard", upBoard);
+	}
+
+	/** faq 파일 정보 수정 DAO
+	 * @param at
+	 * @return result
+	 */
+	public int updateFaqAttachment(Attachment at) {
+		return sqlSession.update("serviceMapper.updateFaqAttachment",at);
+	}
+
+	/** faq 파일 1개 정보 삭제 DAO
+	 * @param fileNo
+	 * @return result
+	 */
+	public int deleteFaqAttachment2(int fileNo) {
+		
+		return sqlSession.delete("serviceMapper.deleteAttachment2",fileNo);
+	}
+
+	
+	/** 게시글 삭제 DAO
+	 * @param boardNo
+	 * @return
+	 */
+	public int deleteFaqBoard(int boardNo) {
+		
+		return sqlSession.update("serviceMapper.deleteFaqBoard",boardNo);
+	}
+
+	
 
 }
