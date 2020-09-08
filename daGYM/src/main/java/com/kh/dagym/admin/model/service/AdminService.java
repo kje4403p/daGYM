@@ -22,10 +22,10 @@ public interface AdminService {
 	 */
 	public abstract List<Trainer> selectTList();
 
-	/** 1:1 문의 조회 Service
+	/** 게시판 목록 조회 Service
 	 * @return iList
 	 */
-	public abstract List<Board> selectIList(Page pInfo);
+	public abstract List<Board> selectList(Page pInfo);
 
 	/** 1:1 문의 답변 Service
 	 * @param reply

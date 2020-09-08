@@ -35,12 +35,12 @@
 						<label class="input-group-addon mr-3 insert-label">제목</label> 
 						<input type="text" class="form-control" id="title" name="boardTitle" size="70">
 					</div>
-	
+					<%-- 	
 					<div class="form-inline mb-2">
 						<label class="input-group-addon mr-3 insert-label">작성자</label>
 						<h5 class="my-0" id="writer">${loginMember.memberId}</h5>
 					</div>
-	
+	 				--%>
 	
 					<div class="form-inline mb-2">
 						<label class="input-group-addon mr-3 insert-label">작성일</label>
@@ -52,8 +52,8 @@
 					
 					<div class="form-inline mb-2">
 						<label class="input-group-addon mr-3 insert-label">날짜</label>
-						<input class="date mr-2" name="startDate" type="date" ><h5>시작일</h5>
-						<input class="date mr-2 ml-5" name="endDate" type="date"><h5>종료일</h5>
+						<h5>시작일</h5><input class="date ml-2 mr-5" name="startDate" type="date" >
+						<h5>종료일</h5><input class="date ml-2" name="endDate" type="date">
 					</div>  
 	
 					<hr>
@@ -120,26 +120,26 @@
 
 		// 유효성 검사
 		function validate() {
-			if ($("#title").val().trim().length == 0) {
+			if($("#title").val().trim().length == 0) {
 				alert("제목을 입력해주세요.");
 				$("#title").focus();
 				return false;
 			}
 
-			if ($("#content").val().trim().length == 0) {
+			if($("#content").val().trim().length == 0) {
 				alert("내용을 입력해주세요.");
 				$("#content").focus();
 				return false;
 			}
 			
-			if($("input[name=startDate]").val().length == 0 || $("input[name=endDate]").val().length == 0) {
-				alert("이벤트 날짜를 입력해주세요.");
+			if($("input[name=startDate]").val() > $("input[name=endDate]").val() || $("input[name=startDate]").val().length == 0 || $("input[name=endDate]").val().length == 0) {
+				alert("이벤트 날짜는 필수로 입력해야하며, 시작일이 종료일보다 빨라야합니다.");
 				$("input[name=startDate]").focus();
 				return false;
 			}
 		}
 		
-		 // 이미지 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+		// 이미지 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
 	    $(function () {
 	       $("#fileArea").hide();
 

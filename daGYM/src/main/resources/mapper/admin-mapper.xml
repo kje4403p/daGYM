@@ -50,6 +50,7 @@
 	<select id="selectMList" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
 		WHERE MEMBER_STATUS='Y'
+		AND NOT EXISTS (SELECT 1 FROM TRAINER WHERE MEMBER_NO = TRAINER_NO)
 		ORDER BY MEMBER_NO
 	</select>
 	
@@ -59,12 +60,14 @@
 		ORDER BY TRAINER_NO
 	</select>
 	
-	<!-- 1:1 문의 조회 -->
-	<select id="selectIList" parameterType="_int" resultMap="boardResultSet">
+	<!-- 게시판 목록 조회 -->
+	<select id="selectList" parameterType="_int" resultMap="boardResultSet">
 		SELECT * FROM A_BOARD
 		WHERE BOARD_TYPE=#{boardType}
-		AND NOT EXISTS (SELECT 1 FROM REPLY WHERE PARENT_BOARD_NO = BOARD_NO)
-		ORDER BY BOARD_NO
+		<if test="boardType == 3">
+			AND NOT EXISTS (SELECT 1 FROM REPLY WHERE PARENT_BOARD_NO = BOARD_NO)
+		</if>
+		ORDER BY BOARD_NO DESC
 	</select>
 	
 	<!-- 1:1 문의 답변 -->
@@ -77,6 +80,9 @@
 	<select id="getListCount" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM A_BOARD
 		WHERE BOARD_TYPE = #{boardType}
+		<if test="boardType == 3">
+			AND NOT EXISTS (SELECT 1 FROM REPLY WHERE PARENT_BOARD_NO = BOARD_NO)
+		</if>
 	</select>
 	
 	<!-- 게시글 다음 번호 가져오기 -->
@@ -104,4 +110,5 @@
 		DELETE FROM ATTACHMENT
 		WHERE PARENT_BOARD_NO = #{boardNo}
 	</delete>
+	
 </mapper>

@@ -1,7 +1,7 @@
 package com.kh.dagym.admin.model.vo;
 
 import java.sql.Date;
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Board {
 
@@ -10,8 +10,8 @@ public class Board {
 	private int boardType;
 	private String boardTitle;
 	private String boardContent;
-	private Date boardEnrollDate;
-	private Date boardModifyDate;
+	private Timestamp boardEnrollDate;
+	private Timestamp boardModifyDate;
 	private String boardStatus;
 	private String questionType;
 	private Date startDate;
@@ -21,7 +21,7 @@ public class Board {
 	public Board() {}
 
 	public Board(int boardNo, String memberId, int boardType, String boardTitle, String boardContent,
-			Date boardEnrollDate, Date boardModifyDate, String boardStatus, String questionType,
+			Timestamp boardEnrollDate, Timestamp boardModifyDate, String boardStatus, String questionType,
 			Date startDate, Date endDate, int views) {
 		super();
 		this.boardNo = boardNo;
@@ -78,19 +78,19 @@ public class Board {
 		this.boardContent = boardContent;
 	}
 
-	public Date getBoardEnrollDate() {
+	public Timestamp getBoardEnrollDate() {
 		return boardEnrollDate;
 	}
 
-	public void setBoardEnrollDate(Date boardEnrollDate) {
+	public void setBoardEnrollDate(Timestamp boardEnrollDate) {
 		this.boardEnrollDate = boardEnrollDate;
 	}
 
-	public Date getBoardModifyDate() {
+	public Timestamp getBoardModifyDate() {
 		return boardModifyDate;
 	}
 
-	public void setBoardModifyDate(Date boardModifyDate) {
+	public void setBoardModifyDate(Timestamp boardModifyDate) {
 		this.boardModifyDate = boardModifyDate;
 	}
 

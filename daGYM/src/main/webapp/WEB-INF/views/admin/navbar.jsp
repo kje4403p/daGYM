@@ -103,7 +103,7 @@
             </div>
           </a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item preview-item">
+          <a class="dropdown-item preview-item" href="logout">
             <div class="preview-item-content">
               <p class="preview-subject mb-1">Logout</p>
             </div>

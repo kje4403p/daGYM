@@ -39,10 +39,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.selectTList();
 	}
 
-	// 1:1 문의 조회 Service 구현
+	// 게시판 목록 조회 Service 구현
 	@Override
-	public List<Board> selectIList(Page pInfo) {
-		return adminDAO.selectIList(pInfo);
+	public List<Board> selectList(Page pInfo) {
+		return adminDAO.selectList(pInfo);
 	}
 
 	// 1:1 문의 답변 Service 구현
@@ -105,7 +105,6 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
-
 	
 	
 	
@@ -138,4 +137,5 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
+
 }

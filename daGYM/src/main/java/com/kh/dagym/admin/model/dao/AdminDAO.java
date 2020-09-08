@@ -30,12 +30,12 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.selectTList");
 	}
 
-	// 1:1 문의 조회 DAO
-	public List<Board> selectIList(Page pInfo) {
+	// 게시판 목록 조회 DAO
+	public List<Board> selectList(Page pInfo) {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
-		return sqlSession.selectList("adminMapper.selectIList", pInfo.getBoardType(), rowBounds);
+		return sqlSession.selectList("adminMapper.selectList", pInfo.getBoardType(), rowBounds);
 	}
 
 	// 1:1 문의 답변 DAO

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,6 +31,16 @@ public class AdminController {
 	@RequestMapping("adminView")
 	public String adminView() {
 		return "admin/adminMain";
+	}
+	
+	// 관리자 로그아웃
+	@RequestMapping("logout")
+	public String logout(SessionStatus status, RedirectAttributes rdAttr) {
+		status.setComplete();
+		rdAttr.addFlashAttribute("status", "success");
+		rdAttr.addFlashAttribute("msg", "로그아웃 되었습니다.");
+		
+		return "redirect:/";
 	}
 	
 	// 회원 전체 조회
@@ -56,7 +67,7 @@ public class AdminController {
 		int type = 3;
 		Page pInfo = adminService.pagination(type, cp);
 		
-		List<Board> iList = adminService.selectIList(pInfo);
+		List<Board> iList = adminService.selectList(pInfo);
 		model.addAttribute("iList", iList);
 		model.addAttribute("pInfo", pInfo);
 		
@@ -110,7 +121,7 @@ public class AdminController {
 		if(result > 0) {
 			rdAttr.addFlashAttribute("status", "success");
 			rdAttr.addFlashAttribute("msg", "이벤트 작성 완료 !");
-			url = "adminView";
+			url = "eventList";
 		} else {
 			rdAttr.addFlashAttribute("status", "error");
 			rdAttr.addFlashAttribute("msg", "이벤트 작성 실패");
@@ -118,5 +129,18 @@ public class AdminController {
 		}
 		
 		return "redirect:" + url;
+	}
+	
+	// 이벤트 목록 조회
+	@RequestMapping("eventList")
+	public String eventList(Model model, @RequestParam(value="cp", required=false, defaultValue="1") int cp) {
+		int type = 1;
+		Page pInfo = adminService.pagination(type, cp);
+		
+		List<Board> eList = adminService.selectList(pInfo);
+		model.addAttribute("eList", eList);
+		model.addAttribute("pInfo", pInfo);
+		
+		return "admin/eventList";
 	}
 }
