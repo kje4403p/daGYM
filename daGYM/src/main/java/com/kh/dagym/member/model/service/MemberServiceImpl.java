@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.dagym.member.model.dao.MemberDAO;
 import com.kh.dagym.member.model.service.MemberService;
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyReply;
 
 @Service //Service 레이어, 비지니스 로직 처리를 하는 클래스임을 명시 + Bean 등록
 public class MemberServiceImpl implements MemberService{
@@ -92,4 +93,11 @@ public class MemberServiceImpl implements MemberService{
 		}
 			return result;
 	}
+		
+		// 내 댓글 Service 구현
+		@Override
+		public List<MyReply> MyReplyList(int rerlyMemberNo) {
+			List<MyReply> myReplyList = memberDAO.myReplyList(rerlyMemberNo);
+			return myReplyList;
+		}
 }

@@ -19,9 +19,8 @@
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
         <div class="col-sm-5">
-            <form method="POST">
                     <h1>내 글</h1>
-                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard" >내가 쓴글</button>
+                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard">내가 쓴글</button>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReply">내 댓글</button>
                     <br><br>
                     <span style ="text-align: center">내 글리스트 총 1개</span>
@@ -44,7 +43,6 @@
                         </tr>
                 	</table>
                 </div>
-            </form>
         </div>
     </div>
     <script>
