@@ -17,6 +17,18 @@
 		<result property="memberGrade" column="MEMBER_GRADE" />
 	
 	</resultMap>
+	
+	<resultMap id="myReplyResultSet" type="com.kh.dagym.member.model.vo.MyReply" >
+		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
+		<id property="replyNo" column="REPLY_NO"/>
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="rarentBoardNo" column="PARENT_BOARD_NO" />
+		<result property="rarentBoardTitle" column="BOARD_TITLE" />
+		<result property="rerlyMemberNo" column="REPLY_MEMBER_NO" />
+		<result property="rerlyContent" column="REPLY_CONTENT" />
+		<result property="rerlyEnrollDt" column="REPLY_ENROLL_DT" />
+		<result property="replyStatus" column="REPLY_STATUS" />
+	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
@@ -53,4 +65,10 @@
 	<update id="removeMember" parameterType="Member">
 		UPDATE MEMBER SET MEMBER_STATUS = 'N' WHERE MEMBER_NO = #{memberNo}
 	</update>
+	
+	<!-- 내 댓글 조회 -->
+	<select id="myReplyList" parameterType="com.kh.dagym.member.model.vo.MyReply" resultMap="myReplyResultSet">
+		SELECT REPLY_NO, BOARD_TITLE, REPLY_CONTENT, REPLY_ENROLL_DT, REPLY_STATUS FROM REPLY 
+		JOIN BOARD ON(PARENT_BOARD_NO=BOARD_NO)WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS ='Y' ORDER BY REPLY_NO DESC
+	</select>
 </mapper>

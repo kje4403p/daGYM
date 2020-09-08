@@ -3,6 +3,7 @@ package com.kh.dagym.member.model.service;
 import java.util.List;
 
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyReply;
 
 public interface MemberService {
 
@@ -44,4 +45,10 @@ public interface MemberService {
 	 * @return result
 	 */
 	int removeMember(String memberPwd, int memberNo);
+
+	/** 내 댓글 Service
+	 * @param memberNo
+	 * @return myReplyList
+	 */
+	List<MyReply> MyReplyList(int rerlyMemberNo);
 }
