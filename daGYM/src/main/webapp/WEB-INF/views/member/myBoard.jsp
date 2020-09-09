@@ -23,7 +23,7 @@
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard">내가 쓴글</button>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReply">내 댓글</button>
                     <br><br>
-                    <span style ="text-align: center">내 게시글 리스트 총 ${pInfo.listCount}개</span>
+                    <span style ="text-align: center">내 게시글 리스트 총 ${pInfo}개</span>
                     <div class="row mb-3 form-row">
                     
                 <table class="table table-hover">
@@ -45,10 +45,10 @@
                  		 <c:otherwise>
                      	 <c:forEach var="board" items="${myBoardList}">
                         <tr>
-                        	<td style ="text-align: center">${board.rarentBoardTitle}</td>
-                        	<td style ="text-align: center">${board.rerlyContent}</td>
-                        	<td style ="text-align: center">${board.rerlyEnrollDt}</td>
-                        	<td style ="text-align: center">${board.rerlyEnrollDt}</td>
+                        	<td style ="text-align: center">${board.boardCategory}</td>
+                        	<td style ="text-align: center">${board.boardTitle}</td>
+                        	<td style ="text-align: center">${board.boardModiftDate}</td>
+                        	<td style ="text-align: center">${board.views}</td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
@@ -94,6 +94,9 @@
 	                <li>
 	                	<fmt:parseNumber var="operand2" value="${(pInfo.currentPage + pInfo.pagingBarSize - 1)/pInfo.pagingBarSize} " integerOnly="true"/>
 	                	<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1 }"/>
+	                	<script>
+	                	alert(${next});	
+	                	</script>
 						<a class="page-link text-primary" href="${url}${next}">&gt;</a>
 	                </li>
 	                

@@ -29,6 +29,24 @@
 		<result property="rerlyEnrollDt" column="REPLY_ENROLL_DT" />
 		<result property="replyStatus" column="REPLY_STATUS" />
 	</resultMap>
+	
+	<resultMap id="myBoardResultSet" type="MyBoard" >
+		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
+		<id property="boardNo" column="BOARD_NO"/>
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="boardWriter" column="BOARD_WRITER" />
+		<result property="boardType" column="BOARD_TYPE" />
+		<result property="boardTitle" column="BOARD_TITLE" />
+		<result property="boardContent" column="BOARD_CONTENT" />
+		<result property="boardEnrollDate" column="BOARD_ENROLL_DATE" />
+		<result property="boardModiftDate" column="BOARD_MODIFY_DATE" />
+		<result property="boardStatus" column="BOARD_STATUS" />
+		<result property="qnaCode" column="QUESTION_CODE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="views" column="VIEWS" />
+		<result property="boardCategory" column="BOARD_CATEGORY" />
+	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
@@ -79,10 +97,11 @@
 	
 	<!-- 내 게시판 페이징 처리 -->
 	<select id="getMyBoardListCount" parameterType="_int" resultType = "_int">
-		SELECT COUNT(*) FROM BOARD WHERE BOARD_WRITER = #{rerlyMemberNo} AND BOARD_STATUS = 'Y'
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_WRITER = #{boardWriter} AND BOARD_STATUS = 'Y'
 	</select>
 	
 	<!-- 내 게시글 조회 -->
-	<select id="myBoardList" parameterType="MyBoard" resultMap="myReplyResultSet">
+	<select id="myBoardList" parameterType="MyBoard" resultMap="myBoardResultSet">
+		SELECT BOARD_NO,BOARD_WRITER,BOARD_TYPE,BOARD_TITLE,BOARD_CONTENT,BOARD_ENROLL_DATE,BOARD_MODIFY_DATE,BOARD_STATUS,QUESTION_CODE,START_DATE,END_DATE,VIEWS,BOARD_CATEGORY FROM BOARD JOIN BOARD_TYPE USING(BOARD_TYPE) WHERE BOARD_WRITER = #{boardWriter} AND BOARD_STATUS = 'Y'
 	</select>
 </mapper>
