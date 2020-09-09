@@ -15,6 +15,10 @@
       <span class="mdi">▥</span>
     </button>
     <ul class="navbar-nav navbar-nav-right">
+      <li class="nav-item">
+        <!-- <a class="nav-link btn btn-success create-new-button" aria-expanded="false" href="insertTrainer2">+ 트레이너 추가하기(ver1)</a> -->
+        <a class="nav-link btn btn-success create-new-button" aria-expanded="false" href="insertTrainer">+ 트레이너 추가하기</a>
+      </li> 
       <li class="nav-item dropdown d-none d-lg-block">
         <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">+ 새 글 작성하기</a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">

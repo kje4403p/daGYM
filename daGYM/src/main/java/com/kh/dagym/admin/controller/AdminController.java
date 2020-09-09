@@ -143,4 +143,15 @@ public class AdminController {
 		
 		return "admin/eventList";
 	}
+	
+	// 트레이너 가입
+	@RequestMapping("insertTrainer")
+	public String insertTrainer() {
+		return "admin/trainerSignUp";
+	}
+	
+	/*
+	 * @RequestMapping("insertTrainer2") public String insertTrainer2() { 
+	 * return "trainerResulvation/signUpView"; }
+	 */
 }
