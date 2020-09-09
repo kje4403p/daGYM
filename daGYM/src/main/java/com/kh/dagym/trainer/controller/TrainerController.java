@@ -63,6 +63,7 @@ public class TrainerController {
 		         if(!files.isEmpty()) {
 		            model.addAttribute("files",files);
 		         }
+		         System.out.println(classStatus);
 		model.addAttribute("trainer",trainer);
 		model.addAttribute("loginMember",loginMember);
 		model.addAttribute("classStatus",classStatus);

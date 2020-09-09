@@ -78,7 +78,7 @@
 	<script>
 	$(".trainerList").on("click",function(event){
 		if(<%=loginMember%>==null){
-		swal("fail","로그인 후 이용해주세요.");
+		swal("FAIL","로그인 후 이용해주세요.");
 		 event.preventDefault();
 		}
 	});
