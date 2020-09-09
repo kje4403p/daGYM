@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +23,7 @@
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard">내가 쓴글</button>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReply">내 댓글</button>
                     <br><br>
-                    <span style ="text-align: center">내 게시글 리스트 총 ${pInfo}개</span>
+                    <span style ="text-align: center">내 게시글 리스트 총 ${pInfo.listCount}개</span>
                     <div class="row mb-3 form-row">
                     
                 <table class="table table-hover">
@@ -65,13 +65,15 @@
 	                </li>
 	                
 	                <li>
-	                	<!-- 이전으로(<) -->
-	                	<!-- prev 생성 식 : (현재 페이지 - 1) / 페이징바 사이즈(10) * 10 -->
-	                	<!-- fmt태그를 이용한 소수점 제거 -->
-	                	<fmt:parseNumber var="operand1" value="${(pInfo.currentPage -1)/pInfo.pagingBarSize}" integerOnly="true"/>
-	                	<c:set var="prev" value="${operand1 * 10 }"></c:set>
-                   		<a class="page-link text-primary" href="${url}${prev}">&lt;</a>
-	                </li>
+                      <!-- 이전으로(<) -->
+                      <!-- prev 생성 식 : (현재페이지-1) / 페이징바 사이즈(10) * 10 -->
+                      <!-- fmt 태그를 이용한 소수점 제거 -->
+                      <fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
+                      <c:set var="prev" value="${operand1 * 10}"/>
+                      
+                         <%-- <a class="page-link text-primary" href="${pInfo.boardType}?cp=${prev}">&lt;</a> --%>
+                         <a class="page-link text-primary" href="${url}${prev}">&lt;</a>
+                   </li>
                 </c:if>
                 
                 <!-- 10개의 페이지 목록 -->
@@ -94,9 +96,6 @@
 	                <li>
 	                	<fmt:parseNumber var="operand2" value="${(pInfo.currentPage + pInfo.pagingBarSize - 1)/pInfo.pagingBarSize} " integerOnly="true"/>
 	                	<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1 }"/>
-	                	<script>
-	                	alert(${next});	
-	                	</script>
 						<a class="page-link text-primary" href="${url}${next}">&gt;</a>
 	                </li>
 	                
