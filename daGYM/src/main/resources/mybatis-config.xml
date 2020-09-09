@@ -37,5 +37,6 @@
       <mapper resource="/mapper/service-mapper.xml"/>
       <mapper resource="/mapper/trainer-mapper.xml"/>
       <mapper resource="/mapper/admin-mapper.xml"/>
+      <mapper resource="/mapper/home-mapper.xml"/>
    </mappers>
 </configuration>
