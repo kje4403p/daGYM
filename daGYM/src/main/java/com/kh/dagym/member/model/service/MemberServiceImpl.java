@@ -11,6 +11,7 @@ import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.dao.MemberDAO;
 import com.kh.dagym.member.model.service.MemberService;
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyReply;
 
 @Service //Service 레이어, 비지니스 로직 처리를 하는 클래스임을 명시 + Bean 등록
@@ -21,6 +22,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Autowired
 	private BCryptPasswordEncoder bcPwd;
+	
+	@Autowired
+	private PageInfo pInfo;
 
 	// 회원가입 Service 구현
 	@Transactional(rollbackFor = Exception.class)
@@ -97,8 +101,39 @@ public class MemberServiceImpl implements MemberService{
 		
 		// 내 댓글 Service 구현
 		@Override
-		public List<MyReply> MyReplyList(int rerlyMemberNo) {
-			List<MyReply> myReplyList = memberDAO.myReplyList(rerlyMemberNo);
+		public List<MyReply> MyReplyList(int rerlyMemberNo, PageInfo pInfo) {
+			List<MyReply> myReplyList = memberDAO.myReplyList(rerlyMemberNo,pInfo);
 			return myReplyList;
+		}
+		
+		// 내 댓글 페이징처리 Service 구현
+		@Override
+		public PageInfo replyPagination(int type, int cp, int rerlyMemberNo) {
+			// 1) 전체  댓글 수 조회
+			int listCount = memberDAO.getMyReplyListCount(rerlyMemberNo);
+			// 2) setPageInfo 호출
+			pInfo.setLimit(10);
+			pInfo.setPageInfo(cp, listCount, type);		
+
+			return pInfo;
+		}
+		
+		// 내 게시판 페이징 처리 Service 구현
+		@Override
+		public PageInfo boardPagination(int type, int cp, int rerlyMemberNo) {
+			// 1) 전체  댓글 수 조회
+			int listCount = memberDAO.getMyBoardListCount(rerlyMemberNo);
+			// 2) setPageInfo 호출
+			pInfo.setLimit(10);
+			pInfo.setPageInfo(cp, listCount, type);		
+
+			return pInfo;
+		}
+		
+		// 내 게시글 Service 구현
+		@Override
+		public List<MyBoard> myBoardList(int rerlyMemberNo, PageInfo pInfo) {
+			List<MyBoard> myBoardList = memberDAO.myBoardList(rerlyMemberNo,pInfo);
+			return myBoardList;
 		}
 }

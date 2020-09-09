@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyReply;
 
 public interface MemberService {
@@ -48,8 +49,32 @@ public interface MemberService {
 	int removeMember(String memberPwd, int memberNo);
 
 	/** 내 댓글 Service
+	 * @param pInfo 
 	 * @param memberNo
 	 * @return myReplyList
 	 */
-	List<MyReply> MyReplyList(int rerlyMemberNo);
+	List<MyReply> MyReplyList(int rerlyMemberNo, PageInfo pInfo);
+
+	/** 내 댓글 페이징 처리 Service
+	 * @param type
+	 * @param cp
+	 * @param rerlyMemberNo
+	 * @return pInfo
+	 */
+	PageInfo replyPagination(int type, int cp, int rerlyMemberNo);
+
+	/** 내 게시판 페이징 처리 Service
+	 * @param type
+	 * @param cp
+	 * @param rerlyMemberNo
+	 * @return pInfo
+	 */
+	PageInfo boardPagination(int type, int cp, int rerlyMemberNo);
+
+	/** 내 게시글 Service
+	 * @param rerlyMemberNo
+	 * @param pInfo
+	 * @return myBoardList
+	 */
+	List<MyBoard> myBoardList(int rerlyMemberNo, PageInfo pInfo);
 }

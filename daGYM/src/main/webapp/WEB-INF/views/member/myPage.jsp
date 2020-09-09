@@ -30,13 +30,13 @@
     </div>
     <script>
 	    $("#profile").on("click", function() {
-			location.href= "memberProfileCk";
+			location.href= "${contextPath}/member/memberProfileCk";
 		});
 	    $("#pass").on("click", function() {
-			location.href= "memberPass";
+			location.href= "${contextPath}/member/memberPass";
 		});
 	    $("#remove").on("click", function() {
-			location.href= "memberRemove";
+			location.href= "${contextPath}/member/memberRemove";
 		});
     </script>
     <%@ include file="../common/footer.jsp"%><br>
