@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.dao.TrainerDAO;
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -24,6 +26,9 @@ public class TrainerServiceImpl implements TrainerService{
 	
 	@Autowired
 	private TrainerDAO trainerDAO;
+	
+	@Autowired 
+	private BCryptPasswordEncoder bcPwd;
 	
 	@Override
 	public List<Trainer> selectList() {
@@ -57,6 +62,10 @@ public class TrainerServiceImpl implements TrainerService{
 			
 		if(trainerNo >0) { 
 			trainer.setTrainerNo(trainerNo);
+
+			String encPwd = bcPwd.encode(trainer.getMemberPwd());
+			
+			trainer.setMemberPwd(encPwd);
 			
 			result = trainerDAO.insertTrainer(trainer);
 	
@@ -148,5 +157,11 @@ public class TrainerServiceImpl implements TrainerService{
 	public int insertImpUid(Payment payment) {
 		int result = trainerDAO.insertImpUid(payment);
 		return result;
+	}
+
+	@Override
+	public ClassStatus selectClassStatus(int memberNo) {
+		
+		return trainerDAO.selectClassStatus(memberNo);
 	}
 }

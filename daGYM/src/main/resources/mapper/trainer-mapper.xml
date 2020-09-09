@@ -21,7 +21,7 @@
 		<result property="trainerComment" column="TRAINER_COMMENT" />		
 	</resultMap>
 	
-	 <resultMap type="trainerAttachment" id="trainerAttachmentResultSet">
+	 <resultMap type="TrainerAttachment" id="trainerAttachmentResultSet">
         <id property="fileNo" column="FILE_NO"/>
         <result property="parentTrainerNo" column="PARENT_TRAINER_NO"/>
         <result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
@@ -29,6 +29,14 @@
         <result property="filePath" column="FILE_PATH"/>
         <result property="fileLevel" column="FILE_LEVEL"/>
     </resultMap>
+    
+    
+	 <resultMap type="ClassStatus" id="classStatusResultSet">
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="trainerNo" column="TRAINER_NO"/>
+        <result property="classCnt" column="CLASS_CNT"/>
+    </resultMap>
+    
     
 	<select id="selectList" resultMap="trainerResultSet">
 SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
@@ -107,5 +115,8 @@ SELECT * FROM DUAL
 	<update id="updateImpUid" parameterType="Payment">
   		UPDATE PAYMENT SET IMP_UID = #{impUid} WHERE MERCHANT_UID=#{merchantUid}
   	</update>
-  
+  	
+  	<select id="selectClassStatus" parameterType="_int" resultMap="classStatusResultSet" >
+  	SELECT * FROM CLASS_STATUS WHERE MEMBER_NO=#{memberNo}
+  	</select>
 </mapper>

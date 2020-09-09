@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -51,6 +52,8 @@ public interface TrainerService {
 	 * @return
 	 */
 	int insertImpUid(Payment payment);
+
+	ClassStatus selectClassStatus(int memberNo);
 
 
 

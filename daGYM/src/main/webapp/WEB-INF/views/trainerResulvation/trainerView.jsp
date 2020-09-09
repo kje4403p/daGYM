@@ -316,13 +316,18 @@ $(document).ready(function(){
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
 								<c:choose>
-									
 									<c:when test="${loginMember !=null }">
-										<c:url var="url" value="../paymentView/${trainer.trainerNo }">
+									
+									 	<c:when test="${classStatus.trainerNo}==${trainer.trainerNo} || ${empty classStatus} ">
+											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="5"/>
 										</c:url>
 										<a href="${url }"class="btn btn-primary" id="order">결제하기</a>
-									
+										</c:when>
+										<c:otherwise>
+										다른 트레이너 이용권을 모두 소모해야 결제할 수 있습니다.
+										</c:otherwise>
+								
 									</c:when>
 									<c:otherwise>
 										로그인 후 결제할 수 있습니다.

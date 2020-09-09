@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -87,6 +88,11 @@ public class TrainerDAO {
 	 */
 	public int insertImpUid(Payment payment) {
 		return sqlSession.update("trainerMapper.updateImpUid", payment);
+	}
+
+	public ClassStatus selectClassStatus(int memberNo) {
+	
+		return sqlSession.selectOne("trainerMapper.selectClassStatus", memberNo);
 	}
 
 

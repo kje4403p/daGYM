@@ -1,9 +1,12 @@
+<%@page import="com.kh.dagym.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% Member loginMember = (Member)request.getAttribute("loginMember"); %>
 <!DOCTYPE html>
 <html>
 <head>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
@@ -13,6 +16,16 @@
 </style>
 </head>
 <body>
+<c:if test="${!empty msg }">
+		<script>
+			swal({icon : "${status}",title : "${msg}", text : "${text}"});
+			
+		</script>
+		<c:remove var="msg"/>
+		<c:remove var="status"/>
+		<c:remove var="text"/>
+	</c:if>
+	
 	<jsp:include page="../common/header.jsp"/>
 	<!-- Trainer Section Begin -->
     <section class="trainer-section spad">
@@ -31,7 +44,7 @@
             
                 <div id="trainer" class="col-lg-4 col-md-6">
                     <div class="single-trainer-item">     
-                    <a href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
+                    <a class="trainerList" href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
                      						<c:forEach items="${thList}" var="th">
 	                							<c:if test="${th.parentTrainerNo == trainer.trainerNo}">
 	                				
@@ -58,9 +71,17 @@
             </div>
         </div>
     </section>
-    <a href="${contextPath}/trainer/signUp">트레이너 추가</a>
     <a href="${contextPath}/trainer/schedule">캘린더</a>
     <!-- Trainer Section End -->
 	<jsp:include page="../common/footer.jsp"/>
 </body>
+	<script>
+	$(".trainerList").on("click",function(event){
+		if(<%=loginMember%>==null){
+		swal("fail","로그인 후 이용해주세요.");
+		 event.preventDefault();
+		}
+	});
+		
+	</script>
 </html>

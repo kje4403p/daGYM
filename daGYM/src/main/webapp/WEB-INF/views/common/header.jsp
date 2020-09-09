@@ -49,7 +49,7 @@
                     <ul>
                     	
                         <li><a href="${contextPath}/intro">소개</a></li>
-                        <li><a href="${contextPath}/trainer/trainerList">트레이너 예약</a></li>
+                        <li id="trainerList"><a href="${contextPath}/trainer/trainerList">트레이너 예약</a></li>
                         <li><a href="${contextPath }/event/list">커뮤니티</a></li>
                         <li><a href="${contextPath}/service/faq/4">고객센터</a></li>
                     </ul>
@@ -100,5 +100,5 @@
     <script src="${contextPath}/resources/js/owl.carousel.min.js"></script>
     <script src="${contextPath}/resources/js/main.js"></script>
 </body>
-
+	
 </html>

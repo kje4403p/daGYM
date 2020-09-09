@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.service.TrainerService;
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -45,11 +46,15 @@ public class TrainerController {
 	}
 	
 	//트레이너 상세 조회
+
 	@RequestMapping("trainerView/{trainerNo}")
 	public String selectTrainer(@PathVariable int trainerNo, Model model, 
 			RedirectAttributes rdAttr, HttpServletRequest request) {
-
+		Member loginMember = (Member)model.getAttribute("loginMember");
 		Trainer trainer = trainerService.selectTrainer(trainerNo);
+		int memberNo = loginMember.getMemberNo();
+		System.out.println(memberNo);
+		ClassStatus classStatus =  trainerService.selectClassStatus(memberNo);
 		String url = null;
 
 		if(trainer!=null) {
@@ -59,6 +64,8 @@ public class TrainerController {
 		            model.addAttribute("files",files);
 		         }
 		model.addAttribute("trainer",trainer);
+		model.addAttribute("loginMember",loginMember);
+		model.addAttribute("classStatus",classStatus);
 		url="trainerResulvation/trainerView";
 	}else {
 		rdAttr.addFlashAttribute("status","error");
@@ -105,7 +112,7 @@ public class TrainerController {
 	      rdAttr.addFlashAttribute("status", status);
 	      rdAttr.addFlashAttribute("msg", msg);
 	      
-	      return "redirect:/";
+	      return "redirect:/admin/trainerList";
 	   }
 	 
 	 // 결제 창으로 이동
