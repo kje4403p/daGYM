@@ -93,4 +93,13 @@ public class EventDAO {
 		return sqlSession.selectList("eventMapper.selectFiles", boardNo);
 	}
 
+
+	/** 이벤트 삭제
+	 * @param boardNo
+	 * @return int
+	 */
+	public int deleteEvent(int boardNo) {
+		return sqlSession.update("eventMapper.deleteEvent", boardNo);
+	}
+
 }

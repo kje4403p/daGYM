@@ -137,9 +137,35 @@ public class EventServiceImpl implements EventService{
 		return board;
 	}
 	
-	
+
+	/**
+	 * event 삭제 메소드
+	 */
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteEvent(int boardNo) {
+		int result = eventDAO.deleteEvent(boardNo);
+		
+		if (result > 0) {
+			List<Attachment> deleteFiles = eventDAO.selectFiles(boardNo);
+			
+			if (! deleteFiles.isEmpty() ) {
+				eventDAO.deleteAttachment(boardNo);
+				for (Attachment at : deleteFiles) {
+					String filePath = "/resources/uploadImages";
+					File file = new File(filePath + "/" + at.getFileChangeName());
+					file.delete();
+				}
+			}
+		}
+		
+		return result;
+	}
 
 
+	/**
+	 * 파일 불러오기
+	 */
 	@Override
 	public List<Attachment> selectFiles(int boardNo) {
 		return eventDAO.selectFiles(boardNo);
