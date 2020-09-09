@@ -88,7 +88,7 @@ SELECT * FROM DUAL
 	
 	<!-- 결제하기 -->
 	<insert id="insertOrder" parameterType="map">
-		INSERT INTO PAYMENT VALUES(#{payment.merchantUid}, #{payment.classNm}, #{payment.amount}, SYSDATE, #{payment.memberNo}, #{payment.trainerNo})
+		INSERT INTO PAYMENT VALUES(#{payment.merchantUid}, #{payment.classNm}, #{payment.amount}, SYSDATE, #{payment.memberNo}, #{payment.trainerNo}, null)
 	</insert>
 	 
 	
@@ -102,6 +102,10 @@ SELECT * FROM DUAL
   		INSERT INTO CLASS_STATUS VALUES(#{memberNo}, #{trainerNo}, #{classNm})
   		
   	</insert>
-	
+  	
+  	<!-- 거래고유번호 삽입 -->
+	<update id="updateImpUid" parameterType="Payment">
+  		UPDATE PAYMENT SET IMP_UID = #{impUid} WHERE MERCHANT_UID=#{merchantUid}
+  	</update>
   
 </mapper>

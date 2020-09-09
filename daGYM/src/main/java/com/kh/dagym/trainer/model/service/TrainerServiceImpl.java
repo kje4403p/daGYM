@@ -121,9 +121,6 @@ public class TrainerServiceImpl implements TrainerService{
 		map.put("payment", payment);
 		map.put("member", member);
 		map.put("trainerNo", trainerNo);
-		System.out.println("임플pay"+payment);
-		System.out.println("임플mem"+member);
-		System.out.println("임플no"+trainerNo);
 		int result = 0;
 		if(merchantUid != null) {
 			result = trainerDAO.insertOrder(map);
@@ -144,9 +141,12 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public int insertCoupon(Payment payment) {
 		int result = trainerDAO.insertCoupon(payment);
-		System.out.println("인써트"+payment.getTrainerNo());
-		System.out.println(payment.getMemberNo());
-		System.out.println(payment.getClassNm());
+		return result;
+	}
+
+	@Override
+	public int insertImpUid(Payment payment) {
+		int result = trainerDAO.insertImpUid(payment);
 		return result;
 	}
 }

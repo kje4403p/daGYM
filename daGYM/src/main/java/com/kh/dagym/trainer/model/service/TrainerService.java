@@ -45,6 +45,13 @@ public interface TrainerService {
 	 */
 	int insertCoupon(Payment payment);
 
+	
+	/** 거래 고유번호(impUid) 삽입 service
+	 * @param payment
+	 * @return
+	 */
+	int insertImpUid(Payment payment);
+
 
 
 }

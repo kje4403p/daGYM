@@ -58,7 +58,7 @@
 </head>
 
 <body>
-
+<jsp:include page="../common/header.jsp"/>
 <!-- forms -->
 <div id="forms">
     <div class="container">
@@ -114,11 +114,10 @@
         <!-- / form 1 -->
 
 
-
     </div><!-- / container -->
 </div>
 <!-- / forms -->
- 
+ <jsp:include page="../common/footer.jsp"/>
 <script>
 	$("#payment").on("click",function(){
 		var classNm = $("#name").val();
@@ -197,14 +196,15 @@
 						
 					}
 				}).done(function(result){
-					if(result !="" ){
+					if(result != ""){
+						//var msg = "결제가 완료되었습니다.";
+						//alert(msg)
+						location.href = "${contextPath}/trainer/orderSuccess/"+trainerNo;
 						
-						var msg = "결제가 완료되었습니다.";
-						alert(msg)
 					}
 				});
 			}else{
-				alert("결제 실패");
+				alert("결제에 실패했습니다. 다시 결제해주세요.");
 			}
 			
 		});
