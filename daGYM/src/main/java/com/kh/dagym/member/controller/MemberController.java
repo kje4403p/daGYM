@@ -16,6 +16,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.dagym.member.model.service.MemberService;
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyReply;
 
 @SessionAttributes({"loginMember"})
@@ -58,17 +60,29 @@ public class MemberController {
 		}
 			
 	// 내 게시글 화면 전환 메소드
-			@RequestMapping("myBoard")
-			public String myBoardView() {
+			@RequestMapping("myBoardList/{type}")
+			public String myBoardView(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
+				int rerlyMemberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+				// 전체 게시글 수 조회 + 현재페이즈 확인
+				com.kh.dagym.common.PageInfo pInfo = memberService.boardPagination(type, cp, rerlyMemberNo);
+				// 게시글 목록 조회 
+				List<MyBoard> myBoardList = memberService.myBoardList(rerlyMemberNo,pInfo);
+				model.addAttribute("myBoardList", myBoardList);
+				model.addAttribute("pInfo",pInfo);
 				return "member/myBoard";
 		}
 	
 	// 내 댓글 화면 전환 메소드
-			@RequestMapping("myReply")
-			public String myReplyView(Model model) {
+			@RequestMapping("myReplyList/{type}")
+			public String myReplyView(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
 				int rerlyMemberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
-				List<MyReply> myReplyList = memberService.MyReplyList(rerlyMemberNo);
+				// 전체 댓글 수 조회 + 현재페이즈 확인 (페이징은 common에서 가져옴)
+				com.kh.dagym.common.PageInfo pInfo = memberService.replyPagination(type, cp, rerlyMemberNo);
+				// 댓글 목록 조회
+				List<MyReply> myReplyList = memberService.MyReplyList(rerlyMemberNo,pInfo);
+				
 				model.addAttribute("myReplyList", myReplyList);
+				model.addAttribute("pInfo",pInfo);
 				return "member/myReply";
 			}
 			

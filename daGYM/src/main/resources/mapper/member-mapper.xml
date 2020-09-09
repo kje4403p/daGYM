@@ -71,4 +71,18 @@
 		SELECT REPLY_NO, BOARD_TITLE, REPLY_CONTENT, REPLY_ENROLL_DT, REPLY_STATUS FROM REPLY 
 		JOIN BOARD ON(PARENT_BOARD_NO=BOARD_NO)WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS ='Y' ORDER BY REPLY_NO DESC
 	</select>
+	
+	<!-- 내 댓글 페이징 처리 -->
+	<select id="getMyReplyListCount" parameterType="_int" resultType = "_int">
+		SELECT COUNT(*) FROM REPLY WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS = 'Y'
+	</select>
+	
+	<!-- 내 게시판 페이징 처리 -->
+	<select id="getMyBoardListCount" parameterType="_int" resultType = "_int">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_WRITER = #{rerlyMemberNo} AND BOARD_STATUS = 'Y'
+	</select>
+	
+	<!-- 내 게시글 조회 -->
+	<select id="myBoardList" parameterType="MyBoard" resultMap="myReplyResultSet">
+	</select>
 </mapper>

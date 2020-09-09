@@ -2,11 +2,14 @@ package com.kh.dagym.member.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyReply;
 
 @Repository
@@ -66,10 +69,40 @@ public class MemberDAO {
 	}
 
 	/** 내 댓글 DAO
+	 * @param pInfo 
 	 * @param memberNo
 	 * @return myReplyList
 	 */
-	public List<MyReply> myReplyList(int rerlyMemberNo) {
-		return sqlSession.selectList("memberMapper.myReplyList", rerlyMemberNo);
+	public List<MyReply> myReplyList(int rerlyMemberNo, PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("memberMapper.myReplyList", rerlyMemberNo,rowBounds);
+	}
+
+	/** 내 댓글 페이징 처리 DAO
+	 * @param rerlyMemberNo
+	 * @return listCount
+	 */
+	public int getMyReplyListCount(int rerlyMemberNo) {
+		return sqlSession.selectOne("memberMapper.getMyReplyListCount",rerlyMemberNo);
+	}
+
+	/** 내 게시판 페이징 처리 DAO
+	 * @param rerlyMemberNo
+	 * @return listCount
+	 */
+	public int getMyBoardListCount(int rerlyMemberNo) {
+		return sqlSession.selectOne("memberMapper.getMyBoardListCount",rerlyMemberNo);
+	}
+
+	/** 내 게시판 DAO
+	 * @param rerlyMemberNo
+	 * @param pInfo
+	 * @return myBoardList
+	 */
+	public List<MyBoard> myBoardList(int rerlyMemberNo, PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("memberMapper.myBoardList", rerlyMemberNo,rowBounds);
 	}	
 }
