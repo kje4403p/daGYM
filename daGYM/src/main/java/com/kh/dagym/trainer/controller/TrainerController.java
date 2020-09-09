@@ -129,11 +129,7 @@ public class TrainerController {
 		 payment.setMemberNo(loginMember.getMemberNo());
 		 
 		 payment.setTrainerNo(trainerNo);
-		 System.out.println("페이"+payment);
 		 String merchantUid = trainerService.insertOrder(payment, member, trainerNo);
-		 System.out.println("payment"+payment);
-		 System.out.println("member"+member);
-		 System.out.println("trainerNo"+trainerNo);
 		 return merchantUid;
 		 
 	 }
@@ -145,8 +141,15 @@ public class TrainerController {
 		 payment.setMemberNo(loginMember.getMemberNo());
 		 payment.setTrainerNo(trainerNo);
 		 String result = trainerService.insertCoupon(payment)+"";
+		 int resultImp = trainerService.insertImpUid(payment);
 		 
 		 return result;
+	 }
+	 
+	 @RequestMapping("orderSuccess/{trainerNo}")
+	 public String successMsg(@PathVariable int trainerNo, Model model) {
+		 	model.addAttribute("trainerNo",trainerNo);
+		 return "trainerResulvation/msg";
 	 }
 	 
 	 

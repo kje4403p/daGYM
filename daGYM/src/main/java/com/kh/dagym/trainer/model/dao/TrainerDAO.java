@@ -81,5 +81,13 @@ public class TrainerDAO {
 		return sqlSession.insert("trainerMapper.insertCoupon", payment);
 	}
 
+	/** 거래 고유번호 (impUid)삽입 DAO
+	 * @param payment
+	 * @return result
+	 */
+	public int insertImpUid(Payment payment) {
+		return sqlSession.update("trainerMapper.updateImpUid", payment);
+	}
+
 
 }
