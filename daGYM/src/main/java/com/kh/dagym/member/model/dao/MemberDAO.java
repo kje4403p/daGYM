@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyBoard;
+import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 
 @Repository
@@ -106,5 +107,25 @@ public class MemberDAO {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		return sqlSession.selectList("memberMapper.myBoardList", boardWriter,rowBounds);
+	}
+	
+	/** 이용권 및 결제정보 페이징 처리 DAO
+	 * @param rerlyMemberNo
+	 * @return listCount
+	 */
+	public int getMyPassListCount(int memberNo) {
+		return sqlSession.selectOne("memberMapper.getMyPassListCount",memberNo);
+	}
+	
+	
+	/** 이용권 및 결제정보 페이징 처리 DAO
+	 * @param memberNo
+	 * @param pInfo
+	 * @return myPassList
+	 */
+	public List<MyPass> myPassList(int memberNo, PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("memberMapper.myPassList", memberNo,rowBounds);
 	}	
 }

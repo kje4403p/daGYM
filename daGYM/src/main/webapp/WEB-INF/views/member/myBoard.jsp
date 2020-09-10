@@ -69,7 +69,7 @@
                       <!-- prev 생성 식 : (현재페이지-1) / 페이징바 사이즈(10) * 10 -->
                       <!-- fmt 태그를 이용한 소수점 제거 -->
                       <fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
-                      <c:set var="prev" value="${operand1 * 10}"/>
+                      <c:set var="prev" value="${operand1 * 5}"/>
                       
                          <%-- <a class="page-link text-primary" href="${pInfo.boardType}?cp=${prev}">&lt;</a> --%>
                          <a class="page-link text-primary" href="${url}${prev}">&lt;</a>

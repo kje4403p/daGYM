@@ -33,7 +33,7 @@
 			location.href= "${contextPath}/member/memberProfileCk";
 		});
 	    $("#pass").on("click", function() {
-			location.href= "${contextPath}/member/memberPass";
+			location.href= "${contextPath}/member/myPassList/1";
 		});
 	    $("#remove").on("click", function() {
 			location.href= "${contextPath}/member/memberRemove";
