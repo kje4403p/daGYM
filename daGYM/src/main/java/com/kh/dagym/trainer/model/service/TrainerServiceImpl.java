@@ -152,7 +152,8 @@ public class TrainerServiceImpl implements TrainerService{
 		int result = trainerDAO.insertCoupon(payment);
 		return result;
 	}
-
+	// 거래 고유번호 삽입 구현
+	@Transactional(rollbackFor= Exception.class)
 	@Override
 	public int insertImpUid(Payment payment) {
 		int result = trainerDAO.insertImpUid(payment);
@@ -163,5 +164,12 @@ public class TrainerServiceImpl implements TrainerService{
 	public ClassStatus selectClassStatus(int memberNo) {
 		
 		return trainerDAO.selectClassStatus(memberNo);
+	}
+
+	// 회원수 증가 Service 구현
+	@Transactional(rollbackFor= Exception.class)
+	@Override
+	public int updateCnt(int trainerNo) {
+		return trainerDAO.updateCnt(trainerNo);
 	}
 }
