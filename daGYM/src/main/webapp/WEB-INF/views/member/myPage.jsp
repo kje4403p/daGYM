@@ -17,11 +17,12 @@
                 onsubmit="return validate();">
                     <h1>내 정보</h1>
                     <div class="row mb-3 form-row">
+                    <br>
                 	<table>
                     	<tr>
-                    		<td id="profile" style ="text-align: center;">회원정보<br>이미지<br>비밀번호,닉네임,주소등 회원정보를 수정 할 수 있습니다.</td>
-                    		<td id="pass" style ="text-align: center;">PT이용권/결제정보<br>이미지<br>PT이용권 및 결제정보를 확인 할수 있습니다.</td>
-                    		<td id="remove" style ="text-align: center;">회원 탈퇴<br>이미지<br>남은 헬스이용권은 환불되지 않습니다. </td>
+                    		<td id="profile" style ="text-align: center;">회원정보<br><img src="${contextPath}/resources/images/dagym/profile.png" alt=""><br>비밀번호,닉네임,주소등 회원정보를 수정 할 수 있습니다.</td>
+                    		<td id="pass" style ="text-align: center;">PT이용권/결제정보<br><img src="${contextPath}/resources/images/dagym/pass.jpg" alt=""><br>PT이용권 및 결제정보를 확인 할수 있습니다.</td>
+                    		<td id="remove" style ="text-align: center;">회원 탈퇴<br><img src="${contextPath}/resources/images/dagym/remove.png" alt=""><br>남은 헬스이용권은 환불되지 않습니다. </td>
                         </tr>
                 	</table>
                 </div>

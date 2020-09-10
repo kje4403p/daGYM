@@ -33,7 +33,7 @@
                      	 <c:forEach var="pass" items="${myPassList}">
                         <tr>
                         	<td style ="text-align: center">${pass.merchantUid}</td>
-                        	<td style ="text-align: center">${pass.classNm}</td>
+                        	<td style ="text-align: center">${pass.classNm} 회권</td>
                         	<td style ="text-align: center">${pass.amount}</td>
                         	<td style ="text-align: center">${pass.raymentDate}</td>
                         	<td style ="text-align: center">${pass.trainerName}</td>
