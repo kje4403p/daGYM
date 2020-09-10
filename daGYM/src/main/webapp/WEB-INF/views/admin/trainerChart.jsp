@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,10 +17,15 @@
 			
 			<div class="main-panel">
 				<div class="content-wrapper">
-		            <div class="page-header">
+		            <div class="page-header" style="float: left">
 		              <h3 class="page-title">매출 조회</h3>
+		              <form action="" class="ml-3">
+		              	<jsp:useBean id="now" class="java.util.Date"/>
+		              	<fmt:formatDate var="ym" value="${now}" pattern="yyyy-MM"/>
+		              	<input type="month" required value="${ym}">
+		              </form>
 		            </div>
-		            <div class="row">
+		            <div class="row" style="clear: both;">
 		              <div class="col-lg-8 grid-margin stretch-card">
 		                <div class="card">
 		                  <div class="card-body">
@@ -100,6 +106,7 @@
 			    });
 			}
 		});
+		
 	</script>
 </body>
 </html>

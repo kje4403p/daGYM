@@ -78,7 +78,7 @@
       </a>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="documentation">
+      <a class="nav-link" href="eventList">
         <span class="menu-title">이벤트 조회</span>
       </a>
     </li>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>1:1 문의사항</title>
+<title>이벤트 목록</title>
 <style type="text/css">
 	#list-table > *{
 		color: white;}
@@ -14,16 +14,11 @@
 		background-color: black;}
   	#list-table > tbody {
   		background-color: #33394a;}
-  	/* 모달 */
-    #label-title, #content-style{
-        color: rgb(56, 190, 243);}
-    .modal-left{
-      float: left;
-      margin-bottom: 0;}
-    .listBtn{
-    	float: left;}
     .pagination {
 	    justify-content: center;}
+	    
+    #list-table td {
+       	cursor: pointer;}
 </style>
 </head>
 <body>
@@ -37,39 +32,29 @@
 				<div class="content-wrapper">
 					<div class="card mb-4">
                             <div class="card-header">
-								1:1 문의사항
+								이벤트 목록
                             </div>
                             <div class="card-body">
 	                            <table class="table table-bordered" id="list-table" width="100%">
 	                                <thead style="color: white;">
 	                                    <tr>
-	                                        <th>문의 번호</th>
-	                                        <th>회원 아이디</th>
-	                                        <th>분류</th>
+	                                        <th>이벤트 번호</th>
 	                                        <th>제목</th>
-	                                        <th>작성일</th>
-	                                        <th>내용 확인</th>
+	                                        <th>이벤트 기간</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
 	                                    <c:choose>
-                                           	<c:when test="${empty iList}">
-                                           		<tr><td colspan="6">문의사항 없음</td></tr>
+                                           	<c:when test="${empty eList}">
+                                           		<tr><td colspan="3">이벤트 없음</td></tr>
                                            	</c:when>
                                            	
                                            	<c:otherwise>
-                                           		<c:forEach var="board" items="${iList}">
+                                           		<c:forEach var="board" items="${eList}">
                                            			<tr>
                                            				<td>${board.boardNo}</td>
-                                           				<td>${board.memberId}</td>
-                                           				<td>${board.questionType}</td>
                                            				<td>${board.boardTitle}</td>
-                                           				<td>
-                                           					<fmt:formatDate var="enrollDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd HH:mm:ss"/>
-                                           					${enrollDate}
-                                           				</td>
-                                           				<td><button class="btn btn-warning contentBtn btn-rounded" type="button"  data-toggle="modal" data-target="#en-modal">확인하기</button></td>
-                                           				<input type="hidden" value="${board.boardContent}">
+                                           				<td>${board.startDate} ~ ${board.endDate}</td>
                                            			</tr>
                                            		</c:forEach>
                                            	</c:otherwise>
@@ -85,7 +70,7 @@
 					            	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
 						                <li>
 						                	<!-- 맨 처음으로(<<) -->
-						                    <a class="page-link text-primary" href="inquiryList?cp=1">&lt;&lt;</a>
+						                    <a class="page-link text-primary" href="eventList?cp=1">&lt;&lt;</a>
 						                </li>
 						                
 						                <li>
@@ -96,7 +81,7 @@
 						                	
 						                	<c:set var="prev" value="${operand1 * pInfo.pagingBarSize}"/>
 						                	
-					                   		<a class="page-link text-primary" href="inquiryList?cp=${prev}">&lt;</a>
+					                   		<a class="page-link text-primary" href="eventList?cp=${prev}">&lt;</a>
 						                </li>
 					                </c:if>
 					                
@@ -109,7 +94,7 @@
 					                		
 					                		<c:otherwise>
 						                		<li>
-						                			<a class="page-link text-primary" href="inquiryList?cp=${p}">${p}</a>
+						                			<a class="page-link text-primary" href="eventList?cp=${p}">${p}</a>
 							                	</li>
 							                </c:otherwise>
 					                	</c:choose>
@@ -123,12 +108,12 @@
 						                <li>
 						                	<fmt:parseNumber var="operand2" value="${(pInfo.currentPage + pInfo.pagingBarSize - 1) / pInfo.pagingBarSize}" integerOnly="true"/>
 						                	<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1}"/>
-											<a class="page-link text-primary" href="inquiryList?cp=${next}">&gt;</a>
+											<a class="page-link text-primary" href="eventList?cp=${next}">&gt;</a>
 						                </li>
 						                
 						                <!-- 맨 끝으로(>>) -->
 						                <li>
-						                    <a class="page-link text-primary" href="inquiryList?cp=${pInfo.maxPage}">&gt;&gt;</a>
+						                    <a class="page-link text-primary" href="eventList?cp=${pInfo.maxPage}">&gt;&gt;</a>
 						                </li>
 					                </c:if>
 					            </ul>
@@ -140,51 +125,14 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- Modal -->
-	<div class="modal fade" id="en-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content" style="width: 400px;">
-				<div class="modal-header">
-					<h3 class="modal-title" id="exampleModalLabel">1:1 문의 답변하기</h3>
-				    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				    <span aria-hidden="true">&times;</span>
-				    </button>
-				</div>
-                <div class="modal-body">
-					<form action="insertAnswer" id="information-en" method="GET">
-						<h4 id="content-style">문의 내용</h4>
-						<div id="content-area">
-						</div>
-						<hr>
-						<label id="label-title" class="modal-left">답변 내용 입력</label> <br>
-						<textarea name="replyContent" cols="50" rows="5" style="resize: none; margin-bottom: 20px;" class="modal-left"></textarea> 
-						<br>
-					
-						<div class="modal-footer" style="clear: both; margin-bottom: 20px;">
-							<input type="hidden" name="parentBoardNo" id="parentBoardNo">
-					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					        <button type="submit" class="btn btn-primary" id=requestBtn>요청</button>
-					    </div>
-					</form>
-                </div>
-			</div>
-		</div>
-	</div>
         
         
-	<script>
-		$(document).ready( function () {
-		    $('#dataTable').DataTable();
-		} );
-		
+	<script>		
 		$(function() {
-			$(".contentBtn").on("click", function() {
-				var boardNo = $(this).parent().parent().children().eq(0).text();
-				var boardContent = $(this).parent().parent().children().eq(6).val();
+			$("#list-table td").on("click", function() {
+				var boardNo = $(this).parent().children().eq(0).text();
 				
-				$("#content-area").html(boardContent);
-				$("#parentBoardNo").val(boardNo);
+				location.href = "${contextPath}/event/" + boardNo;
 			});
 		});
 	</script>
