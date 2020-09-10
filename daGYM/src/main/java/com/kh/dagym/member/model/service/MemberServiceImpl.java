@@ -12,6 +12,7 @@ import com.kh.dagym.member.model.dao.MemberDAO;
 import com.kh.dagym.member.model.service.MemberService;
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyBoard;
+import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 
 @Service //Service 레이어, 비지니스 로직 처리를 하는 클래스임을 명시 + Bean 등록
@@ -135,5 +136,24 @@ public class MemberServiceImpl implements MemberService{
 		public List<MyBoard> myBoardList(int rerlyMemberNo, PageInfo pInfo) {
 			List<MyBoard> myBoardList = memberDAO.myBoardList(rerlyMemberNo,pInfo);
 			return myBoardList;
+		}
+		
+		// 이용권 및 결제정보 페이징 처리 Service 구현
+		@Override
+		public PageInfo myPassPagination(int type, int cp, int memberNo) {
+			// 1) 전체  댓글 수 조회
+			int listCount = memberDAO.getMyPassListCount(memberNo);
+			// 2) setPageInfo 호출
+			pInfo.setLimit(10);
+			pInfo.setPageInfo(cp, listCount, type);		
+
+			return pInfo;
+		}
+		
+		// 이용권 및 결제정보 Service 구현
+		@Override
+		public List<MyPass> MyPassList(int memberNo, PageInfo pInfo) {
+			List<MyPass> myPassList = memberDAO.myPassList(memberNo,pInfo);
+			return myPassList;
 		}
 }

@@ -22,7 +22,7 @@
 		              <form action="" class="ml-3">
 		              	<jsp:useBean id="now" class="java.util.Date"/>
 		              	<fmt:formatDate var="ym" value="${now}" pattern="yyyy-MM"/>
-		              	<input type="month" required value="${ym}">
+		              	<input type="month" id="ym" value="${ym}" required>
 		              </form>
 		            </div>
 		            <div class="row" style="clear: both;">
@@ -30,7 +30,9 @@
 		                <div class="card">
 		                  <div class="card-body">
 		                    <h4 class="card-title">트레이너별 매출 조회</h4>
-		                    <canvas id="trainerChart"></canvas>
+		                   
+		                    <canvas id="trainerChart" style="position: relative; height:500px; width:60vw"></canvas>
+		                   
 		                  </div>
 		                </div>
 		              </div>
@@ -43,70 +45,113 @@
 	</div>
 	
 	<script>
+		trainerChart($("#ym").val());
+		
 		$(function() {
-			var data = {
-			    labels: ["트레이너1", "트레이너2", "트레이너3", "트레이너4", "트레이너5", "트레이너6"],
-			    datasets: [{
-			      label: '매출(단위 : 원)',
-			      data: [4000000, 3000000, 2000000, 3000000, 4000000, 5000000],
-			      backgroundColor: [
-			        'rgba(255, 159, 64, 0.2)',
-			        'rgba(255, 99, 132, 0.2)',
-			        'rgba(54, 162, 235, 0.2)',
-			        'rgba(255, 206, 86, 0.2)',
-			        'rgba(75, 192, 192, 0.2)',
-			        'rgba(153, 102, 255, 0.2)'
-			      ],
-			      borderColor: [
-			        'rgba(255, 159, 64, 1)',
-			        'rgba(255,99,132,1)',
-			        'rgba(54, 162, 235, 1)',
-			        'rgba(255, 206, 86, 1)',
-			        'rgba(75, 192, 192, 1)',
-			        'rgba(153, 102, 255, 1)'
-			      ],
-			      borderWidth: 1,
-			      fill: true
-			    }]
-			};
-			
-			var options = {
-			    scales: {
-			      yAxes: [{
-		    	  	ticks: {
-		              beginAtZero: true
-		            },
-			        gridLines: {
-			          color: "rgba(204, 204, 204,0.1)"
-			        }
-			      }],
-			      xAxes: [{
-			        gridLines: {
-			          color: "rgba(204, 204, 204,0.1)"
-			        }
-			      }]
-			    },
-			    legend: {
-			        display: false
-			    },
-			    elements: {
-			        point: {
-			          radius: 0
-			        }
-		      	}
-			};
-			
-			if ($("#trainerChart").length) {
-			    var barChartCanvas = $("#trainerChart").get(0).getContext("2d");
-			    // This will get the first returned node in the jQuery collection.
-			    var barChart = new Chart(barChartCanvas, {
-			      type: 'bar',
-			      data: data,
-			      options: options
-			    });
-			}
+			$("#ym").on("change", function() {
+				trainerChart($(this).val());
+			});
 		});
 		
+		function trainerChart($ym){
+			$.ajax({
+				url : "trainerChartTotal",
+				data : {"ym" : $ym},
+				dataType : "JSON",
+				success : function(list){
+					trainerChartTotal(list);
+				},error : function(){
+					console.log("통신실패")
+				}
+			});
+		}
+		
+		function trainerChartTotal(list){
+			console.log(list)
+			
+			var ctx = document.getElementById('trainerChart');
+			var config = {
+					type: 'bar',
+					data: {
+						labels: [ // Date Objects
+							
+						],
+						datasets: [{
+							label: '매출(단위 : 원)',
+							backgroundColor: [
+						        'rgba(255, 159, 64, 0.2)',
+						        'rgba(255, 99, 132, 0.2)',
+						        'rgba(54, 162, 235, 0.2)',
+						        'rgba(255, 206, 86, 0.2)',
+						        'rgba(75, 192, 192, 0.2)',
+						        'rgba(153, 102, 255, 0.2)'
+						      ],
+							borderColor: [
+						        'rgba(255, 159, 64, 1)',
+						        'rgba(255,99,132,1)',
+						        'rgba(54, 162, 235, 1)',
+						        'rgba(255, 206, 86, 1)',
+						        'rgba(75, 192, 192, 1)',
+						        'rgba(153, 102, 255, 1)'
+						      ],
+						      borderWidth: 1,
+						      fill: true,
+							data: [
+								
+							],
+						}]
+					},
+					options: {
+						 scales: {
+						      yAxes: [{
+					    	  	ticks: {
+					              beginAtZero: true
+					            },
+						        gridLines: {
+						          color: "rgba(204, 204, 204,0.1)"
+						        }
+						      }],
+						      xAxes: [{
+						        gridLines: {
+						          color: "rgba(204, 204, 204,0.1)"
+						        }
+						      }]
+						    },
+						    legend: {
+						        display: false
+						    },
+						    elements: {
+						        point: {
+						          radius: 0
+						        }
+					      	}
+					}
+				};
+			var myChart = new Chart(ctx, config);
+			
+			var dataset = config.data.datasets;
+			var dataa = dataset[0].data;
+			var label = config.data.labels
+			
+			//차트 업데이트
+			//라벨추가
+			for(var i=0; i<list.length; i++){
+				//데이터셋의 데이터 추가
+				config.data.labels.push(list[i].trainerName);
+			}
+			
+			//데이터셋 수 만큼 반복
+			var dataset = config.data.datasets;
+			for(var i=0; i<dataset.length; i++){
+				//데이터셋의 데이터 추가
+				for(var j=0 ; j<list.length; j++){
+					dataset[i].data.push(list[j].amount);
+				}
+				
+			}
+			myChart.update();
+		}
+	
 	</script>
 </body>
 </html>

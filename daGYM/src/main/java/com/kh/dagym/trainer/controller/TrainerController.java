@@ -123,6 +123,8 @@ public class TrainerController {
 		Trainer trainer = trainerService.selectTrainer(trainerNo);
 		int price = trainer.getTrainerPrice();
 		trainer.setTrainerPrice(price*classNm);
+		
+		
 		model.addAttribute("trainer",trainer);
 		model.addAttribute("classNm",classNm);
 		model.addAttribute("price", trainer.getTrainerPrice());
@@ -138,6 +140,9 @@ public class TrainerController {
 		 
 		 payment.setTrainerNo(trainerNo);
 		 String merchantUid = trainerService.insertOrder(payment, member, trainerNo);
+		 if(merchantUid!=null) {
+			 int result = trainerService.updateCnt(trainerNo);
+		 }
 		 return merchantUid;
 		 
 	 }
@@ -150,6 +155,7 @@ public class TrainerController {
 		 payment.setTrainerNo(trainerNo);
 		 String result = trainerService.insertCoupon(payment)+"";
 		 int resultImp = trainerService.insertImpUid(payment);
+		 
 		 
 		 return result;
 	 }

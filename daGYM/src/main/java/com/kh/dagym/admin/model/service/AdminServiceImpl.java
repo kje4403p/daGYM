@@ -17,6 +17,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -137,5 +138,18 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
+    
+ // 트레이너 매출 조회 Service 구현
+ 	@Override
+ 	public List<Payment> trainerChart(String ym) {
+ 		List<Payment> list = adminDAO.trainerChart(ym);
+ 		return list;
+ 	}
+ 	// 월별 매출 조회 Service 구현
+ 	@Override
+ 	public List<Payment> monthChartView(String year) {
+ 		List<Payment> list = adminDAO.monthChart(year);
+ 		return list;
+ 	}
 
 }

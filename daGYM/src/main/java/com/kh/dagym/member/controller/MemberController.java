@@ -29,6 +29,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.dagym.member.model.service.MemberService;
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyBoard;
+import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 
 @SessionAttributes({"loginMember"})
@@ -155,8 +156,16 @@ public class MemberController {
 	}
 	
 	// PT이용권/결제정보 화면 전환 메소드
-			@RequestMapping("memberPass")
-			public String memberPass() {
+			@RequestMapping("myPassList/{type}")
+			public String memberPass(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
+				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+				// 전체 댓글 수 조회 + 현재페이즈 확인 (페이징은 common에서 가져옴)
+				com.kh.dagym.common.PageInfo pInfo = memberService.myPassPagination(type, cp, memberNo);
+				// 댓글 목록 조회
+				List<MyPass> MyPassList = memberService.MyPassList(memberNo,pInfo);
+				
+				model.addAttribute("myPassList", MyPassList);
+				model.addAttribute("pInfo",pInfo);
 				return "member/memberPass";
 		}
 			

@@ -10,16 +10,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.dagym.admin.model.service.AdminService;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 @Component
 @RequestMapping("/admin/*")
@@ -154,4 +158,24 @@ public class AdminController {
 	 * @RequestMapping("insertTrainer2") public String insertTrainer2() { 
 	 * return "trainerResulvation/signUpView"; }
 	 */
+	
+	@ResponseBody
+	@RequestMapping("trainerChartTotal")
+	public String trainerChart(String ym) {
+		List<Payment> list = adminService.trainerChart(ym);
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(list);
+		
+	}
+	@ResponseBody
+	@RequestMapping("monthChartView")
+	public String monthChart(String year) {
+		List<Payment> list = adminService.monthChartView(year);
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(list);
+	}
+	
+	
 }

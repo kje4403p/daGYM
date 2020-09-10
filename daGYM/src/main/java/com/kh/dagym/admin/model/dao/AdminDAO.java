@@ -13,6 +13,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 @Repository
 public class AdminDAO {
@@ -66,6 +67,15 @@ public class AdminDAO {
 	// 오류난 파일 삭제 DAO
 	public void deleteAttachment(int boardNo) {
 		sqlSession.delete("adminMapper.deleteAttachment", boardNo);
+	}
+
+	// 트레이너 매출 조회 DAO
+	public List<Payment> trainerChart(String ym) {
+		return sqlSession.selectList("adminMapper.trainerChart", ym);
+	}
+	// 월별 매출 조회 DAO
+	public List<Payment> monthChart(String year) {
+		return sqlSession.selectList("adminMapper.monthChart", year);
 	}
 
 }
