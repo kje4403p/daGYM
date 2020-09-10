@@ -1,8 +1,10 @@
 package com.kh.dagym.main.controller;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.common.Attachment;
 import com.kh.dagym.main.model.service.HomeService;
 
@@ -38,9 +41,22 @@ public class HomeController {
 	public String eventViews() {
 		System.out.println("이벤트");
 		List<Attachment> list = homeService.eventViews();
+		
+		
 		Gson gson = new GsonBuilder().create();
 		
 		return gson.toJson(list);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping("/eventTitle")
+	public String eventTitle() {
+		List<Board> bList = homeService.eventTitle();
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(bList);
 		
 	}
 	
