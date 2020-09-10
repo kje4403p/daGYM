@@ -55,7 +55,7 @@ SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y
 
 	<insert id="insertTrainer" parameterType="Trainer">
 		INSERT ALL INTO MEMBER VALUES(#{trainerNo}, #{memberId}, #{memberPwd},
-		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, DEFAULT)
+		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, 'T')
          INTO TRAINER VALUES(#{trainerNo},#{trainerCareer},DEFAULT,#{trainerPrice},
          #{trainerSNS},#{trainerComment},#{trainerAward})
 SELECT * FROM DUAL
