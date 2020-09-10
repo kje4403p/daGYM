@@ -47,6 +47,17 @@
 		<result property="views" column="VIEWS" />
 		<result property="boardCategory" column="BOARD_CATEGORY" />
 	</resultMap>
+	
+	<resultMap id="myPassResultSet" type="MyPass" >
+		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
+		<id property="merchantUid" column="MERCHANT_UID"/>
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="classNm" column="CLASS_NM" />
+		<result property="amount" column="AMOUNT" />
+		<result property="raymentDate" column="PAYMENT_DATE" />
+		<result property="trainerName" column="MEMBER_NM" />
+		<result property="classCnt" column="CLASS_CNT" />
+	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
@@ -102,6 +113,18 @@
 	
 	<!-- 내 게시글 조회 -->
 	<select id="myBoardList" parameterType="MyBoard" resultMap="myBoardResultSet">
-		SELECT BOARD_NO,BOARD_WRITER,BOARD_TYPE,BOARD_TITLE,BOARD_CONTENT,BOARD_ENROLL_DATE,BOARD_MODIFY_DATE,BOARD_STATUS,QUESTION_CODE,START_DATE,END_DATE,VIEWS,BOARD_CATEGORY FROM BOARD JOIN BOARD_TYPE USING(BOARD_TYPE) WHERE BOARD_WRITER = #{boardWriter} AND BOARD_STATUS = 'Y'
+		SELECT BOARD_NO,BOARD_WRITER,BOARD_TYPE,BOARD_TITLE,BOARD_CONTENT,BOARD_ENROLL_DATE,BOARD_MODIFY_DATE,BOARD_STATUS,QUESTION_CODE,START_DATE,END_DATE,VIEWS,BOARD_CATEGORY FROM BOARD JOIN BOARD_TYPE USING(BOARD_TYPE) WHERE BOARD_WRITER = #{boardWriter} AND BOARD_STATUS = 'Y' ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 이용권 및 결제정보 페이징 처리 -->
+	<select id="getMyPassListCount" parameterType="_int" resultType = "_int">
+		SELECT COUNT(*) FROM PAYMENT WHERE MEMBER_NO=#{memberNo}
+	</select>
+	
+	<!-- 이용권 및 결제정보 -->
+	<select id="myPassList" parameterType="MyPass" resultMap="myPassResultSet">
+		SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO=(SELECT TRAINER_NO FROM PAYMENT WHERE MEMBER_NO=#{memberNo}))as MEMBER_NM,MERCHANT_UID,CLASS_NM,AMOUNT,PAYMENT_DATE,CLASS_CNT 
+		FROM PAYMENT JOIN CLASS_STATUS USING(MEMBER_NO) JOIN MEMBER USING(MEMBER_NO)
+		WHERE MEMBER_NO=#{memberNo}
 	</select>
 </mapper>
