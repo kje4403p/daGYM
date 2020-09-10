@@ -45,7 +45,17 @@
 		<result property="endDate" column="END_DATE"/>
 		<result property="views" column="VIEWS"/>
 	</resultMap>
+	<resultMap  id="paymentResultSet" type="Payment">
+		<id property="merchantUid" column="MERCHANT_UID"/>
+		<result property="impUid" column="IMP_UID"/>
+		<result property="classNm" column="CLASS_NM"/>
+		<result property="amount" column="AMOUNT"/>
+		<result property="memberNo" column="MEMBER_NO"/>
+		<result property="trainerNo" column="TRAINER_NO"/>
+		<result property="paymentDate" column="PAYMENT_DATE"/>
 	
+	
+	</resultMap>
 	<!-- 회원 전체 조회 -->
 	<select id="selectMList" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
@@ -110,5 +120,16 @@
 		DELETE FROM ATTACHMENT
 		WHERE PARENT_BOARD_NO = #{boardNo}
 	</delete>
+	<!-- 트레이너 매출 조회 -->
+	
+	 <select id="trainerChart" resultMap="paymentResultSet">
+		SELECT TRAINER_NO, SUM(AMOUNT) AS AMOUNT FROM PAYMENT GROUP BY TRAINER_NO
+		
+	</select>
+	
+	<!-- 월별 매출 조회 -->
+	<select id="monthChart" resultMap="paymentResultSet">
+		SELECT TO_CHAR(TO_DATE(SUBSTR(PAYMENT_DATE,1,5),'YY/MM'),'YY"년"MM"월"') AS PAYMENT_DATE, SUM(AMOUNT) AS AMOUNT FROM PAYMENT GROUP BY TO_CHAR(TO_DATE(SUBSTR(PAYMENT_DATE,1,5),'YY/MM'),'YY"년"MM"월"')
+	</select>
 	
 </mapper>

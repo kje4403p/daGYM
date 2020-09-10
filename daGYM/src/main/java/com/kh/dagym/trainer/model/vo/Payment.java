@@ -11,14 +11,14 @@ public class Payment {
 	private int trainerNo;
 	private String memberEmail;
 	private String memberPhone;
-	private Date paymentDate;
+	private String paymentDate;
 	
 	public Payment() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Payment(String merchantUid, String impUid, int classNm, int amount, int memberNo, int trainerNo,
-			String memberEmail, String memberPhone, Date paymentDate) {
+			String memberEmail, String memberPhone, String paymentDate) {
 		super();
 		this.merchantUid = merchantUid;
 		this.impUid = impUid;
@@ -95,11 +95,11 @@ public class Payment {
 		this.memberPhone = memberPhone;
 	}
 
-	public Date getPaymentDate() {
+	public String getPaymentDate() {
 		return paymentDate;
 	}
 
-	public void setPaymentDate(Date paymentDate) {
+	public void setPaymentDate(String paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 

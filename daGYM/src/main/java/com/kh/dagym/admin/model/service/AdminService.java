@@ -9,6 +9,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 public interface AdminService {
 
@@ -46,5 +47,15 @@ public interface AdminService {
 	 * @return result
 	 */
 	public abstract int insertEvent(Board board, List<MultipartFile> images, String savePath);
+
+	/** 트레이너 매출 조회 Service
+	 * @return list
+	 */
+	public abstract List<Payment> trainerChart();
+
+	/** 월별 매출 조회
+	 * @return list
+	 */
+	public abstract List<Payment> monthChartView();
 
 }
