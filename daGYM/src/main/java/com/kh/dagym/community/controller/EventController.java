@@ -31,18 +31,27 @@ public class EventController {
 	private EventService eventService;
 	
 	private final int BOARD_TYPE = 1;
+	private final int LIST = 0;
+	private final int END_LIST = -1;
 	
 
 	@GetMapping("list")
 	public String eventList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
 		long start = System.currentTimeMillis();
 		
-		PageInfo pInfo = eventService.pagenation(BOARD_TYPE,cp);
+		PageInfo pInfo = eventService.pagenation(BOARD_TYPE, cp, LIST);
 		long end = System.currentTimeMillis();
 		
 		System.out.println((end - start)/1000 + "초");
 		
-		List<Board> eventList = eventService.selectList(pInfo);
+		List<Board> eventList = eventService.selectList(pInfo, LIST);
+		
+		if (!eventList.isEmpty()) {
+			List<Attachment> thList = eventService.selectThumbnailList(eventList);
+			thList.stream().forEach(System.out::println);
+			
+			model.addAttribute("thList",thList);
+		}
 		
 		model.addAttribute("eventList",eventList);
 		model.addAttribute("pInfo",pInfo);
@@ -113,7 +122,8 @@ public class EventController {
 	
 	@GetMapping("{boardNo}/delete")
 	public String deleteEvent(@PathVariable int boardNo, RedirectAttributes rdAttr,HttpServletRequest request) {
-		int result = eventService.deleteEvent(boardNo);
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+		int result = eventService.deleteEvent(boardNo, savePath);
 		String status;
 		String msg;
 		String path;
@@ -132,5 +142,28 @@ public class EventController {
 		return "redirect:"+path;
 	}
 	
+	
+	// ==================== 종료된 이벤트 ================================
+	
+	
+	@GetMapping("end-list")
+	public String endList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
+		
+		PageInfo pInfo = eventService.pagenation(BOARD_TYPE, cp, END_LIST);
+		
+		List<Board> eventList = eventService.selectList(pInfo, END_LIST);
+		
+		if (!eventList.isEmpty()) {
+			List<Attachment> thList = eventService.selectThumbnailList(eventList);
+			thList.stream().forEach(System.out::println);
+			
+			model.addAttribute("thList",thList);
+		}
+		
+		model.addAttribute("eventList",eventList);
+		model.addAttribute("pInfo",pInfo);
+
+		return "community/endList";
+	}
 	
 }

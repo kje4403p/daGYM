@@ -27,16 +27,25 @@ public class EventDAO {
 	 * @param BOARD_TYPE
 	 * @return listCount
 	 */
-	public int getListCount() {
-		return sqlSession.selectOne("eventMapper.getListCount");
+	public int getListCount(int status) {
+		if (status == 0) {
+			return sqlSession.selectOne("eventMapper.getListCount");
+		} else {
+			return sqlSession.selectOne("eventMapper.getEndListCount");
+
+		}
 	}
 
 
-	public List<Board> selectList(PageInfo pInfo) {
+	public List<Board> selectList(PageInfo pInfo, int status) {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
-		return sqlSession.selectList("eventMapper.selectList", null, rowBounds);
+		if (status == 0) {
+			return sqlSession.selectList("eventMapper.selectList", null, rowBounds);
+		} else {
+			return sqlSession.selectList("eventMapper.selectEndList", null, rowBounds);
+		}
 	}
 
 
@@ -101,5 +110,16 @@ public class EventDAO {
 	public int deleteEvent(int boardNo) {
 		return sqlSession.update("eventMapper.deleteEvent", boardNo);
 	}
+
+
+	/** 썸네일 목록 가져오기
+	 * @param eventList
+	 * @return List<Attachment>
+	 */
+	public List<Attachment> selectThumbnailList(List<Board> eventList) {
+		return sqlSession.selectList("eventMapper.selectThumbnailList", eventList);
+
+	}
+
 
 }

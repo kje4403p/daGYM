@@ -9,13 +9,13 @@ import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 
 public interface EventService {
-	PageInfo pagenation(int BOARD_TYPE, int cp);
+	PageInfo pagenation(int BOARD_TYPE, int cp, int status);
 
 	/** 이벤트 목록 조회
 	 * @param pInfo
 	 * @return
 	 */
-	List<Board> selectList(PageInfo pInfo);
+	List<Board> selectList(PageInfo pInfo, int LIST);
 
 	/** 커뮤니티 게시판 삽입
 	 * @param board
@@ -41,7 +41,13 @@ public interface EventService {
 	 * @param boardNo
 	 * @return int
 	 */
-	int deleteEvent(int boardNo);
+	int deleteEvent(int boardNo, String savePath);
+
+	/** 목록에서 썸네일 불러오기
+	 * @param eventList
+	 * @return List
+	 */
+	List<Attachment> selectThumbnailList(List<Board> eventList);
 	
 
 }
