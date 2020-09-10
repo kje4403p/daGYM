@@ -92,7 +92,8 @@ public class MemberDAO {
 	 * @return listCount
 	 */
 	public int getMyBoardListCount(int rerlyMemberNo) {
-		return sqlSession.selectOne("memberMapper.getMyBoardListCount",rerlyMemberNo);
+		int boardWriter = rerlyMemberNo;
+		return sqlSession.selectOne("memberMapper.getMyBoardListCount",boardWriter);
 	}
 
 	/** 내 게시판 DAO
@@ -101,8 +102,9 @@ public class MemberDAO {
 	 * @return myBoardList
 	 */
 	public List<MyBoard> myBoardList(int rerlyMemberNo, PageInfo pInfo) {
+		int boardWriter = rerlyMemberNo;
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
-		return sqlSession.selectList("memberMapper.myBoardList", rerlyMemberNo,rowBounds);
+		return sqlSession.selectList("memberMapper.myBoardList", boardWriter,rowBounds);
 	}	
 }

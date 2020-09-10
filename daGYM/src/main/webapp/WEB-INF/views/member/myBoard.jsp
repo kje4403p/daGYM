@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,10 +45,10 @@
                  		 <c:otherwise>
                      	 <c:forEach var="board" items="${myBoardList}">
                         <tr>
-                        	<td style ="text-align: center">${board.rarentBoardTitle}</td>
-                        	<td style ="text-align: center">${board.rerlyContent}</td>
-                        	<td style ="text-align: center">${board.rerlyEnrollDt}</td>
-                        	<td style ="text-align: center">${board.rerlyEnrollDt}</td>
+                        	<td style ="text-align: center">${board.boardCategory}</td>
+                        	<td style ="text-align: center">${board.boardTitle}</td>
+                        	<td style ="text-align: center">${board.boardModiftDate}</td>
+                        	<td style ="text-align: center">${board.views}</td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
@@ -65,13 +65,15 @@
 	                </li>
 	                
 	                <li>
-	                	<!-- 이전으로(<) -->
-	                	<!-- prev 생성 식 : (현재 페이지 - 1) / 페이징바 사이즈(10) * 10 -->
-	                	<!-- fmt태그를 이용한 소수점 제거 -->
-	                	<fmt:parseNumber var="operand1" value="${(pInfo.currentPage -1)/pInfo.pagingBarSize}" integerOnly="true"/>
-	                	<c:set var="prev" value="${operand1 * 10 }"></c:set>
-                   		<a class="page-link text-primary" href="${url}${prev}">&lt;</a>
-	                </li>
+                      <!-- 이전으로(<) -->
+                      <!-- prev 생성 식 : (현재페이지-1) / 페이징바 사이즈(10) * 10 -->
+                      <!-- fmt 태그를 이용한 소수점 제거 -->
+                      <fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
+                      <c:set var="prev" value="${operand1 * 10}"/>
+                      
+                         <%-- <a class="page-link text-primary" href="${pInfo.boardType}?cp=${prev}">&lt;</a> --%>
+                         <a class="page-link text-primary" href="${url}${prev}">&lt;</a>
+                   </li>
                 </c:if>
                 
                 <!-- 10개의 페이지 목록 -->
