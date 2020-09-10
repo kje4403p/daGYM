@@ -55,6 +55,13 @@ public interface TrainerService {
 
 	ClassStatus selectClassStatus(int memberNo);
 
+	
+	/** 회원수 증가 Service
+	 * @param trainerNo
+	 * @return result
+	 */
+	int updateCnt(int trainerNo);
+
 
 
 }
