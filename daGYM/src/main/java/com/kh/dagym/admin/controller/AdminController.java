@@ -158,10 +158,11 @@ public class AdminController {
 	 * @RequestMapping("insertTrainer2") public String insertTrainer2() { 
 	 * return "trainerResulvation/signUpView"; }
 	 */
+	
 	@ResponseBody
 	@RequestMapping("trainerChartTotal")
-	public String trainerChart() {
-		List<Payment> list = adminService.trainerChart();
+	public String trainerChart(String ym) {
+		List<Payment> list = adminService.trainerChart(ym);
 		Gson gson = new GsonBuilder().create();
 		
 		return gson.toJson(list);
@@ -169,12 +170,11 @@ public class AdminController {
 	}
 	@ResponseBody
 	@RequestMapping("monthChartView")
-	public String monthChart() {
-		List<Payment> list = adminService.monthChartView();
+	public String monthChart(String year) {
+		List<Payment> list = adminService.monthChartView(year);
 		Gson gson = new GsonBuilder().create();
-		System.out.println(list);
-		return gson.toJson(list);
 		
+		return gson.toJson(list);
 	}
 	
 	

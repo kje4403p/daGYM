@@ -49,13 +49,15 @@ public interface AdminService {
 	public abstract int insertEvent(Board board, List<MultipartFile> images, String savePath);
 
 	/** 트레이너 매출 조회 Service
+	 * @param ym 
 	 * @return list
 	 */
-	public abstract List<Payment> trainerChart();
+	public abstract List<Payment> trainerChart(String ym);
 
 	/** 월별 매출 조회
+	 * @param year 
 	 * @return list
 	 */
-	public abstract List<Payment> monthChartView();
+	public abstract List<Payment> monthChartView(String year);
 
 }

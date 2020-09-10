@@ -41,6 +41,7 @@
                                                 <th>회원수</th>
                                                 <th>1회 수업료</th>
                                                 <th>입사일</th>
+                                                <th>수정/탈퇴</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -52,6 +53,7 @@
                                                 <th>회원수</th>
                                                 <th>1회 수업료</th>
                                                 <th>입사일</th>
+                                                <th>수정/탈퇴</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -73,6 +75,10 @@
                                             					${trainerPrice}
                                             				</td>
                                             				<td>${trainer.trainerEnrollDate}</td>
+                                            				<td>
+                                            					<button class="btn-warning" type="button" id="updateTrainer">수정</button>
+                                            					<button class="btn-warning ml-3" type="button" id="deleteTrainer">탈퇴</button>
+                                            				</td>
                                             			</tr>
                                             		</c:forEach>
                                             	</c:otherwise>
@@ -90,6 +96,23 @@
 	</div>
 	
 	<script>
+		$(function() {
+			$("#updateTrainer").on("click", function() {
+				var trainerNo = $(this).parent().parent().children().eq(0).text();
+				
+				location.href = "${contextPath}/admin/updateTrainer/" + trainerNo;
+			});
+			
+			$("#deleteTrainer").on("click", function() {
+				if(alert("정말 탈퇴시키시겠습니까 ?")) {
+					var trainerNo = $(this).parent().parent().children().eq(0).text();
+					
+					location.href = "${contextPath}/admin/deleteTrainer/" + trainerNo;
+				}
+			});
+		})
+		
+	
 		$(document).ready( function () {
 		    $('#trainerTable').DataTable();
 		} );

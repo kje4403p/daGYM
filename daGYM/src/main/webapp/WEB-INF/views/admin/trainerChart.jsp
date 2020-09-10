@@ -22,7 +22,7 @@
 		              <form action="" class="ml-3">
 		              	<jsp:useBean id="now" class="java.util.Date"/>
 		              	<fmt:formatDate var="ym" value="${now}" pattern="yyyy-MM"/>
-		              	<input type="month" required value="${ym}">
+		              	<input type="month" id="ym" value="${ym}" required>
 		              </form>
 		            </div>
 		            <div class="row" style="clear: both;">
@@ -45,23 +45,27 @@
 	</div>
 	
 	<script>
-		$(document).ready(function trainerChart(){
+		trainerChart($("#ym").val());
+		
+		$(function() {
+			$("#ym").on("change", function() {
+				trainerChart($(this).val());
+			});
+		});
+		
+		function trainerChart($ym){
 			$.ajax({
 				url : "trainerChartTotal",
+				data : {"ym" : $ym},
 				dataType : "JSON",
 				success : function(list){
-					//console.log(list);
 					trainerChartTotal(list);
 				},error : function(){
 					console.log("통신실패")
 				}
-			
-			
-			})
-			
-			
-			
-		})
+			});
+		}
+		
 		function trainerChartTotal(list){
 			console.log(list)
 			
@@ -128,14 +132,12 @@
 			var dataset = config.data.datasets;
 			var dataa = dataset[0].data;
 			var label = config.data.labels
-			console.log("데이타"+dataa)
-			console.log("라벨"+label)
-			console.log(list.length)
-				//차트 업데이트
+			
+			//차트 업데이트
 			//라벨추가
 			for(var i=0; i<list.length; i++){
 				//데이터셋의 데이터 추가
-				config.data.labels.push(list[i].trainerNo);
+				config.data.labels.push(list[i].trainerName);
 			}
 			
 			//데이터셋 수 만큼 반복
