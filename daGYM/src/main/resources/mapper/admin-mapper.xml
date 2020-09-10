@@ -140,4 +140,11 @@
 		ORDER BY PAYMENT_DATE
 	</select>
 	
+	<!-- 트레이너 탈퇴 -->
+	<update id="deleteTrainer" parameterType="_int">
+		UPDATE MEMBER
+		SET MEMBER_STATUS = 'N'
+		WHERE MEMBER_NO = #{trainerNo}
+	</update>
+	
 </mapper>

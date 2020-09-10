@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -94,13 +95,13 @@ public class AdminController {
 		return "redirect:inquiryList";
 	}
 	
-	// 월별 매출 조회
+	// 월별 매출 조회 화면 전환
 	@RequestMapping("monthChart")
 	public String monthChartView() {
 		return "admin/monthChart";
 	}
 	
-	// 트레이너별 매출 조회
+	// 트레이너별 매출 조회 화면 전환
 	@RequestMapping("trainerChart")
 	public String trainerChartView() {
 		return "admin/trainerChart";
@@ -159,6 +160,7 @@ public class AdminController {
 	 * return "trainerResulvation/signUpView"; }
 	 */
 	
+	// 트레이너별 매출 조회
 	@ResponseBody
 	@RequestMapping("trainerChartTotal")
 	public String trainerChart(String ym) {
@@ -168,6 +170,8 @@ public class AdminController {
 		return gson.toJson(list);
 		
 	}
+	
+	// 월별 매출 조회
 	@ResponseBody
 	@RequestMapping("monthChartView")
 	public String monthChart(String year) {
@@ -177,5 +181,20 @@ public class AdminController {
 		return gson.toJson(list);
 	}
 	
-	
+	// 트레이너 탈퇴
+	@RequestMapping("deleteTrainer/{trainerNo}")
+	public String deleteTrainer(@PathVariable int trainerNo, RedirectAttributes rdAttr) {
+		System.out.println(trainerNo);
+		int result = adminService.deleteTrainer(trainerNo);
+		
+		if(result > 0) {
+			rdAttr.addFlashAttribute("status", "success");
+			rdAttr.addFlashAttribute("msg", "트레이너가 탈퇴되었습니다.");
+		} else {
+			rdAttr.addFlashAttribute("status", "error");
+			rdAttr.addFlashAttribute("msg", "탈퇴 실패");
+		}
+		
+		return "redirect:/admin/trainerList";
+	}
 }

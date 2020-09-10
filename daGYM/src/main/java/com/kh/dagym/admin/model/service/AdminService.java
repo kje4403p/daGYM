@@ -54,10 +54,16 @@ public interface AdminService {
 	 */
 	public abstract List<Payment> trainerChart(String ym);
 
-	/** 월별 매출 조회
+	/** 월별 매출 조회 Service
 	 * @param year 
 	 * @return list
 	 */
 	public abstract List<Payment> monthChartView(String year);
+
+	/** 트레이너 탈퇴 Service
+	 * @param trainerNo
+	 * @return result
+	 */
+	public abstract int deleteTrainer(int trainerNo);
 
 }

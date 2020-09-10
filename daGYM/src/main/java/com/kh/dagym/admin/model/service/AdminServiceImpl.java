@@ -106,6 +106,27 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
+    
+    // 트레이너 매출 조회 Service 구현
+ 	@Override
+ 	public List<Payment> trainerChart(String ym) {
+ 		return adminDAO.trainerChart(ym);
+ 	}
+ 	// 월별 매출 조회 Service 구현
+ 	@Override
+ 	public List<Payment> monthChartView(String year) {
+ 		return adminDAO.monthChart(year);
+ 	}
+
+ 	// 트레이너 탈퇴 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteTrainer(int trainerNo) {
+		return adminDAO.deleteTrainer(trainerNo);
+	}
+	
+	
+	
 	
 	
 	
@@ -138,18 +159,6 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
-    
- // 트레이너 매출 조회 Service 구현
- 	@Override
- 	public List<Payment> trainerChart(String ym) {
- 		List<Payment> list = adminDAO.trainerChart(ym);
- 		return list;
- 	}
- 	// 월별 매출 조회 Service 구현
- 	@Override
- 	public List<Payment> monthChartView(String year) {
- 		List<Payment> list = adminDAO.monthChart(year);
- 		return list;
- 	}
+
 
 }

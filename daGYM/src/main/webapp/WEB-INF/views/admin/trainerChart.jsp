@@ -66,10 +66,11 @@
 			});
 		}
 		
+		var ctx = document.getElementById('trainerChart');
+		var myChart = null;
 		function trainerChartTotal(list){
 			console.log(list)
 			
-			var ctx = document.getElementById('trainerChart');
 			var config = {
 					type: 'bar',
 					data: {
@@ -127,11 +128,6 @@
 					      	}
 					}
 				};
-			var myChart = new Chart(ctx, config);
-			
-			var dataset = config.data.datasets;
-			var dataa = dataset[0].data;
-			var label = config.data.labels
 			
 			//차트 업데이트
 			//라벨추가
@@ -149,7 +145,12 @@
 				}
 				
 			}
-			myChart.update();
+			if(myChart == null) {
+				myChart = new Chart(ctx, config);
+			} else {
+				myChart.config = config;
+				myChart.update();
+			}
 		}
 	
 	</script>

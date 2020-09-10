@@ -73,14 +73,14 @@
 				},error : function(){
 					console.log("통신실패")
 				}
-			
-			})
+			});
 		}
 		
+		var ctx = document.getElementById('monthChart');
+		var myChart = null;
 		function monthChartView(list){
 				console.log(list)
 				
-				var ctx = document.getElementById('monthChart');
 				var config = {
 					
 						data: {
@@ -89,7 +89,7 @@
 							],
 							datasets: [{
 								label: '매출(단위 : 원)',
-								  type: 'line',
+								type: 'line',
 								lineTension: 0,
 								backgroundColor: [
 							        'rgba(255, 159, 64, 0.2)',
@@ -149,12 +149,8 @@
 							      }]
 						}
 					};
-				var myChart = new Chart(ctx, config);
 				
-				var dataset = config.data.datasets;
-				var dataa = dataset[0].data;
-				var label = config.data.labels
-					//차트 업데이트
+				//차트 업데이트
 				//라벨추가
 				for(var i=0; i<list.length; i++){
 					//데이터셋의 데이터 추가
@@ -170,7 +166,12 @@
 					}
 					
 				}
-				myChart.update();
+				if(myChart == null) {
+					myChart = new Chart(ctx, config);
+				} else {
+					myChart.config = config;
+					myChart.update();
+				}
 		
 		
 		

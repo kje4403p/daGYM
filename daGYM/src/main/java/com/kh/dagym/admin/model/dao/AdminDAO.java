@@ -73,9 +73,15 @@ public class AdminDAO {
 	public List<Payment> trainerChart(String ym) {
 		return sqlSession.selectList("adminMapper.trainerChart", ym);
 	}
+	
 	// 월별 매출 조회 DAO
 	public List<Payment> monthChart(String year) {
 		return sqlSession.selectList("adminMapper.monthChart", year);
+	}
+
+	// 트레이너 탈퇴 DAO
+	public int deleteTrainer(int trainerNo) {
+		return sqlSession.update("adminMapper.deleteTrainer", trainerNo);
 	}
 
 }

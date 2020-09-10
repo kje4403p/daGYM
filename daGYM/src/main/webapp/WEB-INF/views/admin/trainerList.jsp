@@ -76,8 +76,8 @@
                                             				</td>
                                             				<td>${trainer.trainerEnrollDate}</td>
                                             				<td>
-                                            					<button class="btn-warning" type="button" id="updateTrainer">수정</button>
-                                            					<button class="btn-warning ml-3" type="button" id="deleteTrainer">탈퇴</button>
+                                            					<button class="btn-warning updateTrainer" type="button">수정</button>
+                                            					<button class="btn-warning ml-3 deleteTrainer" type="button">탈퇴</button>
                                             				</td>
                                             			</tr>
                                             		</c:forEach>
@@ -97,21 +97,20 @@
 	
 	<script>
 		$(function() {
-			$("#updateTrainer").on("click", function() {
+			$(".updateTrainer").on("click", function() {
 				var trainerNo = $(this).parent().parent().children().eq(0).text();
 				
 				location.href = "${contextPath}/admin/updateTrainer/" + trainerNo;
 			});
 			
-			$("#deleteTrainer").on("click", function() {
-				if(alert("정말 탈퇴시키시겠습니까 ?")) {
+			$(".deleteTrainer").on("click", function() {
+				if(confirm("정말 탈퇴시키시겠습니까 ?")) {
 					var trainerNo = $(this).parent().parent().children().eq(0).text();
 					
-					location.href = "${contextPath}/admin/deleteTrainer/" + trainerNo;
+					location.href = "deleteTrainer/" + trainerNo;
 				}
 			});
-		})
-		
+		});
 	
 		$(document).ready( function () {
 		    $('#trainerTable').DataTable();
