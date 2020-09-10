@@ -45,6 +45,7 @@
 		<result property="endDate" column="END_DATE"/>
 		<result property="views" column="VIEWS"/>
 	</resultMap>
+	
 	<resultMap  id="paymentResultSet" type="Payment">
 		<id property="merchantUid" column="MERCHANT_UID"/>
 		<result property="impUid" column="IMP_UID"/>
@@ -53,9 +54,9 @@
 		<result property="memberNo" column="MEMBER_NO"/>
 		<result property="trainerNo" column="TRAINER_NO"/>
 		<result property="paymentDate" column="PAYMENT_DATE"/>
-	
-	
+		<result property="trainerName" column="MEMBER_NM"/>
 	</resultMap>
+	
 	<!-- 회원 전체 조회 -->
 	<select id="selectMList" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
@@ -120,16 +121,23 @@
 		DELETE FROM ATTACHMENT
 		WHERE PARENT_BOARD_NO = #{boardNo}
 	</delete>
-	<!-- 트레이너 매출 조회 -->
 	
-	 <select id="trainerChart" resultMap="paymentResultSet">
-		SELECT TRAINER_NO, SUM(AMOUNT) AS AMOUNT FROM PAYMENT GROUP BY TRAINER_NO
-		
+	<!-- 트레이너 매출 조회 -->
+	 <select id="trainerChart" parameterType="string" resultMap="paymentResultSet">
+		SELECT MEMBER_NM, SUM(AMOUNT) AS AMOUNT 
+		FROM PAYMENT
+		JOIN MEMBER M ON(M.MEMBER_NO = TRAINER_NO)
+		WHERE TO_CHAR(PAYMENT_DATE, 'YYYY-MM') LIKE #{ym}
+		GROUP BY TRAINER_NO, MEMBER_NM
 	</select>
 	
 	<!-- 월별 매출 조회 -->
-	<select id="monthChart" resultMap="paymentResultSet">
-		SELECT TO_CHAR(TO_DATE(SUBSTR(PAYMENT_DATE,1,5),'YY/MM'),'YY"년"MM"월"') AS PAYMENT_DATE, SUM(AMOUNT) AS AMOUNT FROM PAYMENT GROUP BY TO_CHAR(TO_DATE(SUBSTR(PAYMENT_DATE,1,5),'YY/MM'),'YY"년"MM"월"')
+	<select id="monthChart" parameterType="string" resultMap="paymentResultSet">
+		SELECT TO_CHAR(TO_DATE(SUBSTR(PAYMENT_DATE,1,5),'YY/MM'),'YY"년 "MM"월"') AS PAYMENT_DATE, SUM(AMOUNT) AS AMOUNT 
+		FROM PAYMENT
+		WHERE TO_CHAR(PAYMENT_DATE, 'YYYY') LIKE #{year}
+		GROUP BY TO_CHAR(TO_DATE(SUBSTR(PAYMENT_DATE,1,5),'YY/MM'),'YY"년 "MM"월"')
+		ORDER BY PAYMENT_DATE
 	</select>
 	
 </mapper>

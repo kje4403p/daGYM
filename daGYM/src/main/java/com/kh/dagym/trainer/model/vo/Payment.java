@@ -12,6 +12,7 @@ public class Payment {
 	private String memberEmail;
 	private String memberPhone;
 	private String paymentDate;
+	private String trainerName;
 	
 	public Payment() {
 		// TODO Auto-generated constructor stub

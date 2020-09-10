@@ -70,12 +70,12 @@ public class AdminDAO {
 	}
 
 	// 트레이너 매출 조회 DAO
-	public List<Payment> trainerChart() {
-		return sqlSession.selectList("adminMapper.trainerChart",null);
+	public List<Payment> trainerChart(String ym) {
+		return sqlSession.selectList("adminMapper.trainerChart", ym);
 	}
 	// 월별 매출 조회 DAO
-	public List<Payment> monthChart() {
-		return sqlSession.selectList("adminMapper.monthChart",null);
+	public List<Payment> monthChart(String year) {
+		return sqlSession.selectList("adminMapper.monthChart", year);
 	}
 
 }
