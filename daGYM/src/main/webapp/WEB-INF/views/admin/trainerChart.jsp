@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>트레이너별 매출 조회</title>
-<script src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 	<div class="container-scroller">
@@ -17,16 +17,22 @@
 			
 			<div class="main-panel">
 				<div class="content-wrapper">
-		            <div class="page-header">
+		            <div class="page-header" style="float: left">
 		              <h3 class="page-title">매출 조회</h3>
+		              <form action="" class="ml-3">
+		              	<jsp:useBean id="now" class="java.util.Date"/>
+		              	<fmt:formatDate var="ym" value="${now}" pattern="yyyy-MM"/>
+		              	<input type="month" required value="${ym}">
+		              </form>
 		            </div>
-		            <div class="row">
+		            <div class="row" style="clear: both;">
 		              <div class="col-lg-8 grid-margin stretch-card">
 		                <div class="card">
 		                  <div class="card-body">
 		                    <h4 class="card-title">트레이너별 매출 조회</h4>
-		                    <div class="chart-container" style="position: relative; height:50px; width:60vw">
-		                    <canvas id="trainerChart"></canvas>
+		                   
+		                    <canvas id="trainerChart" style="position: relative; height:500px; width:60vw"></canvas>
+		                   
 		                  </div>
 		                </div>
 		              </div>
@@ -122,6 +128,9 @@
 			var dataset = config.data.datasets;
 			var dataa = dataset[0].data;
 			var label = config.data.labels
+			console.log("데이타"+dataa)
+			console.log("라벨"+label)
+			console.log(list.length)
 				//차트 업데이트
 			//라벨추가
 			for(var i=0; i<list.length; i++){
