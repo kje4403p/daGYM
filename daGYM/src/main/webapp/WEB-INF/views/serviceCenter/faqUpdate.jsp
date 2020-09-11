@@ -29,17 +29,17 @@
 			<form action="updateAction?cp=${param.cp}&type=${param.type}" method="post" 
 				   role="form" enctype="multipart/form-data" onsubmit="return validate();">
 			<!-- enctype="multipart/form-data" -->
-				<!-- <div class="mb-2">
-					<label class="input-group-addon mr-3 insert-label">카테고리</label> 
-					<select	class="custom-select" id="category" name="boardCategory" style="width: 150px;">
-						<option value="10">운동</option>
-						<option value="20">영화</option>
-						<option value="30">음악</option>
-						<option value="40">요리</option>
-						<option value="50">게임</option>
-						<option value="60">기타</option>
+				<div class="mb-2">
+					<c:if test="${board.boardType ==3}">
+					<label class="input-group-addon mr-3 insert-label">질문유형</label> 
+					<select	class="custom-select" id="category" name="qnaCode" style="width: 150px;">
+						<option value="1">운동</option>
+						<option value="2">식단</option>
+						<option value="3">이용관련</option>
+						<option value="4">결제/환불</option>
 					</select>
-				</div> -->
+					</c:if>
+				</div>
 				
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">제목</label> 
@@ -198,7 +198,12 @@
 		// 단, 초기화는 가능(jquery만가능)
 		
 	});
-
+	
+	$.each($("#category>option"), function(index, item){
+		if($(item).val() == "${board.qnaCode}"){
+			$(item).prop("selected","true");
+		}
+	});
 	
 
 	// 유효성 검사

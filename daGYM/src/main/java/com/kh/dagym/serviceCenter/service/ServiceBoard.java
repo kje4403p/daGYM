@@ -8,6 +8,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.serviceCenter.vo.QnaBoard;
 import com.kh.dagym.serviceCenter.vo.Search;
 
 public interface ServiceBoard {
@@ -23,9 +24,10 @@ public interface ServiceBoard {
 
 	/** faq 게시글 상세 조회 Service
 	 * @param boardNo
+	 * @param type 
 	 * @return
 	 */
-	Board selectFaqBoard(int boardNo);
+	Board selectFaqBoard(int boardNo, int type);
 
 	/** 검색 조건이 추가된 페이징 처리 Service
 	 * @param type
@@ -83,6 +85,33 @@ public interface ServiceBoard {
 	 * @return result
 	 */
 	int deleteFaqBoard(int boardNo);
+
+	/** Qa 게시글 목록 조회 Service
+	 * @param pInfo
+	 * @return boardList
+	 */
+	List<Board> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo);
+
+	/** Qa페이징 처리를 위한 Service
+	 * @param type
+	 * @param cp
+	 * @return
+	 */
+	com.kh.dagym.serviceCenter.vo.PageInfoSv paginationQa(int type, int cp,int loginMemberNo);
+
+	/** Qna 게시글 상세조회 Service
+	 * @param boardNo
+	 * @return
+	 */
+	Board selectQnaBoard(int boardNo);
+
+	/** qa 게시글 등록 Service
+	 * @param board
+	 * @param images
+	 * @param savePath
+	 * @return result
+	 */
+	int insertQaBoard(Board board, List<MultipartFile> images, String savePath);
 
 	
 }

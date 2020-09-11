@@ -27,6 +27,7 @@ import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.serviceCenter.service.ServiceBoard;
+import com.kh.dagym.serviceCenter.vo.QnaBoard;
 import com.kh.dagym.serviceCenter.vo.Search;
 
 @SessionAttributes({"loginMember"})
@@ -37,15 +38,21 @@ public class ServiceController {
 	@Autowired
 	private ServiceBoard serviceBoard;
 	
-	@RequestMapping("questionList/{type}")
+	@RequestMapping("question/{type}")
 	public String questionList(@PathVariable int type,@RequestParam(value="cp",required=false, defaultValue="1") int cp,Model model) {
 		
+		int loginMemberNo=((Member) model.getAttribute("loginMember")).getMemberNo();
+		
+		com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo = serviceBoard.paginationQa(type,cp,loginMemberNo);
+		
+		List<Board> bList = serviceBoard.selectQaList(pInfo);
 		
 		
-		PageInfo pInfo = serviceBoard.pagination(type,cp);
+		model.addAttribute("bList", bList);
+		model.addAttribute("pInfo", pInfo);
 		
 		
-		return "serviceCenter/questionList";
+		return "serviceCenter/question";
 	}
 	
 	//faq 리스트 조회
@@ -75,7 +82,7 @@ public class ServiceController {
 						  @PathVariable int boardNo,Model model,
 						   RedirectAttributes rdAttr,HttpServletRequest request) {
 		System.out.println("확인");
-		Board board = serviceBoard.selectFaqBoard(boardNo);
+		Board board = serviceBoard.selectFaqBoard(boardNo,type);
 		Map<String,Object > map = new HashMap<String, Object>();
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		
@@ -140,7 +147,10 @@ public class ServiceController {
 	}
 	
 	@RequestMapping("{type}/insert")
-	public String insertView() {
+	public String insertView(@PathVariable int type,Model model) {
+		System.out.println(type+"aa");
+		model.addAttribute("type", type);
+		
 		return "serviceCenter/faqInsert";
 	}
 	
@@ -173,7 +183,11 @@ public class ServiceController {
 			text="게시글 삽입성공";
 			msg="게시글 등록 성공";
 			//url="board/"+type+"/"+board.getBoardNo()+"?cp=1";
-			url="../faq/"+board.getBoardType()+"?cp=1";
+			if(type!=3) {
+				url="../faq/"+board.getBoardType()+"?cp=1";
+			}else {
+				url="../question/"+type;
+			}
 		} else {
 			status="error";
 			text="게시글 등록 실패";
@@ -187,9 +201,10 @@ public class ServiceController {
 	
 	//faq게시글 수정
 	@RequestMapping("faq/{type}/{boardNo}/update")
-	public ModelAndView faqUpdate(@PathVariable int boardNo,ModelAndView mv) {
+	public ModelAndView faqUpdate(@PathVariable int boardNo,ModelAndView mv,
+								  @PathVariable int type) {
 		
-		Board board = serviceBoard.selectFaqBoard(boardNo);
+		Board board = serviceBoard.selectFaqBoard(boardNo,type);
 		
 		if(board != null) {
 			List<Attachment> files = serviceBoard.selectFaqFiles(boardNo);
@@ -218,11 +233,12 @@ public class ServiceController {
 										 boolean[] deleteImages) {
 		
 		upBoard.setBoardNo(boardNo);
+		upBoard.setBoardType(type);
 		
 		images.add(0, thumbnail);
 		
 		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
-		
+		System.out.println(upBoard.getBoardType()+"123gg");
 		int result = serviceBoard.updateFaqBoard(upBoard,savePath,images,deleteImages);
 		
 		String status=null;
@@ -232,7 +248,11 @@ public class ServiceController {
 		if(result>0) {
 			status="success";
 			msg="게시글 수정성공";
-			url = "../../"+type+"?cp="+cp;
+			if(type ==3) {
+				url= "../../../question/"+type;
+			}else {
+				url = "../../"+type+"?cp="+cp;
+			}
 			rdAttr.addFlashAttribute("status",status);
 			rdAttr.addFlashAttribute("msg",msg);
 			
@@ -260,7 +280,12 @@ public class ServiceController {
 		if(result>0) {
 			status="success";
 			msg="삭제성공";   
-			url = "../../"+type;
+			
+			if(type ==3) {
+				url= "../../../question/"+type;
+			}else {
+				url = "../../"+type;
+			}
 			
 		}else {
 			status="error";
@@ -272,5 +297,51 @@ public class ServiceController {
 		return "redirect:"+url; 
 	}
 	
+	// qa게시글 상세보기 
+	@RequestMapping("question/{type}/{boardNo}")
+	public String questView(@PathVariable int type,@PathVariable int boardNo,
+							Model model,RedirectAttributes rdAttr,HttpServletRequest request ) {
+		
+		Board board = serviceBoard.selectQnaBoard(boardNo);
+		
+		String url = "serviceCenter/questionView";
+		if(board != null) {
+			
+			List<Attachment> files = serviceBoard.selectFaqFiles(boardNo);
+			
+			if(!files.isEmpty()) {
+				model.addAttribute("files", files);
+			}
+		}
+		model.addAttribute("board", board);
+		return url;
+	}
+	
+	//queset게시글 등록
+	
+//	@RequestMapping("{type}/questionInsert")
+//	public String questInsert() {
+//		return "serviceCenter/faqInsert";
+//	}
+//	
+//	@RequestMapping(value="{type}/qaInsertAction",method=RequestMethod.POST)
+//	public String qaInsertAction(@PathVariable int type,Board board,
+//			Model model,HttpServletRequest request,RedirectAttributes rdAttr,
+//			@RequestParam(value="thumbnail", required=false)MultipartFile thumbnail,
+//			@RequestParam(value="images", required=false)List<MultipartFile> images) {
+//		
+//	
+//		Member loginMember=	(Member)model.getAttribute("loginMember");
+//		board.setBoardType(type);
+//		board.setBoardWriter(loginMember.getMemberNo()+""); 
+//		images.add(0, thumbnail);
+//		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
+//		
+//		int result = serviceBoard.insertQaBoard(board,images,savePath);
+//		
+//		
+//		
+//		return null;
+//	}
 	
 }

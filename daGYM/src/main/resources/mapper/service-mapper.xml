@@ -43,6 +43,18 @@
     	<result property="filePath" column="FILE_PATH"/>
     	<result property="fileLevel" column="FILE_LEVEL"/>
     </resultMap>
+    
+    <resultMap type="Sreply" id="SreplyResultSet">
+    	<id property="replyNo" column="REPLY_NO"></id>
+    	<result property="content" column="REPLY_CONTENT"/>
+    	<result property="boardNo" column="PARENT_BOARD_NO"/>
+    	<result property="memberId" column= "MEMBER_ID"/>
+    	<result property="enrollDate" column="REPLY_ENROLL_DT"/>
+    	<result property="replyStatus" column="REPLY_STATUS"/>
+    	<result property="memberNo" column="REPLY_MEMBER_NO"/>
+    </resultMap>
+    
+   
   
   <!-- 전체게시글 수 조회 -->
   <select id="getListCount" parameterType="_int" resultType="_int">
@@ -98,8 +110,16 @@
   
   <!-- faq게시글 상세 조회 -->
   <select id="selectFaqBoard" parameterType="_int" resultMap="boardResultSet">
-  		
-  	SELECT * FROM FAQ_BOARD2 WHERE BOARD_NO=#{boardNo} AND BOARD_STATUS='Y'
+  	<choose>
+  		<when test="type == 4">
+	  		SELECT * FROM FAQ_BOARD2 WHERE BOARD_NO=#{boardNo} AND BOARD_STATUS='Y'
+  		</when>
+  		<otherwise>
+	  		SELECT * FROM QA_BOARD
+	  		WHERE BOARD_NO = #{boardNo}
+	  		AND BOARD_STATUS='Y'
+  		</otherwise>
+  	</choose>
   </select>
   
   <!-- FAQ게시글 조회 수 증가 -->
@@ -167,8 +187,31 @@
   
   <!-- faq 게시글 등록  -->
   <select id="insertFaq" parameterType="Board">
-  	INSERT INTO BOARD (BOARD_NO,BOARD_TITLE,BOARD_CONTENT,BOARD_TYPE,BOARD_WRITER,BOARD_ENROLL_DATE,BOARD_MODIFY_DATE)
-  	VALUES(#{boardNo},#{boardTitle},#{boardContent},#{boardType},#{boardWriter},SYSDATE,SYSDATE)
+  	INSERT INTO BOARD 
+  	<choose>
+  	<when test="qnaCode ==0">
+  	(BOARD_NO,BOARD_TITLE,BOARD_CONTENT,BOARD_TYPE,
+  	BOARD_WRITER,BOARD_ENROLL_DATE,BOARD_MODIFY_DATE)
+  	VALUES(#{boardNo},#{boardTitle},#{boardContent},#{boardType},
+  	#{boardWriter},SYSDATE,SYSDATE)
+  	</when>
+  	<otherwise>
+  	(BOARD_NO,BOARD_TITLE,BOARD_CONTENT,BOARD_TYPE,
+  	BOARD_WRITER,BOARD_ENROLL_DATE,BOARD_MODIFY_DATE,QUESTION_CODE)
+  	VALUES(#{boardNo},#{boardTitle},#{boardContent},#{boardType},
+  	#{boardWriter},SYSDATE,SYSDATE,#{qnaCode})
+  	</otherwise>
+  	</choose>
+  	<!-- <choose>
+  	<when test="#{qnaCode ==0}">
+  	VALUES(#{boardNo},#{boardTitle},#{boardContent},#{boardType},
+  	#{boardWriter},SYSDATE,SYSDATE)
+  	</when>
+  	<otherwise>
+  	VALUES(#{boardNo},#{boardTitle},#{boardContent},#{boardType},
+  	#{boardWriter},SYSDATE,SYSDATE,#{qnaCode})
+  	</otherwise>
+  	</choose> -->
   </select>
   
   <!-- faq 파일 삽입 -->
@@ -199,7 +242,12 @@
   <!-- 게시글 수정 -->
   <update id="updateFaqBoard" parameterType="Board">
   	UPDATE BOARD SET BOARD_TITLE=#{boardTitle},BOARD_CONTENT=#{boardContent},
-  	BOARD_MODIFY_DATE=SYSDATE WHERE BOARD_NO=#{boardNo}
+  	BOARD_MODIFY_DATE=SYSDATE 
+  	<if test="boardType ==3">
+  	,QUESTION_CODE=#{qnaCode}
+  	</if>
+  	WHERE BOARD_NO=#{boardNo}
+  	
   </update>
   
   <!-- faq파일 정보 수정 -->
@@ -216,8 +264,47 @@
   	WHERE FILE_NO = #{fileNo}
   </delete>
   
-  <!-- faq게시글 삭제 DAO -->
+  <!-- faq게시글 삭제 -->
   <update id="deleteFaqBoard" parameterType="_int">
   	UPDATE BOARD SET BOARD_STATUS='N' WHERE BOARD_NO=#{boardNo}
   </update>
+  
+  <!-- qa 전체 게시글 수 조회 -->
+  <select id="getQaListCount" parameterType="map" resultType="_int">
+  SELECT COUNT(*) FROM QA_BOARD
+  WHERE BOARD_TYPE = #{type} AND BOARD_WRITER=#{loginMemberNo}
+  </select>
+  
+  <!-- qf게시글 조회  -->
+  <select id="selectQaList" parameterType="map" resultMap="boardResultSet">
+  	
+  	SELECT * FROM QA_BOARD
+  	WHERE BOARD_TYPE =#{type} AND BOARD_WRITER=#{memberNo}
+  	ORDER BY BOARD_NO DESC
+  </select>
+  
+  <!-- qna게시글 상세 조회 -->
+  <select id="selectQnaBoard" parameterType="_int" resultMap="boardResultSet">
+  	SELECT * FROM QA_BOARD
+  	WHERE BOARD_NO = #{boardNo}
+  	AND BOARD_STATUS='Y'
+  </select>
+  
+  <!-- qna조회수 증가  -->
+  <update id="increaseCount2" parameterType="_int">
+  	UPDATE BOARD SET VIEWS = VIEWS+1 WHERE BOARD_NO=#{boardNo}
+  </update>
+  
+  <!-- quest상세조회 아이디 조회  -->
+  <select id="selectMemberId" parameterType="string" resultType="string">
+  	SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_NO=#{boardWriter}
+  </select>
+  
+  <select id="selectList2" parameterType="_int" resultMap="SreplyResultSet">
+  SELECT * FROM SVR_VIEW
+  WHERE REPLY_STATUS='Y'
+  AND PARENT_BOARD_NO = #{boardNo}
+  ORDER BY REPLY_NO ASC
+  </select>
+  
 </mapper>

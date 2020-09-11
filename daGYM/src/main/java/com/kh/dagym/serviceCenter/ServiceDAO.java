@@ -1,5 +1,6 @@
 package com.kh.dagym.serviceCenter;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.serviceCenter.vo.QnaBoard;
 
 @Repository
 public class ServiceDAO {
@@ -38,8 +40,8 @@ public class ServiceDAO {
 	 * @param boardNo
 	 * @return board
 	 */
-	public Board selectFaqBoard(int boardNo) {
-		return sqlSession.selectOne("serviceMapper.selectFaqBoard", boardNo);
+	public Board selectFaqBoard(Map<String, Object> map) {
+		return sqlSession.selectOne("serviceMapper.selectFaqBoard", map);
 	}
 
 	/** 조회수 증가 DAO
@@ -111,7 +113,7 @@ public class ServiceDAO {
 	 * @return result
 	 */
 	public int insertFaq(Board board) {
-
+		System.out.println(board.getQnaCode()+"pp");
 		return sqlSession.insert("serviceMapper.insertFaq",board);
 	}
 
@@ -175,6 +177,64 @@ public class ServiceDAO {
 		
 		return sqlSession.update("serviceMapper.deleteFaqBoard",boardNo);
 	}
+	
+	
+	/** Qa 전체 게시글 수 조회
+	 * @param type
+	 * @return listCount
+	 */
+	public int getQaListCount(int type,int loginMemberNo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type",type);
+		map.put("loginMemberNo", loginMemberNo);
+			
+		return sqlSession.selectOne("serviceMapper.getQaListCount", map);
+	}
+
+	/** Qs 리스트 조회 DAO
+	 * @param pInfo
+	 * @return bList
+	 */
+	public List<Board> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo) {
+		
+		int offset = (pInfo.getCurrentPage()-1) *pInfo.getLimit();
+		
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("type", pInfo.getBoardType());
+		map.put("memberNo", pInfo.getMemberNo());
+		
+		return sqlSession.selectList("serviceMapper.selectQaList", map,rowBounds);
+		
+	}
+
+	/** qna 게시글 상세조회 DAO
+	 * @param boardNo
+	 * @return board
+	 */
+	public Board selectQnaBoard(int boardNo) {
+		return sqlSession.selectOne("serviceMapper.selectQnaBoard", boardNo);
+	}
+
+	/** qna 조회수 증가 DAO
+	 * @param boardNo
+	 * @return result
+	 */
+	public int increaseCount2(int boardNo) {
+		
+		return sqlSession.update("serviceMapper.increaseCount2", boardNo);
+	}
+
+	/** queset 상세조회 아이디 조회 
+	 * @param boardWriter
+	 * @return
+	 */
+	public String selectMemberId(String boardWriter) {
+		return sqlSession.selectOne("serviceMapper.selectMemberId", boardWriter);
+	}
+
+	
 
 	
 

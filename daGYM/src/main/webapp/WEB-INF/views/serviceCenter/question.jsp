@@ -10,6 +10,10 @@
 <title>Insert title here</title>
 
 <style>
+#body1{
+	height:1300px;
+}
+
 #d1 {
 	height: 80%;
 	width: 100%;
@@ -140,17 +144,40 @@ tbody>tr>td:last-child {
 	margin-left: 60%;
 }
 
+ input[type=text]{
+	border:5px solid #aaa;
+	border-radius:4px;
+	margin:8px 0;
+	outline:none;
+	padding:8px;
+	box-sizing:border-box;
+	transition:.3s;
+	
+}
+input[type=text]:focus{
+	border-color:dodgerBlue;
+	box-sizing: 0 0 50px 0 dodgerBlue;
+}
+
+
+
 /* 페이징바 */
+#pagingbar{
+ position: absolute;
+	left:42% ;
+	margin-top: 10px;
+}
 
-
+#searcharea{
+position: absolute;
+	left:42% ;
+	margin-top: 10px;
+}
 
 
 
 /* 사이드바 css */
 </style>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 </head>
 <body id="body1">
 
@@ -172,39 +199,30 @@ tbody>tr>td:last-child {
 				<table id="table2">
 					<thead>
 						<tr>
-							<th><c:if test="${flag}">번호</c:if></th>
+							
+							<th>질문유형</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
-							<th><c:if test="${flag}">조회수</c:if></th>
+							<th>조회수</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<c:choose>
 							<c:when test="${empty bList}">
-								<tr>
-									<td colspan="5">존재하는 게시글이 없습니다.</td>
-								</tr>
+								<tr><td colspan="5">존재하는 게시글이 없습니다.</td></tr>
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="board" items="${bList}"  varStatus="status">
 									<div>
 										<tr>
 										
-											<td> <c:if test="${flag}">${board.boardNo}</c:if>
-												<c:choose>
-												<c:when test="${flag2}">
+											<td>${board.qnaCode}
 												<input type="hidden" value="${board.boardNo}">
-												</c:when>
-												<c:otherwise>
-												<input type="hidden" value="${nList[status.index].boardNo}">
-												</c:otherwise>
-												</c:choose>
 											</td>
 											<td>${board.boardTitle}</td>
-											<td id="writer"><%-- ${board.memberNo} --%>
-												${mList[status.index].memberId}</td>
+											<td id="writer"><c:out value="${loginMember.memberId}"></c:out></td>
 											<td><jsp:useBean id="now" class="java.util.Date" /> <fmt:formatDate
 													var="today" value="${now}" pattern="yyyy-MM-dd" /> <fmt:formatDate
 													var="createDate" value="${board.boardEnrollDate}"
@@ -217,7 +235,7 @@ tbody>tr>td:last-child {
                 							${createDate}
                 						</c:otherwise>
 												</c:choose></td>
-											<td><c:if test="${flag}">${board.views}</c:if></td>
+											<td>${board.views}</td>
 										</tr>
 									</div>
 								</c:forEach>
@@ -227,7 +245,7 @@ tbody>tr>td:last-child {
 					</tbody>
 				</table>
 				<!-- 관리자 로그인된 경우 글쓰기 버튼 -->
-				<c:if test="${loginMember.memberGrade == 'A'}" >
+				<c:if test="${!empty loginMember}" >
 					<a href="../${pInfo.boardType}/insert">글쓰기</a>
 				</c:if>
 				<!-- 페이징바 -->
@@ -247,15 +265,17 @@ tbody>tr>td:last-child {
 
 					<c:when test="${!empty param.sVal}">
 						<c:set var="url" value="${searchParameter}&cp=" />
+						
 					</c:when>
 					<c:otherwise>
 						<c:set var="url" value="${searchParameter}?cp=" />
+						<c:set var="listUrl" value="../${url}${pInfo.currentPage}" scope="session"/>
 					</c:otherwise>
 
 				</c:choose>
 
-				<div>
-				<nav aria-label="Page navigation example">
+				<div id="pagingbar">
+					<nav aria-label="Page navigation example">
 					<ul class="pagination">
 						<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
 							<li class="page-item">
@@ -293,20 +313,25 @@ tbody>tr>td:last-child {
 					</ul>
 					</nav>
 				</div>
-
+				
+				
+				<!-- 검색창 -->
+				
 				<select name="sKey" style="width:100px; display:inline-block;">
 					<option value="tit">글제목</option>
 					<option value="con">내용</option>
 					<option value="tit-con">제목+내용</option>
 				</select>
-
-
-				<!-- 검색창 -->
+				
+				
 				<input type="text" id="searchInput" name="sVal"
 					style="width: 25% display: inline-block;">
-				<button id="searchBtn" type="button"
-					style="width: 100px; display: inline-block;">검색</button>
-
+				<!-- <button id="searchBtn" type="button"
+					style="width: 100px; display: inline-block;">검색</button> -->
+				<input class="btn btn-primary" id="searchBtn" type="submit" value="검색">
+				
+				
+				
 			</div>
 
 		</div>
@@ -332,112 +357,13 @@ tbody>tr>td:last-child {
 	 <%}%>
 	
 		$("#table2 td").on("click",function(e) {
-					$click=$(this);						
-					var boardNo = $(this).parent().children().eq(0).children().val();
-					
-					var this1 = $(this);
-					var boardUrl = "${contextPath}/service/${pInfo.boardType}/"
-							+ boardNo + "?cp=${pInfo.currentPage}";
-					/* location.href=boardUrl; */
-					var ttr;
-					$.ajax({
-						url : boardUrl,
-						type : "POST",
-						data : {
-							"boardNo" : boardNo
-						},
-						dataType : "json",
-						success : function(map) {
-
-							$ttr = $tr = $("<tr>").attr("id", "tr1");
-							$td = $("<td>").attr({
-								colspan : "5",
-								height : "auto",
-								id : "td1"
-							});
-							
-							$divout = $("<div>").attr({
-								id : "tddiv",
-								height : "auto%",
-								width : "100%"
-							});
-							
-							if(map.files != null){
-							
-							if(map.files[0]!= null){
-							var src = "${contextPath}"+map.files[0].filePath+"/"+map.files[0].fileChangeName;
-							$divin2 = $("<img>").prop("src",src);
-							$divout.append($divin2,"<br>");
-							}
-							
-							if(map.files[1]!= null){
-							var src = "${contextPath}"+map.files[1].filePath+"/"+map.files[1].fileChangeName;
-							$divin3 = $("<img>").prop("src",src);
-							$divout.append($divin3,"<br>");
-							}
-							
-							if(map.files[2]!= null){
-							var src = "${contextPath}"+map.files[2].filePath+"/"+map.files[2].fileChangeName;
-							$divin4 = $("<img>").prop("src",src);
-							$divout.append($divin4,"<br>");
-							}
-							
-							if(map.files[3]!= null){
-							var src = "${contextPath}"+map.files[3].filePath+"/"+map.files[3].fileChangeName;
-							$divin5 = $("<img>").prop("src",src);
-							$divout.append(	$divin5,"<br>");
-							}
-							
-							}
-							
-							$divin = $("<div>").html(
-									map.board.boardContent
-							);
-							
-							$divout.append($divin);
-							
-							if(loginMember == $click.parent().children().eq(2).text().trim()){
-								/* var url = "location.href="'+$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val()+'""; */
-									var updateUrl = "location.href="+"'"+  +$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val()+"'";
-									var deleteUrl = "location.href="+"'"+  +$("#bType").val()+"/"+boardNo+"/delete?cp="+$("#cp").val()+"'";
-								
-								$updateBtn = $("<button>").attr({type:"button",
-															  onclick:updateUrl}).text("수정");
-								$deleteBtn = $("<button>").attr("type","button").text("삭제").on("click",function(){
-									  							  if(confirm("정말 삭제하시겠습니까?")){
-									  								location.href=""+$("#bType").val()+"/"+boardNo+"/delete?cp="+$("#cp").val()+"";
-									  							  };
-									  						  });
-								/* $button = $("<button>").attr({type:"button",id:"upBtn"}); */							  
-								$divout.append($updateBtn,$deleteBtn);
-							}
-							
-							$("#upBtn").on("click",function(){
-								location.href=$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val();
-							}); 
-							
-							
-							$td.append($divout);
-							$tr.append($td);
-							$(this1).parent().after($tr);
-
-							 $("#table2 td").on("click", function() {
-								$divin.html("");
-								$tr.remove();
-							}); 
-
-						},
-						error : function() {
-							console.log("ajax통신실패");
-						}
-
-					}); //
-					 $('html').click(function(e) {
-						if (!$(e.target).hasClass("#table2 td")) {
-							 $ttr.remove();
-						}
-					});
-				});
+			
+			var boardNo = $(this).parent().children().eq(0).children().val();
+			
+			var boardUrl="${contextPath}/service/question/${pInfo.boardType}/"+boardNo+"?cp=${pInfo.currentPage}";
+			
+			location.href=boardUrl;
+		});
 
 		//--------사이드바
 		

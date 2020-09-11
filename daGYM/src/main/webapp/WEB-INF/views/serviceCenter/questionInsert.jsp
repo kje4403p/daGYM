@@ -1,54 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
+<title>게시글 등록</title>
 <style>
-#d1{
-
-  padding-top: 70px;
-
-  padding-bottom: 30px;
-  
-  background: linear-gradient(45deg, #49a09d, #5f2c82);
-
-}
-
- .insert-label {
+    .insert-label {
       display: inline-block;
       width: 80px;
       line-height: 40px
     }
-
 </style>
-
-<!-- jQuery -->
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-
-
-
-<!-- Bootstrap CSS -->
-
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
-
-
-
 </head>
-<body id="body1">
-
-	<jsp:include page="../common/header.jsp" />
-	<%-- <%@include file="../common/header.jsp" %> --%>
-
-	<div id="d1">
-
-<div class="container">
+<body>
+	<jsp:include page="../common/header.jsp"/>
+	<div class="container">
 
 		<div class="container pb-5 mb-5" id="content-main">
 
@@ -61,11 +28,10 @@
 					multipart/form-data 사용시 문제점: 컨트롤러에서 request를 사용해서 파라미터를 받아오기 불가능 해져서 
 					컨트롤러에서 매개 변수로 MultipartFile 변수이름 선언하여 멀티파트타입으로 받을것과 아닌것을 구분시켜 줘야함.							  
 				-->
-			<form action="insertAction" method="post" role="form" 
+			<form action="qaInsertAction" method="post" role="form" 
 				encType="multipart/form-data" onsubmit="return validate();">
 
 				<div class="mb-2">
-				 <c:if test="${type == 3}">
 					<label class="input-group-addon mr-3 insert-label">질문유형</label> 
 					<select	class="custom-select" id="category" name="qnaCode" style="width: 150px;">
 						<option value="1">운동</option>
@@ -73,7 +39,6 @@
 						<option value="3">이용관련</option>
 						<option value="4">결제/환불</option>
 					</select>
-				</c:if>
 				</div>
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">제목</label> 
@@ -152,83 +117,70 @@
 		</div>
 
 	</div>
-	</div>
-
-
-
-
-
-	<jsp:include page="../common/footer.jsp" />
-	<%-- <%@include file="../common/footer.jsp" %> --%>
-
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
-	// 유효성 검사
-	function validate() {
-		if ($("#title").val().trim().length == 0) {
-			alert("제목을 입력해 주세요.");
-			$("#title").focus();
-			return false;
+
+		// 유효성 검사
+		function validate() {
+			if ($("#title").val().trim().length == 0) {
+				alert("제목을 입력해 주세요.");
+				$("#title").focus();
+				return false;
+			}
+
+			if ($("#content").val().trim().length == 0) {
+				alert("내용을 입력해 주세요.");
+				$("#content").focus();
+				return false;
+			}
 		}
+		
+		 // 이미지 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
+	    $(function () {
+	       $("#fileArea").hide();
 
-		if ($("#content").val().trim().length == 0) {
-			alert("내용을 입력해 주세요.");
-			$("#content").focus();
-			return false;
-		}
-	}
-	
-	 // 이미지 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수
-    $(function () {
-       $("#fileArea").hide();
+	      $("#titleImgArea").click(function () {
+	        $("#img1").click();
+	      });
+	      $("#contentImgArea1").click(function () {
+	        $("#img2").click();
+	      });
+	      $("#contentImgArea2").click(function () {
+	        $("#img3").click();
+	      });
+	      $("#contentImgArea3").click(function () {
+	        $("#img4").click();
+	      });
 
-      $("#titleImgArea").click(function () {
-        $("#img1").click();
-      });
-      $("#contentImgArea1").click(function () {
-        $("#img2").click();
-      });
-      $("#contentImgArea2").click(function () {
-        $("#img3").click();
-      });
-      $("#contentImgArea3").click(function () {
-        $("#img4").click();
-      });
+	    });
 
-    });
+	    // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
+	    function LoadImg(value, num) {
+	      if (value.files && value.files[0]) {
+	        var reader = new FileReader();
 
-    // 각각의 영역에 파일을 첨부 했을 경우 미리 보기가 가능하도록 하는 함수
-    function LoadImg(value, num) {
-      if (value.files && value.files[0]) {
-        var reader = new FileReader();
+	        reader.onload = function (e) {
+	          switch (num) {
+	            case 1:
+	              $("#titleImg").attr("src", e.target.result);
+	              break;
+	            case 2:
+	              $("#contentImg1").attr("src", e.target.result);
+	              break;
+	            case 3:
+	              $("#contentImg2").attr("src", e.target.result);
+	              break;
+	            case 4:
+	              $("#contentImg3").attr("src", e.target.result);
+	              break;
+	          }
+	        }
 
-        reader.onload = function (e) {
-          switch (num) {
-            case 1:
-              $("#titleImg").attr("src", e.target.result);
-              break;
-            case 2:
-              $("#contentImg1").attr("src", e.target.result);
-              break;
-            case 3:
-              $("#contentImg2").attr("src", e.target.result);
-              break;
-            case 4:
-              $("#contentImg3").attr("src", e.target.result);
-              break;
-          }
-        }
-
-        reader.readAsDataURL(value.files[0]);
-      }
-    }
-	
-
-</script>
-
-
-
-
+	        reader.readAsDataURL(value.files[0]);
+	      }
+	    }
+		
+	</script>
 </body>
 </html>
