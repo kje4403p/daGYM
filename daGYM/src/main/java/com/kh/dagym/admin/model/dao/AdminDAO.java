@@ -13,6 +13,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 @Repository
 public class AdminDAO {
@@ -30,12 +31,12 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.selectTList");
 	}
 
-	// 1:1 문의 조회 DAO
-	public List<Board> selectIList(Page pInfo) {
+	// 게시판 목록 조회 DAO
+	public List<Board> selectList(Page pInfo) {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
-		return sqlSession.selectList("adminMapper.selectIList", pInfo.getBoardType(), rowBounds);
+		return sqlSession.selectList("adminMapper.selectList", pInfo.getBoardType(), rowBounds);
 	}
 
 	// 1:1 문의 답변 DAO
@@ -66,6 +67,21 @@ public class AdminDAO {
 	// 오류난 파일 삭제 DAO
 	public void deleteAttachment(int boardNo) {
 		sqlSession.delete("adminMapper.deleteAttachment", boardNo);
+	}
+
+	// 트레이너 매출 조회 DAO
+	public List<Payment> trainerChart(String ym) {
+		return sqlSession.selectList("adminMapper.trainerChart", ym);
+	}
+	
+	// 월별 매출 조회 DAO
+	public List<Payment> monthChart(String year) {
+		return sqlSession.selectList("adminMapper.monthChart", year);
+	}
+
+	// 트레이너 탈퇴 DAO
+	public int deleteTrainer(int trainerNo) {
+		return sqlSession.update("adminMapper.deleteTrainer", trainerNo);
 	}
 
 }

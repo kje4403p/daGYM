@@ -298,12 +298,12 @@ $(document).ready(function(){
 					<div class="col-md-4 col-sm-12">
 						<div class="pricing_item">
 							<div class="pricing_head p-top-30 p-bottom-100 text-center">
-								<h3 class="text-uppercase">STARTER</h3>
+								<h3 class="text-uppercase">5회권</h3>
 							</div>
 							<div class="pricing_price_border text-center">
 								<div class="pricing_price">
-									<h3 class="text-white">$19</h3>
-									<p class="text-white">per month</p>
+									<h3 class="text-white">${(trainer.trainerPrice)*5 }</h3>
+									
 								</div>
 							</div>
 
@@ -315,11 +315,50 @@ $(document).ready(function(){
 
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
+								
+								<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
+									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
+											<c:param name="classNm" value="5"/>
+										</c:url>
+										<a href="${url }"class="btn btn-primary" id="order">결제하기</a>
+			                    	</c:when>
+			                    	<c:otherwise>
+			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+			                    	</c:otherwise>
+			                    	</c:choose>
+					
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- End off col-md-4 -->
+
+					<div class="col-md-4 col-sm-12">
+						<div class="pricing_item sm-m-top-30">
+							<div class="pricing_top_border"></div>
+							<div class="pricing_head p-top-30 p-bottom-100 text-center">
+								<h3 class="text-uppercase">10회권</h3>
+							</div>
+							<div class="pricing_price_border text-center">
+								<div class="pricing_price">
+									<h3 class="text-white">${(trainer.trainerPrice)*10 }</h3>
+								</div>
+							</div>
+
+							<div class="pricing_body bg-white p-top-110 p-bottom-60">
+								<ul>
+									<li><i class="fa fa-check-circle text-primary"></i> <span>50</span> user</li>
+									<li><i class="fa fa-check-circle text-primary"></i> Unlimited Bandwidth</li>
+									<li class="disabled"><i class="fa fa-times-circle"></i> Full Statistics</li>
+								</ul>
+								<div class="pricing_btn text-center m-top-40">
+									<c:choose>
 									
 									<c:when test="${loginMember !=null }">
 										<c:url var="url" value="../paymentView/${trainer.trainerNo }">
-											<c:param name="classNm" value="5"/>
+											<c:param name="classNm" value="10"/>
 										</c:url>
 										<a href="${url }"class="btn btn-primary">결제하기</a>
 									
@@ -336,40 +375,12 @@ $(document).ready(function(){
 
 					<div class="col-md-4 col-sm-12">
 						<div class="pricing_item sm-m-top-30">
-							<div class="pricing_top_border"></div>
-							<div class="pricing_head p-top-30 p-bottom-100 text-center">
-								<h3 class="text-uppercase">10회권</h3>
-							</div>
-							<div class="pricing_price_border text-center">
-								<div class="pricing_price">
-									<h3 class="text-white">${(trainer.trainerPrice)*10 }</h3>
-									<p class="text-white">per month</p>
-								</div>
-							</div>
-
-							<div class="pricing_body bg-white p-top-110 p-bottom-60">
-								<ul>
-									<li><i class="fa fa-check-circle text-primary"></i> <span>50</span> user</li>
-									<li><i class="fa fa-check-circle text-primary"></i> Unlimited Bandwidth</li>
-									<li class="disabled"><i class="fa fa-times-circle"></i> Full Statistics</li>
-								</ul>
-								<div class="pricing_btn text-center m-top-40">
-									<a href="" class="btn btn-primary">결제하기</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End off col-md-4 -->
-
-					<div class="col-md-4 col-sm-12">
-						<div class="pricing_item sm-m-top-30">
 							<div class="pricing_head p-top-30 p-bottom-100 text-center">
 								<h3 class="text-uppercase">20회권</h3>
 							</div>
 							<div class="pricing_price_border text-center">
 								<div class="pricing_price">
 									<h3 class="text-white">${(trainer.trainerPrice)*20 }</h3>
-									<p class="text-white">per month</p>
 								</div>
 							</div>
 
@@ -380,19 +391,31 @@ $(document).ready(function(){
 									<li><i class="fa fa-check-circle text-primary"></i> Full Statistics</li>
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
-									<a href="" class="btn btn-primary">결제하기</a>
+									<c:choose>
+									
+									<c:when test="${loginMember !=null }">
+										<c:url var="url" value="../paymentView/${trainer.trainerNo }">
+											<c:param name="classNm" value="20"/>
+										</c:url>
+										<a href="${url }"class="btn btn-primary">결제하기</a>
+									
+									</c:when>
+									<c:otherwise>
+										로그인 후 결제할 수 있습니다.
+									</c:otherwise>
+								</c:choose>
 								</div>
 							</div>
 						</div>
 					</div>
 					<!-- End off col-md-4 -->
-
 				</div>
 				<!--End off row-->
 			</div>
 			<!--End off container -->
 		</section>
 		<!--End off Pricing section -->
+
 		
 <jsp:include page="../common/footer.jsp"/>
 

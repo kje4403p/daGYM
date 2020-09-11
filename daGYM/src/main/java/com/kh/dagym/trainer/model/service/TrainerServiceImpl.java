@@ -8,12 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.dao.TrainerDAO;
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -24,6 +26,9 @@ public class TrainerServiceImpl implements TrainerService{
 	
 	@Autowired
 	private TrainerDAO trainerDAO;
+	
+	@Autowired 
+	private BCryptPasswordEncoder bcPwd;
 	
 	@Override
 	public List<Trainer> selectList() {
@@ -57,6 +62,10 @@ public class TrainerServiceImpl implements TrainerService{
 			
 		if(trainerNo >0) { 
 			trainer.setTrainerNo(trainerNo);
+
+			String encPwd = bcPwd.encode(trainer.getMemberPwd());
+			
+			trainer.setMemberPwd(encPwd);
 			
 			result = trainerDAO.insertTrainer(trainer);
 	
@@ -121,9 +130,6 @@ public class TrainerServiceImpl implements TrainerService{
 		map.put("payment", payment);
 		map.put("member", member);
 		map.put("trainerNo", trainerNo);
-		System.out.println("임플pay"+payment);
-		System.out.println("임플mem"+member);
-		System.out.println("임플no"+trainerNo);
 		int result = 0;
 		if(merchantUid != null) {
 			result = trainerDAO.insertOrder(map);
@@ -144,9 +150,26 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public int insertCoupon(Payment payment) {
 		int result = trainerDAO.insertCoupon(payment);
-		System.out.println("인써트"+payment.getTrainerNo());
-		System.out.println(payment.getMemberNo());
-		System.out.println(payment.getClassNm());
 		return result;
+	}
+	// 거래 고유번호 삽입 구현
+	@Transactional(rollbackFor= Exception.class)
+	@Override
+	public int insertImpUid(Payment payment) {
+		int result = trainerDAO.insertImpUid(payment);
+		return result;
+	}
+
+	@Override
+	public ClassStatus selectClassStatus(int memberNo) {
+		
+		return trainerDAO.selectClassStatus(memberNo);
+	}
+
+	// 회원수 증가 Service 구현
+	@Transactional(rollbackFor= Exception.class)
+	@Override
+	public int updateCnt(int trainerNo) {
+		return trainerDAO.updateCnt(trainerNo);
 	}
 }

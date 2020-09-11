@@ -17,6 +17,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -39,10 +40,10 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.selectTList();
 	}
 
-	// 1:1 문의 조회 Service 구현
+	// 게시판 목록 조회 Service 구현
 	@Override
-	public List<Board> selectIList(Page pInfo) {
-		return adminDAO.selectIList(pInfo);
+	public List<Board> selectList(Page pInfo) {
+		return adminDAO.selectList(pInfo);
 	}
 
 	// 1:1 문의 답변 Service 구현
@@ -105,7 +106,27 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
+    
+    // 트레이너 매출 조회 Service 구현
+ 	@Override
+ 	public List<Payment> trainerChart(String ym) {
+ 		return adminDAO.trainerChart(ym);
+ 	}
+ 	// 월별 매출 조회 Service 구현
+ 	@Override
+ 	public List<Payment> monthChartView(String year) {
+ 		return adminDAO.monthChart(year);
+ 	}
 
+ 	// 트레이너 탈퇴 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int deleteTrainer(int trainerNo) {
+		return adminDAO.deleteTrainer(trainerNo);
+	}
+	
+	
+	
 	
 	
 	
@@ -138,4 +159,6 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
+
+
 }

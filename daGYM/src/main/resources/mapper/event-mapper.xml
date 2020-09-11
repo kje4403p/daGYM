@@ -32,6 +32,16 @@
 		ORDER BY BOARD_NO DESC
 	</select>
 	
+   	<select id="selectThumbnailList" parameterType="list" resultMap="attachmentRs">
+   		SELECT * FROM ATTACHMENT
+   		WHERE FILE_LEVEL = 0
+   		AND BOARD_NO IN
+   		<foreach collection="list" index="i" item="board"
+   			open="(" close=")" separator=",">
+   			#{board.boardNo}
+   		</foreach>
+   	</select>
+	
 	<!-- 게시글 삽입시 필요한 보드넘버 -->
 	<select id="selectNextNo" resultType="_int">
 		SELECT SEQ_BNO.NEXTVAL FROM DUAL
@@ -75,5 +85,23 @@
     	SET BOARD_STATUS = 'N'
     	WHERE BOARD_NO = #{boardNo}
     </update>
+    
+    <!-- 종료 이벤트 -->
+    
+	<select id="selectEndList" resultMap="boardRs">
+		<![CDATA[
+		SELECT * FROM V_EVENT
+		WHERE END_DATE < SYSDATE
+		ORDER BY BOARD_NO DESC
+		]]>
+	</select>
+	
+	<select id="getEndListCount" resultType="_int">
+		<![CDATA[
+		SELECT COUNT(*) FROM V_EVENT
+		WHERE END_DATE < SYSDATE
+		]]>
+	</select>
+	
   
 </mapper>

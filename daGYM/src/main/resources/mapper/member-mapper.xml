@@ -29,6 +29,35 @@
 		<result property="rerlyEnrollDt" column="REPLY_ENROLL_DT" />
 		<result property="replyStatus" column="REPLY_STATUS" />
 	</resultMap>
+	
+	<resultMap id="myBoardResultSet" type="MyBoard" >
+		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
+		<id property="boardNo" column="BOARD_NO"/>
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="boardWriter" column="BOARD_WRITER" />
+		<result property="boardType" column="BOARD_TYPE" />
+		<result property="boardTitle" column="BOARD_TITLE" />
+		<result property="boardContent" column="BOARD_CONTENT" />
+		<result property="boardEnrollDate" column="BOARD_ENROLL_DATE" />
+		<result property="boardModiftDate" column="BOARD_MODIFY_DATE" />
+		<result property="boardStatus" column="BOARD_STATUS" />
+		<result property="qnaCode" column="QUESTION_CODE" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="views" column="VIEWS" />
+		<result property="boardCategory" column="BOARD_CATEGORY" />
+	</resultMap>
+	
+	<resultMap id="myPassResultSet" type="MyPass" >
+		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
+		<id property="merchantUid" column="MERCHANT_UID"/>
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="classNm" column="CLASS_NM" />
+		<result property="amount" column="AMOUNT" />
+		<result property="raymentDate" column="PAYMENT_DATE" />
+		<result property="trainerName" column="MEMBER_NM" />
+		<result property="classCnt" column="CLASS_CNT" />
+	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
@@ -70,5 +99,32 @@
 	<select id="myReplyList" parameterType="MyReply" resultMap="myReplyResultSet">
 		SELECT REPLY_NO, BOARD_TITLE, REPLY_CONTENT, REPLY_ENROLL_DT, REPLY_STATUS FROM REPLY 
 		JOIN BOARD ON(PARENT_BOARD_NO=BOARD_NO)WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS ='Y' ORDER BY REPLY_NO DESC
+	</select>
+	
+	<!-- 내 댓글 페이징 처리 -->
+	<select id="getMyReplyListCount" parameterType="_int" resultType = "_int">
+		SELECT COUNT(*) FROM REPLY WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS = 'Y'
+	</select>
+	
+	<!-- 내 게시판 페이징 처리 -->
+	<select id="getMyBoardListCount" parameterType="_int" resultType = "_int">
+		SELECT COUNT(*) FROM BOARD WHERE BOARD_WRITER = #{boardWriter} AND BOARD_STATUS = 'Y'
+	</select>
+	
+	<!-- 내 게시글 조회 -->
+	<select id="myBoardList" parameterType="MyBoard" resultMap="myBoardResultSet">
+		SELECT BOARD_NO,BOARD_WRITER,BOARD_TYPE,BOARD_TITLE,BOARD_CONTENT,BOARD_ENROLL_DATE,BOARD_MODIFY_DATE,BOARD_STATUS,QUESTION_CODE,START_DATE,END_DATE,VIEWS,BOARD_CATEGORY FROM BOARD JOIN BOARD_TYPE USING(BOARD_TYPE) WHERE BOARD_WRITER = #{boardWriter} AND BOARD_STATUS = 'Y' ORDER BY BOARD_NO DESC
+	</select>
+	
+	<!-- 이용권 및 결제정보 페이징 처리 -->
+	<select id="getMyPassListCount" parameterType="_int" resultType = "_int">
+		SELECT COUNT(*) FROM PAYMENT WHERE MEMBER_NO=#{memberNo}
+	</select>
+	
+	<!-- 이용권 및 결제정보 -->
+	<select id="myPassList" parameterType="MyPass" resultMap="myPassResultSet">
+		SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO=(SELECT TRAINER_NO FROM PAYMENT WHERE MEMBER_NO=#{memberNo}))as MEMBER_NM,MERCHANT_UID,CLASS_NM,AMOUNT,PAYMENT_DATE,CLASS_CNT 
+		FROM PAYMENT JOIN CLASS_STATUS USING(MEMBER_NO) JOIN MEMBER USING(MEMBER_NO)
+		WHERE MEMBER_NO=#{memberNo}
 	</select>
 </mapper>

@@ -7,18 +7,24 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.dagym.admin.model.service.AdminService;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 @Component
 @RequestMapping("/admin/*")
@@ -30,6 +36,16 @@ public class AdminController {
 	@RequestMapping("adminView")
 	public String adminView() {
 		return "admin/adminMain";
+	}
+	
+	// 관리자 로그아웃
+	@RequestMapping("logout")
+	public String logout(SessionStatus status, RedirectAttributes rdAttr) {
+		status.setComplete();
+		rdAttr.addFlashAttribute("status", "success");
+		rdAttr.addFlashAttribute("msg", "로그아웃 되었습니다.");
+		
+		return "redirect:/";
 	}
 	
 	// 회원 전체 조회
@@ -56,7 +72,7 @@ public class AdminController {
 		int type = 3;
 		Page pInfo = adminService.pagination(type, cp);
 		
-		List<Board> iList = adminService.selectIList(pInfo);
+		List<Board> iList = adminService.selectList(pInfo);
 		model.addAttribute("iList", iList);
 		model.addAttribute("pInfo", pInfo);
 		
@@ -79,13 +95,13 @@ public class AdminController {
 		return "redirect:inquiryList";
 	}
 	
-	// 월별 매출 조회
+	// 월별 매출 조회 화면 전환
 	@RequestMapping("monthChart")
 	public String monthChartView() {
 		return "admin/monthChart";
 	}
 	
-	// 트레이너별 매출 조회
+	// 트레이너별 매출 조회 화면 전환
 	@RequestMapping("trainerChart")
 	public String trainerChartView() {
 		return "admin/trainerChart";
@@ -110,7 +126,7 @@ public class AdminController {
 		if(result > 0) {
 			rdAttr.addFlashAttribute("status", "success");
 			rdAttr.addFlashAttribute("msg", "이벤트 작성 완료 !");
-			url = "adminView";
+			url = "eventList";
 		} else {
 			rdAttr.addFlashAttribute("status", "error");
 			rdAttr.addFlashAttribute("msg", "이벤트 작성 실패");
@@ -118,5 +134,67 @@ public class AdminController {
 		}
 		
 		return "redirect:" + url;
+	}
+	
+	// 이벤트 목록 조회
+	@RequestMapping("eventList")
+	public String eventList(Model model, @RequestParam(value="cp", required=false, defaultValue="1") int cp) {
+		int type = 1;
+		Page pInfo = adminService.pagination(type, cp);
+		
+		List<Board> eList = adminService.selectList(pInfo);
+		model.addAttribute("eList", eList);
+		model.addAttribute("pInfo", pInfo);
+		
+		return "admin/eventList";
+	}
+	
+	// 트레이너 가입
+	@RequestMapping("insertTrainer")
+	public String insertTrainer() {
+		return "admin/trainerSignUp";
+	}
+	
+	/*
+	 * @RequestMapping("insertTrainer2") public String insertTrainer2() { 
+	 * return "trainerResulvation/signUpView"; }
+	 */
+	
+	// 트레이너별 매출 조회
+	@ResponseBody
+	@RequestMapping("trainerChartTotal")
+	public String trainerChart(String ym) {
+		List<Payment> list = adminService.trainerChart(ym);
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(list);
+		
+	}
+	
+	// 월별 매출 조회
+	@ResponseBody
+	@RequestMapping("monthChartView")
+	public String monthChart(String year) {
+		List<Payment> list = adminService.monthChartView(year);
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(list);
+	}
+	
+	// 트레이너 탈퇴
+	@RequestMapping("deleteTrainer/{trainerNo}")
+	public String deleteTrainer(@PathVariable int trainerNo, RedirectAttributes rdAttr) {
+		System.out.println(trainerNo);
+		int result = adminService.deleteTrainer(trainerNo);
+		
+		if(result > 0) {
+			rdAttr.addFlashAttribute("status", "success");
+			rdAttr.addFlashAttribute("msg", "트레이너가 탈퇴되었습니다.");
+		} else {
+			rdAttr.addFlashAttribute("status", "error");
+			rdAttr.addFlashAttribute("msg", "탈퇴 실패");
+		}
+		
+		return "redirect:/admin/trainerList";
 	}
 }

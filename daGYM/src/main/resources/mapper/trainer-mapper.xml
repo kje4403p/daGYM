@@ -21,7 +21,7 @@
 		<result property="trainerComment" column="TRAINER_COMMENT" />		
 	</resultMap>
 	
-	 <resultMap type="trainerAttachment" id="trainerAttachmentResultSet">
+	 <resultMap type="TrainerAttachment" id="trainerAttachmentResultSet">
         <id property="fileNo" column="FILE_NO"/>
         <result property="parentTrainerNo" column="PARENT_TRAINER_NO"/>
         <result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
@@ -29,6 +29,14 @@
         <result property="filePath" column="FILE_PATH"/>
         <result property="fileLevel" column="FILE_LEVEL"/>
     </resultMap>
+    
+    
+	 <resultMap type="ClassStatus" id="classStatusResultSet">
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="trainerNo" column="TRAINER_NO"/>
+        <result property="classCnt" column="CLASS_CNT"/>
+    </resultMap>
+    
     
 	<select id="selectList" resultMap="trainerResultSet">
 SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
@@ -47,7 +55,7 @@ SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y
 
 	<insert id="insertTrainer" parameterType="Trainer">
 		INSERT ALL INTO MEMBER VALUES(#{trainerNo}, #{memberId}, #{memberPwd},
-		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, DEFAULT)
+		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, 'T')
          INTO TRAINER VALUES(#{trainerNo},#{trainerCareer},DEFAULT,#{trainerPrice},
          #{trainerSNS},#{trainerComment},#{trainerAward})
 SELECT * FROM DUAL
@@ -88,7 +96,7 @@ SELECT * FROM DUAL
 	
 	<!-- 결제하기 -->
 	<insert id="insertOrder" parameterType="map">
-		INSERT INTO PAYMENT VALUES(#{payment.merchantUid}, #{payment.classNm}, #{payment.amount}, SYSDATE, #{payment.memberNo}, #{payment.trainerNo})
+		INSERT INTO PAYMENT VALUES(#{payment.merchantUid}, #{payment.classNm}, #{payment.amount}, SYSDATE, #{payment.memberNo}, #{payment.trainerNo}, null)
 	</insert>
 	 
 	
@@ -102,6 +110,20 @@ SELECT * FROM DUAL
   		INSERT INTO CLASS_STATUS VALUES(#{memberNo}, #{trainerNo}, #{classNm})
   		
   	</insert>
-	
-  
+  	
+  	<!-- 거래고유번호 삽입 -->
+	<update id="updateImpUid" parameterType="Payment">
+  		UPDATE PAYMENT SET IMP_UID = #{impUid} WHERE MERCHANT_UID=#{merchantUid}
+  	</update>
+  	
+  	<select id="selectClassStatus" parameterType="_int" resultMap="classStatusResultSet" >
+  	SELECT * FROM CLASS_STATUS WHERE MEMBER_NO=#{memberNo}
+  	</select>
+  	
+  	<!-- 회원수증가 -->
+  	<update id="updateCnt" parameterType="_int">
+  		UPDATE TRAINER SET
+		TRAINER_M_CNT = TRAINER_M_CNT+1
+		WHERE TRAINER_NO = #{trainerNo}
+  	</update>
 </mapper>

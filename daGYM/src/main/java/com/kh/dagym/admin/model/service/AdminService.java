@@ -9,6 +9,7 @@ import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
+import com.kh.dagym.trainer.model.vo.Payment;
 
 public interface AdminService {
 
@@ -22,10 +23,10 @@ public interface AdminService {
 	 */
 	public abstract List<Trainer> selectTList();
 
-	/** 1:1 문의 조회 Service
+	/** 게시판 목록 조회 Service
 	 * @return iList
 	 */
-	public abstract List<Board> selectIList(Page pInfo);
+	public abstract List<Board> selectList(Page pInfo);
 
 	/** 1:1 문의 답변 Service
 	 * @param reply
@@ -46,5 +47,23 @@ public interface AdminService {
 	 * @return result
 	 */
 	public abstract int insertEvent(Board board, List<MultipartFile> images, String savePath);
+
+	/** 트레이너 매출 조회 Service
+	 * @param ym 
+	 * @return list
+	 */
+	public abstract List<Payment> trainerChart(String ym);
+
+	/** 월별 매출 조회 Service
+	 * @param year 
+	 * @return list
+	 */
+	public abstract List<Payment> monthChartView(String year);
+
+	/** 트레이너 탈퇴 Service
+	 * @param trainerNo
+	 * @return result
+	 */
+	public abstract int deleteTrainer(int trainerNo);
 
 }

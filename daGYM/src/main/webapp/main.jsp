@@ -150,92 +150,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-7.jpg">
-                        <div class="si-text">
-                            <h4>Personal Training</h4>
-                            <span><i class="fa fa-user"></i> Cole Robertson</span>
-                        </div>
-                    </div>
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-8.jpg">
-                        <div class="si-text">
-                            <h4>Weight Loss</h4>
-                            <span><i class="fa fa-user"></i> Ryan Scott</span>
-                        </div>
-                    </div>
-                </div>
+               
             </div>
         </div>
     </section>
     <!-- Classes Section End -->
 
-    <!-- Trainer Section Begin -->
-    <section class="trainer-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>EXPERT TRAINERS</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                        <img src="resources/img/trainer/trainer-1.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Patrick Cortez</h5>
-                            <span>Leader</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                            <div class="trainer-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                        <img src="resources/img/trainer/trainer-2.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Gregory Powers</h5>
-                            <span>Gym coach</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                            <div class="trainer-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">
-                        <img src="resources/img/trainer/trainer-3.jpg" alt="">
-                        <div class="trainer-text">
-                            <h5>Walter Wagner</h5>
-                            <span>Dance trainer</span>
-                            <p>non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat
-                                voluptatem.</p>
-                            <div class="trainer-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-pinterest"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Trainer Section End -->
-
+   
     <!-- Testimonial Section Begin -->
     <section class="testimonial-section spad">
         <div class="container">
@@ -306,148 +227,7 @@
     </section>
     <!-- Banner Section End -->
 
-    <!-- Membership Section Begin -->
-    <section class="membership-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>MEMBERSHIP PLANS</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="membership-item">
-                        <div class="mi-title">
-                            <h4>Basic</h4>
-                            <div class="triangle"></div>
-                        </div>
-                        <h2 class="mi-price">$17<span>/01 mo</span></h2>
-                        <ul>
-                            <li>
-                                <p>Duration</p>
-                                <span>12 months</span>
-                            </li>
-                            <li>
-                                <p>Personal trainer</p>
-                                <span>00 person</span>
-                            </li>
-                            <li>
-                                <p>Amount of people</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Number of visits</p>
-                                <span>Unlimited</span>
-                            </li>
-                        </ul>
-                        <a href="#" class="primary-btn membership-btn">Start Now</a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="membership-item">
-                        <div class="mi-title">
-                            <h4>Standard</h4>
-                            <div class="triangle"></div>
-                        </div>
-                        <h2 class="mi-price">$57<span>/01 mo</span></h2>
-                        <ul>
-                            <li>
-                                <p>Duration</p>
-                                <span>12 months</span>
-                            </li>
-                            <li>
-                                <p>Personal trainer</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Amount of people</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Number of visits</p>
-                                <span>Unlimited</span>
-                            </li>
-                        </ul>
-                        <a href="#" class="primary-btn membership-btn">Start Now</a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="membership-item">
-                        <div class="mi-title">
-                            <h4>Premium</h4>
-                            <div class="triangle"></div>
-                        </div>
-                        <h2 class="mi-price">$98<span>/01 mo</span></h2>
-                        <ul>
-                            <li>
-                                <p>Duration</p>
-                                <span>12 months</span>
-                            </li>
-                            <li>
-                                <p>Personal trainer</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Amount of people</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Number of visits</p>
-                                <span>Unlimited</span>
-                            </li>
-                        </ul>
-                        <a href="#" class="primary-btn membership-btn">Start Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Membership Section End -->
-
-    <!-- Register Section Begin -->
-    <section class="register-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="register-text">
-                        <div class="section-title">
-                            <h2>Register Now</h2>
-                            <p>The First 7 Day Trial Is Completely Free With The Teacher</p>
-                        </div>
-                        <form action="#" class="register-form">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <label for="name">First Name</label>
-                                    <input type="text" id="name">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="email">Your email address</label>
-                                    <input type="text" id="email">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="last-name">Last Name</label>
-                                    <input type="text" id="last-name">
-                                </div>
-                                <div class="col-lg-6">
-                                    <label for="mobile">Mobile No*</label>
-                                    <input type="text" id="mobile">
-                                </div>
-                            </div>
-                            <button type="submit" class="register-btn">Get Started</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="register-pic">
-                        <img src="resources/img/register-pic.jpg" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Register Section End -->
+  
 
     <!-- Latest Blog Section Begin -->
     <section class="latest-blog-section spad">
@@ -455,39 +235,36 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Latest Blog</h2>
+                        <h2>EVENT</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="single-blog-item">
-                        <img src="resources/img/blog/blog-1.jpg" alt="">
+                        <img id="event0"  alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
-                            <a href="#" class="tag">#Gym</a>
                         </div>
-                        <h4><a href="#">10 States At Risk of Rural Hospital Closures</a></h4>
+                        <h4><a href="#" id="title0">10 States At Risk of Rural Hospital Closures</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="single-blog-item">
-                        <img src="resources/img/blog/blog-2.jpg" alt="">
+                        <img id="event1"  alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
-                            <a href="#" class="tag">#Sport</a>
                         </div>
-                        <h4><a href="#">Diver who helped save Thai soccer team</a></h4>
+                        <h4><a href="#" id="title1">Diver who helped save Thai soccer team</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="single-blog-item">
-                        <img src="resources/img/blog/blog-3.jpg" alt="">
+                        <img id="event2"  alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
-                            <a href="#" class="tag">#Body</a>
                         </div>
-                        <h4><a href="#">Man gets life in prison for stabbing</a></h4>
+                        <h4><a href="#" id="title2">Man gets life in prison for stabbing</a></h4>
                     </div>
                 </div>
             </div>
@@ -508,6 +285,48 @@
     <script src="resources/js/owl.carousel.min.js"></script>
     <script src="resources/js/main.js"></script>
        <jsp:include page="WEB-INF/views/common/footer.jsp"/>
+    <script>
+    $(function(){
+    	eventViews();
+    	titleViews();
+    })
+    	function eventViews(){
+    		$.ajax({
+    			url : "${contextPath}/eventViews",
+    			dataType : "JSON",
+    			success : function(list){
+    				$.each(list,function(index, item){
+    					console.log(list)
+    					src="<%=request.getContextPath()%>/resources/uploadImages/"+item.fileChangeName; 
+    					
+    					$("#event"+index).attr("src",src)
+    				})
+    			}, error : function(){
+    				console.log("통신실패")
+    			}
+    		})
+    		
+    	}
+    function titleViews(){
+		$.ajax({
+			url : "${contextPath}/eventTitle",
+			dataType : "JSON",
+			success : function(list){
+				$.each(list,function(index, item){
+				
+					
+				
+					$("#title"+index).html(item.boardTitle)
+				})
+			}, error : function(){
+				console.log("통신실패")
+			}
+		})
+		
+	}
+    
+    </script>
+       
 </body>
 
 </html>

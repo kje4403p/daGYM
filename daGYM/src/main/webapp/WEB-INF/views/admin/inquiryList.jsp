@@ -94,7 +94,7 @@
 						                	<!-- fmt 태그를 이용한 소수점 제거 -->
 						                	<fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
 						                	
-						                	<c:set var="prev" value="${operand1 * 10}"/>
+						                	<c:set var="prev" value="${operand1 * pInfo.pagingBarSize}"/>
 						                	
 					                   		<a class="page-link text-primary" href="inquiryList?cp=${prev}">&lt;</a>
 						                </li>

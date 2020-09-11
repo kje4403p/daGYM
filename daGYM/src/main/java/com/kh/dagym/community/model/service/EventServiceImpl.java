@@ -29,9 +29,9 @@ public class EventServiceImpl implements EventService{
 	 * @param cp
 	 * @return pInfo
 	 */
-	public PageInfo pagenation(int BOARD_TYPE, int cp) {
+	public PageInfo pagenation(int BOARD_TYPE, int cp, int status) {
 		// 1) 전체 게시글 수 조회
-		int listCount = eventDAO.getListCount();
+		int listCount = eventDAO.getListCount(status);
 
 		// 2) setPageInfo 호출
 		pInfo.setLimit(6);
@@ -43,11 +43,17 @@ public class EventServiceImpl implements EventService{
 
 	/** 게시글 목록 조회
 	 * @param pInfo
-	 * @return eventList
+	 * @return eventListsss
 	 */ 
 	@Override
-	public List<Board> selectList(PageInfo pInfo) {
-		return eventDAO.selectList(pInfo);
+	public List<Board> selectList(PageInfo pInfo, int status) {
+		return eventDAO.selectList(pInfo, status);
+	}
+	
+
+	@Override
+	public List<Attachment> selectThumbnailList(List<Board> eventList) {
+		return eventDAO.selectThumbnailList(eventList);
 	}
 
 
@@ -143,7 +149,7 @@ public class EventServiceImpl implements EventService{
 	 */
 	@Transactional(rollbackFor = Exception.class)
 	@Override
-	public int deleteEvent(int boardNo) {
+	public int deleteEvent(int boardNo, String savePath) {
 		int result = eventDAO.deleteEvent(boardNo);
 		
 		if (result > 0) {
@@ -152,9 +158,13 @@ public class EventServiceImpl implements EventService{
 			if (! deleteFiles.isEmpty() ) {
 				eventDAO.deleteAttachment(boardNo);
 				for (Attachment at : deleteFiles) {
-					String filePath = "/resources/uploadImages";
-					File file = new File(filePath + "/" + at.getFileChangeName());
-					file.delete();
+					File file = new File(savePath + "/" + at.getFileChangeName());
+					if (file.exists()) {
+						file.delete();
+						System.out.println("파일 삭제 성공");
+					} else {
+						System.out.println("파일 삭제 실패");
+					}
 				}
 			}
 		}

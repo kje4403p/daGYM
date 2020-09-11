@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -79,6 +80,27 @@ public class TrainerDAO {
 	 */
 	public int insertCoupon(Payment payment) {
 		return sqlSession.insert("trainerMapper.insertCoupon", payment);
+	}
+
+	/** 거래 고유번호 (impUid)삽입 DAO
+	 * @param payment
+	 * @return result
+	 */
+	public int insertImpUid(Payment payment) {
+		return sqlSession.update("trainerMapper.updateImpUid", payment);
+	}
+
+	public ClassStatus selectClassStatus(int memberNo) {
+	
+		return sqlSession.selectOne("trainerMapper.selectClassStatus", memberNo);
+	}
+
+	/** 회원수 증가 DAO
+	 * @param trainerNo
+	 * @return result
+	 */
+	public int updateCnt(int trainerNo) {
+		return sqlSession.update("trainerMapper.updateCnt",trainerNo);
 	}
 
 

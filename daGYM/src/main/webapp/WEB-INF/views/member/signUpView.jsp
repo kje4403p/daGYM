@@ -48,8 +48,23 @@
 		margin-top : 30px;
 		margin-bottom : 30px;
 	}
+	.form-control{
+		margin-bottom : 5px;
+	}
 	#forms{
 	 background-color: #f5f5f5;}
+	 #emailCk-btn{
+	 	float:right;
+	 }
+	 #code{
+	 	margin-top : 20px;
+	 }
+	 #memberEmail{
+	 	    margin-bottom: 5px;
+	 }
+	#memberPwd{
+	 	    margin-bottom: 5px;
+	 }
 
 </style>
 
@@ -89,14 +104,14 @@
                         <div class="help-block with-errors"><span id="checkName">&nbsp;</span></div>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="memberPhone" name="memberPhone"  placeholder="전화번호(010-0000-0000)" required>
+                        <input type="text" class="form-control" id="memberPhone" name="memberPhone"  placeholder="전화번호( '-'포함)" required>
                         <div class="help-block with-errors"><span id="checkPhone">&nbsp;</span></div>
                     </div>
                     <div class="form-group">
                     
                         <input type="email" class="form-control" id="memberEmail" name="memberEmail"  placeholder="이메일" required>
-                        <div class="help-block with-errors"><span id="checkEmail">&nbsp;</span></div>
-                        <button type="button" name="emailCheck" id="emailCk-btn" onclick="sendEmail();" disabled >이메일 인증</button>
+                        <div class="help-block with-errors"><span id="checkEmail">&nbsp;</span>&nbsp;&nbsp;<button type="button" name="emailCheck" id="emailCk-btn" onclick="sendEmail();" disabled >이메일 인증</button></div>
+                        
                          <input type="text" class="form-control" id="code" name="code"  placeholder="인증번호" required>
                         <div class="help-block with-errors"><span id="checkCode">&nbsp;</span></div>
                        
@@ -104,13 +119,7 @@
                     
                     <!-- log-line -->
                     <div class="log-line reg-form-1 no-margin">
-                        <div class="pull-left">
-                            <div class="checkbox checkbox-primary space-bottom">
-                                <label class="hide"><input type="checkbox"></label>
-                                <input id="checkbox2" type="checkbox">
-                                <label for="checkbox2"><span><a href="#">Terms & Conditions</a></span></label>
-                            </div>
-                        </div>
+                       
                         <div class="pull-right">
                             <button type="submit" id="reg-submit" class="btn btn-md btn-success-filled btn-log" >회원가입</button>
                             <div id="msgSubmit" class="h3 text-center hidden"></div>

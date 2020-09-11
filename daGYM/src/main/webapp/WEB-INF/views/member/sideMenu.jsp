@@ -26,15 +26,15 @@
 	
 	<script>
 		$("#mypage").on("click", function() {
-			location.href= "myPage";
+			location.href= "${contextPath}/member/myPage";
 		});
 		
 		$("#mytext").on("click", function() {
-			location.href= "myBoard";
+			location.href= "${contextPath}/member/myBoardList/1";
 		});
 		
 		$("#myschedule").on("click", function() {
-			location.href= "mySchedule";
+			location.href= "${contextPath}/member/mySchedule";
 		});
 	</script>
 </div>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -44,6 +45,22 @@ public interface TrainerService {
 	 * @return result
 	 */
 	int insertCoupon(Payment payment);
+
+	
+	/** 거래 고유번호(impUid) 삽입 service
+	 * @param payment
+	 * @return
+	 */
+	int insertImpUid(Payment payment);
+
+	ClassStatus selectClassStatus(int memberNo);
+
+	
+	/** 회원수 증가 Service
+	 * @param trainerNo
+	 * @return result
+	 */
+	int updateCnt(int trainerNo);
 
 
 
