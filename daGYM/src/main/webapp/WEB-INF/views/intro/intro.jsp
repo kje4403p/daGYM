@@ -17,6 +17,29 @@
 	padding-left : 0;
 	padding-right : 0;
 	}
+	
+	#top_btn {
+    position: fixed;
+    right: 2%;
+    bottom: 50px;
+  	
+    z-index: 999;
+    }
+    #top_btn>img{
+    width:80px;
+    height:80px;
+    }
+    
+   section{
+    	    background-color: #f5f5f5;
+    }
+    #content2{
+    	padding-top: 10px;
+    }
+}
+
+
+출처: https://cofs.tistory.com/188 [CofS]
 </style>
 </head>
 
@@ -52,28 +75,24 @@
     </section>
     <!-- Services Section End -->
 
-    
    
-        <div class="container">
-            <img src="resources/imges/dagym/dagym1.jpg" alt="">
-        </div>
     
     <!-- Testimonial Section End -->
-	<section>
+	<section id="intro">
 	
 		 <div class="section-title">
 	                        <h2 id="content2">오시는 길</h2>
 	     </div>
 	       <div class="row" >
-                  <div class="col-md-3" ></div>
-	     		<div class="col-md-6">
+                  <div class="col-md-2" ></div>
+	     		<div class="col-md-8">
 	     			<table class="table" cellpadding="0" cellspacing="0" style="display:table;">
 	     				<tbody>
 	     					<tr>
 	     						<td colspan="2">
-	     						<div >
+	     						
 	     							<div id="map" style="width:800px;height:500px;"></div>
-	     						</div>
+	     						
 	     		
 	     						</td>
 	     					</tr>
@@ -99,7 +118,10 @@
 	     				</tbody>
 	     			</table>
 	     		</div>
-	     		<div class="col-md-3" ></div>
+	     		<div class="col-md-2" ></div>
+	     		
+	     			<a href="#" id="top_btn"><img src="resources/images/dagym/top.png" ></a>
+	     		
 	     </div>
 		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c1e469e1fb64b426f1c9b793e7d792d"></script>
 		<script>
@@ -124,13 +146,23 @@
 
 		
 	</script>
-                    
+	    
                     
 	</section>
-  
-    
+	<script>
+    $(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 500) {
+                $('#MOVE_TOP_BTN').fadeIn();
+            } else {
+                $('#MOVE_TOP_BTN').fadeOut();
+            }
+        });
+    });
 
- 
+	</script>
+                
+  
 
     <!-- Js Plugins -->
     <script src="resources/js/jquery-3.3.1.min.js"></script>

@@ -55,7 +55,7 @@ SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y
 
 	<insert id="insertTrainer" parameterType="Trainer">
 		INSERT ALL INTO MEMBER VALUES(#{trainerNo}, #{memberId}, #{memberPwd},
-		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, DEFAULT)
+		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, 'T')
          INTO TRAINER VALUES(#{trainerNo},#{trainerCareer},DEFAULT,#{trainerPrice},
          #{trainerSNS},#{trainerComment},#{trainerAward})
 SELECT * FROM DUAL
@@ -119,4 +119,11 @@ SELECT * FROM DUAL
   	<select id="selectClassStatus" parameterType="_int" resultMap="classStatusResultSet" >
   	SELECT * FROM CLASS_STATUS WHERE MEMBER_NO=#{memberNo}
   	</select>
+  	
+  	<!-- 회원수증가 -->
+  	<update id="updateCnt" parameterType="_int">
+  		UPDATE TRAINER SET
+		TRAINER_M_CNT = TRAINER_M_CNT+1
+		WHERE TRAINER_NO = #{trainerNo}
+  	</update>
 </mapper>

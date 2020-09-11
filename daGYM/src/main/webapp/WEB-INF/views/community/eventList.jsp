@@ -13,8 +13,8 @@
 <%@ include file="../common/header.jsp" %>
 <div class="container event">
 	<ul class="tabType1">
-		<li class="on"><a href="eventList.do?type=1">진행중 이벤트</a></li>
-		<li><a href="pastList.do?type=2">종료된 이벤트</a></li>
+		<li class="on"><a href="list">진행중 이벤트</a></li>
+		<li><a href="end-list">종료된 이벤트</a></li>
 	</ul>
 	<ul class="eventList mx-auto">
 		<c:choose>
@@ -25,7 +25,15 @@
 				<c:forEach var="event" items="${eventList }">
 					<li>
 						<a class="view" href="${event.boardNo}?cp=${pInfo.currentPage}"> 
-							<p class="thumb"></p>
+							<p class="thumb">
+	               				<c:forEach items="${thList}" var="th">
+	               					<c:if test="${th.parentBoardNo == event.boardNo}">
+	               						<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
+	               						<img src="${src}">
+	               					</c:if>
+	               					
+	               				</c:forEach>
+							</p>
 							<p class="ing" >진행중</p>
 							<p class="tit">${event.boardTitle }</p>
 							<fmt:formatDate var='startDate' value="${event.startDate}" pattern="yy-MM-dd" />

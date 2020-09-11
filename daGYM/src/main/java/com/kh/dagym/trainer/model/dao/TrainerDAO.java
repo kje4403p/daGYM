@@ -95,5 +95,13 @@ public class TrainerDAO {
 		return sqlSession.selectOne("trainerMapper.selectClassStatus", memberNo);
 	}
 
+	/** 회원수 증가 DAO
+	 * @param trainerNo
+	 * @return result
+	 */
+	public int updateCnt(int trainerNo) {
+		return sqlSession.update("trainerMapper.updateCnt",trainerNo);
+	}
+
 
 }
