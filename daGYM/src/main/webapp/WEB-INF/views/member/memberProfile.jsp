@@ -11,7 +11,7 @@
     <%@ include file="../common/header.jsp"%>
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
-        <div class="col-sm-5">
+        <div class="col-sm-7">
             <form action="updateAction" method="POST"
                 onsubmit="return validate();">
                     <h1>회원정보</h1>
