@@ -122,4 +122,33 @@ public class EventDAO {
 	}
 
 
+	/** 이벤트 게시글 수정
+	 * @param upBoard
+	 * @return int
+	 */
+	public int updateEvent(Board upBoard) {
+		return sqlSession.update("eventMapper.updateEvent", upBoard);
+	}
+
+
+	/** 첨부 파일 수정
+	 * @param at 
+	 * @return int
+	 */
+	public int updateAttachment(Attachment at) {
+		return sqlSession.update("eventMapper.updateAttachment", at);
+	}
+
+
+	/** 파일 한 개 삭제
+	 * @param fileNo
+	 * @return int
+	 */
+	public int deleteAttachmentOne(int fileNo) {
+		return sqlSession.delete("eventMapper.deleteAttachmentOne", fileNo);
+	}
+
+
+
+
 }

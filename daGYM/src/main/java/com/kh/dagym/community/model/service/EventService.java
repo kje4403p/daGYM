@@ -48,6 +48,15 @@ public interface EventService {
 	 * @return List
 	 */
 	List<Attachment> selectThumbnailList(List<Board> eventList);
+ 
+	/** 이벤트 게시글 수정
+	 * @param upBoard
+	 * @param savePath
+	 * @param images
+	 * @param deleteImages
+	 * @return int
+	 */
+	int updateEvent(Board upBoard, String savePath, List<MultipartFile> images, boolean[] deleteImages);
 	
 
 }

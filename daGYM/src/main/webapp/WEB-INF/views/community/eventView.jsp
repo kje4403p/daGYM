@@ -64,8 +64,12 @@
 					작성자 : ${board.boardWriter}<br>
 				 	<span class="float-right">조회수 : ${board.views}</span>
 					<div id="date-area">
-						<fmt:formatDate var='enrollDt' value="${board.startDate}" pattern="yy-MM-dd" />
+						<fmt:formatDate var='enrollDt' value="${board.boardEnrollDate}" pattern="yy-MM-dd" />
+						<fmt:formatDate var='startDt' value="${board.startDate}" pattern="yy-MM-dd" />
+						<fmt:formatDate var='endDt' value="${board.endDate}" pattern="yy-MM-dd" />
 						<p>작성일 : ${enrollDt}</p>
+						<p>시작일 : ${startDt }</p>
+						<p>종료일: ${endDt }</p>
 					</div>
 					
 				</div>
@@ -113,9 +117,23 @@
 				
 				<div>
 					<div class="float-right">
+					
+            			<jsp:useBean id="now" class="java.util.Date"/>
+                		<fmt:formatDate var="today" value="${now}" pattern="yy-MM-dd"/>
+						<c:set var="list" value="list?cp=${param.cp }"/>
+						<c:set var="endList" value="end-list?cp=${param.cp }"/>
+						
 						<a class="btn btn-primary" 
-							<%-- href="<c:url value="../list/${board.boardType}"><c:param name="cp" value="${param.cp}"/></c:url>">목록으로</a> --%>
-							href="${listUrl }"/>목록으로</a>
+							href = "
+							<c:choose>
+		                		<c:when test="${endDt < today}">
+               						${endList}
+               					</c:when>
+               					<c:otherwise>
+               						${list}
+               					</c:otherwise>
+							</c:choose>
+							"/>목록으로</a>
 							<!-- 상세 주소 예시 : /1/500?cp=500 -->
 							<!-- 목록 주소 예시 : /list/1?cp=1 -->
 	                	

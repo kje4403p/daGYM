@@ -180,6 +180,123 @@ public class EventServiceImpl implements EventService{
 	public List<Attachment> selectFiles(int boardNo) {
 		return eventDAO.selectFiles(boardNo);
 	}
+	
+	
+
+	/**
+	 * 이벤트 수정
+	 */
+	@Override
+	public int updateEvent(Board upBoard, String savePath, List<MultipartFile> images, boolean[] deleteImages) {
+	    // images : 수정된 파일 리스트
+	       
+	       // 크로스 사이트 스크립트 방지
+	       upBoard.setBoardContent(replaceParameter(upBoard.getBoardContent()));
+	       upBoard.setBoardTitle(replaceParameter(upBoard.getBoardTitle())); 
+	       int result = eventDAO.updateEvent(upBoard); // 게시글만 수정
+	       
+	       if(result > 0) {
+	          // 1) 이전 업로드 파일 목록 조회
+	          List<Attachment> oldFiles = eventDAO.selectFiles(upBoard.getBoardNo());
+	          
+	          // DB에 저장할 웹상에서의 이미지 접근 경로
+	          String filePath = "/resources/uploadImages";
+	          List<Attachment> files = new ArrayList<Attachment>(); // 파일 정보를 모아 놓은 List
+	          List<Attachment> removeFiles = new ArrayList<>();
+	          Attachment at = null; // 임시 사용할 참조변수
+	          for(int i = 0; i < images.size(); i++) {
+	             if(!images.get(i).getOriginalFilename().equals("")) {
+	            	 
+	                
+	                String changeFileName = rename(images.get(i).getOriginalFilename());
+	                
+	                at = new Attachment(upBoard.getBoardNo(), images.get(i).getOriginalFilename(), 
+	                      changeFileName, filePath, i);
+	                
+	                
+	                boolean flag = false; 
+	                
+	                for(Attachment old : oldFiles) {   // 이전 파일 목록에 반복 접근
+	                   if(old.getFileLevel() == i) {
+	                      // 현재 접근한 이전 파일의 레벨이
+	                      // 새롭게 업로드된(수정된) 파일의 레벨과 같을 경우
+	                      // == 이전 파일이 새로운 파일로 수정이 된 경우
+	                      flag = true;
+	                      
+	                      removeFiles.add(old); // 서버 파일 제거 List에 수정 예정인 이전 파일 정보를 저장
+	                      
+	                      at.setFileNo(old.getFileNo());
+	                      // 이전 파일의 번호를 얻어와 DB상에서 데이터 수정할 수 있게
+	                      // 새로운 파일에 번호 세팅
+	                      break;
+	                   }
+	                }
+	                
+	                if(flag) {
+	                   // update
+	                   result = eventDAO.updateAttachment(at);
+	                }else {
+	                   // insert
+	                   result = eventDAO.insertAttachment(at);
+	                }
+	                
+	             } else { // if end
+	            	 if (deleteImages[i]) { // 삭제 버튼이 눌러진 인덱스인 경우
+	            		 for (Attachment old : oldFiles) {
+	            			 // 이전 이미지 파일 목록에 반복 접근하여
+	            			 // 삭제 버튼이 눌러진 인덱스(== 파일레벨)와
+	            			 // 이전 이미지 중 같은 파일레벨을 가지고 있는 DB정보를 삭제
+	            			 
+	            			 if (old.getFileLevel() == i) {
+	            				 result = eventDAO.deleteAttachmentOne(old.getFileNo());
+	            				 // 파일 하나만 삭제
+	            				 
+	            				 // 서버측 파일 삭제 목록에 해당 파일 정보를 추가
+	            				 removeFiles.add(old);
+	            			 }
+	            		 }
+	            		 
+	            	 }
+	             }
+	             
+	             files.add(at);
+	          }   // for end
+	          
+	          // 수정된 이미지를 서버에 저장
+	          if(result > 0) {
+	             for(int i = 0; i < images.size(); i++) {
+	                if(!images.get(i).getOriginalFilename().equals("")) {
+	                   // 새로운 업로드 된 파일이 존재한다면
+	                   try {
+	                      // transferTo() : 지정된 경로에 업로드된 파일정보를 실제 파일로 변환하는 메소드
+	                     images.get(i).transferTo(new File(savePath + "/" + files.get(i).getFileChangeName()));
+	                  } catch (Exception e) {
+	                     // 서버에 파일 저장 중 오류 발생 시
+	                     // -> DB에 있는 파일 정보도 삭제
+	                     eventDAO.deleteAttachment(upBoard.getBoardNo());
+	                  
+	                  }
+	                }
+	             }
+	          } // end if
+	          
+	          // 제거 목록에 있는 파일 삭제
+	          for(Attachment re : removeFiles) {
+	        	  
+	        	  File rm = new File(savePath + "/" + re.getFileChangeName());
+	        	  System.out.println(savePath + "/" + re.getFileChangeName());
+	        	  if (rm.exists()) {
+	        		  rm.delete(); // 파일 삭제
+	        		  System.out.println("파일 삭제 성공");
+	        	  } else {
+	        		  System.out.println("파일 삭제 실패");
+	        	  }
+	          }
+	          
+	       }
+	       
+	      return result;
+	}
 
 
 	// 크로스 사이트 스크립트 방지 메소드
