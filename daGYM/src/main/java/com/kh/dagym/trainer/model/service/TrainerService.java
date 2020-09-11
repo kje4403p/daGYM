@@ -9,6 +9,7 @@ import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 public interface TrainerService {
 
@@ -61,6 +62,10 @@ public interface TrainerService {
 	 * @return result
 	 */
 	int updateCnt(int trainerNo);
+
+	int insertSchedule(TrainerSchedule trainerSchedule);
+
+	List<TrainerSchedule> selectSchedule(int trainerNo);
 
 
 

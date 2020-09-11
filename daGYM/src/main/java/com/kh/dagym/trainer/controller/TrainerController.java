@@ -19,9 +19,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.service.TrainerService;
 import com.kh.dagym.trainer.model.vo.ClassStatus;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 @SessionAttributes({"loginMember"})
 @Controller
@@ -75,11 +77,7 @@ public class TrainerController {
 	}
 	return url;
 }
-	@RequestMapping("schedule")
-	public String schedule() {
-		
-		return "trainerResulvation/schedule";
-	}
+	
 	
 	@RequestMapping("signUp")
 	public String signUp() {
@@ -168,4 +166,34 @@ public class TrainerController {
 	 
 	 
 	 
+	 @RequestMapping("schedule/{trainerNo}")
+		public String schedule(@PathVariable int trainerNo, Model model) {
+		 	model.addAttribute("trainerNo",trainerNo);
+			List<TrainerSchedule> schedule = trainerService.selectSchedule(trainerNo);
+	 		model.addAttribute("schedule",schedule);
+			return "trainerResulvation/schedule";
+		}
+		
+	 
+	 
+	 @ResponseBody
+	 @RequestMapping(value="trainerSchedule/{trainerNo}")
+	 public String trainerSchedule(@PathVariable int trainerNo, Model model,TrainerSchedule trainerSchedule) {	
+		 	System.out.println(trainerSchedule);
+		 	int result = trainerService.insertSchedule(trainerSchedule);
+		 	if(result>0) {
+		 		System.out.println("굿");
+		 	}
+		 return "trainerResulvation/schedule";
+	 }
+	 
+	 
+	 @RequestMapping("resulvation/{trainerNo}")
+		public String resulvation(@PathVariable int trainerNo, Model model,PT pt) {
+		 	Member loginMember = (Member)model.getAttribute("loginMember");
+		 	pt.setMemberNo(loginMember.getMemberNo());
+		 	List<TrainerSchedule> schedule = trainerService.selectSchedule(trainerNo);
+	 		model.addAttribute("schedule",schedule);
+			return "trainerResulvation/resulvation";
+		}
 }

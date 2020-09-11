@@ -62,47 +62,34 @@ document.addEventListener('DOMContentLoaded', function() {
 			 %>
 			
 			 {	
-			
+				 
 				 start: "<%=sd.getScheduleTime()%>"
 		
 			 },
 			 
 			 <%}%>
 			 ],
+			 eventColor: "orange",
+			 eventClick: function(info) {
+				var eventFullDate = info.event.start;
+				  
+				var eventYear = eventFullDate.getFullYear() // 선택된 이벤트 연도
+				var eventMonth = eventFullDate.getMonth() + 1; // 선택된 이벤트 월
+				var eventDate = eventFullDate.getDate(); // 선택된 이벤트 일
+				var eventDay = eventFullDate.getDay(); 
+				
+				console.log(eventDay);
+				console.log(eventDate);
+				console.log(eventMonth);
+				console.log(eventYear);
+			
+			},
+				
+
 		defaultView: 'dayGridMonth',
 		defaultDate: new Date(),
 		header: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,dayGridWeek,dayGridDay' },
-		 dateClick: function(date) {
-			 var date = date.dateStr;
-			 var dateSplit = date.split('-');
-		   	var yy=dateSplit[0];
-			var mm=dateSplit[1];
-			var dd=dateSplit[2];
-			 $('#modal').show();
-			 
-			 $("#select").on("click",function(){
-					var item=$("#trainerSchedule option:selected").val();
-					console.log(yy);
-					console.log(mm);
-					console.log(dd);
-					console.log(item);
-					var scheduleTime = date+"-"+item;
-					console.log(scheduleTime);
-					$.ajax({
-						url:"${contextPath}/trainer/trainerSchedule/${trainerNo}",
-						data: {"scheduleTime":scheduleTime},
-						success:function(schedule){
-							location.reload();
-						},error:function(){
-							console.log("통신 실패");
-						}
-					});
-				});
-		  }
-		 
-		
 	
-		
 	}); 
 
 	calendar.render(); 
@@ -116,50 +103,9 @@ document.addEventListener('DOMContentLoaded', function() {
  
 <div id='calendar'></div>
 
- <div id="modal" class="searchModal">
- 	
- 	<div class="search-modal-content">
- 	<button id="close" onclick="closeModal();">
-			X
-			</button>
-		<div class="page-header">
-			<h1>SCHEDULE</h1>
-			
-		</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<div class="row">
-						<div class="col-sm-12">
-							<select id="trainerSchedule" name="trainerSchedule" class="form-control" style="width:400px; height:50px; display: inline-block;">
-							 <option value="12:00">12:00</option>
-							 <option value="13:00">13:00</option>
-							 <option value="14:00">14:00</option>
-							 <option value="15:00">15:00</option>
-							 <option value="16:00">16:00</option>
-							 <option value="17:00">17:00</option>
-							 <option value="18:00">18:00</option>
-							 <option value="19:00">19:00</option>						 
-							 <option value="20:00">20:00</option>
-                  			 <option value="21:00">21:00</option>
-                   			 <option value="22:00">22:00</option>
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-<hr>
-			<div id="select" class="select" style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="closeModal();">
-			선택
-			</div>
-	
-		</div>
-	</div>
 
 </body>
 <script>
-function closeModal(){
-	$('#modal').hide();
-};
 
 </script>
 </html>

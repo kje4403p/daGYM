@@ -19,6 +19,7 @@ import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 
 @Service
@@ -172,4 +173,18 @@ public class TrainerServiceImpl implements TrainerService{
 	public int updateCnt(int trainerNo) {
 		return trainerDAO.updateCnt(trainerNo);
 	}
+	
+	@Transactional(rollbackFor= Exception.class)
+	@Override
+	public int insertSchedule(TrainerSchedule trainerSchedule) {
+		return trainerDAO.insertSchedule(trainerSchedule);
+	}
+
+	@Override
+	public List<TrainerSchedule> selectSchedule(int trainerNo) {
+		return trainerDAO.selectSchedule(trainerNo);
+	}
+	
+	
+
 }

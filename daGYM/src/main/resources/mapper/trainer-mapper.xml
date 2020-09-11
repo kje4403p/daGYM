@@ -38,6 +38,12 @@
     </resultMap>
     
     
+	 <resultMap type="TrainerSchedule" id="TrainerScheduleResultSet">
+        <result property="scheduleTime" column="SCHEDULE_TIME"/>
+        <result property="trainerNo" column="TRAINER_NO"/>
+    </resultMap>
+    
+    
 	<select id="selectList" resultMap="trainerResultSet">
 SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
 	</select>
@@ -126,4 +132,12 @@ SELECT * FROM DUAL
 		TRAINER_M_CNT = TRAINER_M_CNT+1
 		WHERE TRAINER_NO = #{trainerNo}
   	</update>
+  	
+  	<insert id="insertSchedule" parameterType="TrainerSchedule">
+  	INSERT INTO TRAINER_SCHEDULE VALUES(#{scheduleTime},#{trainerNo})
+  	</insert>
+  	
+  	<select id="selectSchedule" parameterType="_int" resultMap="TrainerScheduleResultSet">
+  	SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{trainerNo}
+  	</select>
 </mapper>
