@@ -86,6 +86,27 @@
     	WHERE BOARD_NO = #{boardNo}
     </update>
     
+    <update id="updateEvent" parameterType="Board">
+    	UPDATE BOARD SET
+    	BOARD_TITLE = #{boardTitle},
+    	BOARD_CONTENT = #{boardContent},
+    	START_DATE = #{startDate},
+    	END_DATE = #{endDate}
+    	WHERE BOARD_NO = #{boardNo}
+    </update>
+    
+    <update id="updateAttachment" parameterType="Attachment">
+      	UPDATE ATTACHMENT SET
+   		ORIGIN_NAME = #{fileOriginName},
+   		CHANGED_NAME = #{fileChangeName}
+   		WHERE FILE_NO = #{fileNo}
+    </update>
+    
+    <delete id="deleteAttachmentOne" parameterType="_int">
+    	DELETE FROM ATTACHMENT
+   		WHERE FILE_NO = #{fileNo}
+    </delete>
+    
     <!-- 종료 이벤트 -->
     
 	<select id="selectEndList" resultMap="boardRs">

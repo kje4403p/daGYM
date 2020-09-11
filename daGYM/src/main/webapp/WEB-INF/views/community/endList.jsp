@@ -48,7 +48,7 @@
 	<hr>
 	
 	<div class="my-4">
-		<c:set var="url" value="${contextPath}/event/list?cp="></c:set>
+		<c:set var="url" value="${contextPath}/event/end-list?cp="></c:set>
         	<ul class="pagination">
             	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize }">	
 	                <li>
