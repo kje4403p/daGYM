@@ -93,4 +93,10 @@ public interface MemberService {
 	 * @return myBoardList
 	 */
 	List<MyPass> MyPassList(int memberNo, PageInfo pInfo);
+
+	/** 아이디찾기 Service
+	 * @param email
+	 * @return id
+	 */
+	String findId(String email);
 }

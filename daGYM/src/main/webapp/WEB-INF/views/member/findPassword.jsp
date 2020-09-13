@@ -14,6 +14,10 @@
 		#btn-area{
 			padding-top: 10px;
 		}
+		.id-area{
+			min-height : 300px;
+		}
+		
 	</style>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 	<meta charset="UTF-8">
@@ -46,49 +50,44 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-b-30">
-				<form action="loginAction" method="POST" class="login100-form validate-form">
-					<span class="login100-form-title p-b-40">
-						Login
+			
+					<span class="login100-form-title p-b-30">
+						비밀번호 찾기
 					</span>
 
-					<div class="wrap-input100 validate-input m-b-16" data-validate="Please enter email: ex@abc.xyz">
-						<input class="input100" type="text" name="memberId" placeholder="Id">
-						<span class="focus-input100"></span>
-					</div>
+					<label>아이디와 이메일을 입력해주세요.</label>
+					
+						<div class="wrap-input100 validate-input m-b-3" >
+							<input class="input100" type="text" name="id" id="id" placeholder="Id">
+							<input class="input100" type="text" name="email" id="email" placeholder="Email">
+							<span class="focus-input100"></span>
+						</div>
+	
+	
+						<div class="container-login100-form-btn" id="btn-area">
+							<button class="login100-form-btn" id="find-btn">
+								아이디 찾기
+							</button>
+							<button class="login100-form-btn" id="login" onclick="location.href='login' ">
+								로그인
+							</button>
+						</div>
+					
+					
 
-					<div class="wrap-input100 validate-input m-b-20" data-validate = "Please enter password">
-						<span class="btn-show-pass">
-							<i class="fa fa fa-eye"></i>
-						</span>
-						<input class="input100" type="password" name="memberPwd" placeholder="Password">
-						<span class="focus-input100"></span>
-						
-					</div>
-						<a href="findIdView" id="findId" class="txt2 bo2 hov1">
-							아이디찾기
-						</a>
-						<a href="findPwView" id="findPw" class="txt2 bo2 hov1">
-							비밀번호찾기
-						</a>
-
-					<div class="container-login100-form-btn" id="btn-area">
-						<button class="login100-form-btn">
-							Login
-						</button>
-					</div>
-
-					<div class="flex-col-c ">
-						<span class="txt2 p-t-10 p-b-10">
-							Don’t have an account?
-						</span>
-
-						<a href="signUp" class="txt3 bo1 hov1">
-							Sign up now
-						</a>
-					</div>
-
-				</form>
+				
 			</div>
+		</div>
+	</div>
+	
+	<!-- 모달창 -->
+	<div class="modal hidden">
+		<div class="md_overlay"></div>
+		<div class="md_content">
+			
+			<div class="modal_text">
+			</div>
+			<button>X</button>
 		</div>
 	</div>
 
@@ -117,6 +116,26 @@
 	  gtag('js', new Date());
 
 	  gtag('config', 'UA-23581568-13');
+	</script>
+	<script>
+		$("#find-btn").click(function(){
+			var $email = $("#email").val();
+			
+			$.ajax({
+				url : "${contextPath}/member/findId",
+				data : {"email": $email},
+				method : "POST",
+				success : function(id){
+					swal("아이디는 " +id + " 입니다.");
+				},error:function(){
+					console.log("실패");
+				}
+				
+			})
+			
+			
+		})
+	
 	</script>
 	<jsp:include page="../common/footer.jsp"/>
 </body>

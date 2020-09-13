@@ -295,6 +295,7 @@ public class MemberController {
 				
 				return "redirect:/";
 			}
+			// 인증번호 메일 보내기
 			@ResponseBody
 			@RequestMapping(value = "sendEmail", method=RequestMethod.GET)
 			public String mailSending(HttpServletRequest request, String email, HttpServletResponse response) throws IOException {
@@ -330,6 +331,20 @@ public class MemberController {
 				String code = dice+"";
 				
 				return code;
+			}
+			
+			// 아이디 찾기 화면 이동
+			@RequestMapping("findIdView")
+			public String findIdView() {
+				return "member/findId";
+				
+			}
+			@ResponseBody
+			@RequestMapping("findId")
+			public String findId(String email) {
+				String id = memberService.findId(email);
+				System.out.println(id);
+				return id;
 			}
 			
 			
