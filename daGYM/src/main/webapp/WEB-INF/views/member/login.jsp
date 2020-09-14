@@ -7,6 +7,14 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 	<title>Login</title>
+	<style>
+		#findId{
+			margin: 40px;
+		}
+		#btn-area{
+			padding-top: 10px;
+		}
+	</style>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -54,9 +62,16 @@
 						</span>
 						<input class="input100" type="password" name="memberPwd" placeholder="Password">
 						<span class="focus-input100"></span>
+						
 					</div>
+						<a href="findIdView" id="findId" class="txt2 bo2 hov1">
+							아이디찾기
+						</a>
+						<a href="findPwView" id="findPw" class="txt2 bo2 hov1">
+							비밀번호찾기
+						</a>
 
-					<div class="container-login100-form-btn">
+					<div class="container-login100-form-btn" id="btn-area">
 						<button class="login100-form-btn">
 							Login
 						</button>

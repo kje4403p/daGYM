@@ -19,6 +19,7 @@ import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.serviceCenter.ServiceDAO;
+import com.kh.dagym.serviceCenter.vo.QnaBoard;
 import com.kh.dagym.serviceCenter.vo.Search;
 
 
@@ -31,6 +32,9 @@ public class ServiceBoardImpl implements ServiceBoard{
 	
 	@Autowired //의존성 주입(DI)
 	private PageInfo pInfo;
+	
+	@Autowired
+	private com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo2;
 
 	@Override
 	public PageInfo pagination(int type, int cp) {
@@ -54,9 +58,12 @@ public class ServiceBoardImpl implements ServiceBoard{
 	//faq 게시글 상세조회 Service구현
 	
 	@Override
-	public Board selectFaqBoard(int boardNo) {
+	public Board selectFaqBoard(int boardNo,int type) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("boardNo", boardNo);
+		map.put("type", type);
 		
-		Board board = serviceDAO.selectFaqBoard(boardNo);
+		Board board = serviceDAO.selectFaqBoard(map);
 		
 		if(board != null) {
 			
@@ -297,5 +304,73 @@ public class ServiceBoardImpl implements ServiceBoard{
 	public int deleteFaqBoard(int boardNo) {
 		return serviceDAO.deleteFaqBoard(boardNo);
 	}
+
+	// qaList 페이징 처리 service 구현
+	@Override
+	public com.kh.dagym.serviceCenter.vo.PageInfoSv paginationQa(int type, int cp,int loginMemberNo) {
+		int listCount = serviceDAO.getQaListCount(type,loginMemberNo);
+		pInfo2.setPageInfo(cp, listCount, type);
+		pInfo2.setMemberNo(loginMemberNo);
+		return pInfo2;
+		}
+	
+
+	//Qa 리스트 조회 service구현
+	@Override
+	public List<QnaBoard> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo) {
+		
+		return serviceDAO.selectQaList(pInfo);
+	}
+
+	// queset 게시글 상세 조회
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public Board selectQnaBoard(int boardNo) {
+		Board board = serviceDAO.selectQnaBoard(boardNo);
+		board.setBoardWriter(serviceDAO.selectMemberId(board.getBoardWriter()));
+		System.out.println(board.getBoardWriter()+"qqqq");
+		if(board!= null) {
+			int result = serviceDAO.increaseCount2(boardNo);
+			
+			if(result>0) {
+				board.setViews(board.getViews()+1);
+			}
+		}
+		return board;
+	}
+
+
+	//qa게시글 등록 서비스 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int insertQaBoard(Board board, List<MultipartFile> images, String savePath) {
+		
+		int result = 0;
+		
+		int boardNo = serviceDAO.selectNextNo(board.getBoardType());
+		
+		if(boardNo>0) {
+			board.setBoardNo(boardNo);
+			
+			board.setBoardContent(replaceParameter(board.getBoardContent()));
+			
+			result = serviceDAO.insertFaq(board);
+			
+			
+		}
+		
+		return 0;
+	}
+
+
+	//게시글 이미지 여부 Service구현
+	@Override
+	public List<Attachment> selectImgList(String boardWriter) {
+		
+		return serviceDAO.selectImgList(boardWriter);
+	}
+
+
+	
 
 }

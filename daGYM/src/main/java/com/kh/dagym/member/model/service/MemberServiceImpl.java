@@ -14,6 +14,7 @@ import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
+import com.kh.dagym.member.model.vo.MyStudents;
 
 @Service //Service 레이어, 비지니스 로직 처리를 하는 클래스임을 명시 + Bean 등록
 public class MemberServiceImpl implements MemberService{
@@ -122,9 +123,7 @@ public class MemberServiceImpl implements MemberService{
 		// 내 게시판 페이징 처리 Service 구현
 		@Override
 		public PageInfo boardPagination(int type, int cp, int rerlyMemberNo) {
-			// 1) 전체  댓글 수 조회
 			int listCount = memberDAO.getMyBoardListCount(rerlyMemberNo);
-			// 2) setPageInfo 호출
 			pInfo.setLimit(10);
 			pInfo.setPageInfo(cp, listCount, type);		
 
@@ -141,9 +140,7 @@ public class MemberServiceImpl implements MemberService{
 		// 이용권 및 결제정보 페이징 처리 Service 구현
 		@Override
 		public PageInfo myPassPagination(int type, int cp, int memberNo) {
-			// 1) 전체  댓글 수 조회
 			int listCount = memberDAO.getMyPassListCount(memberNo);
-			// 2) setPageInfo 호출
 			pInfo.setLimit(10);
 			pInfo.setPageInfo(cp, listCount, type);		
 
@@ -155,5 +152,28 @@ public class MemberServiceImpl implements MemberService{
 		public List<MyPass> MyPassList(int memberNo, PageInfo pInfo) {
 			List<MyPass> myPassList = memberDAO.myPassList(memberNo,pInfo);
 			return myPassList;
+		}
+		
+		// 아이디 찾기 구현
+		@Override
+		public String findId(String email) {
+			return memberDAO.findId(email);
+		}
+		
+		// 내 수강생 조회 페이징 처리 Service 구현
+		@Override
+		public PageInfo myStudentsPagination(int type, int cp, int memberNo) {
+			int listCount = memberDAO.getMyStudentsListCount(memberNo);
+			pInfo.setLimit(10);
+			pInfo.setPageInfo(cp, listCount, type);		
+
+			return pInfo;
+		}
+		
+		// 내 수강생 조회  Service 구현
+		@Override
+		public List<MyStudents> myStudentsList(int memberNo, PageInfo pInfo) {
+			List<MyStudents> myStudentsList = memberDAO.myStudentsList(memberNo,pInfo);
+			return myStudentsList;
 		}
 }

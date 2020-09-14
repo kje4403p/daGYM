@@ -65,7 +65,15 @@
 				encType="multipart/form-data" onsubmit="return validate();">
 
 				<div class="mb-2">
-					
+				 <c:if test="${type == 3}">
+					<label class="input-group-addon mr-3 insert-label">질문유형</label> 
+					<select	class="custom-select" id="category" name="qnaCode" style="width: 150px;">
+						<option value="1">운동</option>
+						<option value="2">식단</option>
+						<option value="3">이용관련</option>
+						<option value="4">결제/환불</option>
+					</select>
+				</c:if>
 				</div>
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">제목</label> 

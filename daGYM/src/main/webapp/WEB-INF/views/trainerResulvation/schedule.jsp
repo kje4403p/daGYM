@@ -1,6 +1,9 @@
+<%@page import="com.kh.dagym.trainer.model.vo.TrainerSchedule"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%List<TrainerSchedule> schedule = (List<TrainerSchedule>)request.getAttribute("schedule");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,29 +46,62 @@ float: right;
 .search-modal-content{
 background-color: #fcf8e3;
 }
+
         </style>
         
 <script>
 document.addEventListener('DOMContentLoaded', function() { 
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, { 
+		  initialView: 'resourceTimeGridDay',
 		plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+		 events: [
+			 <%
+			 for(int i=0; i<schedule.size(); i++){
+				 TrainerSchedule sd = (TrainerSchedule)schedule.get(i);
+			 %>
+			
+			 {	
+			
+				 start: "<%=sd.getScheduleTime()%>"
+		
+			 },
+			 
+			 <%}%>
+			 ],
 		defaultView: 'dayGridMonth',
 		defaultDate: new Date(),
 		header: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,dayGridWeek,dayGridDay' },
 		 dateClick: function(date) {
-			 alert("왜안돼");
 			 var date = date.dateStr;
 			 var dateSplit = date.split('-');
 		   	var yy=dateSplit[0];
 			var mm=dateSplit[1];
 			var dd=dateSplit[2];
-			console.log(yy);
-			console.log(mm);
-			console.log(dd);
-			
 			 $('#modal').show();
+			 
+			 $("#select").on("click",function(){
+					var item=$("#trainerSchedule option:selected").val();
+					console.log(yy);
+					console.log(mm);
+					console.log(dd);
+					console.log(item);
+					var scheduleTime = date+"-"+item;
+					console.log(scheduleTime);
+					$.ajax({
+						url:"${contextPath}/trainer/trainerSchedule/${trainerNo}",
+						data: {"scheduleTime":scheduleTime},
+						success:function(schedule){
+							location.reload();
+						},error:function(){
+							console.log("통신 실패");
+						}
+					});
+				});
 		  }
+		 
+		
+	
 		
 	}); 
 
@@ -94,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				<div class="col-sm-12">
 					<div class="row">
 						<div class="col-sm-12">
-							<select name="trainerSchedule" class="form-control" style="width:400px; height:50px; display: inline-block;">
+							<select id="trainerSchedule" name="trainerSchedule" class="form-control" style="width:400px; height:50px; display: inline-block;">
 							 <option value="12:00">12:00</option>
 							 <option value="13:00">13:00</option>
 							 <option value="14:00">14:00</option>
@@ -112,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				</div>
 			</div>
 <hr>
-			<div class="select" style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="closeModal();">
+			<div id="select" class="select" style="cursor:pointer;background-color:#DDDDDD;text-align: center;padding-bottom: 10px;padding-top: 10px;" onclick="closeModal();">
 			선택
 			</div>
 	

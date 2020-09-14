@@ -38,6 +38,12 @@
     </resultMap>
     
     
+	 <resultMap type="TrainerSchedule" id="TrainerScheduleResultSet">
+        <result property="scheduleTime" column="SCHEDULE_TIME"/>
+        <result property="trainerNo" column="TRAINER_NO"/>
+    </resultMap>
+    
+    
 	<select id="selectList" resultMap="trainerResultSet">
 SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
 	</select>
@@ -100,9 +106,9 @@ SELECT * FROM DUAL
 	</insert>
 	 
 	
-	<!-- 트레이너 가격조회 -->
-  	<select id="selectPrice" parameterType="_int" resultType="_int">
-  		SELECT TRAINER_PRICE FROM TRAINER WHERE TRAINER_NO=#{trainerNo}
+	<!-- 트레이너 가격, 이름 조회 -->
+  	<select id="selectPrice" parameterType="_int" resultMap="trainerResultSet">
+  		SELECT TRAINER_PRICE, MEMBER_NM FROM TRAINER JOIN MEMBER ON(TRAINER.TRAINER_NO=MEMBER.MEMBER_NO) WHERE TRAINER.TRAINER_NO=#{trainerNo}
   	</select>
   	
   	<!-- 수강권 삽입 -->
@@ -126,4 +132,12 @@ SELECT * FROM DUAL
 		TRAINER_M_CNT = TRAINER_M_CNT+1
 		WHERE TRAINER_NO = #{trainerNo}
   	</update>
+  	
+  	<insert id="insertSchedule" parameterType="TrainerSchedule">
+  	INSERT INTO TRAINER_SCHEDULE VALUES(#{scheduleTime},#{trainerNo})
+  	</insert>
+  	
+  	<select id="selectSchedule" parameterType="_int" resultMap="TrainerScheduleResultSet">
+  	SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{trainerNo}
+  	</select>
 </mapper>

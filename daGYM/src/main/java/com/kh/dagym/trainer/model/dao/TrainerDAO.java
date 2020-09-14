@@ -11,6 +11,7 @@ import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 @Repository
 public class TrainerDAO {
@@ -101,6 +102,15 @@ public class TrainerDAO {
 	 */
 	public int updateCnt(int trainerNo) {
 		return sqlSession.update("trainerMapper.updateCnt",trainerNo);
+	}
+
+
+	public int insertSchedule(TrainerSchedule trainerSchedule) {
+		return sqlSession.update("trainerMapper.insertSchedule",trainerSchedule);
+	}
+
+	public List<TrainerSchedule> selectSchedule(int trainerNo) {
+		return sqlSession.selectList("trainerMapper.selectSchedule",trainerNo);
 	}
 
 

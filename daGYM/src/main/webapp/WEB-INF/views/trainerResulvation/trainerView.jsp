@@ -66,36 +66,6 @@
 	}
 	</style>
 	
-<script>
-$(document).ready(function(){
-	  $('#calendar').fullCalendar({
-	    header: {
-	      right: 'custom2 prevYear,prev,next,nextYear'
-	    },
-        // 출석체크를 위한 버튼 생성
-	    customButtons: { 
-	        custom2: {
-	          text: '출석체크하기',
-	          id: 'check',
-	          click: function() {	
-                    // ajax 통신으로 출석 정보 저장하기 
-                    // POST "/users/attendances" -> { status: "success", date:"2018-07-01"}
-                    // 통신 성공시 버튼 바꾸고, property disabled 만들기 
-	          }
-	        }
-	    },
-       // 달력 정보 가져오기 
-	    eventSources: [
-	    	{
-				// ajax 통신으로 달력 정보 가져오기 
-                // GET "/users/attendances" -> {dateList:[ date: "2016-03-21", ... ]}
-				color: 'purple',   
-			 	textColor: 'white' 
-	    	}
-	    ]
-	  }); 
-});
-</script>
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
@@ -107,7 +77,7 @@ $(document).ready(function(){
 	
 		<section id="hello" class="home bg-mega">
 		<div class="container calendar-container">
-					<div id="calendar" style="max-width:900px; margin:40px auto;"></div>
+		
 				</div>
 			<div class="trainerImg">
 					<c:if test="${!empty files }">
@@ -194,8 +164,14 @@ $(document).ready(function(){
 				<!--End off row-->
 			</div>
 			<!--End off container -->
+			<c:if test="${loginMember.memberGrade == 'T'}">
+			<a href="${contextPath}/trainer/schedule/${trainer.trainerNo}">스케줄 등록</a>
+			</c:if>
+			<c:if test="${loginMember.memberGrade == 'G'}">
+			<a href="${contextPath}/trainer/resulvation/${trainer.trainerNo}">예약</a>
+			</c:if>
 		</section>
-
+  
 
 
 
@@ -354,19 +330,18 @@ $(document).ready(function(){
 									<li class="disabled"><i class="fa fa-times-circle"></i> Full Statistics</li>
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
-									<c:choose>
-									
-									<c:when test="${loginMember !=null }">
-										<c:url var="url" value="../paymentView/${trainer.trainerNo }">
+									<c:set var="trainerNo" value="${trainer.trainerNo}"/>
+								<c:choose>
+									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="10"/>
 										</c:url>
-										<a href="${url }"class="btn btn-primary">결제하기</a>
-									
-									</c:when>
-									<c:otherwise>
-										로그인 후 결제할 수 있습니다.
-									</c:otherwise>
-								</c:choose>
+										<a href="${url }"class="btn btn-primary" id="order">결제하기</a>
+			                    	</c:when>
+			                    	<c:otherwise>
+			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+			                    	</c:otherwise>
+			                    	</c:choose>
 								</div>
 							</div>
 						</div>
@@ -391,19 +366,18 @@ $(document).ready(function(){
 									<li><i class="fa fa-check-circle text-primary"></i> Full Statistics</li>
 								</ul>
 								<div class="pricing_btn text-center m-top-40">
-									<c:choose>
-									
-									<c:when test="${loginMember !=null }">
-										<c:url var="url" value="../paymentView/${trainer.trainerNo }">
+									<c:set var="trainerNo" value="${trainer.trainerNo}"/>
+								<c:choose>
+									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="20"/>
 										</c:url>
-										<a href="${url }"class="btn btn-primary">결제하기</a>
-									
-									</c:when>
-									<c:otherwise>
-										로그인 후 결제할 수 있습니다.
-									</c:otherwise>
-								</c:choose>
+										<a href="${url }"class="btn btn-primary" id="order">결제하기</a>
+			                    	</c:when>
+			                    	<c:otherwise>
+			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+			                    	</c:otherwise>
+			                    	</c:choose>
 								</div>
 							</div>
 						</div>

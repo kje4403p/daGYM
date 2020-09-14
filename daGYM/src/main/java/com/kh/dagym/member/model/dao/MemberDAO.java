@@ -12,6 +12,7 @@ import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
+import com.kh.dagym.member.model.vo.MyStudents;
 
 @Repository
 public class MemberDAO {
@@ -85,7 +86,7 @@ public class MemberDAO {
 	 * @return listCount
 	 */
 	public int getMyReplyListCount(int rerlyMemberNo) {
-		return sqlSession.selectOne("memberMapper.getMyReplyListCount",rerlyMemberNo);
+		return sqlSession.selectOne("memberMapper.MyReplyListCount",rerlyMemberNo);
 	}
 
 	/** 내 게시판 페이징 처리 DAO
@@ -94,7 +95,7 @@ public class MemberDAO {
 	 */
 	public int getMyBoardListCount(int rerlyMemberNo) {
 		int boardWriter = rerlyMemberNo;
-		return sqlSession.selectOne("memberMapper.getMyBoardListCount",boardWriter);
+		return sqlSession.selectOne("memberMapper.MyBoardListCount",boardWriter);
 	}
 
 	/** 내 게시판 DAO
@@ -114,11 +115,11 @@ public class MemberDAO {
 	 * @return listCount
 	 */
 	public int getMyPassListCount(int memberNo) {
-		return sqlSession.selectOne("memberMapper.getMyPassListCount",memberNo);
+		return sqlSession.selectOne("memberMapper.MyPassListCount",memberNo);
 	}
 	
 	
-	/** 이용권 및 결제정보 페이징 처리 DAO
+	/** 이용권 및 결제정보 DAO
 	 * @param memberNo
 	 * @param pInfo
 	 * @return myPassList
@@ -127,5 +128,32 @@ public class MemberDAO {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		return sqlSession.selectList("memberMapper.myPassList", memberNo,rowBounds);
+	}
+
+	/** 아이디 찾기 DAO
+	 * @param email
+	 * @return id
+	 */
+	public String findId(String email) {
+		return sqlSession.selectOne("memberMapper.findId", email);
+	}
+
+	/** 내 수강생 페이징 처리 DAO
+	 * @param memberNo
+	 * @return listCount
+	 */
+	public int getMyStudentsListCount(int memberNo) {
+		return sqlSession.selectOne("memberMapper.MyStudentsListCnt",memberNo);
+	}
+
+	/** 내 수강생 조회 Service DAO
+	 * @param memberNo
+	 * @param pInfo
+	 * @return myStudentsList
+	 */
+	public List<MyStudents> myStudentsList(int memberNo, PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("memberMapper.myStudentsList", memberNo,rowBounds);
 	}	
 }

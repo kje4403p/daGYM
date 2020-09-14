@@ -245,9 +245,8 @@
                         <img id="event0"  alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
-                    
                         </div>
-                        <h4><a href="#">10 States At Risk of Rural Hospital Closures</a></h4>
+                        <h4><a href="#" id="title0">10 States At Risk of Rural Hospital Closures</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -255,9 +254,8 @@
                         <img id="event1"  alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
-                            
                         </div>
-                        <h4><a href="#">Diver who helped save Thai soccer team</a></h4>
+                        <h4><a href="#" id="title1">Diver who helped save Thai soccer team</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
@@ -265,9 +263,8 @@
                         <img id="event2"  alt="">
                         <div class="blog-widget">
                             <div class="bw-date">February 17, 2019</div>
-                            
                         </div>
-                        <h4><a href="#">Man gets life in prison for stabbing</a></h4>
+                        <h4><a href="#" id="title2">Man gets life in prison for stabbing</a></h4>
                     </div>
                 </div>
             </div>
@@ -291,18 +288,18 @@
     <script>
     $(function(){
     	eventViews();
+    	titleViews();
     })
     	function eventViews(){
     		$.ajax({
     			url : "${contextPath}/eventViews",
     			dataType : "JSON",
     			success : function(list){
-    				console.log(list)
     				$.each(list,function(index, item){
-    					src="<%=request.getContextPath()%>/resources/uploadImages"+item.fileChangeName; 
+    					console.log(list)
+    					src="<%=request.getContextPath()%>/resources/uploadImages/"+item.fileChangeName; 
+    					
     					$("#event"+index).attr("src",src)
-    					
-    					
     				})
     			}, error : function(){
     				console.log("통신실패")
@@ -310,6 +307,23 @@
     		})
     		
     	}
+    function titleViews(){
+		$.ajax({
+			url : "${contextPath}/eventTitle",
+			dataType : "JSON",
+			success : function(list){
+				$.each(list,function(index, item){
+				
+					
+				
+					$("#title"+index).html(item.boardTitle)
+				})
+			}, error : function(){
+				console.log("통신실패")
+			}
+		})
+		
+	}
     
     </script>
        

@@ -75,8 +75,17 @@
                         
                     <div class="form-group">
                     
-                    <label>주문명</label>
-                       <input type="text" class="form-control" id="name" name="classNm" value="${classNm}" required data-error="*Please fill out this field">
+                    <label>트레이너 </label>
+                    	
+                       <input  type="text" class="form-control" id="trainerName" name="trainerName" value="${trainer.memberName}" required data-error="*Please fill out this field">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                    
+                     <div class="form-group">
+                    
+                    <label>회수 </label>
+                    	
+                       <input  type="text" class="form-control" id="name" name="classNm" value="${classNm}" required data-error="*Please fill out this field">
                         <div class="help-block with-errors"></div>
                     </div>
                     
