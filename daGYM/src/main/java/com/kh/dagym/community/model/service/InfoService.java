@@ -2,6 +2,8 @@ package com.kh.dagym.community.model.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 
