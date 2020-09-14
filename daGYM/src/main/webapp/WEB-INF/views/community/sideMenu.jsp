@@ -11,7 +11,7 @@
 	<h3>Side Menu</h3>
 	<ul class="list-group">
 		<li class="list-group-item list-group-item-action"><a href="${contextPath}/event/list">이벤트</a></li>
-		<li class="list-group-item list-group-item-action"><a href="${contextPath}/info">정보 게시판</a></li>
+		<li class="list-group-item list-group-item-action"><a href="${contextPath}/info/list">정보 게시판</a></li>
 	</ul>
 </div>
 </body>

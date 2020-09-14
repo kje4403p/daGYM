@@ -10,7 +10,7 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private Timestamp boardEnrollDate;
-	private Timestamp boardModiftDate;
+	private Timestamp boardModifyDate;
 	private String boardStatus;
 	private int qnaCode;
 	private Date startDate;
@@ -22,7 +22,7 @@ public class Board {
 	}
 
 	public Board(int boardNo, String boardWriter, int boardType, String boardTitle, String boardContent,
-			Timestamp boardEnrollDate, Timestamp boardModiftDate, String boardStatus, int qnaCode, Date startDate,
+			Timestamp boardEnrollDate, Timestamp boardModifyDate, String boardStatus, int qnaCode, Date startDate,
 			Date endDate, int views) {
 		super();
 		this.boardNo = boardNo;
@@ -31,7 +31,7 @@ public class Board {
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardEnrollDate = boardEnrollDate;
-		this.boardModiftDate = boardModiftDate;
+		this.boardModifyDate = boardModifyDate;
 		this.boardStatus = boardStatus;
 		this.qnaCode = qnaCode;
 		this.startDate = startDate;
@@ -87,12 +87,12 @@ public class Board {
 		this.boardEnrollDate = boardEnrollDate;
 	}
 
-	public Timestamp getBoardModiftDate() {
-		return boardModiftDate;
+	public Timestamp getBoardModifyDate() {
+		return boardModifyDate;
 	}
 
-	public void setBoardModiftDate(Timestamp boardModiftDate) {
-		this.boardModiftDate = boardModiftDate;
+	public void setBoardModifyDate(Timestamp boardModifyDate) {
+		this.boardModifyDate = boardModifyDate;
 	}
 
 	public String getBoardStatus() {
@@ -135,8 +135,6 @@ public class Board {
 		this.views = views;
 	}
 	
-	
-
 	public String getBoardWriter() {
 		return boardWriter;
 	}
@@ -144,12 +142,14 @@ public class Board {
 	public void setBoardWriter(String boardWriter) {
 		this.boardWriter = boardWriter;
 	}
+	
+	
 
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", memberNo=" + boardWriter + ", boardType=" + boardType + ", boardTitle="
 				+ boardTitle + ", boardContent=" + boardContent + ", boardEnrollDate=" + boardEnrollDate
-				+ ", boardModiftDate=" + boardModiftDate + ", boardStatus=" + boardStatus + ", qnaCode=" + qnaCode
+				+ ", boardModifyDate=" + boardModifyDate + ", boardStatus=" + boardStatus + ", qnaCode=" + qnaCode
 				+ ", startDate=" + startDate + ", endDate=" + endDate + ", views=" + views + "]";
 	}
 

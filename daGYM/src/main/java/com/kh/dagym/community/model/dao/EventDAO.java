@@ -18,7 +18,6 @@ public class EventDAO {
 	
 	@Autowired
 	public EventDAO(SqlSessionTemplate sqlSession) {
-		super();
 		this.sqlSession = sqlSession;
 	}
 
