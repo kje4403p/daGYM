@@ -14,7 +14,8 @@
 <script src='${contextPath}/resources/fullcalendar/packages/core/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/daygrid/main.js'></script>
-
+<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
           /* The Modal (background) */
 .searchModal {
@@ -50,6 +51,8 @@ background-color: #fcf8e3;
         </style>
         
 <script>
+swal({icon : "${status}",title : "${msg}", text : "${text}"});
+
 document.addEventListener('DOMContentLoaded', function() { 
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, { 
@@ -61,27 +64,31 @@ document.addEventListener('DOMContentLoaded', function() {
 				 TrainerSchedule sd = (TrainerSchedule)schedule.get(i);
 			 %>
 			
-			 {	
+			 {	 
 				 
 				 start: "<%=sd.getScheduleTime()%>"
-		
+					
 			 },
 			 
 			 <%}%>
 			 ],
 			 eventColor: "orange",
-			 eventClick: function(info) {
-				var eventFullDate = info.event.start;
-				  
-				var eventYear = eventFullDate.getFullYear() // 선택된 이벤트 연도
-				var eventMonth = eventFullDate.getMonth() + 1; // 선택된 이벤트 월
-				var eventDate = eventFullDate.getDate(); // 선택된 이벤트 일
-				var eventDay = eventFullDate.getDay(); 
-				
-				console.log(eventDay);
-				console.log(eventDate);
-				console.log(eventMonth);
-				console.log(eventYear);
+			 eventClick: function(info,start) {
+				var eventFullDate = info.event.start;			  		
+				var scheduleTime =moment(eventFullDate).format('YY/MM/DD HH:mm:00.000000000');
+			console.log(scheduleTime);
+				if(confirm(info.event.start+"                   예약 하시겠습니까?")){
+					$.ajax({
+						url:"${contextPath}/trainer/resulvation/${trainerNo}",
+						data: {"scheduleTime":scheduleTime},
+						success:function(schedule){
+							 eventColor: "red"
+							 swal("SUCCESS","예약 성공하였습니다.");
+						},error:function(){
+							console.log("통신 실패");
+						}
+					});
+				}
 			
 			},
 				

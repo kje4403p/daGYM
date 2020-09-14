@@ -168,7 +168,7 @@
 			<a href="${contextPath}/trainer/schedule/${trainer.trainerNo}">스케줄 등록</a>
 			</c:if>
 			<c:if test="${loginMember.memberGrade == 'G'}">
-			<a href="${contextPath}/trainer/resulvation/${trainer.trainerNo}">예약</a>
+			<a href="${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}">트레이너 예약</a>
 			</c:if>
 		</section>
   

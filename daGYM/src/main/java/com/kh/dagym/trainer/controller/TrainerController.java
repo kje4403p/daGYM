@@ -191,12 +191,20 @@ public class TrainerController {
 	 }
 	 
 	 
+	 @RequestMapping("trainerResulvation/{trainerNo}")
+		public String trainerResulvation(@PathVariable int trainerNo, Model model) {
+			List<TrainerSchedule> schedule = trainerService.selectSchedule(trainerNo);
+	 		model.addAttribute("schedule",schedule);
+	 		return "trainerResulvation/resulvation";
+		}
+	 
+	 @ResponseBody
 	 @RequestMapping("resulvation/{trainerNo}")
 		public String resulvation(@PathVariable int trainerNo, Model model,PT pt) {
-		 	Member loginMember = (Member)model.getAttribute("loginMember");
-		 	pt.setMemberNo(loginMember.getMemberNo());
-		 	List<TrainerSchedule> schedule = trainerService.selectSchedule(trainerNo);
-	 		model.addAttribute("schedule",schedule);
+		 Member loginMember = (Member)model.getAttribute("loginMember");
+		 pt.setMemberNo(loginMember.getMemberNo());
+		 System.out.println(pt);
+		int result = trainerService.insertResulvation(pt);
 			return "trainerResulvation/resulvation";
 		}
 }
