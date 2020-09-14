@@ -148,5 +148,11 @@
 		WHERE BOARD_NO = #{boardNo}
 	</select>
 	
+	<insert id="insertInfo" parameterType="Board">
+		INSERT INTO BOARD
+		VALUES(#{boardNo}, #{boardWriter}, #{boardType}, #{boardTitle}, #{boardContent}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, 
+				DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
   
 </mapper>

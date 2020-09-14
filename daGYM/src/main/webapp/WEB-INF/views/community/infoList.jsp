@@ -70,7 +70,7 @@
         
         <%-- 로그인이 되어있는 경우에만 글쓰기 버튼 보이게 하기 --%>
         <c:if test="${!empty loginMember }">
-			<a class="btn btn-primary float-right" href="../${boardList[0].boardType}/insert">글쓰기</a>
+			<a class="btn btn-primary float-right" href="insert?boardType=2">글쓰기</a>
 		</c:if>
       	<!--------------------------------- 페이징바  ---------------------------------->
       	
