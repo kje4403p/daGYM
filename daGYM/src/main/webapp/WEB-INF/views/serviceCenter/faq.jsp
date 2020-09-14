@@ -10,145 +10,9 @@
 <title>Insert title here</title>
 
 <style>
-#d1 {
-	height: 80%;
-	width: 100%;
-	/* border: 1px solid black; */
-	background: linear-gradient(45deg, #49a09d, #5f2c82);
-	box-sizing: border-box;
-}
 
-#left {
-	width: 15%;
-	height: 100%;
-	float: left;
-	box-sizing: border-box;
-}
-
-#right {
-	width: 85%;
-	height: 100%;
-	float: left;
-}
-
-#b1 {
-	margin: 0;
-	background: linear-gradient(45deg, #49a09d, #5f2c82);
-	font-family: sans-serif;
-	font-weight: 100;
-}
-
-/* #dd1{
-	position: relative;
-} */
-.container1 {
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-table {
-	width: 80%;
-	border-collapse: collapse;
-	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-	margin-top: 7%;
-	/* margin-left: */
-}
-
-th, td {
-	padding: 15px;
-	background-color: rgba(255, 255, 255, 0.2);
-	color: #fff;
-	cursor: pointer;
-}
-
-th {
-	text-align: left;
-	padding-top: 70px;
-	padding-bottom: 20px;
-}
-
-thead {th { background-color:#55608f;
-	
-}
-
-}
-tbody {tr { &:hover {
-			background-color : rgba(255, 255, 255, 0.3);
-	
-}
-
-}
-td {
-	position: relative; &: hover { & : before { 
-				 content : "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: -9999px;
-	bottom: -9999px;
-	background-color: rgba(255, 255, 255, 0.2);
-	z-index: -1;
-	
-}
-
-}
-}
-}
-#dd1 {
-	width: 1000px;
-	height: 1000px;
-}
-
-#table1 {
-	width: 100%;
-	height: 100%;
-	float: left;
-	overflow: auto;
-}
-
-
-tr>th:nth-child(2) {
-	width: 400px;
-}
-
-tr>th:not(:nth-child(2)) {
-	width: 120px;
-}
-
-tr>th, tr>td {
-	text-align: center;
-}
-
-tr>td:nth-child(2) /* tr>th:nth-child(2) */ {
-	text-align: left;
-}
-
-tbody>tr>td:last-child {
-	padding-bottom: 10px;
-}
-
-
-#table2{
-	max-width: 1200px;
-}
-/* 검색창 */
-#searchInput, #searchBtn {
-	float: left;
-	margin-left: 60%;
-}
-
-/* 페이징바 */
-
-
-
-
-
-/* 사이드바 css */
 </style>
-
+<link rel="stylesheet" href="${contextPath}/resources/css/service/faq.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 </head>
@@ -162,7 +26,7 @@ tbody>tr>td:last-child {
 		<div id="left">
 
 			<%-- <%@ include file="sideMenu.jsp"%> --%>
-
+			<jsp:include page="sideMenu.jsp" />
 
 		</div>
 
@@ -318,9 +182,8 @@ tbody>tr>td:last-child {
 
 	<jsp:include page="../common/footer.jsp" />
 	<%-- <%@include file="../common/footer.jsp" %> --%>
-
+	
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 	<script>
 		
 	 <%
@@ -330,7 +193,7 @@ tbody>tr>td:last-child {
 	 <% if(tempMember != null){ %>
 	 	loginMember = "<%= tempMember.getMemberId() %>"
 	 <%}%>
-	
+
 		$("#table2 td").on("click",function(e) {
 					$click=$(this);						
 					var boardNo = $(this).parent().children().eq(0).children().val();
@@ -457,6 +320,12 @@ tbody>tr>td:last-child {
 			
 			location.href=searchUrl;
 		});
+		
+		
+	
+	
+	
 	</script>
+	
 </body>
 </html>

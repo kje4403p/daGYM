@@ -90,7 +90,7 @@ public interface ServiceBoard {
 	 * @param pInfo
 	 * @return boardList
 	 */
-	List<Board> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo);
+	List<QnaBoard> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo);
 
 	/** Qa페이징 처리를 위한 Service
 	 * @param type
@@ -112,6 +112,12 @@ public interface ServiceBoard {
 	 * @return result
 	 */
 	int insertQaBoard(Board board, List<MultipartFile> images, String savePath);
+
+	/** 게시글 이미지 포함 여부 조회 Service
+	 * @param bList
+	 * @return
+	 */
+	List<Attachment> selectImgList(String boardWriter);
 
 	
 }

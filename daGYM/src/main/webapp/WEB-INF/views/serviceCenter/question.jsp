@@ -10,174 +10,15 @@
 <title>Insert title here</title>
 
 <style>
-#body1{
-	height:1300px;
-}
 
-#d1 {
-	height: 80%;
-	width: 100%;
-	/* border: 1px solid black; */
-	background: linear-gradient(45deg, #49a09d, #5f2c82);
-	box-sizing: border-box;
-}
-
-#left {
-	width: 15%;
-	height: 100%;
-	float: left;
-	box-sizing: border-box;
-}
-
-#right {
-	width: 85%;
-	height: 100%;
-	float: left;
-}
-
-#b1 {
-	margin: 0;
-	background: linear-gradient(45deg, #49a09d, #5f2c82);
-	font-family: sans-serif;
-	font-weight: 100;
-}
-
-/* #dd1{
-	position: relative;
-} */
-.container1 {
-	position: absolute;
-	top: 100%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-
-table {
-	width: 80%;
-	border-collapse: collapse;
-	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-	margin-top: 7%;
-	/* margin-left: */
-}
-
-th, td {
-	padding: 15px;
-	background-color: rgba(255, 255, 255, 0.2);
-	color: #fff;
-	cursor: pointer;
-}
-
-th {
-	text-align: left;
-	padding-top: 70px;
-	padding-bottom: 20px;
-}
-
-thead {th { background-color:#55608f;
-	
-}
-
-}
-tbody {tr { &:hover {
-			background-color : rgba(255, 255, 255, 0.3);
-	
-}
-
-}
-td {
-	position: relative; &: hover { & : before { 
-				 content : "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: -9999px;
-	bottom: -9999px;
-	background-color: rgba(255, 255, 255, 0.2);
-	z-index: -1;
-	
-}
-
-}
-}
-}
-#dd1 {
-	width: 1000px;
-	height: 1000px;
-}
-
-#table1 {
-	width: 100%;
-	height: 100%;
-	float: left;
-	overflow: auto;
-}
-
-
-tr>th:nth-child(2) {
-	width: 400px;
-}
-
-tr>th:not(:nth-child(2)) {
-	width: 120px;
-}
-
-tr>th, tr>td {
-	text-align: center;
-}
-
-tr>td:nth-child(2) /* tr>th:nth-child(2) */ {
-	text-align: left;
-}
-
-tbody>tr>td:last-child {
-	padding-bottom: 10px;
-}
-
-
-#table2{
-	max-width: 1200px;
-}
-/* 검색창 */
-#searchInput, #searchBtn {
-	float: left;
-	margin-left: 60%;
-}
-
- input[type=text]{
-	border:5px solid #aaa;
-	border-radius:4px;
-	margin:8px 0;
-	outline:none;
-	padding:8px;
-	box-sizing:border-box;
-	transition:.3s;
-	
-}
-input[type=text]:focus{
-	border-color:dodgerBlue;
-	box-sizing: 0 0 50px 0 dodgerBlue;
-}
-
-
-
-/* 페이징바 */
-#pagingbar{
- position: absolute;
-	left:42% ;
-	margin-top: 10px;
-}
-
-#searcharea{
-position: absolute;
-	left:42% ;
-	margin-top: 10px;
-}
-
-
-
-/* 사이드바 css */
 </style>
+<link rel="stylesheet" href="${contextPath}/resources/css/service/quest.css" />
+
+
+  <meta charset="utf-8">
+    <title>Animated Sidebar Menu | CodingLab</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 <body id="body1">
 
@@ -189,7 +30,7 @@ position: absolute;
 		<div id="left">
 
 			<%-- <%@ include file="sideMenu.jsp"%> --%>
-
+			<jsp:include page="sideMenu.jsp" />
 
 		</div>
 
@@ -199,29 +40,46 @@ position: absolute;
 				<table id="table2">
 					<thead>
 						<tr>
-							
 							<th>질문유형</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 							<th>조회수</th>
+							<th>답변여부</th>
 						</tr>
 					</thead>
 
 					<tbody>
 						<c:choose>
 							<c:when test="${empty bList}">
-								<tr><td colspan="5">존재하는 게시글이 없습니다.</td></tr>
+								<tr><td colspan="6">존재하는 게시글이 없습니다.</td></tr>
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="board" items="${bList}"  varStatus="status">
 									<div>
 										<tr>
-										
-											<td>${board.qnaCode}
+											
+											<td>
+												<c:choose>
+													<c:when test="${board.qnaCode ==1 }">운동</c:when>
+													<c:when test="${board.qnaCode ==2 }">식단</c:when>
+													<c:when test="${board.qnaCode ==3 }">이용관련</c:when>
+													<c:otherwise>결제/환불</c:otherwise>
+												</c:choose>
 												<input type="hidden" value="${board.boardNo}">
 											</td>
-											<td>${board.boardTitle}</td>
+											<td>${board.boardTitle}   
+												<c:if test="${board.replyCount >0 }">[${board.replyCount}]</c:if>
+												<c:set var="flag" value="false" />
+												<c:forEach var="at" items="${thList}" varStatus="status">
+													<c:if test="${not flag}">
+														<c:if test="${board.boardNo == at.parentBoardNo}">
+															<img src="${contextPath}/resources/img/serviceImg/img.png"/>
+															  <c:set var="flag" value="true" />
+														</c:if>
+													</c:if>
+												</c:forEach>
+											</td>
 											<td id="writer"><c:out value="${loginMember.memberId}"></c:out></td>
 											<td><jsp:useBean id="now" class="java.util.Date" /> <fmt:formatDate
 													var="today" value="${now}" pattern="yyyy-MM-dd" /> <fmt:formatDate
@@ -236,6 +94,16 @@ position: absolute;
                 						</c:otherwise>
 												</c:choose></td>
 											<td>${board.views}</td>
+											<td>
+											  <c:choose>
+												<c:when test="${board.answer ==1 }">
+													<img src = "${contextPath}/resources/img/serviceImg/check.png"/>
+												</c:when>
+												<c:otherwise>
+													<img src = "${contextPath}/resources/img/serviceImg/quest.png"/>
+												</c:otherwise>
+											</c:choose>
+											</td>
 										</tr>
 									</div>
 								</c:forEach>
