@@ -176,4 +176,20 @@ public class MemberServiceImpl implements MemberService{
 			List<MyStudents> myStudentsList = memberDAO.myStudentsList(memberNo,pInfo);
 			return myStudentsList;
 		}
+
+		// 비밀번호 찾기 - 아이디확인 구현
+		@Override
+		public int checkId(Member member) {
+			return memberDAO.checkId(member);
+		}
+
+		
+		// 비밀번호 찾기 - 임시비밀번호 저장
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int updatePw(Member member) {
+			String encPwd = bcPwd.encode(member.getMemberPwd());
+			member.setMemberPwd(encPwd);
+			return memberDAO.updatePw(member);
+		}
 }

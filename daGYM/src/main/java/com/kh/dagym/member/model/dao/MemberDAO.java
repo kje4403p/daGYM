@@ -155,5 +155,29 @@ public class MemberDAO {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		return sqlSession.selectList("memberMapper.myStudentsList", memberNo,rowBounds);
+	}
+
+	/** 비밀번호찾기 - 아이디 확인 DAO
+	 * @param id
+	 * @return checkId
+	 */
+	public int checkId(Member member) {
+		return sqlSession.selectOne("memberMapper.checkId", member);
+	}
+
+	/** 비밀번호찾기 - 아이디 확인 DAO
+	 * @param id
+	 * @return checkId
+	 */
+	public int checkEmail(String email) {
+		return sqlSession.selectOne("memberMapper.checkEmail", email);
+	}
+
+	/** 비밀번호 찾기 - 임시비밀번호 저장 DAO
+	 * @param member
+	 * @return result
+	 */
+	public int updatePw(Member member) {
+		return sqlSession.update("memberMapper.updatePw",member);
 	}	
 }

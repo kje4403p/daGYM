@@ -348,6 +348,74 @@ public class MemberController {
 				return id;
 			}
 			
+
+			// 비밀번호 찾기 화면 이동
+			@RequestMapping("findPwView")
+			public String findPwView() {
+				return "member/findPassword";
+				
+			}
+			
+			// 임시비밀번호 메일전송
+			@ResponseBody
+			@RequestMapping(value="findPw", produces = "application/text; charset=utf8")
+			public String findPw(Member member, String email, String id, HttpServletResponse response, HttpServletRequest request
+					) throws IOException {
+				//PrintWriter out = response.getWriter();
+				member.setMemberId(id);
+				member.setMemberEmail(email);
+				int checkId = memberService.checkId(member);
+				String pw = "";
+				String msg = "";
+				if(checkId==0 ) {
+				
+					msg="아이디 또는 이메일을 확인해주세요.";
+					System.out.println(msg);
+				
+				}else {
+					
+					
+					for (int i=0 ; i<12 ; i++) {
+						
+						 pw += (char)((Math.random()*26) + 97);
+					}
+					
+					String setfrom = "kljklj28561@gmail.com";
+					String tomail = request.getParameter("email");
+					String title = "임시 비밀번호 발급 이메일 입니다.";
+					String content = 
+							System.getProperty("line.separator")+
+							System.getProperty("line.separator")+
+							"안녕하세요. 임시 비밀번호 발급 이메일 입니다."
+							+ System.getProperty("line.separator")
+							+ System.getProperty("line.separator")+
+							"임시 비밀번호는 " + pw + " 입니다." 
+							+ System.getProperty("line.separator")
+							+ System.getProperty("line.separator")
+							+ "임시비밀번호를 통해 로그인 후 안전한 비밀번호로 변경해주세요.";
+					try {
+						MimeMessage message = mailSender.createMimeMessage();
+						MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+						messageHelper.setFrom(setfrom);
+						messageHelper.setTo(tomail);
+						messageHelper.setSubject(title);
+						messageHelper.setText(content);
+						mailSender.send(message);
+						
+						member.setMemberPwd(pw);
+						
+						int result = memberService.updatePw(member);
+						msg="임시 비밀번호가 전송되었습니다.";
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+					
+				}
+				System.out.println("checkId"+checkId);
+				return msg;
+			}
+			
+			
 			
 			
 			

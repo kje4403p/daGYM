@@ -115,4 +115,18 @@ public interface MemberService {
 	 * @return myStudentsList
 	 */
 	List<MyStudents> myStudentsList(int memberNo, PageInfo pInfo);
+
+
+	/** 비밀번호찾기 - 아이디확인 Service
+	 * @param id
+	 * @return checkId
+	 */
+	int checkId(Member member);
+
+
+	/** 비밀번호 찾기 - 임시 비밀번호 저장 Service
+	 * @param pw
+	 * @return result
+	 */
+	int updatePw(Member member);
 }
