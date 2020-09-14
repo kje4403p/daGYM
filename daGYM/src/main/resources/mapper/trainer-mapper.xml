@@ -106,9 +106,9 @@ SELECT * FROM DUAL
 	</insert>
 	 
 	
-	<!-- 트레이너 가격조회 -->
-  	<select id="selectPrice" parameterType="_int" resultType="_int">
-  		SELECT TRAINER_PRICE FROM TRAINER WHERE TRAINER_NO=#{trainerNo}
+	<!-- 트레이너 가격, 이름 조회 -->
+  	<select id="selectPrice" parameterType="_int" resultMap="trainerResultSet">
+  		SELECT TRAINER_PRICE, MEMBER_NM FROM TRAINER JOIN MEMBER ON(TRAINER.TRAINER_NO=MEMBER.MEMBER_NO) WHERE TRAINER.TRAINER_NO=#{trainerNo}
   	</select>
   	
   	<!-- 수강권 삽입 -->

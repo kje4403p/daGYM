@@ -118,11 +118,14 @@ public class TrainerController {
 	 @RequestMapping("paymentView/{trainerNo}")
 	 public String paymentView(@PathVariable int trainerNo, @RequestParam("classNm") int classNm,
 				Model model	) {
+		 
+		// 트레이너 가격, 이름 조회
 		Trainer trainer = trainerService.selectTrainer(trainerNo);
 		int price = trainer.getTrainerPrice();
+		
 		trainer.setTrainerPrice(price*classNm);
 		
-		
+		System.out.println(trainer);
 		model.addAttribute("trainer",trainer);
 		model.addAttribute("classNm",classNm);
 		model.addAttribute("price", trainer.getTrainerPrice());

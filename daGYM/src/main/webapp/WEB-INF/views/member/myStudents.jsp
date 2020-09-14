@@ -29,7 +29,6 @@
 
                     	<tr>
                     		<td style ="text-align: center">이름</td>
-                    		<td style ="text-align: center">나이</td>
                     		<td style ="text-align: center">전화번호</td>
                         </tr>
                         <c:choose>
@@ -42,17 +41,16 @@
                  		 <c:otherwise>
                      	 <c:forEach var="students" items="${myStudentsList}">
                         <tr>
-                        	<td style ="text-align: center">${students.rarentBoardTitle}</td>
-                        	<td style ="text-align: center">${students.rerlyContent}</td>
-                        	<td style ="text-align: center">${students.rerlyEnrollDt}</td>
+                        	<td style ="text-align: center">${students.studentsName}</td>
+                        	<td style ="text-align: center">${students.studentsPhone}</td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
                         </c:choose>
                 	</table>
                 </div>
-                <div class="my-4">
-		<c:set var="url" value="${contextPath}/member/myStudentsList/${pInfo.boardType}?cp="></c:set>
+               <div class="my-4">
+		<c:set var="url" value="${contextPath}/member/myReplyList/${pInfo.boardType}?cp="></c:set>
         	<ul class="pagination">
             	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize }">	
 	                <li>

@@ -31,6 +31,7 @@ import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
+import com.kh.dagym.member.model.vo.MyStudents;
 
 @SessionAttributes({"loginMember"})
 @Component
@@ -168,18 +169,16 @@ public class MemberController {
 		}
 			
 	// 내 수강생 조회
-				@RequestMapping("myStudentsList/{type}")
-				public String myStudentsList(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
-					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
-					// 전체 댓글 수 조회 + 현재페이즈 확인 (페이징은 common에서 가져옴)
-					com.kh.dagym.common.PageInfo pInfo = memberService.myPassPagination(type, cp, memberNo);
-					// 댓글 목록 조회
-					List<MyPass> MyPassList = memberService.MyPassList(memberNo,pInfo);
-					
-					model.addAttribute("myPassList", MyPassList);
-					model.addAttribute("pInfo",pInfo);
-					return "member/myStudents";
-			}
+			@RequestMapping("myStudentsList/{type}")
+			public String myStudentsList(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
+				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+				com.kh.dagym.common.PageInfo pInfo = memberService.myStudentsPagination(type, cp, memberNo);
+				List<MyStudents> myStudentsList = memberService.myStudentsList(memberNo,pInfo);
+				
+				model.addAttribute("myStudentsList", myStudentsList);
+				model.addAttribute("pInfo",pInfo);
+				return "member/myStudents";
+		}
 			
 	// 회원탈퇴 화면 전환 메소드
 				@RequestMapping("memberRemove")
@@ -295,6 +294,7 @@ public class MemberController {
 				
 				return "redirect:/";
 			}
+			// 인증번호 메일 보내기
 			@ResponseBody
 			@RequestMapping(value = "sendEmail", method=RequestMethod.GET)
 			public String mailSending(HttpServletRequest request, String email, HttpServletResponse response) throws IOException {
@@ -330,6 +330,20 @@ public class MemberController {
 				String code = dice+"";
 				
 				return code;
+			}
+			
+			// 아이디 찾기 화면 이동
+			@RequestMapping("findIdView")
+			public String findIdView() {
+				return "member/findId";
+				
+			}
+			@ResponseBody
+			@RequestMapping("findId")
+			public String findId(String email) {
+				String id = memberService.findId(email);
+				System.out.println(id);
+				return id;
 			}
 			
 			

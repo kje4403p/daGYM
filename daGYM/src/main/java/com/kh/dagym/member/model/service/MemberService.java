@@ -7,6 +7,7 @@ import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
+import com.kh.dagym.member.model.vo.MyStudents;
 
 public interface MemberService {
 
@@ -93,4 +94,25 @@ public interface MemberService {
 	 * @return myBoardList
 	 */
 	List<MyPass> MyPassList(int memberNo, PageInfo pInfo);
+
+	/** 아이디찾기 Service
+	 * @param email
+	 * @return id
+	 */
+	String findId(String email);
+
+	/** 내 수강생 조회  페이징 처리Service
+	 * @param type
+	 * @param cp
+	 * @param memberNo
+	 * @return pInfo
+	 */
+	PageInfo myStudentsPagination(int type, int cp, int memberNo);
+
+	/** 내 수강생 조회 Service
+	 * @param memberNo
+	 * @param pInfo
+	 * @return myStudentsList
+	 */
+	List<MyStudents> myStudentsList(int memberNo, PageInfo pInfo);
 }
