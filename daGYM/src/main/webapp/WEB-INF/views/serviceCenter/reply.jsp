@@ -158,13 +158,13 @@ function selectReplyList(){
 				var $div = $("<div>");
 				var $rWriter = $("<a>").addClass("rWriter idSelect").html(rList[i].memberId);
 				var $rDate = $("<p>").addClass("rDate")
-								.html("작성일 : " + rList[i].replyCreateDate + "<br>"
+								.html("작성일 : " + rList[i].enrollDate + "<br>"
 											+ "마지막 수정 날짜 : " + rList[i].replyModifyDate);
 				$div.append($rWriter).append($rDate)
 				
 				
 				// 댓글 내용
-				var $rContent = $("<p>").addClass("rContent").html(rList[i].replyContent);
+				var $rContent = $("<p>").addClass("rContent").html(rList[i].content);
 				
 				
 				// 답글, 수정, 삭제 버튼 영역
@@ -180,8 +180,8 @@ function selectReplyList(){
 				// 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
 				if(rList[i].memberId == loginMemberId){
 					
-					var $showUpdate = $("<button>").addClass("btn btn-sm btn-primary ml-1").text("수정");
-					var $deleteReply = $("<button>").addClass("btn btn-sm btn-primary ml-1").text("삭제");
+					var $showUpdate = $("<button>").addClass("btn btn-sm btn-primary ml-1").attr({id:"updateBtn",onclick:"updateReply(this,"+rList[i].replyNo+")"}).text("수정");
+					var $deleteReply = $("<button>").addClass("btn btn-sm btn-primary ml-1").attr({id:"deleteBtn",onclick:"deleteReply("+rList[i].replyNo+")"}).text("삭제");
 					$btnArea.append($showUpdate, $deleteReply);
 				}
 				
@@ -213,12 +213,7 @@ $("#addReply").on("click", function(){
 	// 댓글 내용을 얻어와 변수에 저장 //제일 위에있는 새답글 작성 부분
 	var replyContent = $("#replyContent").val();
 	
-	// 로그인이 되어있지 않은 경우
-	if(${empty loginMember} == true){
-		alert("로그인 후 이용해 주세요.");	
-		
-	}else{
-		// 댓글이 작성되었는지 유효성 검사
+	// 댓글이 작성되었는지 유효성 검사
 		if(replyContent.trim().length == 0){  //댓글이 써져있는지 확인
 			alert("댓글 작성 후 클릭해주세요.");
 			$("#replyContent").focus();
@@ -231,7 +226,7 @@ $("#addReply").on("click", function(){
 					url : url,
 					type : "POST",
 					data : {"memberId" : memberId,
-							"replyContent" : replyContent},
+							"content" : replyContent},
 					dataType : "text",
 					success : function(result){
 						
@@ -245,7 +240,7 @@ $("#addReply").on("click", function(){
 					}
 			});
 		}
-	} 
+	 
 });
 
 //-----------------------------------------------------------------------------------------
@@ -283,7 +278,7 @@ function addReply2Area(el, parentReplyNo){ //el :this가 들어옴 //클릭되�
 
 //-----------------------------------------------------------------------------------------
 // 답글 등록
-function addReply2(el, parentReplyNo, replyWriter){
+/* function addReply2(el, parentReplyNo, replyWriter){
 	//el: 답글 등록 버튼 요소
 	//parentReplyNo : 부모댓글 번호
 	//replyWriter : 답글 작성자
@@ -309,7 +304,7 @@ function addReply2(el, parentReplyNo, replyWriter){
 			console.log("통신 실패");
 		}
 	});  
-}
+} */
 
 //-----------------------------------------------------------------------------------------
 // 답글 취소
@@ -339,5 +334,70 @@ function cancelReply2(){
 	}
 	
 }
+
+//------------------댓글 수정
+
+
+function updateReply(el,replyNo){
+ 		
+		var content = $(el).parent().prev().html();
+		
+		$(el).parent().prev(".rContent").replaceWith("<textarea>");
+		$(el).parent().prev().attr({"cols":"75","id":"text1"});
+		$("#text1").text(content);
+		
+		$(".btn-sm").not($(el)).not($(el).siblings()).attr("disabled",true);
+		$(el).prev().hide();
+		
+		$(el).next().html("취소").on("click",function(){
+			$(el).prev().show();
+			$(".btn-sm").removeAttr("disabled");
+			$("#text1").replaceWith("<p class=rContent>");
+			$(el).parent().prev(".rContent").html(content);
+			$(el).off();
+			
+		});
+		$(el).on("click",function(){
+			var url = "${contextPath}/reply/updateReply/${board.boardNo}"
+			var content1=$("#text1").val();
+			
+			$.ajax({
+				url:url,
+				type:"POST",
+				data: {"replyNo":replyNo,"content":content1},
+				dataType:"text",
+				success:function(result){
+					alert(result);
+					selectReplyList();
+				},error:function(){
+					console.log("ajax통신실패");
+				}
+				
+			});
+		});
+		
+	
+ 	}
+ 	
+ 	function deleteReply(replyNo){
+ 		var url="${contextPath}/reply/deleteReply/${board.boardNo}";
+ 		if(confirm("삭제 하시겠습니까?")){
+ 			$.ajax({
+ 				url:url,
+ 				data : {"replyNo":replyNo},
+ 				type: "POST",
+ 				success : function(result){
+ 					alert(result)
+ 					selectReplyList();
+ 				},error : function(){
+ 					console.log("ajax통신 실패");
+ 				}
+ 			});
+ 		}
+ 			
+ 		}
+ 	
+
+
 
 </script>

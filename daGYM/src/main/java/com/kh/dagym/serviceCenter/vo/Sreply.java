@@ -1,6 +1,7 @@
 package com.kh.dagym.serviceCenter.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Sreply {
 
@@ -8,7 +9,7 @@ public class Sreply {
 	private String content;
 	private int boardNo;
 	private String memberId;
-	private Date enrollDate;
+	private Timestamp enrollDate;
 	private String replyStatus;
 	private int memberNo;
 	
@@ -16,7 +17,7 @@ public class Sreply {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Sreply(int replyNo, String content, int boardNo, String memberId, Date enrollDate, String replyStatus,
+	public Sreply(int replyNo, String content, int boardNo, String memberId, Timestamp enrollDate, String replyStatus,
 			int memberNo) {
 		super();
 		this.replyNo = replyNo;
@@ -60,11 +61,11 @@ public class Sreply {
 		this.memberId = memberId;
 	}
 
-	public Date getEnrollDate() {
+	public Timestamp getEnrollDate() {
 		return enrollDate;
 	}
 
-	public void setEnrollDate(Date enrollDate) {
+	public void setEnrollDate(Timestamp enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 

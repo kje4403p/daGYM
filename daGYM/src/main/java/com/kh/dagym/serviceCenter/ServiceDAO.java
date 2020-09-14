@@ -195,7 +195,7 @@ public class ServiceDAO {
 	 * @param pInfo
 	 * @return bList
 	 */
-	public List<Board> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo) {
+	public List<QnaBoard> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo) {
 		
 		int offset = (pInfo.getCurrentPage()-1) *pInfo.getLimit();
 		
@@ -232,6 +232,14 @@ public class ServiceDAO {
 	 */
 	public String selectMemberId(String boardWriter) {
 		return sqlSession.selectOne("serviceMapper.selectMemberId", boardWriter);
+	}
+
+	/** 게시글 이미지 여부 조회 DAO
+	 * @param bList
+	 * @return thList
+	 */
+	public List<Attachment> selectImgList(String boardWriter) {
+		return sqlSession.selectList("serviceMapper.selectImgList", boardWriter);
 	}
 
 	

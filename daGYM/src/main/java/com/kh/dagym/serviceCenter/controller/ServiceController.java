@@ -26,9 +26,11 @@ import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.member.model.vo.Member;
+import com.kh.dagym.serviceCenter.service.ReplyService;
 import com.kh.dagym.serviceCenter.service.ServiceBoard;
 import com.kh.dagym.serviceCenter.vo.QnaBoard;
 import com.kh.dagym.serviceCenter.vo.Search;
+import com.kh.dagym.serviceCenter.vo.Sreply;
 
 @SessionAttributes({"loginMember"})
 @Controller
@@ -38,6 +40,9 @@ public class ServiceController {
 	@Autowired
 	private ServiceBoard serviceBoard;
 	
+	@Autowired
+	private ReplyService rService;
+	
 	@RequestMapping("question/{type}")
 	public String questionList(@PathVariable int type,@RequestParam(value="cp",required=false, defaultValue="1") int cp,Model model) {
 		
@@ -45,8 +50,17 @@ public class ServiceController {
 		
 		com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo = serviceBoard.paginationQa(type,cp,loginMemberNo);
 		
-		List<Board> bList = serviceBoard.selectQaList(pInfo);
+		List<QnaBoard> bList = serviceBoard.selectQaList(pInfo);
 		
+		
+		if(!bList.isEmpty()) {
+			
+			List<Attachment> thList = serviceBoard.selectImgList(bList.get(0).getBoardWriter());
+				for(Attachment at : thList) {
+					System.out.println(at.getFileNo());
+				}
+			model.addAttribute("thList", thList);
+		}
 		
 		model.addAttribute("bList", bList);
 		model.addAttribute("pInfo", pInfo);

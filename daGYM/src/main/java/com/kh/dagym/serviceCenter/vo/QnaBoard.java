@@ -1,40 +1,47 @@
 package com.kh.dagym.serviceCenter.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class QnaBoard {
 	
 	private int boardNo;
-	private String memberId;
-	private int memberNo;
+	private String boardWriter;
+	private int boardType;
 	private String boardTitle;
 	private String boardContent;
-	private Date boardEnrollDate;
-	private Date boardModifyDate;
+	private Timestamp boardEnrollDate;
+	private Timestamp boardModiftDate;
 	private String boardStatus;
-	private String questionType;
+	private int qnaCode;
+	private Date startDate;
+	private Date endDate;
 	private int views;
-	private int boardType;
+	private int answer;
+	private int replyCount;
 	
 	public QnaBoard() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public QnaBoard(int boardNo, String memberId, int memberNo, String boardTitle, String boardContent,
-			Date boardEnrollDate, Date boardModifyDate, String boardStatus, String questionType, int views,
-			int boardType) {
+	public QnaBoard(int boardNo, String boardWriter, int boardType, String boardTitle, String boardContent,
+			Timestamp boardEnrollDate, Timestamp boardModiftDate, String boardStatus, int qnaCode, Date startDate,
+			Date endDate, int views, int answer, int replyCount) {
 		super();
 		this.boardNo = boardNo;
-		this.memberId = memberId;
-		this.memberNo = memberNo;
+		this.boardWriter = boardWriter;
+		this.boardType = boardType;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardEnrollDate = boardEnrollDate;
-		this.boardModifyDate = boardModifyDate;
+		this.boardModiftDate = boardModiftDate;
 		this.boardStatus = boardStatus;
-		this.questionType = questionType;
+		this.qnaCode = qnaCode;
+		this.startDate = startDate;
+		this.endDate = endDate;
 		this.views = views;
-		this.boardType = boardType;
+		this.answer = answer;
+		this.replyCount = replyCount;
 	}
 
 	public int getBoardNo() {
@@ -45,20 +52,20 @@ public class QnaBoard {
 		this.boardNo = boardNo;
 	}
 
-	public String getMemberId() {
-		return memberId;
+	public String getBoardWriter() {
+		return boardWriter;
 	}
 
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setBoardWriter(String boardWriter) {
+		this.boardWriter = boardWriter;
 	}
 
-	public int getMemberNo() {
-		return memberNo;
+	public int getBoardType() {
+		return boardType;
 	}
 
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
+	public void setBoardType(int boardType) {
+		this.boardType = boardType;
 	}
 
 	public String getBoardTitle() {
@@ -77,20 +84,20 @@ public class QnaBoard {
 		this.boardContent = boardContent;
 	}
 
-	public Date getBoardEnrollDate() {
+	public Timestamp getBoardEnrollDate() {
 		return boardEnrollDate;
 	}
 
-	public void setBoardEnrollDate(Date boardEnrollDate) {
+	public void setBoardEnrollDate(Timestamp boardEnrollDate) {
 		this.boardEnrollDate = boardEnrollDate;
 	}
 
-	public Date getBoardModifyDate() {
-		return boardModifyDate;
+	public Timestamp getBoardModiftDate() {
+		return boardModiftDate;
 	}
 
-	public void setBoardModifyDate(Date boardModifyDate) {
-		this.boardModifyDate = boardModifyDate;
+	public void setBoardModiftDate(Timestamp boardModiftDate) {
+		this.boardModiftDate = boardModiftDate;
 	}
 
 	public String getBoardStatus() {
@@ -101,12 +108,28 @@ public class QnaBoard {
 		this.boardStatus = boardStatus;
 	}
 
-	public String getQuestionType() {
-		return questionType;
+	public int getQnaCode() {
+		return qnaCode;
 	}
 
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
+	public void setQnaCode(int qnaCode) {
+		this.qnaCode = qnaCode;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public int getViews() {
@@ -117,21 +140,30 @@ public class QnaBoard {
 		this.views = views;
 	}
 
-	public int getBoardType() {
-		return boardType;
+	public int getAnswer() {
+		return answer;
 	}
 
-	public void setBoardType(int boardType) {
-		this.boardType = boardType;
+	public void setAnswer(int answer) {
+		this.answer = answer;
+	}
+
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
 	}
 
 	@Override
 	public String toString() {
-		return "QnaBoard [boardNo=" + boardNo + ", memberId=" + memberId + ", memberNo=" + memberNo + ", boardTitle="
-				+ boardTitle + ", boardContent=" + boardContent + ", boardEnrollDate=" + boardEnrollDate
-				+ ", boardModifyDate=" + boardModifyDate + ", boardStatus=" + boardStatus + ", questionType="
-				+ questionType + ", views=" + views + ", boardType=" + boardType + "]";
-	}
+		return "QnaBoard [boardNo=" + boardNo + ", boardWriter=" + boardWriter + ", boardType=" + boardType
+				+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardEnrollDate="
+				+ boardEnrollDate + ", boardModiftDate=" + boardModiftDate + ", boardStatus=" + boardStatus
+				+ ", qnaCode=" + qnaCode + ", startDate=" + startDate + ", endDate=" + endDate + ", views=" + views
+				+ ", answer=" + answer + ", replyCount=" + replyCount + "]";
+	} 
 	
 	
 	

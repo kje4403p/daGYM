@@ -317,7 +317,7 @@ public class ServiceBoardImpl implements ServiceBoard{
 
 	//Qa 리스트 조회 service구현
 	@Override
-	public List<Board> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo) {
+	public List<QnaBoard> selectQaList(com.kh.dagym.serviceCenter.vo.PageInfoSv pInfo) {
 		
 		return serviceDAO.selectQaList(pInfo);
 	}
@@ -360,6 +360,14 @@ public class ServiceBoardImpl implements ServiceBoard{
 		}
 		
 		return 0;
+	}
+
+
+	//게시글 이미지 여부 Service구현
+	@Override
+	public List<Attachment> selectImgList(String boardWriter) {
+		
+		return serviceDAO.selectImgList(boardWriter);
 	}
 
 
