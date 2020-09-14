@@ -138,12 +138,14 @@ public class MemberController {
 				Member loginMember = (Member)model.getAttribute("loginMember");
 				
 				upMember.setMemberNo(loginMember.getMemberNo());
-
+				upMember.setMemberName(loginMember.getMemberName());
+				upMember.setMemberPhone(loginMember.getMemberPhone());
+				upMember.setMemberEmail(loginMember.getMemberEmail());
 				int result = memberService.updateMember(upMember);
 				String msg = null;
 				String status = null;
 				if (result > 0) {
-					model.addAttribute("loginMember", upMember);
+					model.addAttribute("loginMember", loginMember);
 					status="success";
 					msg = "회원정보가 수정 되었습니다.";
 				} else {
@@ -152,7 +154,7 @@ public class MemberController {
 				}
 				rdAttr.addFlashAttribute("status", status);
 				rdAttr.addFlashAttribute("msg", msg);
-				return "redirect:/member/mypage";
+				return "redirect:/member/myPage";
 			
 	}
 	
