@@ -81,8 +81,6 @@ public class EventServiceImpl implements EventService{
 
 			Attachment at = null;
 			String filePath = "/resources/uploadImages";
-			System.out.println("HELLO");
-			System.out.println("images size : " + images.size());
 			for(int i = 0; i < images.size(); i++) {
 				if (!images.get(i).getOriginalFilename().equals("") ) {
 					String chageName = rename(images.get(i).getOriginalFilename());

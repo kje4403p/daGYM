@@ -61,7 +61,10 @@ public class EventDAO {
 	 * @return int
 	 */
 	public int insertBoard(Board board) {
-		return sqlSession.insert("eventMapper.insertBoard", board);
+		if (board.getBoardType() == 1)
+			return sqlSession.insert("eventMapper.insertBoard", board);
+		else 
+			return sqlSession.insert("eventMapper.insertInfo", board);
 	}
 
 
