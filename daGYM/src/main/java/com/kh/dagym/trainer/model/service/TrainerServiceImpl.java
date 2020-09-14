@@ -138,7 +138,7 @@ public class TrainerServiceImpl implements TrainerService{
 		
 		return merchantUid;
 	}
-    // 트레이너 가격 조회 구현
+    // 트레이너 가격, 이름 조회 구현
 	@Override
 	public int selectPrice(int trainerNo) {
 			

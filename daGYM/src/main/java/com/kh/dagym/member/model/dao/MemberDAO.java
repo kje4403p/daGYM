@@ -127,5 +127,13 @@ public class MemberDAO {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		return sqlSession.selectList("memberMapper.myPassList", memberNo,rowBounds);
+	}
+
+	/** 아이디 찾기 DAO
+	 * @param email
+	 * @return id
+	 */
+	public String findId(String email) {
+		return sqlSession.selectOne("memberMapper.findId", email);
 	}	
 }

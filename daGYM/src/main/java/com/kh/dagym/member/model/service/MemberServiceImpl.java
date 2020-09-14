@@ -156,4 +156,10 @@ public class MemberServiceImpl implements MemberService{
 			List<MyPass> myPassList = memberDAO.myPassList(memberNo,pInfo);
 			return myPassList;
 		}
+		
+		// 아이디 찾기 구현
+		@Override
+		public String findId(String email) {
+			return memberDAO.findId(email);
+		}
 }
