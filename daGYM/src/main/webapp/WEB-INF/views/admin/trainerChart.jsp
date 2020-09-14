@@ -61,7 +61,7 @@
 				success : function(list){
 					trainerChartTotal(list);
 				},error : function(){
-					console.log("통신실패")
+					console.log("통신실패");
 				}
 			});
 		}
