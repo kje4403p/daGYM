@@ -133,6 +133,8 @@ public class Board {
 	public void setViews(int views) {
 		this.views = views;
 	}
+	
+	
 
 	@Override
 	public String toString() {

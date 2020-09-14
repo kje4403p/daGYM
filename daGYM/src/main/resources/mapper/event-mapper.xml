@@ -17,6 +17,16 @@
 		<result property="endDate" column="END_DATE"/>
 	</resultMap>
 	
+	<resultMap type="Board" id="infoRs">
+			<id property="boardNo" column="BOARD_NO"/>
+		<result property="boardWriter" column="MEMBER_ID"/>
+		<result property="boardTitle" column="BOARD_TITLE"/>
+		<result property="boardContent" column="BOARD_CONTENT"/>
+		<result property="boardEnrollDate" column="BOARD_ENROLL_DATE" javaType="java.sql.Timestamp"/>
+		<result property="boardModifyDate" column="BOARD_MODIFY_DATE" javaType="java.sql.Timestamp"/>
+		<result property="views" column="VIEWS"/>
+	</resultMap>
+	
     <resultMap type="Attachment" id="attachmentRs">
     	<id property="fileNo" column="FILE_NO"></id>
     	<result property="parentBoardNo" column="BOARD_NO"/>
@@ -122,6 +132,20 @@
 		SELECT COUNT(*) FROM V_EVENT
 		WHERE END_DATE < SYSDATE
 		]]>
+	</select>
+	
+	<!-- info -->
+	<select id="getInfoListCount" resultType="_int">
+		SELECT COUNT(*) FROM INFO_VIEW
+	</select>
+	
+	<select id="selectInfoList" resultMap="infoRs">
+		SELECT * FROM INFO_VIEW
+	</select>
+	
+	<select id="selectInfo" resultMap="infoRs">
+		SELECT * FROM INFO_VIEW
+		WHERE BOARD_NO = #{boardNo}
 	</select>
 	
   
