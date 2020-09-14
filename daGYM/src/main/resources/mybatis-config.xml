@@ -36,6 +36,8 @@
       <typeAlias type="com.kh.dagym.serviceCenter.vo.QnaBoard" alias="QBoard"/>
       <typeAlias type="com.kh.dagym.member.model.vo.MyStudents" alias="MyStudents"/>
        <typeAlias type="com.kh.dagym.trainer.model.vo.PT" alias="PT"/>
+      <typeAlias type="com.kh.dagym.community.model.vo.BoardLikes" alias="BoardLikes"/>
+
    </typeAliases>
    
    <!--  mapper.xml 파일을 등록하는 태그 -->

@@ -45,6 +45,9 @@
 	
 	
 </style>
+
+	<link href="${contextPath }/resources/css/info.css" rel="stylesheet" />
+
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
@@ -64,8 +67,8 @@
 					작성자 : ${board.boardWriter}<br>
 				 	<span class="float-right">조회수 : ${board.views}</span>
 					<div id="date-area">
-						<fmt:formatDate var='enrollDt' value="${board.boardEnrollDate}" pattern="yy-MM-dd" />
-						<fmt:formatDate var='modifyDt' value="${board.boardModifyDate}" pattern="yy-MM-dd" />
+						<fmt:formatDate var='enrollDt' value="${board.boardEnrollDate}" pattern="yy-MM-dd hh:mm:ss" />
+						<fmt:formatDate var='modifyDt' value="${board.boardModifyDate}" pattern="yy-MM-dd hh:mm:ss" />
 						<p>작성일 : ${enrollDt}</p>
 						<p>최근 수정일 : ${modifyDt}</p>
 					</div>
@@ -110,8 +113,13 @@
                     ${fn:replace(board.boardContent,newLine,"<br>") }
 				    ${board.boardContent }
 				</div>
-
+				
+				<div id="heart_div">
+					<img id ="heart">
+					<span id="likes"></span>
+				</div>
 				<hr>
+				
 				
 				<div>
 					<div class="float-right">
@@ -144,7 +152,53 @@
 				location.href = "${board.boardNo}/delete"; 
 			}
 		});
+		var loginMember = "${sessionScope.loginMember}";
 		
+		
+	    $(document).ready(function () {
+	    	console.log(loginMember == "");
+
+	        var heartval = ${heart};
+
+	        if(heartval>0) {
+	            $("#heart").prop("src", "${contextPath}/resources/images/icons/heart.png");
+	        }
+	        else {
+	            $("#heart").prop("src", "${contextPath}/resources/images/icons/no_heart.png");
+	        }
+	        $("#heart_div").attr('name',heartval) 
+	        $("#likes").text(${likesCount});
+
+	        $("#heart").on("click", function () {
+	        	
+	        	if (loginMember == "") {
+	        		alert("로그인 후 이용해주세요");
+	        	} else {
+	        		
+
+	            var heart_div = $("#heart_div");
+
+	            var sendData = {'boardNo' : '${board.boardNo}','heart' : heart_div.attr('name')};
+	            $.ajax({
+	                url :'heart',
+	                type :'POST',
+	                data : sendData,
+	                success : function(map){
+	                	heart_div.attr	('name', map.isLikes);
+	                    if(map.isLikes == 1) {
+	                        $('#heart').prop("src","${contextPath}/resources/images/icons/heart.png");
+	                    }
+	                    else{
+	                        $('#heart').prop("src","${contextPath}/resources/images/icons/no_heart.png");
+	                    }
+	                    $("#likes").text(map.likesCount);
+
+	                } 
+	            }); // ajax
+	            
+	        }
+	        });
+	    });
 	</script>
 </body>
 </html>

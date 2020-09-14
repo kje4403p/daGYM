@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.community.model.dao.InfoDAO;
+import com.kh.dagym.community.model.vo.BoardLikes;
 
 @Service
 public class InfoServiceImpl implements InfoService{
@@ -36,7 +38,7 @@ public class InfoServiceImpl implements InfoService{
 		return infoDAO.selectList(pInfo);
 	}
 
-
+	@Transactional
 	@Override
 	public Board selectInfo(int boardNo) {
 		Board board = infoDAO.selectBoard(boardNo);
@@ -52,6 +54,31 @@ public class InfoServiceImpl implements InfoService{
 		// 조회 성공 시 조회수 증가
 		return board;
 	}
+
+
+	@Override
+	public int getBoardLike(BoardLikes boardLikes) {
+		return infoDAO.getBoardLike(boardLikes);
+	}
+
+
+	@Transactional
+	@Override
+	public void deleteLikes(BoardLikes boardLikes) {
+		infoDAO.deleteLikes(boardLikes);
+	}
+
+	@Transactional
+	@Override
+	public int insertLikes(BoardLikes boardLikes) {
+		return infoDAO.insertLikes(boardLikes);
+	}
+	
+	public int likesCount(int boardNo) {
+		return infoDAO.likesCount(boardNo);
+	}
+	
+	
 	
 	
 

@@ -1,6 +1,8 @@
 package com.kh.dagym.community.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,6 +25,7 @@ import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
 import com.kh.dagym.community.model.service.EventService;
 import com.kh.dagym.community.model.service.InfoService;
+import com.kh.dagym.community.model.vo.BoardLikes;
 import com.kh.dagym.member.model.vo.Member;
 
 @Controller
@@ -56,14 +60,25 @@ public class InfoController {
 
 		Board board = infoService.selectInfo(boardNo);
 		String url = "";
+		Member member = (Member)model.getAttribute("loginMember");
+		int heart = 0;
+		
 
 		if(board != null) {
-			List<Attachment> files = eventService.selectFiles(boardNo);
+			if (member != null) {
+				int memberNo = member.getMemberNo();
+				BoardLikes boardLikes = new BoardLikes(boardNo, memberNo);
+				heart = infoService.getBoardLike(boardLikes);
+			}
 
+			int likesCount = infoService.likesCount(boardNo);
+
+			List<Attachment> files = eventService.selectFiles(boardNo);
 			if(!files.isEmpty()) {
 				model.addAttribute("files", files);
-				files.stream().forEach(System.out::println);
 			}
+			model.addAttribute("likesCount", likesCount);
+			model.addAttribute("heart", heart);
 			model.addAttribute("board", board);
 			url = "community/infoView";
 		} else {
@@ -182,6 +197,31 @@ public class InfoController {
 		rdAttr.addFlashAttribute("msg",msg);
 
 		return path;
+	}
+	
+	@ResponseBody
+	@PostMapping("heart")
+	public Map heart(HttpServletRequest request, Model model) {
+        int heart = Integer.parseInt(request.getParameter("heart"));
+        int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+        
+		int memberNo = ((Member)model.getAttribute("loginMember")).getMemberNo();
+
+		BoardLikes boardLikes = new BoardLikes(boardNo, memberNo);
+		
+		if (heart > 0) {
+			infoService.deleteLikes(boardLikes);
+			heart = 0;
+		} else {
+			heart = infoService.insertLikes(boardLikes);
+		}
+        
+		int likesCount = infoService.likesCount(boardNo);
+		Map<String, Integer> map = new HashMap<>();
+		map.put("isLikes", heart);
+		map.put("likesCount", likesCount);
+		
+		return map;
 	}
 
 }
