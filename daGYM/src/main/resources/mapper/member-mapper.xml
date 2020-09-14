@@ -58,6 +58,13 @@
 		<result property="trainerName" column="MEMBER_NM" />
 		<result property="classCnt" column="CLASS_CNT" />
 	</resultMap>
+	
+	<resultMap id="MyStudentsResultSet" type="MyStudents" >
+		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
+		<id property="studentsName" column="MEMBER_NM"/>
+		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
+		<result property="studentsPhone" column="MEMBER_PHONE" />
+	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
@@ -102,12 +109,12 @@
 	</select>
 	
 	<!-- 내 댓글 페이징 처리 -->
-	<select id="getMyReplyListCount" parameterType="_int" resultType = "_int">
+	<select id="MyReplyListCount" parameterType="_int" resultType = "_int">
 		SELECT COUNT(*) FROM REPLY WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS = 'Y'
 	</select>
 	
 	<!-- 내 게시판 페이징 처리 -->
-	<select id="getMyBoardListCount" parameterType="_int" resultType = "_int">
+	<select id="MyBoardListCount" parameterType="_int" resultType = "_int">
 		SELECT COUNT(*) FROM BOARD WHERE BOARD_WRITER = #{boardWriter} AND BOARD_STATUS = 'Y'
 	</select>
 	
@@ -117,7 +124,7 @@
 	</select>
 	
 	<!-- 이용권 및 결제정보 페이징 처리 -->
-	<select id="getMyPassListCount" parameterType="_int" resultType = "_int">
+	<select id="MyPassListCount" parameterType="_int" resultType = "_int">
 		SELECT COUNT(*) FROM PAYMENT WHERE MEMBER_NO=#{memberNo}
 	</select>
 	
@@ -131,5 +138,15 @@
 	<!-- 아이디찾기 -->
 	<select id="findId" parameterType="string" resultType="string">
 		SELECT MEMBER_ID FROM MEMBER WHERE MEMBER_EMAIL=#{email} AND MEMBER_STATUS='Y'
+	</select>
+	
+	<!-- 내 수강생 조회 페이징 처리 -->
+	<select id="MyStudentsListCnt" parameterType="_int" resultType = "_int">
+		SELECT COUNT(*) FROM CLASS_STATUS WHERE TRAINER_NO = 127 AND CLASS_CNT > 0
+	</select>
+	
+	<!-- 내 수강생 조회 -->
+	<select id="myStudentsList" parameterType="MyStudents" resultMap="MyStudentsResultSet">
+		SELECT MEMBER_NM, MEMBER_PHONE FROM CLASS_STATUS JOIN MEMBER USING(MEMBER_NO) WHERE TRAINER_NO = #{memberNo}
 	</select>
 </mapper>

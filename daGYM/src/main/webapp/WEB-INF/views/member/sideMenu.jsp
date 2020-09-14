@@ -18,10 +18,6 @@
 	<ul id="side" class="list-group">
 		<li id="mypage" type="button" class="list-group-item list-group-item-action">내 정보</li>
 		<br>
-		<c:if test="${loginMember.memberGrade == 'T'}">
-			<li id="mytext" type="button" class="list-group-item list-group-item-action">실적 확인</li>
-			<br>
-		</c:if>
 		<li id="mytext" type="button" class="list-group-item list-group-item-action">내 글</li>
 		<br>
 		<li id="myschedule" type="button" class="list-group-item list-group-item-action">내 스케줄</li>
