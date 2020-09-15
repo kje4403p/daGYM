@@ -10,8 +10,9 @@
 <title>Insert title here</title>
 
 <style>
-.colorlib-blog{
-	width: 100%;
+
+.row1{
+	left: 50px;
 }
 
 </style>
@@ -52,12 +53,12 @@
 
 	<div id="d1">
 
-	<%-- 	<div id="left">
+		<div id="left">
 
-			<%@ include file="sideMenu.jsp"%>
+			<%-- <%@ include file="sideMenu.jsp"%> --%>
 			<jsp:include page="sideMenu.jsp" />
 
-		</div> --%>
+		</div>
 
 		<div id="right">
 <div class="colorlib-loader"></div>
@@ -66,9 +67,9 @@
 		
 
 		<div class="colorlib-blog">
-		<jsp:include page="sideMenu.jsp" />
+		<%-- <jsp:include page="sideMenu.jsp" /> --%>
 			<div class="container">
-				<div class="row">
+				<div class="row1">
 					<div class="col-md-4 animate-box">
 						<article>
 							<h2><a href="#">Building the Mention Sales Application on Unapp</a></h2>
@@ -95,7 +96,7 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row1">
 					<div class="col-md-4 animate-box">
 						<article>
 							<h2><a href="#">Building the Mention Sales Application on Unapp</a></h2>
@@ -122,7 +123,7 @@
 					</div>
 				</div>
 
-				<div class="row">
+				<div class="row1">
 					<div class="col-md-4 animate-box">
 						<article>
 							<h2><a href="#">Building the Mention Sales Application on Unapp</a></h2>
@@ -164,7 +165,7 @@
 			</div>
 		</div>
 
-			<jsp:include page="../common/footer.jsp" />
+			
 		
 	</div>
 
@@ -242,5 +243,6 @@
 	<script src="${contextPath}/resources/js/service/quest2/jquery.countTo.js"></script>
 	<!-- Main -->
 	<script src="${contextPath}/resources/js/service/quest2/main.js"></script>
+	<script src="${contextPath}/resources/js/service/quest2/js/modernizr-2.6.2.min.js"></script>
 </body>
 </html>
