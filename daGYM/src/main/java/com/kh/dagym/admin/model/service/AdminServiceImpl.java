@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +28,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private Page pInfo;
+	
+	@Autowired
+	private BCryptPasswordEncoder bcPwd;
 	
 	// 회원 전체 조회 Service 구현
 	@Override
@@ -124,6 +128,76 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteTrainer(int trainerNo) {
 		return adminDAO.deleteTrainer(trainerNo);
 	}
+
+    // 트레이너 한 명 조회 Service 구현
+	@Override
+	public Trainer selectTrainer(int trainerNo) {
+		return adminDAO.selectTrainer(trainerNo);
+	}	
+
+    // 비밀번호 확인 Service 구현
+	@Override
+	public int pwdCheck(Trainer trainer) {
+		String savePwd = adminDAO.pwdCheck(trainer.getTrainerNo());
+		int result = 0;
+		
+		if(savePwd != null) {
+			if(bcPwd.matches(trainer.getTrainerPwd(), savePwd)) {
+				result = 1;
+			}
+		}
+		
+		return result;
+	}	
+
+    // 트레이너 이미지 조회 Service 구현
+	@Override
+	public Attachment selectFile(int trainerNo) {
+		return adminDAO.selectFile(trainerNo);
+	}
+
+	// 트레이너 수정 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int updateTrainer(Trainer trainer, String savePath, MultipartFile image) {
+		// pwd 썼는지 안썼는지 확인
+		if(trainer.getTrainerPwd().trim().equals("")) {
+			System.out.println("비밀번호 입력 안함");
+			trainer.setMemberNo(-1);
+		} else {
+			System.out.println("비밀번호 입력 함");
+			trainer.setMemberNo(0);
+			String encPwd = bcPwd.encode(trainer.getTrainerPwd());
+			trainer.setTrainerPwd(encPwd);
+		}
+		
+		int result = adminDAO.updateMember(trainer);
+		if(result > 0) {
+			result = adminDAO.updateTrainer(trainer);
+			// 이전 이미지 파일
+			Attachment oldImage = adminDAO.selectFile(trainer.getTrainerNo());
+			
+			String filePath = "/resources/uploadImages";
+			if(!image.getOriginalFilename().equals("")) { // 이미지에 변경이 있으면
+				System.out.println("새로운 이미지 삽입");
+				String changeFileName = rename(image.getOriginalFilename()); // 파일명 변경
+				// 이전 파일no + 수정된 파일 정보 저장
+				Attachment at = new Attachment(oldImage.getFileNo(), trainer.getTrainerNo(), image.getOriginalFilename(), changeFileName, filePath, 0);
+				result = adminDAO.updateFile(at); // db 변경
+				try {
+					image.transferTo(new File(savePath + at.getFileChangeName())); // 서버에 저장
+				} catch (Exception e) {
+					adminDAO.deleteFile(oldImage.getFileNo());
+				}
+				new File(savePath + oldImage.getFileChangeName()).delete(); // 이전 파일 삭제
+			} else {
+				System.out.println("새로운 이미지 삽입 안함");
+			}
+		}
+		
+		return result;
+	}
+	
 	
 	
 	
@@ -159,6 +233,5 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
-
 
 }

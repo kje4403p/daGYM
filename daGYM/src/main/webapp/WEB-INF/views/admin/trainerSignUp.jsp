@@ -163,7 +163,7 @@
 			var regExp = /^[a-zA-Z\d]{6,12}$/;
 			console.log($id.val())
 			if(!regExp.test($id.val())){
-				$("#checkId").text("아이디 형식이 유효하지 않습니다.").css("color","red");
+				$("#checkId").text("아이디 형식이 유효하지 않습니다.").css("color","rgb(255, 159, 64)");
 				signUpCheck.id=false;
 				
 			}else{
@@ -173,10 +173,10 @@
 					type : "GET",
 					success : function(result){
 						if(result == 0){
-							$("#checkId").text("사용 가능한 아이디입니다.").css("color","blue");
+							$("#checkId").text("사용 가능한 아이디입니다.").css("color", "rgb(82, 242, 98)");
 							signUpCheck.id=true;
 						}else{
-							$("#checkId").text("이미 사용중인 아이디입니다.").css("color","red")
+							$("#checkId").text("이미 사용중인 아이디입니다.").css("color","rgb(255, 159, 64)");
 						}
 					}, error : function(){
 						console.log("통신실패");
@@ -191,11 +191,11 @@
 			console.log("22 : " + $pwd2.val())
 			
 			if(!regExp.test($("#trainerPwd").val())){
-				$("#checkPwd").text("비밀번호 형식이 유효하지 않습니다.").css("color", "red");
+				$("#checkPwd").text("비밀번호 형식이 유효하지 않습니다.").css("color", "rgb(255, 159, 64)");
 				signUpCheck.pwd1 = false;
 				
 			}else{
-				$("#checkPwd").text("사용 가능한 비밀번호 입니다.").css("color", "blue");
+				$("#checkPwd").text("사용 가능한 비밀번호 입니다.").css("color", "rgb(82, 242, 98)");
 				signUpCheck.pwd1 = true;
 			}
 			
@@ -206,10 +206,10 @@
 			}else if(signUpCheck.pwd1 && $pwd2.val().length > 0){
 				console.log("일치")
 				if($pwd1.val().trim() != $pwd2.val().trim()){
-					$("#checkPwd2").text("비밀번호 불일치").css("color","red");
+					$("#checkPwd2").text("비밀번호 불일치").css("color","rgb(255, 159, 64)");
 					signUpCheck.pwd2 = false;
 				}else{
-					$("#checkPwd2").text("비밀번호 일치").css("color","blue");
+					$("#checkPwd2").text("비밀번호 일치").css("color","rgb(82, 242, 98)");
 					signUpCheck.pwd2 = true;
 				}
 			}
@@ -220,10 +220,10 @@
 			var regExp = /^[가-힣]{2,}$/;
 			console.log("이름 " + $name.val())
 			if(!regExp.test($name.val())){
-				$("#checkName").text("한글 두 글자 이상을 입력하세요.").css("color", "red");
+				$("#checkName").text("한글 두 글자 이상을 입력하세요.").css("color", "rgb(255, 159, 64)");
 				signUpCheck.name = false;
 			}else{
-				$("#checkName").text("유효한 이름입니다.").css("color", "blue");
+				$("#checkName").text("유효한 이름입니다.").css("color", "rgb(82, 242, 98)");
 				signUpCheck.name = true;
 			}
 			
@@ -233,10 +233,10 @@
 			var regExp =  /(01[016789])[-](\d{4}|\d{3})[-]\d{4}$/;
 			
 			if(!regExp.test($phone.val())){
-				$("#checkPhone").text("전화번호가 유효하지 않습니다.").css("color", "red");
+				$("#checkPhone").text("전화번호가 유효하지 않습니다.").css("color", "rgb(255, 159, 64)");
 				signUpCheck.phone = false;
 			}else{
-				$("#checkPhone").text("유효한 전화번호 입니다.").css("color", "blue");
+				$("#checkPhone").text("유효한 전화번호 입니다.").css("color", "rgb(82, 242, 98)");
 				signUpCheck.phone = true;
 			}
 			
@@ -246,11 +246,11 @@
 			var regExp =  /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/; // 4글자 아무단어 @ 아무단어 . * 3아무3
 			
 			if(!regExp.test($email.val())){
-				$("#checkEmail").text("유효하지 않은 이메일입니다.").css("color","red");
+				$("#checkEmail").text("유효하지 않은 이메일입니다.").css("color","rgb(255, 159, 64)");
 				signUpCheck.email = false;
 				
 			}else{
-				$("#checkEmail").text("유효한 이메일입니다.").css("color","blue");
+				$("#checkEmail").text("유효한 이메일입니다.").css("color","rgb(82, 242, 98)");
 				signUpCheck.email = true;
 				$("#emailCk-btn").prop("disabled", false)
 				

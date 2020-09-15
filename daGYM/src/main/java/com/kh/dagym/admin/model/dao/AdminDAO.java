@@ -84,4 +84,40 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.deleteTrainer", trainerNo);
 	}
 
+    // 트레이너 한 명 조회 DAO
+	public Trainer selectTrainer(int trainerNo) {
+		return sqlSession.selectOne("adminMapper.selectTrainer", trainerNo);
+	}
+
+	// 비밀번호 확인 DAO
+	public String pwdCheck(int trainerNo) {
+		return sqlSession.selectOne("adminMapper.pwdCheck", trainerNo);
+	}
+
+	// 트레이너 이미지 조회 DAO
+	public Attachment selectFile(int trainerNo) {
+		return sqlSession.selectOne("adminMapper.selectFile", trainerNo);
+	}
+
+	// 트레이너 MEMBER 테이블 수정 DAO
+	public int updateMember(Trainer trainer) {
+		return sqlSession.update("adminMapper.updateMember", trainer);
+	}
+	
+	// 트레이너 TRAINER 테이블 수정 DAO
+	public int updateTrainer(Trainer trainer) {
+		return sqlSession.update("adminMapper.updateTrainer", trainer);
+	}
+
+	// 트레이너 이미지 수정 DAO
+	public int updateFile(Attachment at) {
+		return sqlSession.update("adminMapper.updateFile", at);
+	}
+
+	// 오류 났을 시 파일 삭제 DAO
+	public void deleteFile(int fileNo) {
+		sqlSession.delete("adminMapper.deleteFile", fileNo);
+	}
+
+
 }

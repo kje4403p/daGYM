@@ -18,12 +18,14 @@ public class Trainer {
 	private int trainerPrice;
 	private String trainerSNS;
 	private String trainerComment;
+	private String trainerAward;
 	
 	public Trainer() {}
 
 	public Trainer(int trainerNo, int memberNo, String trainerId, String trainerPwd, String trainerName,
 			String trainerPhone, String trainerEmail, Date trainerEnrollDate, String trianerStatus, String trainerGrade,
-			String trainerCareer, int trainerMemberCount, int trainerPrice, String trainerSNS, String trainerComment) {
+			String trainerCareer, int trainerMemberCount, int trainerPrice, String trainerSNS, String trainerComment,
+			String trainerAward) {
 		super();
 		this.trainerNo = trainerNo;
 		this.memberNo = memberNo;
@@ -40,6 +42,7 @@ public class Trainer {
 		this.trainerPrice = trainerPrice;
 		this.trainerSNS = trainerSNS;
 		this.trainerComment = trainerComment;
+		this.trainerAward = trainerAward;
 	}
 
 	public int getTrainerNo() {
@@ -48,6 +51,14 @@ public class Trainer {
 
 	public void setTrainerNo(int trainerNo) {
 		this.trainerNo = trainerNo;
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
 
 	public String getTrainerId() {
@@ -154,6 +165,14 @@ public class Trainer {
 		this.trainerComment = trainerComment;
 	}
 
+	public String getTrainerAward() {
+		return trainerAward;
+	}
+
+	public void setTrainerAward(String trainerAward) {
+		this.trainerAward = trainerAward;
+	}
+
 	@Override
 	public String toString() {
 		return "Trainer [trainerNo=" + trainerNo + ", memberNo=" + memberNo + ", trainerId=" + trainerId
@@ -161,7 +180,7 @@ public class Trainer {
 				+ ", trainerEmail=" + trainerEmail + ", trainerEnrollDate=" + trainerEnrollDate + ", trianerStatus="
 				+ trianerStatus + ", trainerGrade=" + trainerGrade + ", trainerCareer=" + trainerCareer
 				+ ", trainerMemberCount=" + trainerMemberCount + ", trainerPrice=" + trainerPrice + ", trainerSNS="
-				+ trainerSNS + ", trainerComment=" + trainerComment + "]";
+				+ trainerSNS + ", trainerComment=" + trainerComment + ", trainerAward=" + trainerAward + "]";
 	}
 
 }

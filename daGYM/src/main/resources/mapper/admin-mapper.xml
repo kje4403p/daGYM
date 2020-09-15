@@ -29,6 +29,7 @@
 		<result property="trainerPrice" column="TRAINER_PRICE" />
 		<result property="trainerSNS" column="TRAINER_SNS" />
 		<result property="trainerComment" column="TRAINER_COMMENT" />
+		<result property="trainerAward" column="TRAINER_AWARD" />
 	</resultMap>
 	
 	<resultMap id="boardResultSet" type="ABoard">
@@ -56,6 +57,15 @@
 		<result property="paymentDate" column="PAYMENT_DATE"/>
 		<result property="trainerName" column="MEMBER_NM"/>
 	</resultMap>
+	
+	<resultMap type = "AAttachment" id="attachmentResultSet">
+    	<id property="fileNo" column="FILE_NO"/>
+    	<result property="parentBoardNo" column="PARENT_TRAINER_NO"/>
+    	<result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
+    	<result property="fileChangeName" column="FILE_CHANGE_NAME"/>
+    	<result property="filePath" column="FILE_PATH"/>
+    	<result property="fileLevel" column="FILE_LEVEL"/>
+    </resultMap>
 	
 	<!-- 회원 전체 조회 -->
 	<select id="selectMList" resultMap="memberResultSet">
@@ -147,4 +157,54 @@
 		WHERE MEMBER_NO = #{trainerNo}
 	</update>
 	
+	<!-- 트레이너 한 명 조회 -->
+	<select id="selectTrainer" parameterType="_int" resultMap="trainerResultSet">
+		SELECT * FROM A_TRAINER
+		WHERE TRAINER_NO = #{trainerNo}
+	</select>
+	
+	<!-- 비밀번호 확인 -->
+	<select id="pwdCheck" parameterType="_int" resultType="string">
+		SELECT MEMBER_PWD FROM A_TRAINER
+		WHERE TRAINER_NO = #{trainerNo}
+	</select>
+	
+	<!-- 트레이너 이미지 조회 -->
+	<select id="selectFile" parameterType="_int" resultMap="attachmentResultSet">
+		SELECT * FROM TRAINER_ATTACHMENT
+		WHERE PARENT_TRAINER_NO = #{trainerNo}
+	</select>
+	
+	<!-- 트레이너 수정 -->
+	<update id="updateMember" parameterType="ATrainer">
+		UPDATE MEMBER
+		SET MEMBER_PHONE = #{trainerPhone},
+			MEMBER_EMAIL = #{trainerEmail}
+		<if test="memberNo == 0">
+			, MEMBER_PWD = #{trainerPwd}
+		</if>
+		WHERE MEMBER_NO = #{trainerNo}
+	</update>
+	
+	<update id="updateTrainer" parameterType="ATrainer">
+		UPDATE TRAINER
+		SET TRAINER_CAREER = #{trainerCareer},
+			TRAINER_PRICE = #{trainerPrice},
+			TRAINER_SNS = #{trainerSNS},
+			TRAINER_COMMENT = #{trainerComment},
+			TRAINER_AWARD = #{trainerAward}
+		WHERE TRAINER_NO = #{trainerNo}
+	</update>
+	
+	<update id="updateFile" parameterType="AAttachment">
+		UPDATE TRAINER_ATTACHMENT
+		SET FILE_ORIGIN_NAME = #{fileOriginName},
+			FILE_CHANGE_NAME = #{fileChangeName}
+		WHERE FILE_NO = #{fileNo}
+	</update>
+	
+	<delete id="deleteFile" parameterType="_int">
+		DELETE FROM TRAINER_ATTACHMENT
+		WHERE FILE_NO = #{fileNo}
+	</delete>
 </mapper>

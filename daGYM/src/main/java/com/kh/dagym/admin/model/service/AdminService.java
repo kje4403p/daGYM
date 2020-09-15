@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.kh.dagym.admin.model.vo.Attachment;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
@@ -65,5 +66,31 @@ public interface AdminService {
 	 * @return result
 	 */
 	public abstract int deleteTrainer(int trainerNo);
+
+	/** 트레이너 한 명 조회 Service
+	 * @param trainerNo
+	 * @return trainer
+	 */
+	public abstract Trainer selectTrainer(int trainerNo);
+
+	/** 비밀번호 확인 Service
+	 * @param trainer
+	 * @return result
+	 */
+	public abstract int pwdCheck(Trainer trainer);
+	
+	/** 트레이너 이미지 조회 Service
+	 * @param trainerNo
+	 * @return file
+	 */
+	public abstract Attachment selectFile(int trainerNo);
+
+	/** 트레이너 수정 Service
+	 * @param trainer
+	 * @param image 
+	 * @param savePath 
+	 * @return result
+	 */
+	public abstract int updateTrainer(Trainer trainer, String savePath, MultipartFile image);
 
 }

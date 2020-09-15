@@ -100,7 +100,24 @@
 			$(".updateTrainer").on("click", function() {
 				var trainerNo = $(this).parent().parent().children().eq(0).text();
 				
-				location.href = "${contextPath}/admin/updateTrainer/" + trainerNo;
+				var trainerPwd = prompt("비밀번호를 입력하세요");
+				
+				if(trainerPwd != null) {
+					$.ajax({
+						url : "pwdCheck",
+						data : {"trainerNo" : trainerNo, "trainerPwd" : trainerPwd},
+						dataType : "JSON",
+						success : function(result) {
+							if(result == 1) {
+								location.href = "updateTrainerView/" + trainerNo;
+							} else {
+								swal("비밀번호가 틀렸습니다.");
+							}
+						}, error : function() {
+							console.log("통신 실패");
+						}
+					});
+				}
 			});
 			
 			$(".deleteTrainer").on("click", function() {
@@ -111,7 +128,7 @@
 				}
 			});
 		});
-	
+		
 		$(document).ready( function () {
 		    $('#trainerTable').DataTable();
 		} );
