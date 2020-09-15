@@ -14,7 +14,7 @@
 <script src='${contextPath}/resources/fullcalendar/packages/core/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/daygrid/main.js'></script>
-
+<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 <style>
           /* The Modal (background) */
 .searchModal {
@@ -74,27 +74,31 @@ document.addEventListener('DOMContentLoaded', function() {
 		header: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,dayGridWeek,dayGridDay' },
 		 dateClick: function(date) {
 			 var date = date.dateStr;
-			 var dateSplit = date.split('-');
-		   	var yy=dateSplit[0];
-			var mm=dateSplit[1];
-			var dd=dateSplit[2];
+		
 			 $('#modal').show();
 			 
 			 $("#select").on("click",function(){
 				
 					var item=$("#trainerSchedule option:selected").val();
 					
-					console.log(yy);
-					console.log(mm);
-					console.log(dd);
-					console.log(item);
-					var scheduleTime = date+"-"+item;
+					
+					var scheduleTime2 = date+" "+item;
+					console.log(scheduleTime2);
+					var scheduleTime =moment(scheduleTime2).format('YY/MM/DD HH:mm:00.000000000');
 					console.log(scheduleTime);
 					$.ajax({
 						url:"${contextPath}/trainer/trainerSchedule/${trainerNo}",
 						data: {"scheduleTime":scheduleTime},
-						success:function(schedule){
+						success:function(result){
+							
 							location.reload();
+							console.log(result);
+							if(result==1){
+								alert("스케줄 등록 성공!");
+								
+							}else{
+								alert("이미 예약되어있는 시간입니다.");
+							}
 						},error:function(){					
 							console.log("통신 실패");
 						}

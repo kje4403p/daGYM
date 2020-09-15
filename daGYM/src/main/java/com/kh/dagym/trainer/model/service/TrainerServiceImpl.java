@@ -178,7 +178,17 @@ public class TrainerServiceImpl implements TrainerService{
 	@Transactional(rollbackFor= Exception.class)
 	@Override
 	public int insertSchedule(TrainerSchedule trainerSchedule) {
-		return trainerDAO.insertSchedule(trainerSchedule);
+		int result = trainerDAO.compareSchedule(trainerSchedule);
+		int status=0;
+		if(result>0) {
+			status=-1;
+			
+		}else {
+			int result2 = trainerDAO.insertSchedule(trainerSchedule);
+			status=1;
+		}
+		System.out.println("status="+status);
+		return status;
 	}
 
 	@Override

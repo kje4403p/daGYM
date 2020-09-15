@@ -16,7 +16,7 @@
 <script src='${contextPath}/resources/fullcalendar/packages/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/daygrid/main.js'></script>
 <script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
-
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
           /* The Modal (background) */
 .searchModal {
@@ -84,9 +84,14 @@ document.addEventListener('DOMContentLoaded', function() {
 					$.ajax({
 						url:"${contextPath}/trainer/resulvation/${trainerNo}",
 						data: {"scheduleTime":scheduleTime},
-						success:function(schedule){
+						success:function(result2){
 							 location.reload();
-							
+							if(result2>0){
+								alert("예약성공");
+							}else{
+								alert("이미 예약되어있는 시간입니다.");
+							}
+	
 						},error:function(){
 							console.log("통신 실패");
 						}
@@ -114,7 +119,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </head>
 <body>
-
+<c:if test="${!empty msg }">
+		<script>
+			swal({icon : "${status}",title : "${msg}", text : "${text}"});
+			
+		</script>
+		<c:remove var="msg"/>
+		<c:remove var="status"/>
+		<c:remove var="text"/>
+	</c:if>
 
 <div id='calendar'></div>
 
