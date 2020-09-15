@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.dagym.admin.model.vo.Attachment;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.admin.model.vo.PT;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
@@ -117,6 +118,16 @@ public class AdminDAO {
 	// 오류 났을 시 파일 삭제 DAO
 	public void deleteFile(int fileNo) {
 		sqlSession.delete("adminMapper.deleteFile", fileNo);
+	}
+
+	// 스케줄 조회 DAO
+	public List<PT> selectSList() {
+		return sqlSession.selectList("adminMapper.selectSList");
+	}
+
+	// 스케줄 조회 시 트레이너 필터 적용 DAO
+	public List<PT> scheduleFilter(List<Integer> noList) {
+		return sqlSession.selectList("adminMapper.scheduleFilter", noList);
 	}
 
 
