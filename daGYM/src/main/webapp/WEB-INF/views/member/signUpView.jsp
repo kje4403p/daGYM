@@ -273,6 +273,7 @@
 			
 		}
 	});
+	// 인증번호 이메일 전송하기
 	function sendEmail(){
 		
 		var $memberEmail =$("#memberEmail"); 
@@ -283,10 +284,10 @@
 			success : function(code){
 				console.log("다이스"+code);
 				
-				if(code!=null){
+				if(code!=null){ // 인증번호가 발송되었을 때
 					alert("인증번호를 입력해주세요.")
 					codeCheck(code);
-				}else{
+				}else{ // 인증번호가 발송되지 않았을 때 == 이메일을 잘못 입력했을 때
 					alert("이메일을 다시 입력해주세요.")
 				}
 			},error:function(){
@@ -296,18 +297,16 @@
 		});
 	}
 	
-	
+	// 인증번호 일치여부 확인
 		function codeCheck(code){
-			console.log("다이다이" + code);
-			console.log("코드"+$code.val());
 			$code.on("input", function(){
-			if($code.val()==code){
-				$("#checkCode").text("인증번호 일치").css("color","blue");
-				signUpCheck.code=true;
-			}else{
-				$("#checkCode").text("인증번호 불일치").css("color","red");
-				signUpCheck.code=false;
-			}
+				if($code.val()==code){ // 회원이 작성한 인증번호와 발송한 인증번호가 같을 때
+					$("#checkCode").text("인증번호 일치").css("color","blue");
+					signUpCheck.code=true;
+				}else{ // 회원이 작성한 인증번호와 발송한 인증번호가 다를 때
+					$("#checkCode").text("인증번호 불일치").css("color","red");
+					signUpCheck.code=false;
+				}
 			});
 		}
 	
