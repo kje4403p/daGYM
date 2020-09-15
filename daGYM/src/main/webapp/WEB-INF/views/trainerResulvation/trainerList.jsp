@@ -13,6 +13,7 @@
  #trainer{
  padding-bottom: 100px;
  }
+
 </style>
 </head>
 <body>
@@ -56,7 +57,7 @@
 	                						
                         <div id="trainer-text" class="trainer-text">
                             <h5>${trainer.memberName}</h5>
-                            <span>Leader</span>
+                            <span>Trainer</span>
                             <br><br>
                             <p>Phone: ${trainer.memberPhone}</p>
                             <p>회원 수: ${trainer.trainerMcnt}</p>
@@ -77,7 +78,7 @@
 	<script>
 	$(".trainerList").on("click",function(event){
 		if(<%=loginMember%>==null){
-		swal("FAIL","로그인 후 이용해주세요.");
+		swal({"error","로그인 후 이용해주세요."});
 		 event.preventDefault();
 		}
 	});

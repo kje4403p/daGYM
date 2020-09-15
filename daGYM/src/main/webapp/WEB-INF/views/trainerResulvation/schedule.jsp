@@ -81,7 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
 			 $('#modal').show();
 			 
 			 $("#select").on("click",function(){
+				
 					var item=$("#trainerSchedule option:selected").val();
+					
 					console.log(yy);
 					console.log(mm);
 					console.log(dd);
@@ -93,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 						data: {"scheduleTime":scheduleTime},
 						success:function(schedule){
 							location.reload();
-						},error:function(){
+						},error:function(){					
 							console.log("통신 실패");
 						}
 					});

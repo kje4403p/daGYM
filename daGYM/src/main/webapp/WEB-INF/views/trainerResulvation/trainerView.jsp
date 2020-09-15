@@ -39,12 +39,6 @@
 
 	<script src="${contextPath}/resources/js/trainerView/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	
-		<!-- calendar를 위한 라이브러리들 지우면 안됨 -->
-
-<script src='https://fullcalendar.io/releases/fullcalendar/3.9.0/lib/moment.min.js'></script>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css'rel='stylesheet'/>
-<link href='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.print.css' rel='stylesheet' media='print'/>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js'></script>
 
 	<style>
 	.trainerImg{
@@ -59,10 +53,21 @@
 	clear: both;
 	}
 	hr{
-	color:black;
+	background-color:white;
 	}
 	.hello{
 	background-color: gray;
+	}
+	#hello{
+	margin: 0 auto;
+	width: 1200px;
+	}
+	#price{
+	font-size: 30px;
+	font-weight: bold;
+	}
+	.pricing_price{
+	padding-top: 30%;
 	}
 	</style>
 	
@@ -102,6 +107,7 @@
 				<hr>
 				<h4>입사일:  ${trainer.memberEnrollDate}</h4>
 				</div>
+				<hr>
 			</div>
 		</section>
 
@@ -165,10 +171,10 @@
 			</div>
 			<!--End off container -->
 			<c:if test="${loginMember.memberGrade == 'T'}">
-			<a href="${contextPath}/trainer/schedule/${trainer.trainerNo}">스케줄 등록</a>
+			<button class="btn btn-outline-danger" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}')">스케줄 등록</button>
 			</c:if>
 			<c:if test="${loginMember.memberGrade == 'G'}">
-			<a href="${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}">트레이너 예약</a>
+			<button class="btn btn-outline-danger" onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}')">트레이너 예약</button>
 			</c:if>
 		</section>
   
@@ -180,8 +186,6 @@
 			<div class="overlay"></div>
 			<div class="container">
 				<div class="row">
-
-
 					<div class="main_testimonial col-sm-8 ml-sm-auto mr-sm-auto">
 						<div class="head_title text-center roomy-100">
 							<h2 class="text-white">OUR TESTIMONIALS</h2>
@@ -192,7 +196,7 @@
 					<div class="testimonial_slid text-center">
 						<div class="testimonial_item">
 							<div class="col-sm-10 mr-sm-auto ml-sm-auto">
-								<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+								<p class="text-white">환불은 불가능합니다...! 신중히 결제해주세요...!</p>
 
 								<div class="test_authour m-top-30">
 									<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
@@ -263,9 +267,9 @@
 					<div class="main_pricing">
 						<div class="col-md-8 ml-md-auto mr-md-auto">
 							<div class="head_title text-center">
-								<h2>OUR PRICING</h2>
+								<h2>PT 결제</h2>
 								<div class="separator_auto"></div>
-								<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+								<h4>환불은 불가능합니다...! 신중히 결제해주세요...!</h4>
 							</div>
 						</div>
 					</div>
@@ -278,7 +282,7 @@
 							</div>
 							<div class="pricing_price_border text-center">
 								<div class="pricing_price">
-									<h3 class="text-white">${(trainer.trainerPrice)*5 }</h3>
+									<p id="price" class="text-white">${(trainer.trainerPrice)*5 }</p>
 									
 								</div>
 							</div>
@@ -298,7 +302,7 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="5"/>
 										</c:url>
-										<a href="${url }"class="btn btn-primary" id="order">결제하기</a>
+										<button onclick="window.open('${url}')" class="btn btn-primary" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
@@ -319,7 +323,7 @@
 							</div>
 							<div class="pricing_price_border text-center">
 								<div class="pricing_price">
-									<h3 class="text-white">${(trainer.trainerPrice)*10 }</h3>
+									<p id="price" class="text-white">${(trainer.trainerPrice)*10 }</p>
 								</div>
 							</div>
 
@@ -336,7 +340,7 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="10"/>
 										</c:url>
-										<a href="${url }"class="btn btn-primary" id="order">결제하기</a>
+											<button onclick="window.open('${url}')" class="btn btn-primary" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
@@ -355,7 +359,7 @@
 							</div>
 							<div class="pricing_price_border text-center">
 								<div class="pricing_price">
-									<h3 class="text-white">${(trainer.trainerPrice)*20 }</h3>
+									<p id="price" class="text-white">${(trainer.trainerPrice)*20 }</p>
 								</div>
 							</div>
 
@@ -372,7 +376,8 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="20"/>
 										</c:url>
-										<a href="${url }"class="btn btn-primary" id="order">결제하기</a>
+										<button onclick="window.open('${url}')" class="btn btn-primary" id="order">결제하기</button>
+	
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
