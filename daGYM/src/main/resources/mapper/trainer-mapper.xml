@@ -152,4 +152,8 @@ SELECT * FROM DUAL
   	<update id="updateTrainerSchedule"  parameterType="PT" >
   	UPDATE TRAINER_SCHEDULE SET SCHEDULE_STATUS='N' WHERE TRAINER_NO=#{trainerNo} AND SCHEDULE_TIME=#{scheduleTime}
   	</update>
+  	
+  	<select id="compareSchedule" parameterType="TrainerSchedule" resultType="_int">
+  	SELECT COUNT(*) FROM TRAINER_SCHEDULE WHERE SCHEDULE_TIME=#{scheduleTime} AND TRAINER_NO=#{trainerNo}
+  	</select>
 </mapper>

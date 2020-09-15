@@ -126,5 +126,10 @@ public class TrainerDAO {
 		return sqlSession.update("trainerMapper.updateTrainerSchedule",pt);
 	}
 
+	public int compareSchedule(TrainerSchedule trainerSchedule) {
+		int result=sqlSession.selectOne("trainerMapper.compareSchedule",trainerSchedule);
+		return result;
+	}
+
 
 }

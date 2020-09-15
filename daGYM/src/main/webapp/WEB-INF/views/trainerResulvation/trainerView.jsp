@@ -170,7 +170,8 @@
 				<!--End off row-->
 			</div>
 			<!--End off container -->
-			<c:if test="${loginMember.memberGrade == 'T'}">
+		
+			<c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
 			<button class="btn btn-outline-danger" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}')">스케줄 등록</button>
 			</c:if>
 			<c:if test="${loginMember.memberGrade == 'G'}">

@@ -184,21 +184,10 @@ public class TrainerController {
 		produces="application/text; charset=utf-8;")
 	 public String trainerSchedule(@PathVariable int trainerNo, Model model,TrainerSchedule trainerSchedule,RedirectAttributes rdAttr) {	
 		 	System.out.println(trainerSchedule);
-		 	int result = trainerService.insertSchedule(trainerSchedule);
-			String status=null;
-			String msg=null;
-		    if(result>0) {
-		         status = "success";
-		         msg = "스케줄 성공!";
-		      }else {
-		         status= "error";
-		         msg = "이미 예약된 시간이 있습니다.";
-		      }
-		      
-		      rdAttr.addFlashAttribute("status", status);
-		      rdAttr.addFlashAttribute("msg", msg);
-		      
-		 return "trainerResulvation/schedule";
+		 	
+		 		int result = trainerService.insertSchedule(trainerSchedule);
+			 	
+		 return result+"";
 	 }
 	 
 	 
@@ -216,24 +205,12 @@ public class TrainerController {
 	 @ResponseBody
 	 @RequestMapping(value="resulvation/{trainerNo}",
 		produces="application/text; charset=utf-8;")
-		public String resulvation(@PathVariable int trainerNo, Model model,PT pt ,ClassStatus classStatus,RedirectAttributes rdAttr) {
+		public String resulvation(@PathVariable int trainerNo, Model model,PT pt ,ClassStatus classStatus) {
 		 Member loginMember = (Member)model.getAttribute("loginMember");
 		 pt.setMemberNo(loginMember.getMemberNo());
 		 System.out.println(pt);
 		int result = trainerService.insertResulvation(pt);
-		String status=null;
-		String msg=null;
-	    if(result>0) {
-	         status = "success";
-	         msg = "예약 성공!";
-	      }else {
-	         status= "error";
-	         msg = "이미 예약된 시간입니다.";
-	      }
-	    
-	      rdAttr.addFlashAttribute("status", status);
-	      rdAttr.addFlashAttribute("msg", msg);
-	      
-	      return "redirect:/trainer/trainerResulvation"+trainerNo;
+	
+	      return result+"";
 }
 }
