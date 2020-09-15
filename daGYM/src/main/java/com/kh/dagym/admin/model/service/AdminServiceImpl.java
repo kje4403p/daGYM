@@ -15,6 +15,7 @@ import com.kh.dagym.admin.model.dao.AdminDAO;
 import com.kh.dagym.admin.model.vo.Attachment;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.admin.model.vo.PT;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
@@ -197,7 +198,18 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
-	
+
+    // 스케줄 조회 Service 구현
+	@Override
+	public List<PT> selectSList() {
+		return adminDAO.selectSList();
+	}
+
+	// 스케줄 조회 시 트레이너 필터 적용 Service 구현
+	@Override
+	public List<PT> scheduleFilter(List<Integer> noList) {
+		return adminDAO.scheduleFilter(noList);
+	}	
 	
 	
 	
@@ -233,5 +245,6 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
+
 
 }

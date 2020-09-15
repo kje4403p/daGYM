@@ -11,7 +11,7 @@ public class QnaBoard {
 	private String boardTitle;
 	private String boardContent;
 	private Timestamp boardEnrollDate;
-	private Timestamp boardModiftDate;
+	private Timestamp boardModifyDate;
 	private String boardStatus;
 	private int qnaCode;
 	private Date startDate;
@@ -25,7 +25,7 @@ public class QnaBoard {
 	}
 
 	public QnaBoard(int boardNo, String boardWriter, int boardType, String boardTitle, String boardContent,
-			Timestamp boardEnrollDate, Timestamp boardModiftDate, String boardStatus, int qnaCode, Date startDate,
+			Timestamp boardEnrollDate, Timestamp boardModifyDate, String boardStatus, int qnaCode, Date startDate,
 			Date endDate, int views, int answer, int replyCount) {
 		super();
 		this.boardNo = boardNo;
@@ -34,7 +34,7 @@ public class QnaBoard {
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.boardEnrollDate = boardEnrollDate;
-		this.boardModiftDate = boardModiftDate;
+		this.boardModifyDate = boardModifyDate;
 		this.boardStatus = boardStatus;
 		this.qnaCode = qnaCode;
 		this.startDate = startDate;
@@ -92,12 +92,12 @@ public class QnaBoard {
 		this.boardEnrollDate = boardEnrollDate;
 	}
 
-	public Timestamp getBoardModiftDate() {
-		return boardModiftDate;
+	public Timestamp getBoardModifyDate() {
+		return boardModifyDate;
 	}
 
-	public void setBoardModiftDate(Timestamp boardModiftDate) {
-		this.boardModiftDate = boardModiftDate;
+	public void setBoardModifyDate(Timestamp boardModifyDate) {
+		this.boardModifyDate = boardModifyDate;
 	}
 
 	public String getBoardStatus() {
@@ -160,7 +160,7 @@ public class QnaBoard {
 	public String toString() {
 		return "QnaBoard [boardNo=" + boardNo + ", boardWriter=" + boardWriter + ", boardType=" + boardType
 				+ ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardEnrollDate="
-				+ boardEnrollDate + ", boardModiftDate=" + boardModiftDate + ", boardStatus=" + boardStatus
+				+ boardEnrollDate + ", boardModifyDate=" + boardModifyDate + ", boardStatus=" + boardStatus
 				+ ", qnaCode=" + qnaCode + ", startDate=" + startDate + ", endDate=" + endDate + ", views=" + views
 				+ ", answer=" + answer + ", replyCount=" + replyCount + "]";
 	} 

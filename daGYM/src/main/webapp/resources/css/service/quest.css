@@ -23,6 +23,7 @@
 	width: 85%;
 	height: 100%;
 	float: left;
+	box-sizing: border-box;
 }
 
 #b1 {
@@ -43,7 +44,7 @@
 }
 
 table {
-	width: 80%;
+	width: 1500px;
 	border-collapse: collapse;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -129,11 +130,11 @@ tbody>tr>td:last-child {
 	max-width: 1200px;
 }
 /* 검색창 */
-#searchInput, #searchBtn {
+/* #searchInput, #searchBtn {
 	float: left;
 	margin-left: 60%;
 }
-
+*/
  input[type=text]{
 	border:5px solid #aaa;
 	border-radius:4px;
@@ -147,15 +148,26 @@ tbody>tr>td:last-child {
 input[type=text]:focus{
 	border-color:dodgerBlue;
 	box-sizing: 0 0 50px 0 dodgerBlue;
+} 
+
+#search{
+	margin-top:50px;
+	margin-left: 390px;
+	
 }
 
-
+#newInsert{
+	margin-left : 1120px;
+	font-weight: bold;
+	color: black;
+}
 
 /* 페이징바 */
 #pagingbar{
- position: absolute;
-	left:42% ;
-	margin-top: 10px;
+ 	position: absolute;
+	margin-left:500px;
+	margin-top: 5px;
+	float: left;
 }
 
 #searcharea{
@@ -317,4 +329,19 @@ position: absolute;
 .content p{
   font-size: 40px;
   font-weight: 700;
+}
+
+/* 이미지 창 */
+
+#body1{
+	
+	z-index: 2;
+}
+
+#divz1{
+	position:absolute;
+	z-index: 1;
+	border: 1px solid black;
+	width: 200px;
+	height: 200px;
 }

@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.dagym.admin.model.vo.Attachment;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.admin.model.vo.PT;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
@@ -92,5 +93,16 @@ public interface AdminService {
 	 * @return result
 	 */
 	public abstract int updateTrainer(Trainer trainer, String savePath, MultipartFile image);
+
+	/** 스케줄 조회 Service
+	 * @return sList
+	 */
+	public abstract List<PT> selectSList();
+
+	/** 스케줄 조회 시 트레이너 필터 적용 Service
+	 * @param noList
+	 * @return sList
+	 */
+	public abstract List<PT> scheduleFilter(List<Integer> noList);
 
 }

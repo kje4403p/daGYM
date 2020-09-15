@@ -67,7 +67,7 @@
 				 	<span class="float-right">조회수 : ${board.views} </span>
 					<div id="date-area">
 						<p>작성일 : ${board.boardEnrollDate }</p>
-						<p>마지막 수정일 : ${board.boardModiftDate}</p>  
+						<p>마지막 수정일 : ${board.boardModifyDate}</p>  
 					</div>
 					
 				</div>
