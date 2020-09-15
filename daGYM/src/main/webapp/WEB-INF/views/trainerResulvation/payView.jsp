@@ -18,7 +18,7 @@
 <!-- favicon -->
 <link rel="icon" href="${contextPath}/resources/images/favicon.png">
 <!-- page title -->
-<title>회원가입</title>
+<title>회원권 결제하기</title>
 
 <!-- css -->
 <link href="${contextPath}/resources/css/king-ui.css" rel="stylesheet">
@@ -128,6 +128,8 @@
 <!-- / forms -->
  <jsp:include page="../common/footer.jsp"/>
 <script>
+
+	 // 결제할 데이터 전송
 	$("#payment").on("click",function(){
 		var classNm = $("#name").val();
 		var amount=$("#amount").val();
@@ -136,8 +138,6 @@
 		var memberPhone = $("#memberPhone").val();
 		var trainerNo = "${trainer.trainerNo}";
 		var merchant_uid;
-		//alert("${trainer.trainerNo}")
-		//alert(amount)
 		$.ajax({
 			url : "../payment",
 			type : "post",
@@ -148,13 +148,9 @@
 				"memberEmail" : memberEmail,
 				"memberPhone" : memberPhone,
 				"trainerNo" :"${trainer.trainerNo}"}
-				
 			, success : function(merchant_uid){
-				//alert(merchant_uid)
-				if(merchant_uid != ""){
-					payment(classNm, amount, memberName,memberEmail, memberPhone, merchant_uid, trainerNo);
-					
-					
+				if(merchant_uid != ""){ // 결제번호가 있을 경우
+					payment(classNm, amount, memberName,memberEmail, memberPhone, merchant_uid, trainerNo); // 결제 함수 실행
 				}else{
 					alert("실패")
 				}
@@ -166,17 +162,11 @@
 		
 		
 	});
-	
+	 
+	// 결제
 	function payment(classNm, amount, memberName, memberEmail,  memberPhone, merchant_uid, trainerNo){
 		var IMP = window.IMP;
 		IMP.init("imp85849324");
-		console.log(classNm)
-		console.log(amount)
-		console.log(memberEmail)
-		console.log(memberName)
-		console.log(memberPhone)
-		console.log(merchant_uid)
-	
 		IMP.request_pay({
 			pg : "html5_inicis",
 			pay_method :"card",
@@ -186,13 +176,8 @@
 			buyer_email : memberEmail,
 			buyer_name : memberName,
 			buyer_tel : memberPhone
-			
-			
 		}, function(rsp){
-			console.log(rsp)
-			console.log("??")
 			if(rsp.success){
-				
 				$.ajax({
 					url : "../insertImpUid",
 					type : "post",
@@ -202,20 +187,15 @@
 						merchantUid : rsp.merchant_uid,
 						trainerNo : trainerNo,
 						classNm : classNm
-						
 					}
 				}).done(function(result){
 					if(result != ""){
-						//var msg = "결제가 완료되었습니다.";
-						//alert(msg)
 						location.href = "${contextPath}/trainer/orderSuccess/"+trainerNo;
-						
 					}
 				});
 			}else{
-				alert("결제에 실패했습니다. 다시 결제해주세요.");
+				alert("결제에 실패했습니다. 다시 시도해주세요.");
 			}
-			
 		});
 	
 	}

@@ -158,7 +158,7 @@ public class MemberController {
 			
 	}
 	
-	// PT이용권/결제정보 화면 전환 메소드
+			// PT이용권/결제정보 화면 전환 메소드
 			@RequestMapping("myPassList/{type}")
 			public String memberPass(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
 				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
@@ -168,9 +168,9 @@ public class MemberController {
 				model.addAttribute("myPassList", MyPassList);
 				model.addAttribute("pInfo",pInfo);
 				return "member/memberPass";
-		}
+			}
 			
-	// 내 수강생 조회
+			// 내 수강생 조회
 			@RequestMapping("myStudentsList/{type}")
 			public String myStudentsList(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
 				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
@@ -180,43 +180,43 @@ public class MemberController {
 				model.addAttribute("myStudentsList", myStudentsList);
 				model.addAttribute("pInfo",pInfo);
 				return "member/myStudents";
-		}
-			
-	// 회원탈퇴 화면 전환 메소드
-				@RequestMapping("memberRemove")
-				public String memberRemove() {
-					return "member/memberRemove";
 			}
-	// 회원탈퇴 메소드
-				@RequestMapping("memberRemoveAction")
-				public String removeMember(String memberPwd, Model model, RedirectAttributes rdAttr, HttpServletRequest request, SessionStatus status1) {
-					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
-					
-					int result = memberService.removeMember(memberPwd,memberNo);
-					
-					String msg = null;
-					String status = null;
-					String text = null;
-					String link = null;
-					if(result > 0) {
-						msg="회원 탈퇴 성공";
-						status = "success";
-						link ="";
-						status1.setComplete();
-					}else if(result == 0){
-						msg="회원 탈퇴 실패";
-						status = "error";
-						link = "member/memberRemove";
-					}else if(result == -1){
-						msg="패스워드가 일치하지 않습니다.";
-						status = "error";
-						link = "member/memberRemove";
-					}
-					rdAttr.addFlashAttribute("msg", msg);
-					rdAttr.addFlashAttribute("status", status);
-					return "redirect:/" +link;
-				}	
+			
+			// 회원탈퇴 화면 전환 메소드
+			@RequestMapping("memberRemove")
+			public String memberRemove() {
+				return "member/memberRemove";
+			}
+			// 회원탈퇴 메소드
+			@RequestMapping("memberRemoveAction")
+			public String removeMember(String memberPwd, Model model, RedirectAttributes rdAttr, HttpServletRequest request, SessionStatus status1) {
+				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
 				
+				int result = memberService.removeMember(memberPwd,memberNo);
+				
+				String msg = null;
+				String status = null;
+				String text = null;
+				String link = null;
+				if(result > 0) {
+					msg="회원 탈퇴 성공";
+					status = "success";
+					link ="";
+					status1.setComplete();
+				}else if(result == 0){
+					msg="회원 탈퇴 실패";
+					status = "error";
+					link = "member/memberRemove";
+				}else if(result == -1){
+					msg="패스워드가 일치하지 않습니다.";
+					status = "error";
+					link = "member/memberRemove";
+				}
+				rdAttr.addFlashAttribute("msg", msg);
+				rdAttr.addFlashAttribute("status", status);
+				return "redirect:/" +link;
+			}	
+			
 			// 회원가입 화면 전환 메소드
 			@RequestMapping(value="signUp", method=RequestMethod.GET)
 			public String signUpView() {
@@ -301,7 +301,7 @@ public class MemberController {
 			@RequestMapping(value = "sendEmail", method=RequestMethod.GET)
 			public String mailSending(HttpServletRequest request, String email, HttpServletResponse response) throws IOException {
 				Random r = new Random();
-				int dice=r.nextInt(4589362) + 49311;
+				int dice=r.nextInt(4589362) + 49311; // 랜덤으로 인증번호 만들기
 				System.out.println("랜덤 : "+ r);
 				String setfrom = "kljklj28561@gmail.com";
 				String tomail = request.getParameter("memberEmail");
@@ -340,6 +340,8 @@ public class MemberController {
 				return "member/findId";
 				
 			}
+			
+			// 아이디 찾기
 			@ResponseBody
 			@RequestMapping("findId")
 			public String findId(String email) {
@@ -359,8 +361,8 @@ public class MemberController {
 			// 임시비밀번호 메일전송
 			@ResponseBody
 			@RequestMapping(value="findPw", produces = "application/text; charset=utf8")
-			public String findPw(Member member, String email, String id, HttpServletResponse response, HttpServletRequest request
-					) throws IOException {
+			public String findPw(Member member, String email, String id, HttpServletResponse response,
+					HttpServletRequest request) throws IOException {
 				//PrintWriter out = response.getWriter();
 				member.setMemberId(id);
 				member.setMemberEmail(email);
@@ -368,16 +370,12 @@ public class MemberController {
 				String pw = "";
 				String msg = "";
 				if(checkId==0 ) {
-				
 					msg="아이디 또는 이메일을 확인해주세요.";
 					System.out.println(msg);
 				
 				}else {
-					
-					
 					for (int i=0 ; i<12 ; i++) {
-						
-						 pw += (char)((Math.random()*26) + 97);
+					 pw += (char)((Math.random()*26) + 97);
 					}
 					
 					String setfrom = "kljklj28561@gmail.com";
@@ -402,16 +400,15 @@ public class MemberController {
 						messageHelper.setText(content);
 						mailSender.send(message);
 						
-						member.setMemberPwd(pw);
+						member.setMemberPwd(pw); // 임시 비밀번호를 member에 세팅
 						
-						int result = memberService.updatePw(member);
+						int result = memberService.updatePw(member); // 임시 비밀번호를 DB에 저장
 						msg="임시 비밀번호가 전송되었습니다.";
 					}catch(Exception e) {
 						e.printStackTrace();
 					}
 					
 				}
-				System.out.println("checkId"+checkId);
 				return msg;
 			}
 			

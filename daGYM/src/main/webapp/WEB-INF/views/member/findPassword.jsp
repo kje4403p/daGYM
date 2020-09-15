@@ -55,7 +55,7 @@
 						비밀번호 찾기
 					</span>
 
-					<label>아이디와 이메일을 입력해주세요. 입력하신 이메일로 인증번호가 전송됩니다.</label>
+					<label>아이디와 이메일을 입력해주세요. 입력하신 이메일로 임시 비밀번호가 전송됩니다.</label>
 					
 						<div class="wrap-input100 validate-input m-b-3" >
 							<input class="input100" type="text" name="id" id="id" placeholder="Id">
@@ -82,18 +82,7 @@
 		</div>
 	</div>
 	
-	<!-- 모달창 -->
-	<div class="modal hidden">
-		<div class="md_overlay"></div>
-		<div class="md_content">
-				인증번호를 입력해주세요
-				<input type="text">
-				<button >확인</button>
-			<div class="modal_text">
-			</div>
-			<button>X</button>
-		</div>
-	</div>
+	
 
 
 <!--===============================================================================================-->
@@ -130,17 +119,12 @@
 				data : {"email": $email , "id" : $id},
 				method : "POST",
 				success : function(msg){
-					console.log("a")
-					console.log(msg)
 					alert(msg)
 				location.href="${contextPath}/member/login"
 				},error:function(){
 					console.log("실패");
 				}
-				
 			})
-			
-			
 		})
 	
 	</script>
