@@ -46,7 +46,7 @@
       <span class="nav-link">Navigation</span>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="#">
+      <a class="nav-link" href="${contextPath}/admin/schedule">
         <span class="menu-title">전체 스케줄 조회</span>
       </a>
     </li>

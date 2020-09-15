@@ -1,5 +1,6 @@
 package com.kh.dagym.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import com.kh.dagym.admin.model.service.AdminService;
 import com.kh.dagym.admin.model.vo.Attachment;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
+import com.kh.dagym.admin.model.vo.PT;
 import com.kh.dagym.admin.model.vo.Page;
 import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
@@ -239,5 +241,32 @@ public class AdminController {
 		}
 		
 		return "redirect:/admin/trainerList";
+	}
+	
+	// 스케줄 조회 화면 전환
+	@RequestMapping("schedule")
+	public String scheduleView(Model model) {
+		List<Trainer> tList = adminService.selectTList();
+		List<PT> sList = adminService.selectSList();
+		System.out.println(sList);
+		model.addAttribute("tList", tList);
+		model.addAttribute("sList", sList);
+
+		return "admin/schedule";
+	}
+	
+	// 스케줄 조회 시 트레이너 필터 적용
+	@ResponseBody
+	@RequestMapping("scheduleFilter")
+	public String scheduleFileter(int[] tno) {
+		List<Integer> noList = new ArrayList<Integer>();
+		for(int i=0; i<tno.length; i++) {
+			noList.add(tno[i]);
+		}
+		List<PT> sList = adminService.scheduleFilter(noList);
+		System.out.println("필터" + sList);
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(sList);
 	}
 }
