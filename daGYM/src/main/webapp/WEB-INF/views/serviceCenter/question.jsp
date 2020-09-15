@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -19,6 +19,7 @@
     <title>Animated Sidebar Menu | CodingLab</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
 <body id="body1">
 
@@ -114,7 +115,7 @@
 				</table>
 				<!-- 관리자 로그인된 경우 글쓰기 버튼 -->
 				<c:if test="${!empty loginMember}" >
-					<a href="../${pInfo.boardType}/insert">글쓰기</a>
+					<button class="btn btn-primary" type="submit" id="newInsert">글쓰기</button>
 				</c:if>
 				<!-- 페이징바 -->
 				<input type="hidden" id="cp" value="${pInfo.currentPage}">
@@ -176,29 +177,31 @@
 									integerOnly="true" /> <c:set var="next"
 									value="${operand2*5 + 1}" /> <a class="page-link" href="${url}${next}" aria-label="Next"><span aria-hidden="true">&gt;</span></a></li>
 
-							<li><a class="page-item" href="${url}${pInfo.maxPage}" aria-label="Next"><span aria-hidden="true">&gt;&gt;</span></a></li>
+							<li><a class="page-item" aria-label="Next" href="${url}${pInfo.maxPage}"><span aria-hidden="true">&gt;&gt;</span></a></li>
 						</c:if>
 					</ul>
 					</nav>
 				</div>
-				
+				<div id = "divz1"></div>
 				
 				<!-- 검색창 -->
+				<div id="search">
 				
-				<select name="sKey" style="width:100px; display:inline-block;">
-					<option value="tit">글제목</option>
-					<option value="con">내용</option>
-					<option value="tit-con">제목+내용</option>
-				</select>
+					<select name="sKey" style="width:100px; display:inline-block;">
+						<option value="tit">글제목</option>
+						<option value="con">내용</option>
+						<option value="tit-con">제목+내용</option>
+					</select>
+					
+					
+					<input type="text" id="searchInput" name="sVal"
+						style="width: 25% display: inline-block;">
+					<!-- <button id="searchBtn" type="button"
+						style="width: 100px; display: inline-block;">검색</button> -->
+					<input class="btn btn-primary" id="searchBtn" type="submit" value="검색">
+				   
 				
-				
-				<input type="text" id="searchInput" name="sVal"
-					style="width: 25% display: inline-block;">
-				<!-- <button id="searchBtn" type="button"
-					style="width: 100px; display: inline-block;">검색</button> -->
-				<input class="btn btn-primary" id="searchBtn" type="submit" value="검색">
-				
-				
+				</div>
 				
 			</div>
 
@@ -211,7 +214,14 @@
 
 	<jsp:include page="../common/footer.jsp" />
 	<%-- <%@include file="../common/footer.jsp" %> --%>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 	<script>
@@ -251,6 +261,13 @@
 			
 			location.href=searchUrl;
 		});
+		
+		$("#newInsert").on("click",function(){
+			
+			location.href="../${pInfo.boardType}/insert";
+		});
+		
+		
 	</script>
 </body>
 </html>

@@ -10,7 +10,7 @@
         <result property="boardTitle" column="BOARD_TITLE"/>
         <result property="boardContent" column="BOARD_CONTENT"/>
         <result property="boardEnrollDate" column="BOARD_ENROLL_DATE"/>
-        <result property="boardModiftDate" column="BOARD_MODIFY_DATE"/>
+        <result property="boardModifyDate" column="BOARD_MODIFY_DATE"/>
         <result property="boardStatus" column="BOARD_STATUS"/>
         <result property="qnaCode" column="QUESTION_CODE"/>
         <result property="startDate" column="START_DATE"/>
@@ -25,7 +25,7 @@
         <result property="boardTitle" column="BOARD_TITLE"/>
         <result property="boardContent" column="BOARD_CONTENT"/>
         <result property="boardEnrollDate" column="BOARD_ENROLL_DATE"/>
-        <result property="boardModiftDate" column="BOARD_MODIFY_DATE"/>
+        <result property="boardModifyDate" column="BOARD_MODIFY_DATE"/>
         <result property="boardStatus" column="BOARD_STATUS"/>
         <result property="qnaCode" column="QUESTION_CODE"/>
         <result property="startDate" column="START_DATE"/>
