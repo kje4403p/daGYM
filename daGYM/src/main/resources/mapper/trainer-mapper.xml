@@ -138,7 +138,7 @@ SELECT * FROM DUAL
   	</insert>
   	
   	<select id="selectSchedule" parameterType="_int" resultMap="TrainerScheduleResultSet">
-  	SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{trainerNo}
+  	SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{trainerNo} AND SCHEDULE_STATUS='Y'
   	</select>
   	
   	<insert id="insertResulvation" parameterType="PT">

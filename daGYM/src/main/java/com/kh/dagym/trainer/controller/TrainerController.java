@@ -65,7 +65,7 @@ public class TrainerController {
 		         if(!files.isEmpty()) {
 		            model.addAttribute("files",files);
 		         }
-		         System.out.println(classStatus);
+		       
 		model.addAttribute("trainer",trainer);
 		model.addAttribute("loginMember",loginMember);
 		model.addAttribute("classStatus",classStatus);
@@ -180,31 +180,60 @@ public class TrainerController {
 	 
 	 
 	 @ResponseBody
-	 @RequestMapping(value="trainerSchedule/{trainerNo}")
-	 public String trainerSchedule(@PathVariable int trainerNo, Model model,TrainerSchedule trainerSchedule) {	
+	 @RequestMapping(value="trainerSchedule/{trainerNo}",
+		produces="application/text; charset=utf-8;")
+	 public String trainerSchedule(@PathVariable int trainerNo, Model model,TrainerSchedule trainerSchedule,RedirectAttributes rdAttr) {	
 		 	System.out.println(trainerSchedule);
 		 	int result = trainerService.insertSchedule(trainerSchedule);
-		 	if(result>0) {
-		 		System.out.println("굿");
-		 	}
+			String status=null;
+			String msg=null;
+		    if(result>0) {
+		         status = "success";
+		         msg = "스케줄 성공!";
+		      }else {
+		         status= "error";
+		         msg = "이미 예약된 시간이 있습니다.";
+		      }
+		      
+		      rdAttr.addFlashAttribute("status", status);
+		      rdAttr.addFlashAttribute("msg", msg);
+		      
 		 return "trainerResulvation/schedule";
 	 }
 	 
 	 
 	 @RequestMapping("trainerResulvation/{trainerNo}")
-		public String trainerResulvation(@PathVariable int trainerNo, Model model) {
+		public String trainerResulvation(@PathVariable int trainerNo, Model model,ClassStatus classStatus) {
 			List<TrainerSchedule> schedule = trainerService.selectSchedule(trainerNo);
+			 Member loginMember = (Member)model.getAttribute("loginMember");
 	 		model.addAttribute("schedule",schedule);
+	 		classStatus= trainerService.selectClassStatus(loginMember.getMemberNo());
+			  System.out.println(classStatus);
+			model.addAttribute("classStatus",classStatus);
 	 		return "trainerResulvation/resulvation";
 		}
 	 
 	 @ResponseBody
-	 @RequestMapping("resulvation/{trainerNo}")
-		public String resulvation(@PathVariable int trainerNo, Model model,PT pt) {
+	 @RequestMapping(value="resulvation/{trainerNo}",
+		produces="application/text; charset=utf-8;")
+		public String resulvation(@PathVariable int trainerNo, Model model,PT pt ,ClassStatus classStatus,RedirectAttributes rdAttr) {
 		 Member loginMember = (Member)model.getAttribute("loginMember");
 		 pt.setMemberNo(loginMember.getMemberNo());
 		 System.out.println(pt);
 		int result = trainerService.insertResulvation(pt);
-			return "trainerResulvation/resulvation";
-		}
+		String status=null;
+		String msg=null;
+	    if(result>0) {
+	         status = "success";
+	         msg = "예약 성공!";
+	      }else {
+	         status= "error";
+	         msg = "이미 예약된 시간입니다.";
+	      }
+	    
+	      rdAttr.addFlashAttribute("status", status);
+	      rdAttr.addFlashAttribute("msg", msg);
+	      
+	      return "redirect:/trainer/trainerResulvation"+trainerNo;
+}
 }

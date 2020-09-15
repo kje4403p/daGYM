@@ -56,8 +56,8 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="trainerList">트레이너 조회</a></li>
-          <li class="nav-item"> <a class="nav-link" href="memberList">회원 조회</a></li>
+          <li class="nav-item"> <a class="nav-link" href="${contextPath}/admin/trainerList">트레이너 조회</a></li>
+          <li class="nav-item"> <a class="nav-link" href="${contextPath}/admin/memberList">회원 조회</a></li>
         </ul>
       </div>
     </li>
@@ -67,18 +67,18 @@
       </a>
       <div class="collapse" id="auth">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="trainerChart">트레이너별 매출</a></li>
-          <li class="nav-item"> <a class="nav-link" href="monthChart">월별 매출</a></li>
+          <li class="nav-item"> <a class="nav-link" href="${contextPath}/admin/trainerChart">트레이너별 매출</a></li>
+          <li class="nav-item"> <a class="nav-link" href="${contextPath}/admin/monthChart">월별 매출</a></li>
         </ul>
       </div>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="inquiryList">
+      <a class="nav-link" href="${contextPath}/admin/inquiryList">
         <span class="menu-title">1:1 문의 조회</span>
       </a>
     </li>
     <li class="nav-item menu-items">
-      <a class="nav-link" href="eventList">
+      <a class="nav-link" href="${contextPath}/admin/eventList">
         <span class="menu-title">이벤트 조회</span>
       </a>
     </li>

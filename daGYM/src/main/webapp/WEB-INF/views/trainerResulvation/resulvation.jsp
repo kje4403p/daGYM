@@ -7,6 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>트레이너 예약</title>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link href='${contextPath}/resources/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
@@ -15,7 +16,7 @@
 <script src='${contextPath}/resources/fullcalendar/packages/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/daygrid/main.js'></script>
 <script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <style>
           /* The Modal (background) */
 .searchModal {
@@ -51,7 +52,7 @@ background-color: #fcf8e3;
         </style>
         
 <script>
-swal({icon : "${status}",title : "${msg}", text : "${text}"});
+
 
 document.addEventListener('DOMContentLoaded', function() { 
 	var calendarEl = document.getElementById('calendar');
@@ -65,8 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
 			 %>
 			
 			 {	 
-				 
-				 start: "<%=sd.getScheduleTime()%>"
+				
+				 start:"<%=sd.getScheduleTime()%>"
 					
 			 },
 			 
@@ -76,18 +77,24 @@ document.addEventListener('DOMContentLoaded', function() {
 			 eventClick: function(info,start) {
 				var eventFullDate = info.event.start;			  		
 				var scheduleTime =moment(eventFullDate).format('YY/MM/DD HH:mm:00.000000000');
+				var scheduleTime2 =moment(eventFullDate).format('YYYY/MM/DD HH:mm');
 			console.log(scheduleTime);
-				if(confirm(info.event.start+"                   예약 하시겠습니까?")){
+				if(confirm(scheduleTime2+" 예약 하시겠습니까?")){
+					if ("${classStatus.classCnt}">0){
 					$.ajax({
 						url:"${contextPath}/trainer/resulvation/${trainerNo}",
 						data: {"scheduleTime":scheduleTime},
 						success:function(schedule){
-							 eventColor: "red"
-							 swal("SUCCESS","예약 성공하였습니다.");
+							 location.reload();
+							
 						},error:function(){
 							console.log("통신 실패");
 						}
 					});
+					}else{
+						 swal("FAIL","PT이용권을 구매해야 합니다.");
+					}
+			
 				}
 			
 			},
@@ -107,9 +114,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </head>
 <body>
- 
-<div id='calendar'></div>
 
+
+<div id='calendar'></div>
 
 </body>
 <script>

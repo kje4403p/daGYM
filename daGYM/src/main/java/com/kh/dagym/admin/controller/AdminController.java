@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.dagym.admin.model.service.AdminService;
+import com.kh.dagym.admin.model.vo.Attachment;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.admin.model.vo.Member;
 import com.kh.dagym.admin.model.vo.Page;
@@ -184,7 +185,6 @@ public class AdminController {
 	// 트레이너 탈퇴
 	@RequestMapping("deleteTrainer/{trainerNo}")
 	public String deleteTrainer(@PathVariable int trainerNo, RedirectAttributes rdAttr) {
-		System.out.println(trainerNo);
 		int result = adminService.deleteTrainer(trainerNo);
 		
 		if(result > 0) {
@@ -193,6 +193,49 @@ public class AdminController {
 		} else {
 			rdAttr.addFlashAttribute("status", "error");
 			rdAttr.addFlashAttribute("msg", "탈퇴 실패");
+		}
+		
+		return "redirect:/admin/trainerList";
+	}
+	
+	// 트레이너 수정 화면 전환
+	@RequestMapping("updateTrainerView/{trainerNo}")
+	public String updateTrainerView(@PathVariable int trainerNo, Model model) {
+		Trainer trainer = adminService.selectTrainer(trainerNo);
+		
+		if(trainer != null) {
+			Attachment file = adminService.selectFile(trainerNo);
+			model.addAttribute("file", file);
+		}
+		model.addAttribute("trainer", trainer);
+
+		return "admin/updateTrainer";
+	}
+	
+	// 비밀번호 확인
+	@ResponseBody
+	@RequestMapping("pwdCheck")
+	public String pwdCheck(Trainer trainer) {
+		int result = adminService.pwdCheck(trainer);
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(result);
+	}
+	
+	// 트레이너 수정
+	@RequestMapping(value="trainerUpdate", method=RequestMethod.POST)
+	public String updateTrainer(Trainer trainer, HttpServletRequest request, 
+								RedirectAttributes rdAttr, @RequestParam(value="thumbnail", required=false) MultipartFile image) {
+		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages/");
+		
+		int result = adminService.updateTrainer(trainer, savePath, image);
+
+		if(result > 0) { 
+			rdAttr.addFlashAttribute("status", "success");
+			rdAttr.addFlashAttribute("msg", "수정 성공 !"); 
+		} else {
+			rdAttr.addFlashAttribute("status", "error"); 
+			rdAttr.addFlashAttribute("msg", "수정 실패"); 
 		}
 		
 		return "redirect:/admin/trainerList";
