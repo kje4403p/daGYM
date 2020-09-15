@@ -9,11 +9,12 @@ public class MyPass {
 	private Date raymentDate; // 결제 날짜
 	private String trainerName; // 트레이너 이름
 	private int classCnt; // 이용권(횟수)
+	private int trainerNo;
 
 	public MyPass() {
 	}
 
-	public MyPass(String merchantUid, int classNm, int amount, Date raymentDate, String trainerName, int classCnt) {
+	public MyPass(String merchantUid, int classNm, int amount, Date raymentDate, String trainerName, int classCnt, int trainerNo) {
 		super();
 		this.merchantUid = merchantUid;
 		this.classNm = classNm;
@@ -21,6 +22,15 @@ public class MyPass {
 		this.raymentDate = raymentDate;
 		this.trainerName = trainerName;
 		this.classCnt = classCnt;
+		this.trainerNo=trainerNo;
+	}
+
+	public int getTrainerNo() {
+		return trainerNo;
+	}
+
+	public void setTrainerNo(int trainerNo) {
+		this.trainerNo = trainerNo;
 	}
 
 	public String getMerchantUid() {

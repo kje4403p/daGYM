@@ -18,6 +18,7 @@ import com.kh.dagym.trainer.model.dao.TrainerDAO;
 import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Payment;
+import com.kh.dagym.trainer.model.vo.Review;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 import com.kh.dagym.trainer.model.vo.TrainerSchedule;
@@ -209,6 +210,11 @@ public class TrainerServiceImpl implements TrainerService{
 		return result;
 	}
 	
+	// 리뷰 조회 구현
+		@Override
+		public List<Review> selectReviews(int trainerNo) {
+			return trainerDAO.selectReviews(trainerNo);
+		}
 	
 
 }

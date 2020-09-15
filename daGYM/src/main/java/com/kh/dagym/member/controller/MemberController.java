@@ -32,6 +32,7 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.Review;
 
 @SessionAttributes({"loginMember"})
 @Component
@@ -164,9 +165,10 @@ public class MemberController {
 				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
 				com.kh.dagym.common.PageInfo pInfo = memberService.myPassPagination(type, cp, memberNo);
 				List<MyPass> MyPassList = memberService.MyPassList(memberNo,pInfo);
-				
+				int trainerNo= MyPassList.get(0).getTrainerNo();
 				model.addAttribute("myPassList", MyPassList);
 				model.addAttribute("pInfo",pInfo);
+				model.addAttribute("trainerNo",trainerNo);
 				return "member/memberPass";
 			}
 			
@@ -413,6 +415,28 @@ public class MemberController {
 			}
 			
 			
+			// 리뷰화면으로 이동
+				@RequestMapping("{trainerNo}/review")
+				public String review( @PathVariable int trainerNo, Model model) {
+					model.addAttribute("trainerNo",trainerNo);
+					return "member/review";
+				}
+			// 리뷰 등록
+				@ResponseBody
+				@RequestMapping("insertReview")
+				public String insertReview(Review review, Model model, RedirectAttributes rdAttr) {
+					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+					int reviewNo = memberService.selectReviewNo();
+					review.setReviewNo(reviewNo);
+					review.setMemberNo(memberNo);
+					System.out.println("리뷰");
+					System.out.println("리뷰"+review);
+					int result = memberService.insertReview(review);
+					
+						return result+"";
+						
+					
+				}
 			
 			
 			

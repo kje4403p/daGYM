@@ -38,6 +38,7 @@
       <typeAlias type="com.kh.dagym.member.model.vo.MyStudents" alias="MyStudents"/>
        <typeAlias type="com.kh.dagym.trainer.model.vo.PT" alias="PT"/>
       <typeAlias type="com.kh.dagym.community.model.vo.BoardLikes" alias="BoardLikes"/>
+      <typeAlias type="com.kh.dagym.trainer.model.vo.Review" alias="Review"/>
 
    </typeAliases>
    
