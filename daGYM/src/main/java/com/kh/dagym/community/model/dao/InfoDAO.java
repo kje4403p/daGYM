@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.community.model.vo.BoardLikes;
 
 @Repository
 public class InfoDAO {
@@ -46,6 +47,26 @@ public class InfoDAO {
 
 	public int increaseCount(int boardNo) {
 		return sqlSession.update("eventMapper.increaseCount", boardNo);
+	}
+
+
+	public int getBoardLike(BoardLikes boardLikes) {
+		return sqlSession.selectOne("eventMapper.getBoardLike", boardLikes);
+	}
+
+
+	public Object deleteLikes(BoardLikes boardLikes) {
+		return sqlSession.delete("eventMapper.deleteLikes", boardLikes);
+	}
+
+
+	public int insertLikes(BoardLikes boardLikes) {
+		return sqlSession.delete("eventMapper.insertLikes", boardLikes);
+	}
+
+
+	public int likesCount(int boardNo) {
+		return sqlSession.selectOne("eventMapper.likesCount", boardNo);
 	}
 
 }

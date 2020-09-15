@@ -149,4 +149,15 @@
 	<select id="myStudentsList" parameterType="MyStudents" resultMap="MyStudentsResultSet">
 		SELECT MEMBER_NM, MEMBER_PHONE FROM CLASS_STATUS JOIN MEMBER USING(MEMBER_NO) WHERE TRAINER_NO = #{memberNo}
 	</select>
+	
+	<!-- 비밀번호 찾기 - 아이디, 이메일확인 -->
+	<select id="checkId" parameterType="Member" resultType="_int">
+		SELECT COUNT(*) FROM MEMBER WHERE MEMBER_ID=#{memberId} AND MEMBER_EMAIL=#{memberEmail}
+	</select>
+	
+	
+	<!-- 비밀번호 찾기 - 임시비밀번호 저장 -->
+	<update id="updatePw" parameterType="Member">
+		UPDATE MEMBER SET MEMBER_PWD = #{memberPwd} WHERE MEMBER_ID = #{memberId} AND MEMBER_EMAIL=#{memberEmail}
+	</update>
 </mapper>

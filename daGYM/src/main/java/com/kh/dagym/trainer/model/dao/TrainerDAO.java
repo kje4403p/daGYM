@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.dagym.trainer.model.vo.ClassStatus;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -106,11 +107,23 @@ public class TrainerDAO {
 
 
 	public int insertSchedule(TrainerSchedule trainerSchedule) {
-		return sqlSession.update("trainerMapper.insertSchedule",trainerSchedule);
+		return sqlSession.insert("trainerMapper.insertSchedule",trainerSchedule);
 	}
 
 	public List<TrainerSchedule> selectSchedule(int trainerNo) {
 		return sqlSession.selectList("trainerMapper.selectSchedule",trainerNo);
+	}
+
+	public int insertResulvation(PT pt) {
+		return sqlSession.insert("trainerMapper.insertResulvation",pt);
+	}
+
+	public int updateClassCnt(int memberNo) {
+		return sqlSession.update("trainerMapper.updateClassCnt",memberNo);
+	}
+
+	public int updateTrainerSchedule(PT pt) {
+		return sqlSession.update("trainerMapper.updateTrainerSchedule",pt);
 	}
 
 

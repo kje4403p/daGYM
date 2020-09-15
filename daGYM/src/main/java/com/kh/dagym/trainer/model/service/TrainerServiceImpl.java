@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.dao.TrainerDAO;
 import com.kh.dagym.trainer.model.vo.ClassStatus;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -183,6 +184,19 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public List<TrainerSchedule> selectSchedule(int trainerNo) {
 		return trainerDAO.selectSchedule(trainerNo);
+	}
+	
+	@Transactional(rollbackFor= Exception.class)
+	@Override
+	public int insertResulvation(PT pt) {
+		int result = trainerDAO.insertResulvation(pt);
+		if(result>0) {
+			int result2= trainerDAO.updateClassCnt(pt.getMemberNo());
+				if(result2>0) {
+					int result3= trainerDAO.updateTrainerSchedule(pt);
+				}
+		}
+		return result;
 	}
 	
 	

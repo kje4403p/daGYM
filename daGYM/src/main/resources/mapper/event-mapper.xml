@@ -154,5 +154,29 @@
 				DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
+	<select id="getBoardLike" parameterType="BoardLikes" resultType="_int">
+		SELECT COUNT(*) FROM LIKES
+		WHERE LIKES_MEMBER_NO = #{memberNo}
+		AND BOARD_NO = #{boardNo}
+		
+	</select>	
+	
+	<delete id="deleteLikes" parameterType="BoardLikes">
+		DELETE LIKES 
+		WHERE LIKES_MEMBER_NO = #{memberNo}
+		AND BOARD_NO = #{boardNo}
+	</delete>
+	
+	<insert id="insertLikes" parameterType="BoardLikes">
+		INSERT INTO
+		LIKES VALUES(#{memberNo}, #{boardNo})
+		
+	</insert>
+	
+	<select id="likesCount" parameterType="_int" resultType="_int">
+		SELECT COUNT(*)
+		FROM LIKES
+		WHERE BOARD_NO= #{boardNo}
+	</select>
   
 </mapper>

@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.vo.ClassStatus;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Payment;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
@@ -66,6 +67,8 @@ public interface TrainerService {
 	int insertSchedule(TrainerSchedule trainerSchedule);
 
 	List<TrainerSchedule> selectSchedule(int trainerNo);
+
+	int insertResulvation(PT pt);
 
 
 

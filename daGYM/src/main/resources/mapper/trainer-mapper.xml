@@ -134,10 +134,22 @@ SELECT * FROM DUAL
   	</update>
   	
   	<insert id="insertSchedule" parameterType="TrainerSchedule">
-  	INSERT INTO TRAINER_SCHEDULE VALUES(#{scheduleTime},#{trainerNo})
+  	INSERT INTO TRAINER_SCHEDULE VALUES(#{scheduleTime},#{trainerNo},DEFAULT)
   	</insert>
   	
   	<select id="selectSchedule" parameterType="_int" resultMap="TrainerScheduleResultSet">
   	SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{trainerNo}
   	</select>
+  	
+  	<insert id="insertResulvation" parameterType="PT">
+  	INSERT INTO PT VALUES(#{scheduleTime},#{trainerNo},#{memberNo},DEFAULT)
+  	</insert>
+  	
+  	<update id="updateClassCnt"  parameterType="_int" >
+  	UPDATE CLASS_STATUS SET CLASS_CNT=CLASS_CNT-1 WHERE MEMBER_NO=#{memberNo}
+  	</update>
+  	
+  	<update id="updateTrainerSchedule"  parameterType="PT" >
+  	UPDATE TRAINER_SCHEDULE SET SCHEDULE_STATUS='N' WHERE TRAINER_NO=#{trainerNo} AND SCHEDULE_TIME=#{scheduleTime}
+  	</update>
 </mapper>
