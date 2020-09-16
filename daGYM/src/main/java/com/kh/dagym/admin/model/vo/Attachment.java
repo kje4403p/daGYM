@@ -4,11 +4,29 @@ public class Attachment {
 
 	private int fileNo;
 	private int parentBoardNo;
+	private int boardNo;
 	private String fileOriginName;
 	private String fileChangeName;
 	private String filePath;
 	private int fileLevel;
+	private String fileStatus;
 	
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
+	public String getFileStatus() {
+		return fileStatus;
+	}
+
+	public void setFileStatus(String fileStatus) {
+		this.fileStatus = fileStatus;
+	}
+
 	public Attachment() {}
 
 	public Attachment(int fileNo, int parentBoardNo, String fileOriginName, String fileChangeName, String filePath,

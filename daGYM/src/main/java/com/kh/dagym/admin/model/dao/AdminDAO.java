@@ -40,6 +40,11 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.selectList", pInfo.getBoardType(), rowBounds);
 	}
 
+	// 문의 내용 이미지 조회 DAO
+	public List<Attachment> selectFList(int boardNo) {
+		return sqlSession.selectList("adminMapper.selectFList", boardNo);
+	}
+	
 	// 1:1 문의 답변 DAO
 	public int insertAnswer(Reply reply) {
 		return sqlSession.insert("adminMapper.insertAnswer", reply);
@@ -129,6 +134,15 @@ public class AdminDAO {
 	public List<PT> scheduleFilter(List<Integer> noList) {
 		return sqlSession.selectList("adminMapper.scheduleFilter", noList);
 	}
+
+	public Integer countMember() {
+		return sqlSession.selectOne("adminMapper.countMember");
+	}
+
+	public Integer countTrainer() {
+		return sqlSession.selectOne("adminMapper.countTrainer");
+	}
+
 
 
 }
