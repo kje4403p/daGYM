@@ -30,6 +30,12 @@ public interface AdminService {
 	 */
 	public abstract List<Board> selectList(Page pInfo);
 
+	/** 문의 내용 이미지 조회 Service
+	 * @param boardNo
+	 * @return fList
+	 */
+	public abstract List<Attachment> selectFList(int boardNo);
+	
 	/** 1:1 문의 답변 Service
 	 * @param reply
 	 * @return result
@@ -104,5 +110,11 @@ public interface AdminService {
 	 * @return sList
 	 */
 	public abstract List<PT> scheduleFilter(List<Integer> noList);
+
+	/** 회원수 세기 Service
+	 * @return count
+	 */
+	public abstract List<Integer> count();
+
 
 }
