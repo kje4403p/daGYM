@@ -40,8 +40,8 @@
                         	<td style ="text-align: center">${pass.trainerName}</td>
                         	<td style ="text-align: center">${pass.classCnt}</td>
                         	<td style ="text-align: center">
+                        	<button typd="button" id="review">리뷰 작성하기</button>
                         		
-                        	
                         	
                         	</td>
                         </tr>
@@ -128,8 +128,11 @@
 			url : "${contextPath}/member/checkReview",
 			success : function(result){
 				console.log(result)
-				if(result==0){
-					$td.append($btn);
+				if(result>0){
+					$td.html("")
+					//$btn.attr("id","review")
+					//$btn.html("리뷰 작성")
+					//$td.append($btn);
 				}
 			}, error : function(){
 				console.log("실패")

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,6 +30,7 @@ import com.kh.dagym.admin.model.vo.Reply;
 import com.kh.dagym.admin.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.Payment;
 
+@SessionAttributes({"loginMember"})
 @Component
 @RequestMapping("/admin/*")
 public class AdminController {
@@ -44,9 +46,9 @@ public class AdminController {
 	// 관리자 로그아웃
 	@RequestMapping("logout")
 	public String logout(SessionStatus status, RedirectAttributes rdAttr) {
-		status.setComplete();
 		rdAttr.addFlashAttribute("status", "success");
 		rdAttr.addFlashAttribute("msg", "로그아웃 되었습니다.");
+		status.setComplete();
 		
 		return "redirect:/";
 	}
@@ -80,6 +82,17 @@ public class AdminController {
 		model.addAttribute("pInfo", pInfo);
 		
 		return "admin/inquiryList";
+	}
+	
+	// 문의 내용 이미지 조회
+	@ResponseBody
+	@RequestMapping("fileList")
+	public String fileList(int boardNo) {
+		List<Attachment> fList = adminService.selectFList(boardNo);
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(fList);
 	}
 	
 	// 1:1 문의 답변
@@ -268,5 +281,16 @@ public class AdminController {
 		Gson gson = new GsonBuilder().create();
 		
 		return gson.toJson(sList);
+	}
+	
+	// 회원수 세기
+	@ResponseBody
+	@RequestMapping("count")
+	public String count() {
+		List<Integer> count = adminService.count();
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(count);
 	}
 }

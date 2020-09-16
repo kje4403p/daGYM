@@ -35,6 +35,14 @@
     	<result property="filePath" column="FILE_PATH"/>
     	<result property="fileLevel" column="FILE_LEVEL"/>
     </resultMap>
+    
+    <resultMap type="Reply" id="replyRs">
+    	<id property="replyNo" column="REPLY_NO" />
+    	<result property="memberNo" column="REPLY_MEMBER_NO"/>
+    	<result property="memberId" column="MEMBER_ID"/>
+    	<result property="replyContent" column="REPLY_CONTENT"/>
+    	<result property="replyEnrollDt" column="REPLY_ENROLL_DT"  javaType="java.sql.Timestamp"/>
+    </resultMap>
 	
 	<select id="selectList" resultMap="boardRs">
 		SELECT * FROM V_EVENT
@@ -201,6 +209,19 @@
 		SELECT COUNT(*)
 		FROM LIKES
 		WHERE BOARD_NO= #{boardNo}
+	</select>
+	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES (SEQ_RNO.NEXTVAL, #{boardNo}, #{memberNo}, #{replyContent}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<select id="selectReplys" parameterType="_int" resultMap="replyRs">
+		SELECT REPLY_NO, REPLY_MEMBER_NO, MEMBER_ID, REPLY_CONTENT, REPLY_ENROLL_DT
+		FROM REPLY JOIN MEMBER ON(REPLY_MEMBER_NO = MEMBER_NO)
+		WHERE REPLY_STATUS = 'Y'
+		AND PARENT_BOARD_NO = #{boardNo}
+		ORDER BY REPLY_NO DESC
 	</select>
   
 </mapper>

@@ -44,8 +44,16 @@
               <c:forEach var="trainer" items="${trainerList}">
             
                 <div id="trainer" class="col-lg-4 col-md-6">
-                    <div class="single-trainer-item">     
-                    <a class="trainerList" href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
+                  <c:if test="${loginMember==null}">
+                
+                    <div class="single-trainer-item">  
+                        <a class="trainerList" href="${contextPath}/member/login">            
+                  </c:if>
+                  <c:if test="${loginMember!=null}">
+                    <div class="single-trainer-item">  
+                           <a class="trainerList" href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
+                  </c:if>
+  
                      						<c:forEach items="${thList}" var="th">
 	                							<c:if test="${th.parentTrainerNo == trainer.trainerNo}">
 	                				
@@ -78,8 +86,8 @@
 	<script>
 	$(".trainerList").on("click",function(event){
 		if(<%=loginMember%>==null){
-		swal({"error","로그인 후 이용해주세요."});
-		 event.preventDefault();
+		alert("로그인 후 이용해주세요.");
+		location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}";
 		}
 	});
 		

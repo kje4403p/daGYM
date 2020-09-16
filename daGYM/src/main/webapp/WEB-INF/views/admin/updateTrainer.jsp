@@ -63,7 +63,7 @@
 		                        경력 사항 <textarea class="form-control" rows="5" id="trainerCareer" name="trainerCareer" required>${trainer.trainerCareer}</textarea>
 		                    </div>
 		                     <div class="form-group">
-		                        수상 경력 <textarea class="form-control" rows="5" id="trainerAward" name="trainerAward" required>${trainer.trainerAward}</textarea>
+		                        수상 내역 <textarea class="form-control" rows="5" id="trainerAward" name="trainerAward" required>${trainer.trainerAward}</textarea>
 		                    </div>
 		                    <div class="form-group">
 		                        회원님들께 할 말 <textarea class="form-control" rows="5" id="trainerComment" name="trainerComment" required>${trainer.trainerComment}</textarea>
@@ -89,6 +89,7 @@
 		                    <!-- log-line -->
 		                    <div class="log-line reg-form-1">
 		                        <div class="pull-right" style="text-align: center;">
+		                            <button type="button" id="back" class="btn btn-warning btn-md btn-success-filled btn-log" >취소</button>
 		                            <button type="submit" id="reg-submit" class="btn btn-warning btn-md btn-success-filled btn-log" >트레이너 수정</button>
 		                        </div>
 		                    </div><!-- / log-line -->
@@ -104,6 +105,10 @@
 </div>
 
 	<script>
+		$("#back").on("click", function() {
+			location.href = "../trainerList";
+		});
+	
 		/* $("#reg-submit").on("click",function(){
 			 if(!$("#img1").val()){
 				 alert("사진을 업로드 해주세요!");

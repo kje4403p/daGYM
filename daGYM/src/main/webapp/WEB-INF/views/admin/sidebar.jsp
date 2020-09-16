@@ -38,8 +38,8 @@
 	
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-    <a class="sidebar-brand brand-logo" href="${contextPath}"><img src="${contextPath}/resources/img/logo3.png"></a>
-    <a class="sidebar-brand brand-logo-mini" href="${contextPath}"><img src="${contextPath}/resources/img/logo3_mini.png"></a>
+    <a class="sidebar-brand brand-logo" href="${contextPath}"><img src="${contextPath}/resources/img/logo3.png" style="height: 37px;"></a>
+    <a class="sidebar-brand brand-logo-mini" href="${contextPath}"><img src="${contextPath}/resources/img/logo3_mini.png" style="width: 45px; height: 37px;"></a>
   </div>
   <ul class="nav">
     <li class="nav-item nav-category">
@@ -47,11 +47,17 @@
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" href="${contextPath}/admin/schedule">
+      	<span class="menu-icon">
+          <b class="mdi">S</b>
+        </span>
         <span class="menu-title">전체 스케줄 조회</span>
       </a>
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <span class="menu-icon">
+          <b class="mdi">M&T</b>
+        </span>
         <span class="menu-title">회원&트레이너 조회 ▽</span>
       </a>
       <div class="collapse" id="ui-basic">
@@ -63,6 +69,9 @@
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+      	<span class="menu-icon">
+          <b class="mdi">R</b>
+        </span>
         <span class="menu-title">매출 조회 ▽</span>
       </a>
       <div class="collapse" id="auth">
@@ -74,11 +83,17 @@
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" href="${contextPath}/admin/inquiryList">
+      	<span class="menu-icon">
+          <b class="mdi">I</b>
+        </span>
         <span class="menu-title">1:1 문의 조회</span>
       </a>
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" href="${contextPath}/admin/eventList">
+      	<span class="menu-icon">
+          <b class="mdi">E</b>
+        </span>
         <span class="menu-title">이벤트 조회</span>
       </a>
     </li>

@@ -120,16 +120,15 @@ $(function(){
 
 // 댓글 목록 불러오기
 function selectReplyList(){
-	var url = "${contextPath}/reply/selectList/${board.boardNo}";
-	console.log(url);
+	var url = "selectReplys/${board.boardNo}";
+	
 	$.ajax({
 		url : url,
 		type : "POST",
-		dataType:"json",
+		dataType: "JSON",
+		
 		success:function(rList){
-			console.log(123);
-			console.log(rList);
-			
+
 			var $replyListArea = $("#replyListArea");
 			
 			$replyListArea.html(""); // 기존 정보 초기화
@@ -141,17 +140,13 @@ function selectReplyList(){
 				console.log(rList[i]);
 				var $li = $("<li>").addClass("reply-row").attr("id", rList[i].replyNo);
 				
-				if(rList[i].replyDepth == 1){
-					$li.addClass("reply2-li");
-				}
-				
 				// 작성자, 작성일, 수정일 영역 
 				var $div = $("<div>");
 				var $rWriter = $("<a>").addClass("rWriter idSelect").html(rList[i].memberId);
 				var $rDate = $("<p>").addClass("rDate")
-								.html("작성일 : " + rList[i].replyCreateDate + "<br>"
-											+ "마지막 수정 날짜 : " + rList[i].replyModifyDate);
-				$div.append($rWriter).append($rDate)
+								.html("작성일 : " + rList[i].replyEnrollDt + "<br>");
+				
+				$div.append($rWriter).append($rDate);
 				
 				
 				// 댓글 내용
@@ -161,12 +156,6 @@ function selectReplyList(){
 				// 답글, 수정, 삭제 버튼 영역
 				var $btnArea = $("<div>").addClass("btnArea");
 				
-				// 로그인 되어 있는 경우에 답글 버튼 추가
-				if(loginMemberId != ""){
-					// ** 추가되는 댓글에 onclick 이벤트를 부여하여 버튼 클릭 시 답글창을 생성하는 함수를 이벤트 핸들러로 추가함. 
-					var $reply2 = $("<button>").addClass("btn btn-sm btn-primary ml-1 reply2").text("답글").attr("onclick", "addReply2Area(this, "+rList[i].parentReplyNo+")");
-					$btnArea.append($reply2);
-				}
 				
 				// 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
 				if(rList[i].memberId == loginMemberId){
@@ -205,7 +194,7 @@ $("#addReply").on("click", function(){
 	var replyContent = $("#replyContent").val();
 	
 	// 로그인이 되어있지 않은 경우
-	if(${empty loginMember} == true){
+	if(${empty loginMember} == true) {
 		alert("로그인 후 이용해 주세요.");	
 		
 	}else{
@@ -216,16 +205,16 @@ $("#addReply").on("click", function(){
 			
 		// 로그인이 되어있고, 댓글이 작성이 된 상태로 댓글 등록 버튼이 클릭된 경우
 		}else{
-			var url = "${contextPath}/reply/insertReply/${board.boardNo}";
+			var url = "insertReply/${board.boardNo}";
 			var memberId = "${loginMember.memberNo}"; // 회원 아이디에 회원 번호를 저장해서 전달
 				$.ajax({
 					url : url,
 					type : "POST",
-					data : {"memberId" : memberId,
+					data : {"memberNo" : memberId,
 							"replyContent" : replyContent},
-					dataType : "text",
 					success : function(result){
 						alert(result);
+						console.log("성공했다");
 						$("#replyContent").val(""); // 기존 댓글 삭제
 						selectReplyList();
 					},error : function(){

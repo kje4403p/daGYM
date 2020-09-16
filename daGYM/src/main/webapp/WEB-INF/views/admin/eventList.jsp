@@ -41,6 +41,7 @@
 	                                        <th>이벤트 번호</th>
 	                                        <th>제목</th>
 	                                        <th>이벤트 기간</th>
+	                                        <th>상태</th>
 	                                    </tr>
 	                                </thead>
 	                                <tbody>
@@ -55,6 +56,23 @@
                                            				<td>${board.boardNo}</td>
                                            				<td>${board.boardTitle}</td>
                                            				<td>${board.startDate} ~ ${board.endDate}</td>
+                                           				<td>
+                                           					<jsp:useBean id="now" class="java.util.Date"/>
+                                           					<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
+                                           					<fmt:formatDate var="startDate" value="${board.startDate}" pattern="yyyy-MM-dd"/>
+                                           					<fmt:formatDate var="endDate" value="${board.endDate}" pattern="yyyy-MM-dd"/>
+                                           					<c:choose>
+                                           						<c:when test="${startDate <= today && endDate >= today}">
+                                           							<div class="badge badge-outline-success">진행중</div>
+                                           						</c:when>
+                                           						<c:when test="${startDate > today}">
+                                           							<div class="badge badge-outline-warning">예정</div>
+                                           						</c:when>
+                                           						<c:otherwise>
+                                           							<div class="badge badge-outline-danger">종료</div>
+                                           						</c:otherwise>
+                                           					</c:choose>
+                                           				</td>
                                            			</tr>
                                            		</c:forEach>
                                            	</c:otherwise>

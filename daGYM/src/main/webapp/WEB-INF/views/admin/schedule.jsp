@@ -104,22 +104,10 @@
 		trainerFilter(searchUrl);
 	});
 	
-	// 필터된 정보로 list 불러오는 ajax
-	function trainerFilter(searchUrl) {
-		$.ajax({
-			url : searchUrl,
-			dataType : "JSON",
-			success : function(list) {
-				console.log(list);
-			}, error : function() {
-				console.log("통신 실패");
-			}
-		});
-	}
 	
-	document.addEventListener('DOMContentLoaded', function() { 
-		var calendarEl = document.getElementById('calendar');
-		var calendar = new FullCalendar.Calendar(calendarEl, { 
+	
+	//  달력 정보를 저장하는 객체.
+	var calObj = { 
 			initialView: 'resourceTimeGridDay',
 			plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
 			events: [
@@ -136,13 +124,49 @@
 			header: { left: 'prev,next today', 
 					  center: 'title', 
 					  right: 'dayGridMonth,dayGridWeek,dayGridDay' 
-					},
-		
-		}); 
-
-		calendar.render(); 
-		
-	});
+					}
+		};
+	
+	var calendar;
+	// 달력을 생성하는 함수
+	function createCalendar(){
+		var calendarEl = document.getElementById('calendar');
+		calendar = new FullCalendar.Calendar(calendarEl, calObj);
+	}
+	
+	// 페이지 로딩 완료 시 달력을 생성
+	document.addEventListener('DOMContentLoaded', createCalendar()); 
+	calendar.render(); // 달력 화면 출력
+	
+	
+	// 필터된 정보로 list 불러오는 ajax
+	function trainerFilter(searchUrl) {
+		$.ajax({
+			url : searchUrl,
+			dataType : "JSON",
+			success : function(list) {
+				console.log(list);
+				
+				var calendarEl = document.getElementById('calendar');
+				calendarEl.innerHTML = "";
+				
+				var arr =[];
+				for(var i=0; i<list.length ; i++){
+					var obj = {title : "T:" + list[i].trainerName + "/M:" + list[i].memberName,
+								start : list[i].scheduleTime}	
+					arr.push(obj);
+				}
+				calObj.events = arr;
+				
+				
+				calendar = new FullCalendar.Calendar(calendarEl, calObj);
+				calendar.render();
+				
+			}, error : function() {
+				console.log("통신 실패");
+			}
+		});
+	}
 	</script>
 </body>
 </html>

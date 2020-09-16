@@ -12,8 +12,9 @@
   </div>
   <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
     <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
-      <span class="mdi">▥</span>
+      <span class="mdi"><img src="${contextPath}/resources/img/list2.png" style="width: 25px;"></span>
     </button>
+	
     <ul class="navbar-nav navbar-nav-right">
       <li class="nav-item">
         <!-- <a class="nav-link btn btn-success create-new-button" aria-expanded="false" href="insertTrainer2">+ 트레이너 추가하기(ver1)</a> -->
@@ -96,8 +97,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
           <div class="navbar-profile">
-            <p class="mb-0 d-none d-sm-block navbar-profile-name">관리자</p>
-            <span>▽</span>
+            <p class="mb-0 d-none d-sm-block navbar-profile-name">관리자 ▽</p>
           </div>
         </a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
@@ -116,7 +116,7 @@
       </li>
     </ul>
     <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
-      <span>▥</span>
+      <span><img src="${contextPath}/resources/img/list2.png" style="width: 25px;"></span>
     </button>
   </div>
 </nav>

@@ -51,6 +51,12 @@ public class AdminServiceImpl implements AdminService {
 		return adminDAO.selectList(pInfo);
 	}
 
+    // 문의 내용 이미지 조회 Service 구현
+	@Override
+	public List<Attachment> selectFList(int boardNo) {
+		return adminDAO.selectFList(boardNo);
+	}
+	
 	// 1:1 문의 답변 Service 구현
 	@Transactional(rollbackFor = Exception.class)
 	@Override
@@ -210,7 +216,17 @@ public class AdminServiceImpl implements AdminService {
 	public List<PT> scheduleFilter(List<Integer> noList) {
 		return adminDAO.scheduleFilter(noList);
 	}	
-	
+
+    // 회원수 세기 Service 구현
+	@Override
+	public List<Integer> count() {
+		List<Integer> count = new ArrayList<Integer>();
+		
+		count.add(adminDAO.countMember());
+		count.add(adminDAO.countTrainer());
+		
+		return count;
+	}
 	
 	
 	
@@ -245,6 +261,8 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
+
+
 
 
 }

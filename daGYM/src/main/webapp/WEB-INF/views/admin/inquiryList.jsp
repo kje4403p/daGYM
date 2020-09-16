@@ -24,6 +24,10 @@
     	float: left;}
     .pagination {
 	    justify-content: center;}
+	    
+	.imageView {
+		width: 70px;
+		height: 70px;}
 </style>
 </head>
 <body>
@@ -154,8 +158,14 @@
                 <div class="modal-body">
 					<form action="insertAnswer" id="information-en" method="GET">
 						<h4 id="content-style">문의 내용</h4>
+						
 						<div id="content-area">
 						</div>
+						
+						<!-- 이미지 부분 -->
+						<div class="mt-3" id="imageArea">
+	                    </div>
+						
 						<hr>
 						<label id="label-title" class="modal-left">답변 내용 입력</label> <br>
 						<textarea name="replyContent" cols="50" rows="5" style="resize: none; margin-bottom: 20px;" class="modal-left"></textarea> 
@@ -182,6 +192,22 @@
 			$(".contentBtn").on("click", function() {
 				var boardNo = $(this).parent().parent().children().eq(0).text();
 				var boardContent = $(this).parent().parent().children().eq(6).val();
+				
+				$.ajax({
+					url : "fileList",
+					data : {"boardNo":boardNo},
+					dataType : "JSON",
+					success : function(fList) {
+						$("#imageArea").empty();
+						for(var i=0; i<fList.length; i++) {
+							var resultUrl = fList[i].filePath + "/" + fList[i].fileChangeName;
+							var $img = $("<img>").addClass("imageView ml-3").attr("src", "${contextPath}/" + resultUrl);
+							$("#imageArea").append($img);
+						}
+					}, error : function() {
+						console.log("통신 실패");
+					}
+				});
 				
 				$("#content-area").html(boardContent);
 				$("#parentBoardNo").val(boardNo);
