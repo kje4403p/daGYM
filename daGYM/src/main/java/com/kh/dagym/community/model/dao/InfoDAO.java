@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.common.Reply;
 import com.kh.dagym.community.model.vo.BoardLikes;
 
 @Repository
@@ -68,6 +69,16 @@ public class InfoDAO {
 
 	public int likesCount(int boardNo) {
 		return sqlSession.selectOne("eventMapper.likesCount", boardNo);
+	}
+
+
+	public int insertReply(Reply reply) {
+		return sqlSession.insert("eventMapper.insertReply", reply);
+	}
+
+
+	public List<Reply> selectReplys(int boardNo) {
+		return sqlSession.selectList("eventMapper.selectReplys", boardNo);
 	}
 
 }
