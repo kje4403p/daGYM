@@ -1,6 +1,7 @@
 package com.kh.dagym.community.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,9 @@ public class InfoServiceImpl implements InfoService{
 	
 
 	@Override
-	public PageInfo pagenation(int cp,int BOARD_TYPE) {
+	public PageInfo pagenation(int cp, Map<String, String> map, int BOARD_TYPE) {
 		// 1) 전체 게시글 수 조회
-		int listCount = infoDAO.getListCount();
+		int listCount = infoDAO.getListCount(map);
 		pInfo.setLimit(10);
 		pInfo.setPageInfo(cp, listCount, BOARD_TYPE);
 
@@ -34,8 +35,8 @@ public class InfoServiceImpl implements InfoService{
 
 
 	@Override
-	public List<Board> selectList(PageInfo pInfo) {
-		return infoDAO.selectList(pInfo);
+	public List<Board> selectList(PageInfo pInfo, Map<String, String> map) {
+		return infoDAO.selectList(pInfo, map);
 	}
 
 	@Transactional
