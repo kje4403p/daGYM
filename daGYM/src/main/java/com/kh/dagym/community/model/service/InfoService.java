@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.common.Reply;
 import com.kh.dagym.community.model.vo.BoardLikes;
 
 public interface InfoService {
@@ -35,5 +36,17 @@ public interface InfoService {
 	 * @return int
 	 */
 	int likesCount(int boardNo);
+
+	/** 리플 등록
+	 * @param reply
+	 * @return int
+	 */
+	int insertReply(Reply reply);
+
+	/** 댓글 목록 조회
+	 * @param boardNo
+	 * @return List<Reply>
+	 */
+	List<Reply> selectReplys(int boardNo);
 
 }

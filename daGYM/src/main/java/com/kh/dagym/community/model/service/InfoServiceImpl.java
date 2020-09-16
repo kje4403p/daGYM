@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.common.Reply;
 import com.kh.dagym.community.model.dao.InfoDAO;
 import com.kh.dagym.community.model.vo.BoardLikes;
 
@@ -78,6 +79,38 @@ public class InfoServiceImpl implements InfoService{
 	public int likesCount(int boardNo) {
 		return infoDAO.likesCount(boardNo);
 	}
+
+	@Transactional
+	@Override
+	public int insertReply(Reply reply) {
+		reply.setReplyContent(replaceParameter(reply.getReplyContent()));
+		
+		return infoDAO.insertReply(reply);
+	}
+	
+	
+	
+	@Override
+	public List<Reply> selectReplys(int boardNo) {
+		return infoDAO.selectReplys(boardNo);
+	}
+
+
+	// 크로스 사이트 스크립트 방지 메소드
+	private String replaceParameter(String param) {
+		String result = param;
+		if(param != null) {
+			result = result.replaceAll("&", "&amp;");
+			result = result.replaceAll("<", "&lt;");
+			result = result.replaceAll(">", "&gt;");
+			result = result.replaceAll("\"", "&quot;");
+		}
+
+		return result;
+	}
+
+	
+	
 	
 	
 	

@@ -8,43 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title></title>
-<style>
-	#board-area{ margin-bottom:100px;}
-	#board-content{ padding-bottom:150px;}
-	#date-area{font-size: 12px; line-height: 12px}
-	#date-area>p{margin: 0}
- 
 
-	.boardImgArea{
-		height: 300px;
-	}
-
-	.boardImg{
-		width : 100%;
-		height: 100%;
-		
-		max-width : 300px;
-		max-height: 300px;
-		
-		margin : auto;
-	}
-	
-	#content-main{ margin: 100px auto;}
-	
-	/* 이미지 화살표 색 조정
-	-> fill='%23000' 부분의 000을
-	   RGB 16진수 값을 작성하여 변경 가능 
-	 */
-	.carousel-control-prev-icon {
- 		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-	}
-	
-	.carousel-control-next-icon {
-  		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-	}
-	
-	
-</style>
 
 	<link href="${contextPath }/resources/css/info.css" rel="stylesheet" />
 
@@ -119,7 +83,7 @@
 					<span id="likes"></span>
 				</div>
 				<hr>
-				
+				<jsp:include page="reply.jsp"/>
 				
 				<div>
 					<div class="float-right">
@@ -167,7 +131,7 @@
 	            $("#heart").prop("src", "${contextPath}/resources/images/icons/no_heart.png");
 	        }
 	        $("#heart_div").attr('name',heartval) 
-	        $("#likes").text(${likesCount});
+	        $("#likes").text("${likesCount}");
 
 	        $("#heart").on("click", function () {
 	        	
