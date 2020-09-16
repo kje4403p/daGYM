@@ -10,7 +10,12 @@
    
    
     <!-- Google Font -->
-   
+   <style>
+   	.event-area img{
+   	 height : 240px;
+   	 width : 360px;
+   	}
+   </style>
 </head>
 
 <body>
@@ -241,29 +246,20 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6">
-                    <div class="single-blog-item">
+                    <div class="single-blog-item event-area">
                         <img id="event0"  alt="">
-                        <div class="blog-widget">
-                            <div class="bw-date">February 17, 2019</div>
-                        </div>
                         <h4><a href="#" id="title0">10 States At Risk of Rural Hospital Closures</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="single-blog-item">
+                    <div class="single-blog-item event-area" >
                         <img id="event1"  alt="">
-                        <div class="blog-widget">
-                            <div class="bw-date">February 17, 2019</div>
-                        </div>
                         <h4><a href="#" id="title1">Diver who helped save Thai soccer team</a></h4>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                    <div class="single-blog-item">
+                    <div class="single-blog-item event-area">
                         <img id="event2"  alt="">
-                        <div class="blog-widget">
-                            <div class="bw-date">February 17, 2019</div>
-                        </div>
                         <h4><a href="#" id="title2">Man gets life in prison for stabbing</a></h4>
                     </div>
                 </div>
