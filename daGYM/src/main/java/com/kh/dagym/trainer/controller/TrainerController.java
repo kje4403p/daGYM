@@ -63,6 +63,7 @@ public class TrainerController {
 		if(trainer!=null) {
 			  List<TrainerAttachment> files = trainerService.selectFiles(trainerNo);
 			  List<Review> reviews = trainerService.selectReviews(trainerNo);
+			  System.out.println(reviews);
 		         if(!files.isEmpty()) {
 		            model.addAttribute("files",files);
 		         }

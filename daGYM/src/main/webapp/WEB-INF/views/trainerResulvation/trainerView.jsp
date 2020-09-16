@@ -399,8 +399,6 @@
 		
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-		<!------ Include the above in your HEAD tag ---------->
 
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
 		 <div class="section-title">
@@ -439,11 +437,18 @@
 		          <p>${review.reviewContent }</p>
 		          <ul class="list-inline list-unstyled">
 		            <li>
-		               <span class="glyphicon glyphicon-star"></span>
+		               <c:set var="rating" value="${review.reviewRating }"/>
+		               		<c:forEach var="i" begin="1" end="${rating}">
 		                        <span class="glyphicon glyphicon-star"></span>
-		                        <span class="glyphicon glyphicon-star"></span>
-		                        <span class="glyphicon glyphicon-star"></span>
+		               		</c:forEach>
+		               		<c:forEach var="i" begin="1" end="${5-rating}" >
 		                        <span class="glyphicon glyphicon-star-empty"></span>
+		               		
+		               		</c:forEach>
+							
+							
+							
+		               
 		            </li>
 		            <li>|</li>
 		            <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
