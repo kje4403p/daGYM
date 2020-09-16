@@ -21,6 +21,7 @@ import com.kh.dagym.trainer.model.service.TrainerService;
 import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Payment;
+import com.kh.dagym.trainer.model.vo.Review;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 import com.kh.dagym.trainer.model.vo.TrainerSchedule;
@@ -61,9 +62,12 @@ public class TrainerController {
 
 		if(trainer!=null) {
 			  List<TrainerAttachment> files = trainerService.selectFiles(trainerNo);
-		         
+			  List<Review> reviews = trainerService.selectReviews(trainerNo);
 		         if(!files.isEmpty()) {
 		            model.addAttribute("files",files);
+		         }
+		         if(!reviews.isEmpty()) {
+		        	 model.addAttribute("reviews", reviews);
 		         }
 		       
 		model.addAttribute("trainer",trainer);

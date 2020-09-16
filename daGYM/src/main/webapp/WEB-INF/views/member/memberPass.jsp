@@ -21,6 +21,7 @@
                 			<td style ="text-align: center">결제 날짜</td>
                 			<td style ="text-align: center">트레이너 이름</td>
                 			<td style ="text-align: center">이용권</td>
+                			<td style ="text-align: center"></td>
                 		</tr>
                 		<c:choose>
                         
@@ -38,6 +39,13 @@
                         	<td style ="text-align: center">${pass.raymentDate}</td>
                         	<td style ="text-align: center">${pass.trainerName}</td>
                         	<td style ="text-align: center">${pass.classCnt}</td>
+                        	<td style ="text-align: center">
+                        		<div>
+                        		<button id="review">리뷰 작성하기</button>
+                        		</div>
+                        	
+                        	
+                        	</td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
@@ -97,6 +105,16 @@
         </div>
         </div>
     </div>
+<script>
+	$("#review").on("click",function(){
+		var memberNo = ${loginMember.memberNo}
+			var url = "${contextPath }/member/${trainerNo}/review";
+			var options = "width=500, height=300, resizable=no, scrollbars=no";
+			
+			window.open(url, "리뷰작성", options);
+		
+	})
+</script>
     <%@ include file="../common/footer.jsp"%><br>
 </body>
 </html>

@@ -8,6 +8,7 @@ import com.kh.dagym.member.model.vo.Member;
 import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Payment;
+import com.kh.dagym.trainer.model.vo.Review;
 import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 import com.kh.dagym.trainer.model.vo.TrainerSchedule;
@@ -69,6 +70,12 @@ public interface TrainerService {
 	List<TrainerSchedule> selectSchedule(int trainerNo);
 
 	int insertResulvation(PT pt);
+
+	/** 리뷰 조회 Service
+	 * @param trainerNo
+	 * @return reviews
+	 */
+	List<Review> selectReviews(int trainerNo);
 
 
 
