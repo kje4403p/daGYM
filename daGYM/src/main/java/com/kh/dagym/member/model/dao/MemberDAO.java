@@ -195,5 +195,13 @@ public class MemberDAO {
 	 */
 	public int selectReviewNo() {
 		return sqlSession.selectOne("memberMapper.selectReviewNo");
+	}
+
+	/** 리뷰 작성 여부 확인 DAO
+	 * @param memberNo
+	 * @return result
+	 */
+	public int checkReview(int memberNo) {
+		return sqlSession.selectOne("memberMapper.checkReview", memberNo);
 	}	
 }

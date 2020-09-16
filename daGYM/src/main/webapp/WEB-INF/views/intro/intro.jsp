@@ -12,6 +12,7 @@
 }
 	table{
 		margin : 20px;
+		text-align :center;
 	}
 	body > section.services-section > div{
 	padding-left : 0;
@@ -36,10 +37,12 @@
     #content2{
     	padding-top: 10px;
     }
+    #map{
+    	margin : 0 auto;
+    }
 }
 
 
-출처: https://cofs.tistory.com/188 [CofS]
 </style>
 </head>
 
