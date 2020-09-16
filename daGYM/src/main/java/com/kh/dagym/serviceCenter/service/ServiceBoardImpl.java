@@ -88,10 +88,15 @@ public class ServiceBoardImpl implements ServiceBoard{
 		map.put("search", search);
 		map.put("type",type);
 		
-		int searchListCount = serviceDAO.getSearchListCount(map);
+		if(type ==3) {
+			
+			int searchListCount = serviceDAO.getSearchListQnaCount(map);
+		}else {
 		
-		pInfo.setPageInfo(cp, searchListCount, type);
-		
+			int searchListCount = serviceDAO.getSearchListCount(map);
+			
+			pInfo.setPageInfo(cp, searchListCount, type);
+		}
 		return pInfo;
 	}
 
