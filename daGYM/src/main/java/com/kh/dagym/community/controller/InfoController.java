@@ -42,12 +42,21 @@ public class InfoController {
 	private final int BOARD_TYPE = 2;
 	
 	@GetMapping("list")
-	public String infoList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
+	public String infoList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, 
+							@RequestParam(value = "sKey", required = false, defaultValue = "")String sKey,
+							@RequestParam(value = "sVal", required = false)String sVal, Model model) {
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("sKey", sKey);
+		map.put("sVal", sVal);
+		
+		System.out.println(map.get("sKey"));
+		System.out.println(map.get("sVal"));
 
-		PageInfo pInfo = infoService.pagenation(cp, BOARD_TYPE);
+		PageInfo pInfo = infoService.pagenation(cp, map, BOARD_TYPE);
 
 
-		List<Board> infoList = infoService.selectList(pInfo);
+		List<Board> infoList = infoService.selectList(pInfo, map);
 
 		model.addAttribute("infoList",infoList);
 		model.addAttribute("pInfo",pInfo);

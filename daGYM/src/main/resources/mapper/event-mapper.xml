@@ -135,12 +135,36 @@
 	</select>
 	
 	<!-- info -->
-	<select id="getInfoListCount" resultType="_int">
+	<select id="getInfoListCount" parameterType="map" resultType="_int">
 		SELECT COUNT(*) FROM INFO_VIEW
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="skey == tit and sVal != null ">
+				BOARD_TITLE like '%' || #{sVal} || '%'
+			</if>
+			<if test="skey =='con' and sVal != null ">
+				BOARD_CONTENT like '%' || #{sVal} || '%'
+			</if>
+			<if test="skey =='tit-con' and sVal != null ">
+				BOARD_TITLE like '%' || #{sVal} || '%'
+				OR BOARD_CONTENT like '%' || #{sVal} || '%'
+			</if>	
+		</trim>
 	</select>
 	
-	<select id="selectInfoList" resultMap="infoRs">
+	<select id="selectInfoList" parameterType="map" resultMap="infoRs">
 		SELECT * FROM INFO_VIEW
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="skey == tit and sVal != null ">
+				BOARD_TITLE like '%' || #{sVal} || '%'
+			</if>
+			<if test="skey =='con' and sVal != null ">
+				BOARD_CONTENT like '%' || #{sVal} || '%'
+			</if>
+			<if test="skey =='tit-con' and sVal != null ">
+				BOARD_TITLE like '%' || #{sVal} || '%'
+				OR BOARD_CONTENT like '%' || #{sVal} || '%'
+			</if>	
+		</trim>
 	</select>
 	
 	<select id="selectInfo" resultMap="infoRs">

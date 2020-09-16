@@ -1,6 +1,7 @@
 package com.kh.dagym.community.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,9 +11,9 @@ import com.kh.dagym.community.model.vo.BoardLikes;
 
 public interface InfoService {
 
-	PageInfo pagenation(int cp,int BOARD_TYPE);
+	PageInfo pagenation(int cp, Map<String, String> map,int BOARD_TYPE);
 
-	List<Board> selectList(PageInfo pInfo);
+	List<Board> selectList(PageInfo pInfo, Map<String, String> map);
 
 	Board selectInfo(int boardNo);
 
