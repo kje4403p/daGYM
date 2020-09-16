@@ -291,6 +291,7 @@
     	titleViews();
     })
     	function eventViews(){
+    	
     		$.ajax({
     			url : "${contextPath}/eventViews",
     			dataType : "JSON",
@@ -298,8 +299,13 @@
     				$.each(list,function(index, item){
     					console.log(list)
     					src="<%=request.getContextPath()%>/resources/uploadImages/"+item.fileChangeName; 
-    					
+    					var boardNo = item.parentBoardNo;
+    					console.log("넘버"+boardNo)
     					$("#event"+index).attr("src",src)
+    					
+    					$("#event"+index).on("click",function(){
+    						location.href= "${contextPath}/event/"+boardNo 
+    					})
     				})
     			}, error : function(){
     				console.log("통신실패")
@@ -312,11 +318,14 @@
 			url : "${contextPath}/eventTitle",
 			dataType : "JSON",
 			success : function(list){
+					console.log("리리"+list)
 				$.each(list,function(index, item){
-				
-					
+					var boardNo = item.boardNo;
 				
 					$("#title"+index).html(item.boardTitle)
+					$("#title"+index).on("click",function(){
+    						location.href= "${contextPath}/event/"+boardNo 
+    					})
 				})
 			}, error : function(){
 				console.log("통신실패")

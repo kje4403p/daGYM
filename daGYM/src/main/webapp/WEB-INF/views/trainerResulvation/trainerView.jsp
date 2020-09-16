@@ -403,10 +403,26 @@
 		<!------ Include the above in your HEAD tag ---------->
 
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
-
+		 <div class="section-title">
+	                        <h2 id="content2">REVIEW</h2>
+	     </div>
 		<c:choose>
 			<c:when test="${empty reviews }">
-				작성된 리뷰가 없습니다.
+					<div class="container">
+		
+		   <div class="well">
+		      <div class="media">
+		      
+		  		<a class="pull-left" href="#">
+		  		</a>
+		  		<div class="media-body">
+		    		<h4 class="media-heading"></h4>
+		          <p class="text-center">작성된 리뷰가 없습니다.</p>
+		         
+		       </div>
+		    </div>
+		  </div>
+		</div>
 			</c:when>
 			<c:otherwise>
 				<c:forEach var="review" items="${reviews }">

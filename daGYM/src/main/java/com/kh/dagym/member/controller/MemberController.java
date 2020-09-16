@@ -438,6 +438,15 @@ public class MemberController {
 					
 				}
 			
+				// 리뷰 작성 여부 확인
+				@ResponseBody
+				@RequestMapping("checkReview")
+				public String checkReview(Model model) {
+					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+					
+					int result = memberService.checkReview(memberNo);
+					return result+"";
+				}
 			
 			
 			

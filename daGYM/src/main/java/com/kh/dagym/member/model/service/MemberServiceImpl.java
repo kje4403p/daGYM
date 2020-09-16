@@ -207,5 +207,11 @@ public class MemberServiceImpl implements MemberService{
 			return memberDAO.selectReviewNo();
 		}
 
+		// 리뷰 작성 여부 확인 
+		@Override
+		public int checkReview(int memberNo) {
+			return memberDAO.checkReview(memberNo);
+		}
+
 		
 }

@@ -141,4 +141,11 @@ public interface MemberService {
 	 * @return reviewNo
 	 */
 	int selectReviewNo();
+
+	
+	/** 리뷰 작성 여부확인
+	 * @param memberNo
+	 * @return result
+	 */
+	int checkReview(int memberNo);
 }
