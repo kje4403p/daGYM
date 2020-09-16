@@ -11,6 +11,8 @@
 
 <style>
 
+	
+
 </style>
 <link rel="stylesheet" href="${contextPath}/resources/css/service/faq.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -92,7 +94,7 @@
 				</table>
 				<!-- 관리자 로그인된 경우 글쓰기 버튼 -->
 				<c:if test="${loginMember.memberGrade == 'A'}" >
-					<a href="../${pInfo.boardType}/insert">글쓰기</a>
+					<button class="btn btn-primary" type="submit" id="newInsert">글쓰기</button>
 				</c:if>
 				<!-- 페이징바 -->
 				<input type="hidden" id="cp" value="${pInfo.currentPage}">
@@ -119,7 +121,7 @@
 				</c:choose>
 
 				<div>
-				<nav aria-label="Page navigation example">
+				<nav id="pagingBar" aria-label="Page navigation example">
 					<ul class="pagination">
 						<c:if test="${pInfo.currentPage > pInfo.pagingBarSize}">
 							<li class="page-item">
@@ -158,6 +160,8 @@
 					</nav>
 				</div>
 
+				<div id="search">
+
 				<select name="sKey" style="width:100px; display:inline-block;">
 					<option value="tit">글제목</option>
 					<option value="con">내용</option>
@@ -166,10 +170,12 @@
 
 
 				<!-- 검색창 -->
-				<input type="text" id="searchInput" name="sVal"
+				<input type="text" id="searchInput" name="sVal" 
 					style="width: 25% display: inline-block;">
-				<button id="searchBtn" type="button"
+				<button id="searchBtn" type="button" class="btn btn-primary"
 					style="width: 100px; display: inline-block;">검색</button>
+				
+				</div>
 
 			</div>
 
@@ -261,16 +267,19 @@
 							
 							if(loginMember == $click.parent().children().eq(2).text().trim()){
 								/* var url = "location.href="'+$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val()+'""; */
-									var updateUrl = "location.href="+"'"+  +$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val()+"'";
+									var updateUrl = "location.href="+"'../faq/"+  +$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val()+"'";
 									var deleteUrl = "location.href="+"'"+  +$("#bType").val()+"/"+boardNo+"/delete?cp="+$("#cp").val()+"'";
 								
 								$updateBtn = $("<button>").attr({type:"button",
 															  onclick:updateUrl}).text("수정");
+								$updateBtn.addClass("btn btn-primary");
+								
 								$deleteBtn = $("<button>").attr("type","button").text("삭제").on("click",function(){
 									  							  if(confirm("정말 삭제하시겠습니까?")){
-									  								location.href=""+$("#bType").val()+"/"+boardNo+"/delete?cp="+$("#cp").val()+"";
+									  								location.href="../faq/"+$("#bType").val()+"/"+boardNo+"/delete?cp="+$("#cp").val()+"";
 									  							  };
 									  						  });
+								$deleteBtn.addClass("btn btn-danger");
 								/* $button = $("<button>").attr({type:"button",id:"upBtn"}); */							  
 								$divout.append($updateBtn,$deleteBtn);
 							}
@@ -323,7 +332,13 @@
 		
 		
 	
-	
+	//글쓰기 동작
+	$("#newInsert").on("click",function(){
+		
+		location.href="../${pInfo.boardType}/insert";
+	});
+		
+		
 	
 	</script>
 	
