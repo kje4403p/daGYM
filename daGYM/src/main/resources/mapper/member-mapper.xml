@@ -57,6 +57,7 @@
 		<result property="raymentDate" column="PAYMENT_DATE" />
 		<result property="trainerName" column="MEMBER_NM" />
 		<result property="classCnt" column="CLASS_CNT" />
+		<result property="trainerNo" column="TRAINER_NO" />
 	</resultMap>
 	
 	<resultMap id="MyStudentsResultSet" type="MyStudents" >
@@ -66,6 +67,7 @@
 		<result property="studentsPhone" column="MEMBER_PHONE" />
 	</resultMap>
 
+	
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
 	INSERT INTO MEMBER 
@@ -130,7 +132,7 @@
 	
 	<!-- 이용권 및 결제정보 -->
 	<select id="myPassList" parameterType="MyPass" resultMap="myPassResultSet">
-		SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO=(SELECT TRAINER_NO FROM PAYMENT WHERE MEMBER_NO=#{memberNo}))as MEMBER_NM,MERCHANT_UID,CLASS_NM,AMOUNT,PAYMENT_DATE,CLASS_CNT 
+		SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO=(SELECT TRAINER_NO FROM PAYMENT WHERE MEMBER_NO=#{memberNo}))as MEMBER_NM,MERCHANT_UID,CLASS_NM,AMOUNT,PAYMENT_DATE,CLASS_CNT, PAYMENT.TRAINER_NO 
 		FROM PAYMENT JOIN CLASS_STATUS USING(MEMBER_NO) JOIN MEMBER USING(MEMBER_NO)
 		WHERE MEMBER_NO=#{memberNo}
 	</select>
@@ -160,4 +162,19 @@
 	<update id="updatePw" parameterType="Member">
 		UPDATE MEMBER SET MEMBER_PWD = #{memberPwd} WHERE MEMBER_ID = #{memberId} AND MEMBER_EMAIL=#{memberEmail}
 	</update>
+	
+	<!-- 다음 리뷰번호 받아오기  -->
+	<select id="selectReviewNo" resultType="_int">
+		SELECT SEQ_RVNO.NEXTVAL FROM DUAL
+	</select>
+	<!-- 리뷰등록 -->
+	<insert id="insertReview" parameterType="Review">
+		INSERT INTO REVIEW VALUES(#{reviewNo}, #{reviewContent}, #{reviewRating}, SYSDATE, 'Y', #{memberNo}, #{trainerNo})
+	 </insert>
+	 
+	<!-- 리뷰 작성 여부 확인 -->
+	<select id="checkReview" parameterType="_int" resultType="_int">
+		SELECT COUNT(*) FROM REVIEW WHERE REVIEW_WRITER=#{memberNo}
+	</select>
+	 
 </mapper>

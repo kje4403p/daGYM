@@ -43,7 +43,15 @@
         <result property="trainerNo" column="TRAINER_NO"/>
     </resultMap>
     
-    
+      <resultMap type="Review" id="reviewResultSet">
+	
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewRating" column="REVIEW_RATING"/>
+		<result property="reviewCreateDate" column="REVIEW_CREATE_DT"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		
+	</resultMap>
 	<select id="selectList" resultMap="trainerResultSet">
 SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
 	</select>
@@ -155,5 +163,11 @@ SELECT * FROM DUAL
   	
   	<select id="compareSchedule" parameterType="TrainerSchedule" resultType="_int">
   	SELECT COUNT(*) FROM TRAINER_SCHEDULE WHERE SCHEDULE_TIME=#{scheduleTime} AND TRAINER_NO=#{trainerNo}
+  	</select>
+  	
+  	<!-- 리뷰 조회 -->
+  	<select id="selectReviews" parameterType="_int" resultMap="reviewResultSet">
+  			SELECT REVIEW_CONTENT, REVIEW_RATING, REVIEW_CREATE_DT, MEMBER_ID FROM REVIEW JOIN MEMBER ON (REVIEW.REVIEW_WRITER=MEMBER.MEMBER_NO)
+  		 WHERE TRAINER_NO=#{trainerNo} AND REVIEW_STATUS='Y'
   	</select>
 </mapper>

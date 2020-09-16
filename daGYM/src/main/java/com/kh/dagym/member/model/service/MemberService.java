@@ -8,6 +8,7 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.Review;
 
 public interface MemberService {
 
@@ -129,4 +130,22 @@ public interface MemberService {
 	 * @return result
 	 */
 	int updatePw(Member member);
+
+	/** 리뷰 등록
+	 * @param review
+	 * @return result
+	 */
+	int insertReview(Review review);
+
+	/** 다음 리뷰번호 받아오기
+	 * @return reviewNo
+	 */
+	int selectReviewNo();
+
+	
+	/** 리뷰 작성 여부확인
+	 * @param memberNo
+	 * @return result
+	 */
+	int checkReview(int memberNo);
 }

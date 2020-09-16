@@ -15,6 +15,7 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.Review;
 
 @Service //Service 레이어, 비지니스 로직 처리를 하는 클래스임을 명시 + Bean 등록
 public class MemberServiceImpl implements MemberService{
@@ -192,4 +193,25 @@ public class MemberServiceImpl implements MemberService{
 			member.setMemberPwd(encPwd);
 			return memberDAO.updatePw(member);
 		}
+
+
+		// 리뷰 등록
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int insertReview(Review review) {
+			return memberDAO.insertReview(review);
+		}
+		// 다음 리뷰번호 받아오기
+		@Override
+		public int selectReviewNo() {
+			return memberDAO.selectReviewNo();
+		}
+
+		// 리뷰 작성 여부 확인 
+		@Override
+		public int checkReview(int memberNo) {
+			return memberDAO.checkReview(memberNo);
+		}
+
+		
 }

@@ -1,6 +1,7 @@
 package com.kh.dagym.community.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -25,17 +26,17 @@ public class InfoDAO {
 	/** 게시글 수 가져오기
 	 * @return
 	 */
-	public int getListCount() {
-		return sqlSession.selectOne("eventMapper.getInfoListCount");
+	public int getListCount(Map<String, String> map) {
+		return sqlSession.selectOne("eventMapper.getInfoListCount", map);
 	}
 
 
-	public List<Board> selectList(PageInfo pInfo) {
+	public List<Board> selectList(PageInfo pInfo, Map<String, String> map) {
 		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
 		
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		
-		return sqlSession.selectList("eventMapper.selectInfoList", null, rowBounds);
+		return sqlSession.selectList("eventMapper.selectInfoList", map, rowBounds);
 
 	}
 

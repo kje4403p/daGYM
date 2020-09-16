@@ -395,8 +395,69 @@
 			<!--End off container -->
 		</section>
 		<!--End off Pricing section -->
-
+	
 		
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+		<!------ Include the above in your HEAD tag ---------->
+
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+		 <div class="section-title">
+	                        <h2 id="content2">REVIEW</h2>
+	     </div>
+		<c:choose>
+			<c:when test="${empty reviews }">
+					<div class="container">
+		
+		   <div class="well">
+		      <div class="media">
+		      
+		  		<a class="pull-left" href="#">
+		  		</a>
+		  		<div class="media-body">
+		    		<h4 class="media-heading"></h4>
+		          <p class="text-center">작성된 리뷰가 없습니다.</p>
+		         
+		       </div>
+		    </div>
+		  </div>
+		</div>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="review" items="${reviews }">
+					<div class="container">
+		
+		   <div class="well">
+		      <div class="media">
+		      
+		  		<a class="pull-left" href="#">
+		  		</a>
+		  		<div class="media-body">
+		    		<h4 class="media-heading"></h4>
+		          <p class="text-right">By ${review.memberId }</p>
+		          <p>${review.reviewContent }</p>
+		          <ul class="list-inline list-unstyled">
+		            <li>
+		               <span class="glyphicon glyphicon-star"></span>
+		                        <span class="glyphicon glyphicon-star"></span>
+		                        <span class="glyphicon glyphicon-star"></span>
+		                        <span class="glyphicon glyphicon-star"></span>
+		                        <span class="glyphicon glyphicon-star-empty"></span>
+		            </li>
+		            <li>|</li>
+		            <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
+		            <fmt:formatDate var="createDate" value="${review.reviewCreateDate}" pattern="yyyy-MM-dd"/>
+		            <li>${createDate }</li>
+		            <li>${review.reviewCreateDate}</li>
+					</ul>
+		       </div>
+		    </div>
+		  </div>
+		</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
 <jsp:include page="../common/footer.jsp"/>
 
 		<!-- scroll up-->

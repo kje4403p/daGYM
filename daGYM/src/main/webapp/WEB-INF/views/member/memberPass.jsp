@@ -13,7 +13,7 @@
         <div class="col-sm-5">
                     <h1>이용권 및 결제정보</h1>
                     <div class="row mb-3 form-row">
-                	<table class="table table-hover">
+                	<table class="table table-hover" id="table">
                 		<tr>
                 			<td style ="text-align: center">결제 번호</td>
                 			<td style ="text-align: center">상품명</td>
@@ -21,6 +21,7 @@
                 			<td style ="text-align: center">결제 날짜</td>
                 			<td style ="text-align: center">트레이너 이름</td>
                 			<td style ="text-align: center">이용권</td>
+                			<td style ="text-align: center"></td>
                 		</tr>
                 		<c:choose>
                         
@@ -38,6 +39,11 @@
                         	<td style ="text-align: center">${pass.raymentDate}</td>
                         	<td style ="text-align: center">${pass.trainerName}</td>
                         	<td style ="text-align: center">${pass.classCnt}</td>
+                        	<td style ="text-align: center">
+                        		
+                        	
+                        	
+                        	</td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
@@ -97,6 +103,41 @@
         </div>
         </div>
     </div>
+<script>
+	$("#review").on("click",function(){
+	//	window.screen.width
+	//	window.screen.height
+		
+	//	var popupWidth = 500;
+	//	var popupHeight = 300;
+		
+	//	var popupX = (window.screen.width/2)-(popupWidth/2);
+	//	var popupY=(window.screen.height/2)-(popupHeight/2);
+		var memberNo = ${loginMember.memberNo}
+			var url = "${contextPath }/member/${trainerNo}/review";
+			var options = "width=500, height=300, resizable=no, scrollbars=no";
+			
+			window.open(url, "리뷰작성", options);
+		
+	})
+	// 리뷰 작성 여부 확인하기
+	$(function(){
+		var $td = $("#table tr").eq(1).children().eq(6)
+		var $btn =$("<button>"); 
+		$.ajax({
+			url : "${contextPath}/member/checkReview",
+			success : function(result){
+				console.log(result)
+				if(result==0){
+					$td.append($btn);
+				}
+			}, error : function(){
+				console.log("실패")
+			}	
+		})
+		
+	})
+</script>
     <%@ include file="../common/footer.jsp"%><br>
 </body>
 </html>

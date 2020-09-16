@@ -13,6 +13,7 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.Review;
 
 @Repository
 public class MemberDAO {
@@ -179,5 +180,28 @@ public class MemberDAO {
 	 */
 	public int updatePw(Member member) {
 		return sqlSession.update("memberMapper.updatePw",member);
+	}
+
+	/** 리뷰등록 DAO
+	 * @param review
+	 * @return result
+	 */
+	public int insertReview(Review review) {
+		return sqlSession.insert("memberMapper.insertReview", review);
+	}
+
+	/** 다음 리뷰번호 받아오기
+	 * @return reviewNo
+	 */
+	public int selectReviewNo() {
+		return sqlSession.selectOne("memberMapper.selectReviewNo");
+	}
+
+	/** 리뷰 작성 여부 확인 DAO
+	 * @param memberNo
+	 * @return result
+	 */
+	public int checkReview(int memberNo) {
+		return sqlSession.selectOne("memberMapper.checkReview", memberNo);
 	}	
 }
