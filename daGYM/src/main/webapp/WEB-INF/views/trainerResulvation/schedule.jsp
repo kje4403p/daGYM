@@ -14,6 +14,8 @@
 <script src='${contextPath}/resources/fullcalendar/packages/core/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/daygrid/main.js'></script>
+<script src='${contextPath}/resources/fullcalendar/packages/timegrid/main.js'></script>
+<script src='${contextPath}/resources/fullcalendar/packages/moment/main.js'></script>
 <script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 <style>
           /* The Modal (background) */
@@ -50,25 +52,35 @@ background-color: #fcf8e3;
         </style>
         
 <script>
-document.addEventListener('DOMContentLoaded', function() { 
+document.addEventListener('DOMContentLoaded', function() {
+	
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, { 
+		
 		  initialView: 'resourceTimeGridDay',
-		plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+		plugins: [ 'interaction', 'dayGrid','timeGrid',  'moment' ],
+	
+		
 		 events: [
 			 <%
 			 for(int i=0; i<schedule.size(); i++){
 				 TrainerSchedule sd = (TrainerSchedule)schedule.get(i);
 			 %>
-			
+				
 			 {	
 			
+					
 				 start: "<%=sd.getScheduleTime()%>"
+						
 		
 			 },
 			 
 			 <%}%>
 			 ],
+		eventTimeFormat: {
+		hour:'numeric'
+		  
+		   },
 		defaultView: 'dayGridMonth',
 		defaultDate: new Date(),
 		header: { left: 'prev,next today', center: 'title', right: 'dayGridMonth,dayGridWeek,dayGridDay' },

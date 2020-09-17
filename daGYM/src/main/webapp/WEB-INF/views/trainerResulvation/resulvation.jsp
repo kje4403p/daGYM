@@ -73,6 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			 
 			 <%}%>
 			 ],
+			 timeFormat: "H(:mm)",
 			 eventColor: "orange",
 			 eventClick: function(info,start) {
 				var eventFullDate = info.event.start;			  		
