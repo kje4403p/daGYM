@@ -19,10 +19,11 @@ public class TrainerSchedule {
 		this.trainerNo = trainerNo;
 		this.scheduleStatus = scheduleStatus;
 	}
+
 	public String getScheduleTime() {
 		return scheduleTime;
 	}
-	public void setScheduleTime() {
+	public void setScheduleTime(String scheduleTime) {
 		this.scheduleTime = scheduleTime;
 	}
 	public int getTrainerNo() {
