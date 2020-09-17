@@ -139,25 +139,30 @@ public class ServiceController {
 			Search search, Model model){
 		
 			PageInfo pInfo = serviceBoard.pagination(type, cp,search);
+			Map<String, Object> map  = new HashMap<String, Object>();
+			map = serviceBoard.selectSearchList(pInfo,search);
 			
-			List<Board> boardList = serviceBoard.selectSearchList(pInfo,search);
-			for(Board b:boardList) {
-				System.out.println(b.getBoardNo()+"gg");
+			String url=null;
+			if(type ==3) {
+				model.addAttribute("bList",map.get("qList"));
+				model.addAttribute("pInfo", pInfo);
+				url="serviceCenter/question";
+				
+			}else {
+				List<Board> nList = serviceBoard.selectBoardNo(pInfo);
+				List<com.kh.dagym.admin.model.vo.Member> mList = serviceBoard.selectMemberId(pInfo);
+				model.addAttribute("bList",map.get("bList"));
+				model.addAttribute("pInfo", pInfo);
+				model.addAttribute("nList", nList);
+				model.addAttribute("mList", mList);
+				boolean flag = false;
+				model.addAttribute("flag", flag);
+				boolean flag2=true;
+				model.addAttribute("flag2", flag2);
+				url="serviceCenter/faq";
 			}
-			List<Board> nList = serviceBoard.selectBoardNo(pInfo);
-			List<com.kh.dagym.admin.model.vo.Member> mList = serviceBoard.selectMemberId(pInfo);
-			model.addAttribute("bList",boardList);
-			model.addAttribute("pInfo", pInfo);
-			model.addAttribute("nList", nList);
-			model.addAttribute("mList", mList);
-			boolean flag = false;
-			model.addAttribute("flag", flag);
-			boolean flag2=true;
-			model.addAttribute("flag2", flag2);
-		
-		
 	
-		return "serviceCenter/faq";
+		return url;
 	}
 	
 	@RequestMapping("{type}/insert")
