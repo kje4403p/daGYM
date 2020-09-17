@@ -100,17 +100,12 @@ public class MemberController {
 				if (memberGrade.equals("G")) {
 					List<PT> myPt = memberService.myPt(memberNo);
 					model.addAttribute("myPt",myPt);
-					//System.out.println(myPt.size());
-					System.out.println(myPt);
 					
 				}else if(memberGrade.equals("T")) {
 					List<TrainerSchedule> myPt = memberService.myTPt(memberNo);
 					 for (int i = 0; i < myPt.size(); i++) {
-						   System.out.println(myPt.get(i).getScheduleTime());
 						  }
 					model.addAttribute("myPt",myPt);
-					System.out.println(myPt.size());
-					
 				}
 				return "member/mySchedule";
 		}

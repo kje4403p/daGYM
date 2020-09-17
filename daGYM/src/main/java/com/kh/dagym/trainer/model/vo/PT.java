@@ -1,5 +1,10 @@
 package com.kh.dagym.trainer.model.vo;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.Gson;
+
 public class PT {
 	private int memberNo;
 	private int trainerNo;
@@ -39,10 +44,18 @@ public class PT {
 	public void setPtStatus(String ptStatus) {
 		this.ptStatus = ptStatus;
 	}
+
 	@Override
 	public String toString() {
-		return "PT [memberNo=" + memberNo + ", trainerNo=" + trainerNo + ", scheduleTime=" + scheduleTime
-				+ ", ptStatus=" + ptStatus + "]";
+		
+		Map<String , Object> map = new HashMap<String, Object>();
+		
+		map.put("memberNo", memberNo);
+		map.put("trainerNo", trainerNo);
+		map.put("scheduleTime", scheduleTime);
+		map.put("ptStatus", ptStatus);
+		
+		return new Gson().toJson(map);
 	}
 
 	
