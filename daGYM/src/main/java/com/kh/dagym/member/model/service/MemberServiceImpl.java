@@ -15,7 +15,9 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 @Service //Service 레이어, 비지니스 로직 처리를 하는 클래스임을 명시 + Bean 등록
 public class MemberServiceImpl implements MemberService{
@@ -211,6 +213,18 @@ public class MemberServiceImpl implements MemberService{
 		@Override
 		public int checkReview(int memberNo) {
 			return memberDAO.checkReview(memberNo);
+		}
+		
+		// 마이페이지 회원 스케줄 Service 구현
+		@Override
+		public List<PT> myPt(int memberNo) {
+			return memberDAO.myPt(memberNo);
+		}
+
+		// 마이페이지 트레이너 스케줄 Service 구현
+		@Override
+		public List<TrainerSchedule> myTPt(int memberNo) {
+			return memberDAO.myTPt(memberNo);
 		}
 
 		

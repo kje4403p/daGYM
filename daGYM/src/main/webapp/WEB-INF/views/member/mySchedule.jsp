@@ -1,10 +1,12 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
+<script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 <meta charset="UTF-8">
 <title>내 스케줄</title>
 <style>
@@ -12,13 +14,12 @@
     {
         border:1px solid #BDBDBD;
         text-align:center;
-        width:100%;
-        height: 500px;
+        width:1000px;
+        height: 100px;
     }
-    #schedule
-    {
-    	width:100%;
-    	height: 50px;
+    
+    #calendar td{
+    	vertical-align: top;
     }
 </style>
 <script language="javascript">
@@ -41,10 +42,13 @@
         var lastDate = new Date(today.getFullYear(), today.getMonth() + 1, 0); //현재 달의 마지막 날
         var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
         var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
+        var size = ${myPt.size()};
         var a = 2020 //가져오는 년도
         var b = 8 // 가져오는 월 +1
         var c = 15 // 가져오는 일
-        var d = "15:30" // 가져온시간
+        var d = "" // 가져온시간
+        var e = "" // 가져온시간
+        var f = "" // 가져온시간
         yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
         
         if(today.getMonth()+1==12) //  눌렀을 때 월이 넘어가는 곳
@@ -65,8 +69,7 @@
         
        
      // 남은 테이블 줄 삭제
-        while (tbcal.rows.length > 2) 
-        {
+        while (tbcal.rows.length > 2) {
             tbcal.deleteRow(tbcal.rows.length - 1);
         }
         var row = null;
@@ -79,36 +82,72 @@
             cell = row.insertCell();
             cnt = cnt + 1;
         }
- 
         // 달력 출력
-        for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
-        { 
-            cell = row.insertCell();
-            bbb = row.insertCell();
-            aaa = bbb.insertCell();
-            console.log(row.insertCell());
-            cell.innerHTML = i;
-            cnt = cnt + 1;
-            if (cnt % 7 == 1) {//일요일 계산
-                cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
-            }
-            if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
-                row = calendar.insertRow().id="schedule";// 줄 추가
-                row = calendar.insertRow();// 줄 추가
-            }
-            if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
-            {
-                cell.bgColor = "#BCF1B1"; //오늘날짜배경색
-            }
+        var arr = ${myPt};
+        
+        console.log("길이 : " + arr.length)
+        
+        
+        	for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
+            { 
+            	d = "";
+        		for(j =0; j<arr.length; j++){
+                	
+                	var tmp = new Date(arr[j].scheduleTime);
+                	var tmpYear = tmp.getFullYear();
+                	var tmpMonth = tmp.getMonth()+1;
+                	var tmpDate = tmp.getDate();
+                	
+                	var tmpYMD = tmpYear + "-" + tmpMonth + "-" + tmpDate;
+                	
+                	var tmpTime = tmp.getHours() + ":00";
+                	
+                	console.log("현재 날짜 : " + tmpYear + "-" + tmpMonth + "-" + tmpDate);
+                	
+                	console.log(tmpTime);
+        		
+	                cell = row.insertCell();
+	                if( tmpYMD == today.getFullYear() +"-"+ (today.getMonth()+1) +"-"+  i) 
+	                {
+	                	 d += "<div>" + tmpTime + "</div>"; // 가져온시간
+	                	   
+	                     //e = "16:30" // 가져온시간
+	                     //f = "17:30" // 가져온시간
+	                }else{
+	                	//d = "" // 가져온시간
+	                    //e = "" // 가져온시간
+	                    //f = "" // 가져온시간
+	                }
+	                // 만약 가져온갯수가 3개보다 클경우
+	               /*  if (test > 3){ // 일정이 3개이상일경우
+	                	for(int i=0; i > 3; i++){ // 일정을 가져옴
+	                		
+	                	}
+	                } */
+        		}
+        		
+               	cell.innerHTML = i+ "<br>"+d;
+        		//cell.innerHTML += "<br>"+d; // +"<br>"+ e +"<br>"+f;
+	         
+	            cnt = cnt + 1;
+                if (cnt % 7 == 1) {//일요일 계산
+                    cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
+                }
+                if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
+                    cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
+                    row = calendar.insertRow();// 줄 추가
+                }
+                if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
+                {
+                    cell.bgColor = "#BCF1B1"; //오늘날짜배경색
+                }
+                
+                
+                 
+                
             
-            if(today.getFullYear()==a&&today.getMonth()==b&&i==c) 
-            {
-            	aaa.innerHTML = "tt";
-            }
-            
-            
-        }
+    	}
+        
     }
 </script>
 </head>
@@ -121,20 +160,21 @@
                 onsubmit="return validate();">
                     <h1>내 스케줄</h1>
                     <div class="row mb-3 form-row">
-                <table align="center" id="calendar">
+                    
+                <table align="" id="calendar">
                     	<tr>
                     	<td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
             			<td colspan="5" align="center" id="yearmonth"></td>
             			<td><font size=1%; color="#B3B6B3"><label onclick="nextm()" id="next"></label></font></td>
                         </tr>
                         <tr>
-				            <td align="center"> <font color="#FF9090">일</font></td>
-				            <td align="center"> 월 </td>
-				            <td align="center"> 화 </td>
-				            <td align="center"> 수 </td>
-				            <td align="center"> 목 </td>
-				            <td align="center"> 금 </td>
-				            <td align="center"><font color=#7ED5E4>토</font></td>
+				            <td align=""> <font color="#FF9090">일</font></td>
+				            <td align=""> 월 </td>
+				            <td align=""> 화 </td>
+				            <td align=""> 수 </td>
+				            <td align=""> 목 </td>
+				            <td align=""> 금 </td>
+				            <td align=""><font color=#7ED5E4>토</font></td>
 				        </tr>
                 	</table>
                 </div>

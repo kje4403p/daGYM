@@ -2,6 +2,7 @@ package com.kh.dagym.member.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -32,7 +33,9 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 @SessionAttributes({"loginMember"})
 @Component
@@ -91,7 +94,24 @@ public class MemberController {
 			
 	// 내 스케줄 화면 전환 메소드
 			@RequestMapping("mySchedule")
-			public String myScheduleView() {
+			public String myScheduleView(Model model) {
+				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+				String memberGrade =  ((Member)model.getAttribute("loginMember")).getMemberGrade();
+				if (memberGrade.equals("G")) {
+					List<PT> myPt = memberService.myPt(memberNo);
+					model.addAttribute("myPt",myPt);
+					//System.out.println(myPt.size());
+					System.out.println(myPt);
+					
+				}else if(memberGrade.equals("T")) {
+					List<TrainerSchedule> myPt = memberService.myTPt(memberNo);
+					 for (int i = 0; i < myPt.size(); i++) {
+						   System.out.println(myPt.get(i).getScheduleTime());
+						  }
+					model.addAttribute("myPt",myPt);
+					System.out.println(myPt.size());
+					
+				}
 				return "member/mySchedule";
 		}
 			
