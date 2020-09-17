@@ -66,6 +66,18 @@
 		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
 		<result property="studentsPhone" column="MEMBER_PHONE" />
 	</resultMap>
+	
+	 <resultMap type="TrainerSchedule" id="TrainerScheduleResultSet">
+        <result property="scheduleTime" column="SCHEDULE_TIME"/>
+        <result property="trainerNo" column="TRAINER_NO"/>
+    </resultMap>
+    
+    <resultMap type="PT" id="MemberScheduleResultSet">
+    	<result property="memberNo" column="MEMBER_NO"/>
+    	<result property="trainerNo" column="TRAINER_NO"/>
+        <result property="scheduleTime" column="SCHEDULE_TIME"/>
+        <result property="ptStatus" column="PT_STATUS"/>
+    </resultMap>
 
 	
 	<!-- 회원가입 -->
@@ -176,5 +188,17 @@
 	<select id="checkReview" parameterType="_int" resultType="_int">
 		SELECT COUNT(*) FROM REVIEW WHERE REVIEW_WRITER=#{memberNo}
 	</select>
+	
+	<!-- 회원 스케줄 조회 -->
+	<select id="myPt" parameterType="_int" resultMap="MemberScheduleResultSet">
+		SELECT * FROM PT WHERE MEMBER_NO=#{memberNo}
+	</select>
+	
+	<!-- 트레이너 스케줄 조회 -->
+	<select id="myTPt" parameterType="_int" resultMap="TrainerScheduleResultSet">
+		SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{memberNo}
+	</select>
+	
+	
 	 
 </mapper>
