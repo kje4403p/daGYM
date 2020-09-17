@@ -6,18 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-    <style>
-
-	</style>
-	<link href="${contextPath }/resources/css/info.css" rel="stylesheet" />
+	<link href= "${contextPath}/resources/css/info.css" rel="stylesheet"  type="text/css"/>
 
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
 	<div class="container board-list">
 
-        <div style="height:530px">
-            <table class="table table-hover table-striped" id="list-table">
+        <div>
+            <table class="table" id="list-table">
                 <thead>
                     <tr>
                         <th>글번호 </th>
@@ -28,6 +25,34 @@
                     </tr>
                 </thead>
                 <tbody>
+                	<!-- BEST -->
+                	
+               		<c:forEach var="board" items="${bestInfoList}">
+                			<!-- boardList에 있는 요소를 반복 접근하여
+                				 board라는 변수에 저장하여 내부에서 사용 -->
+	                		<tr class="best">
+	                			<td><span class="best-icon">best</span></td>
+	                			<td>
+	                				${board.boardTitle }
+	                			</td>
+	                			<td>${board.boardWriter}</td>
+	                			<td>${board.views}</td>
+	                			<td>
+               						<jsp:useBean id="now" class="java.util.Date"/>
+               						<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
+               						<fmt:formatDate var="createDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd"/>
+               						<fmt:formatDate var="createTime" value="${board.boardEnrollDate}" pattern="hh:mm:ss"/>
+	                				<c:choose>
+	                					<c:when test="${today == createDate }">
+	                						${createTime }
+	                					</c:when>
+	                					<c:otherwise>		
+	                						${createDate }
+	                					</c:otherwise>
+	                				</c:choose>
+	                			</td>
+	                		</tr>
+                		</c:forEach>
                 	<c:choose>
                 		<c:when test="${empty infoList}">
                 			<tr><td colspan="6">존재하는 게시글이 없습니다.</td></tr>
@@ -44,10 +69,10 @@
 		                			<td>${board.boardWriter}</td>
 		                			<td>${board.views}</td>
 		                			<td>
-                						<jsp:useBean id="now" class="java.util.Date"/>
-                						<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
+<%-- 		                			    <jsp:useBean id="now" class="java.util.Date"/>
+                						<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/> --%>
                 						<fmt:formatDate var="createDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd"/>
-                						<fmt:formatDate var="createTime" value="${board.boardEnrollDate}" pattern="hh:mm:ss"/>
+                						<fmt:formatDate var="createTime" value="${board.boardEnrollDate}" pattern="hh:mm:ss"/> 
 		                				<c:choose>
 		                					<c:when test="${today == createDate }">
 		                						${createTime }

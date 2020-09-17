@@ -1,8 +1,10 @@
 package com.kh.dagym.common;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class PageInfo {
 	
 	private int currentPage;	// 현재 페이지 번호

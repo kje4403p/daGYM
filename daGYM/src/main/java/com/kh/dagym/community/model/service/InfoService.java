@@ -49,4 +49,16 @@ public interface InfoService {
 	 */
 	List<Reply> selectReplys(int boardNo);
 
+	/** 댓글 삭제
+	 * @param replyNo
+	 * @return int
+	 */
+	int deleteReply(int replyNo);
+
+	/** 베스트 게시글
+	 * @param BOARD_TYPE
+	 * @return
+	 */
+	List<Board> selectBest(int BOARD_TYPE);
+
 }

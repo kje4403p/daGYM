@@ -27,7 +27,6 @@ public class InfoServiceImpl implements InfoService{
 	public PageInfo pagenation(int cp, Map<String, String> map, int BOARD_TYPE) {
 		// 1) 전체 게시글 수 조회
 		int listCount = infoDAO.getListCount(map);
-		pInfo.setLimit(10);
 		pInfo.setPageInfo(cp, listCount, BOARD_TYPE);
 
 
@@ -93,6 +92,18 @@ public class InfoServiceImpl implements InfoService{
 	@Override
 	public List<Reply> selectReplys(int boardNo) {
 		return infoDAO.selectReplys(boardNo);
+	}
+	
+	@Transactional
+	@Override
+	public int deleteReply(int replyNo) {
+		return infoDAO.deleteReply(replyNo);
+	}
+	
+
+	@Override
+	public List<Board> selectBest(int BOARD_TYPE) {
+		return infoDAO.selectBest(BOARD_TYPE);
 	}
 
 
