@@ -23,7 +23,7 @@
       <li class="nav-item dropdown d-none d-lg-block">
         <a class="nav-link btn btn-success create-new-button" id="createbuttonDropdown" data-toggle="dropdown" aria-expanded="false" href="#">+ 새 글 작성하기</a>
         <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="createbuttonDropdown">
-          <a class="dropdown-item preview-item" href="">
+          <a class="dropdown-item preview-item" href="${contextPath}/info/insert?boardType=2">
             <div class="preview-item-content">
               <p class="preview-subject ellipsis mb-1">정보 게시판</p>
             </div>

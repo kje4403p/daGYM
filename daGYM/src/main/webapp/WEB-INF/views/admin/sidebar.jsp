@@ -38,8 +38,8 @@
 	
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
-    <a class="sidebar-brand brand-logo" href="${contextPath}"><img src="${contextPath}/resources/img/logo3.png" style="height: 37px;"></a>
-    <a class="sidebar-brand brand-logo-mini" href="${contextPath}"><img src="${contextPath}/resources/img/logo3_mini.png" style="width: 45px; height: 37px;"></a>
+    <a class="sidebar-brand brand-logo" href="${contextPath}/admin/adminView"><img src="${contextPath}/resources/img/logo3.png" style="height: 37px;"></a>
+    <a class="sidebar-brand brand-logo-mini" href="${contextPath}/admin/adminView"><img src="${contextPath}/resources/img/logo3_mini.png" style="width: 45px; height: 37px;"></a>
   </div>
   <ul class="nav">
     <li class="nav-item nav-category">
