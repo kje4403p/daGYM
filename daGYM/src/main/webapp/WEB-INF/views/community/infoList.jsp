@@ -6,15 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-	<link href= "${contextPath}/resources/css/info.css" rel="stylesheet"  type="text/css"/>
-
+	<link href= "${contextPath}/resources/css/info.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
-	<div class="container board-list">
-
+	<div class="contain board-list m-5">
+	<jsp:include page="sideMenu.jsp"/>
         <div>
-            <table class="table" id="list-table">
+            <table class="table" id="list-table" style="width:70%;">
                 <thead>
                     <tr>
                         <th>글번호 </th>
@@ -31,7 +30,7 @@
                 			<!-- boardList에 있는 요소를 반복 접근하여
                 				 board라는 변수에 저장하여 내부에서 사용 -->
 	                		<tr class="best">
-	                			<td><span class="best-icon">best</span></td>
+	                			<td id=${board.boardNo }><span class="best-icon">best</span></td>
 	                			<td>
 	                				${board.boardTitle }
 	                			</td>
@@ -62,7 +61,7 @@
 	                			<!-- boardList에 있는 요소를 반복 접근하여
 	                				 board라는 변수에 저장하여 내부에서 사용 -->
 		                		<tr>
-		                			<td>${board.boardNo }</td>
+		                			<td id=${board.boardNo }>${board.boardNo }</td>
 		                			<td>
 		                				${board.boardTitle }
 		                			</td>
@@ -197,7 +196,7 @@
 	$(function(){
 		$("#list-table td").on("click", function(){
 			// 글번호
-			var boardNo = $(this).parent().children().eq(0).text();
+			var boardNo = $(this).parent().children().eq(0).attr('id');
 			
 			var boardUrl = boardNo + "?cp=${pInfo.currentPage}";
 			
