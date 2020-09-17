@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>트레이너 예약</title>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link href='${contextPath}/resources/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />
@@ -15,8 +14,9 @@
 <script src='${contextPath}/resources/fullcalendar/packages/core/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/interaction/main.js'></script>
 <script src='${contextPath}/resources/fullcalendar/packages/daygrid/main.js'></script>
+<script src='${contextPath}/resources/fullcalendar/packages/timegrid/main.js'></script>
+<script src='${contextPath}/resources/fullcalendar/packages/moment/main.js'></script>
 <script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
           /* The Modal (background) */
 .searchModal {
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, { 
 		  initialView: 'resourceTimeGridDay',
-		plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+		  plugins: [ 'interaction', 'dayGrid','timeGrid',  'moment' ],
 		 events: [
 			 <%
 			 for(int i=0; i<schedule.size(); i++){
@@ -73,7 +73,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			 
 			 <%}%>
 			 ],
-			 timeFormat: "H(:mm)",
+				eventTimeFormat: {
+					hour:'numeric'
+					  
+					   },
 			 eventColor: "orange",
 			 eventClick: function(info,start) {
 				var eventFullDate = info.event.start;			  		
