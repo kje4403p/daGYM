@@ -63,6 +63,7 @@ public class TrainerController {
 		if(trainer!=null) {
 			  List<TrainerAttachment> files = trainerService.selectFiles(trainerNo);
 			  List<Review> reviews = trainerService.selectReviews(trainerNo);
+			  System.out.println(reviews);
 		         if(!files.isEmpty()) {
 		            model.addAttribute("files",files);
 		         }
@@ -187,7 +188,7 @@ public class TrainerController {
 	 @RequestMapping(value="trainerSchedule/{trainerNo}",
 		produces="application/text; charset=utf-8;")
 	 public String trainerSchedule(@PathVariable int trainerNo, Model model,TrainerSchedule trainerSchedule,RedirectAttributes rdAttr) {	
-		 	System.out.println(trainerSchedule);
+		 	System.out.println(trainerSchedule.getScheduleTime());
 		 	
 		 		int result = trainerService.insertSchedule(trainerSchedule);
 			 	

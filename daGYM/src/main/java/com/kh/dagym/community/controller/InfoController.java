@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -20,9 +21,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.dagym.common.Attachment;
 import com.kh.dagym.common.Board;
 import com.kh.dagym.common.PageInfo;
+import com.kh.dagym.common.Reply;
 import com.kh.dagym.community.model.service.EventService;
 import com.kh.dagym.community.model.service.InfoService;
 import com.kh.dagym.community.model.vo.BoardLikes;
@@ -232,5 +236,36 @@ public class InfoController {
 		
 		return map;
 	}
+	
+	@ResponseBody
+	@PostMapping(value = "insertReply/{boardNo}",  produces="text/plain;Charset=UTF-8")
+	public String insertReply(@PathVariable int boardNo, Reply reply) {
+		reply.setBoardNo(boardNo);
+		
+		int result = infoService.insertReply(reply);
+		
+		String str = "댓글삽입";
+		if (result == 1) {
+			str += "성공";
+		} else {
+			str += "실패"; 
+		}
+		return str;
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(method = RequestMethod.POST, value = "selectReplys/{boardNo}", produces="text/plain;Charset=UTF-8")
+	public String selectReplys(@PathVariable int boardNo) {
+		
+		List<Reply> replyList = infoService.selectReplys(boardNo);
+		System.out.println(boardNo);
+		replyList.stream().forEach(System.out::println);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yy-MM-dd hh:mm").create();
+		
+		return gson.toJson(replyList);
+	}
+	
 
 }

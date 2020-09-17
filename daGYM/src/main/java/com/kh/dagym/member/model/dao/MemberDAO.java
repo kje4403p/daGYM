@@ -13,7 +13,9 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 @Repository
 public class MemberDAO {
@@ -203,5 +205,21 @@ public class MemberDAO {
 	 */
 	public int checkReview(int memberNo) {
 		return sqlSession.selectOne("memberMapper.checkReview", memberNo);
+	}
+
+	/** 회원 스케줄 조회 DAO
+	 * @param memberNo
+	 * @return myPt
+	 */
+	public List<PT> myPt(int memberNo) {
+		return sqlSession.selectList("memberMapper.myPt", memberNo);
+	}
+
+	/** 트레이너 스케줄 조회 DAO
+	 * @param memberNo
+	 * @return
+	 */
+	public List<TrainerSchedule> myTPt(int memberNo) {
+		return sqlSession.selectList("memberMapper.myTPt", memberNo);
 	}	
 }

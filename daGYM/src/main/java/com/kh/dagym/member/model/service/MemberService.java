@@ -8,7 +8,9 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
+import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 public interface MemberService {
 
@@ -148,4 +150,16 @@ public interface MemberService {
 	 * @return result
 	 */
 	int checkReview(int memberNo);
+	
+	/** 마이페이지 회원 스케줄 Service
+	 * @param memberNo
+	 * @return myPt
+	 */
+	List<PT> myPt(int memberNo);
+
+	/** 마이페이지 트레이너 스케줄 Service
+	 * @param memberNo
+	 * @return myPt
+	 */
+	List<TrainerSchedule> myTPt(int memberNo);
 }

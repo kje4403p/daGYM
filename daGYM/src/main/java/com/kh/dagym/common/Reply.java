@@ -1,6 +1,7 @@
 package com.kh.dagym.common;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
+
 
 public class Reply {
 	private int replyNo;
@@ -9,13 +10,14 @@ public class Reply {
 	private String replyContent;
 	private Timestamp replyEnrollDt;
 	private String replyStatus;
+	private String memberId;
 	
 	public Reply() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Reply(int replyNo, int boardNo, int memberNo, String replyContent, Timestamp replyEnrollDt,
-			String replyStatus) {
+			String replyStatus, String memberId) {
 		super();
 		this.replyNo = replyNo;
 		this.boardNo = boardNo;
@@ -23,6 +25,7 @@ public class Reply {
 		this.replyContent = replyContent;
 		this.replyEnrollDt = replyEnrollDt;
 		this.replyStatus = replyStatus;
+		this.memberId = memberId;
 	}
 
 	public int getReplyNo() {
@@ -71,6 +74,16 @@ public class Reply {
 
 	public void setReplyStatus(String replyStatus) {
 		this.replyStatus = replyStatus;
+	}
+	
+	
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	@Override

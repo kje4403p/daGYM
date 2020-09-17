@@ -182,7 +182,7 @@
 					</ul>
 					</nav>
 				</div>
-				<div id = "divz1"></div>
+			
 				
 				<!-- 검색창 -->
 				<div id="search">
@@ -200,7 +200,6 @@
 						style="width: 100px; display: inline-block;">검색</button> -->
 					<input class="btn btn-primary" id="searchBtn" type="submit" value="검색">
 				   
-				
 				</div>
 				
 			</div>

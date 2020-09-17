@@ -39,7 +39,7 @@
 }
 
 table {
-	width: 80%;
+	width: 1500px;
 	border-collapse: collapse;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -125,13 +125,35 @@ tbody>tr>td:last-child {
 	max-width: 1200px;
 }
 /* 검색창 */
-#searchInput, #searchBtn {
-	float: left;
-	margin-left: 60%;
+
+
+#search{
+	
+	margin-top:50px;
+	margin-left: 390px;
+	
 }
+
+ input[type=text]{
+	border:5px solid #aaa;
+	border-radius:4px;
+	margin:8px 0;
+	outline:none;
+	padding:8px;
+	box-sizing:border-box;
+	transition:.3s;
+	
+}
+input[type=text]:focus{
+	border-color:dodgerBlue;
+	box-sizing: 0 0 50px 0 dodgerBlue;
+} 
 
 /* 페이징바 */
 
+#pagingBar{
+	margin-left: 500px;
+}
 
 
 
@@ -288,3 +310,5 @@ tbody>tr>td:last-child {
   font-size: 40px;
   font-weight: 700;
 }
+
+

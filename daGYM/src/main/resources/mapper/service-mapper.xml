@@ -349,4 +349,45 @@
 	  AND BOARD_WRITER IN 
 	  (SELECT MEMBER_NO FROM MEMBER WHERE MEMBER_ID=#{boardWriter})
   	</select>
+  	
+  	<!-- 검색 조건이 추가된 qna게시글 수 조회  -->
+  	<select id="selectQnaSearchCount" parameterType="map" resultType="_int">
+  	
+  	SELECT COUNT (*) FROM QNA_SEARCH
+  	WHERE
+  	<bind name="sv" value="'%' + search.sVal +'%'"/>
+  	<choose>
+  		<when test="search.sKey == 'tit'">
+  			BOARD_TITLE LIKE #{sv}
+  		</when>
+  		<when test="search.sKey == 'con'">
+  			BOARD_CONTENT LIKE #{sv}
+  		</when>
+  		<otherwise>
+  			(BOARD_TITLE LIKE #{sv} OR BOARD_CONTENT LIKE #{sv})
+  		</otherwise>
+  	</choose>
+  		
+  	</select>
+  	
+  	<!-- 검색 조건이 추가된 qna글 리스트 조회  -->
+  	<select id="selectQnaSearchList" parameterType="map" resultMap="qnaBoardResultSet">
+  	
+  	SELECT * FROM QNA_SEARCH
+  	WHERE 
+  	<bind name="sv" value="'%' + search.sVal +'%'"/>
+  	
+  	<choose>
+  		<when test="search.sKey == 'tit'">
+  			BOARD_TITLE LIKE #{sv}
+  		</when>
+  		<when test="search.sKey == 'con'">
+  			BOARD_CONTENT LIKE #{sv}
+  		</when>
+  		<otherwise>
+  			(BOARD_TITLE LIKE #{sv} OR BOARD_CONTENT LIKE #{sv})
+  		</otherwise>
+  	</choose>
+  	
+  	</select>
 </mapper>

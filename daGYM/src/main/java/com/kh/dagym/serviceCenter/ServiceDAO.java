@@ -96,6 +96,8 @@ public class ServiceDAO {
 	public List<Board> selectSearchList(PageInfo pInfo, Map<String, Object> map) {
 		int offset = (pInfo.getCurrentPage()-1) * pInfo.getLimit();
 		RowBounds rowBounds = new RowBounds(offset,pInfo.getLimit());
+		System.out.println(map.get("search"));
+		System.out.println(map.get("type"));
 		return sqlSession.selectList("serviceMapper.selectSearchList",map,rowBounds);
 	}
 
@@ -240,6 +242,21 @@ public class ServiceDAO {
 	 */
 	public List<Attachment> selectImgList(String boardWriter) {
 		return sqlSession.selectList("serviceMapper.selectImgList", boardWriter);
+	}
+
+	/** 검색 조건 추가된 qna전체 게시글 수 조회 
+	 * @param map
+	 * @return result
+	 */
+	public int getSearchListQnaCount(Map<String, Object> map) {
+		return sqlSession.selectOne("serviceMapper.selectQnaSearchCount", map);
+	}
+
+	//검색 조건 추가된 QNA게시글 조회 
+	public List<QnaBoard> selectQnaSearchList(PageInfo pInfo, Map<String, Object> map) {
+		int offset = (pInfo.getCurrentPage()-1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset,pInfo.getLimit());
+		return sqlSession.selectList("serviceMapper.selectQnaSearchList",map,rowBounds);
 	}
 
 	
