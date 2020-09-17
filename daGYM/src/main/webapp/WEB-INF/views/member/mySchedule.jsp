@@ -15,11 +15,24 @@
         border:1px solid #BDBDBD;
         text-align:center;
         width:1000px;
-        height: 100px;
+        height: 800px;
     }
     
     #calendar td{
     	vertical-align: top;
+    }
+    
+    #successFall{
+    	width:1000px;
+    }
+    #success {
+    	color: red;
+    	float: right;
+    }
+    
+    #fall {
+    	color: blue;
+    	float: right;
     }
 </style>
 <script language="javascript">
@@ -84,14 +97,14 @@
         }
         // 달력 출력
         var arr = ${myPt};
-        
-        console.log("길이 : " + arr.length)
-        
+        var a =0;
         
         	for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
             { 
-            	d = "";
-        		for(j =0; j<arr.length; j++){
+            	time = "";
+            	
+            	var tmpCnt = 0;
+        		for(j =0; j<arr.length; j++){ // 12바퀴 돌꺼고 
                 	
                 	var tmp = new Date(arr[j].scheduleTime);
                 	var tmpYear = tmp.getFullYear();
@@ -102,33 +115,33 @@
                 	
                 	var tmpTime = tmp.getHours() + ":00";
                 	
-                	console.log("현재 날짜 : " + tmpYear + "-" + tmpMonth + "-" + tmpDate);
+                	// console.log("현재 날짜 : " + tmpYear + "-" + tmpMonth + "-" + tmpDate);
                 	
-                	console.log(tmpTime);
-        		
-	                cell = row.insertCell();
+                	//console.log(tmpTime);
+                	
+        		    // 숫자를 정의해줌 
+	                
 	                if( tmpYMD == today.getFullYear() +"-"+ (today.getMonth()+1) +"-"+  i) 
 	                {
-	                	 d += "<div>" + tmpTime + "</div>"; // 가져온시간
-	                	   
-	                     //e = "16:30" // 가져온시간
-	                     //f = "17:30" // 가져온시간
-	                }else{
-	                	//d = "" // 가져온시간
-	                    //e = "" // 가져온시간
-	                    //f = "" // 가져온시간
-	                }
-	                // 만약 가져온갯수가 3개보다 클경우
-	               /*  if (test > 3){ // 일정이 3개이상일경우
-	                	for(int i=0; i > 3; i++){ // 일정을 가져옴
-	                		
+	                	a += 1;
+	                	
+	                	if(j % 2 == 0) time += "<div>"
+	                	console.log("시간 :" + tmpTime + "// 순서 :" + j);
+	                	if(arr[j].scheduleStatus == "Y"){
+	                		time += "<span>"+ "<font color=blue>" + tmpTime + " " + "</span>"; // 예약 x
+	                	}else{
+	                		time += "<span>"+ "<font color=red>" + tmpTime + " " + "</span>"; // 예약 o
 	                	}
-	                } */
+	                	
+	                	if(j % 2 == 1) time += "</div>";
+	                }
         		}
         		
-               	cell.innerHTML = i+ "<br>"+d;
+        		if(j % 2 == 0) time += "</div>";
+        		cell = row.insertCell();
+               	cell.innerHTML = i+ "<br>" + time;
         		//cell.innerHTML += "<br>"+d; // +"<br>"+ e +"<br>"+f;
-	         
+	         	
 	            cnt = cnt + 1;
                 if (cnt % 7 == 1) {//일요일 계산
                     cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
@@ -159,6 +172,11 @@
             <form method="POST"
                 onsubmit="return validate();">
                     <h1>내 스케줄</h1>
+                    <div id="successFall">
+                    <c:if test="${loginMember.memberGrade == 'T'}">
+                    <label id="success">, --예약 완료--</label> <label id="fall">--예약 없음--</label><br>
+					</c:if>                    
+                    </div>
                     <div class="row mb-3 form-row">
                     
                 <table align="" id="calendar">

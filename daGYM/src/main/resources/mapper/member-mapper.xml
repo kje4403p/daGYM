@@ -70,6 +70,7 @@
 	 <resultMap type="TrainerSchedule" id="TrainerScheduleResultSet">
         <result property="scheduleTime" column="SCHEDULE_TIME"/>
         <result property="trainerNo" column="TRAINER_NO"/>
+        <result property="scheduleStatus" column="SCHEDULE_STATUS"/>
     </resultMap>
     
     <resultMap type="PT" id="MemberScheduleResultSet">
@@ -191,12 +192,12 @@
 	
 	<!-- 회원 스케줄 조회 -->
 	<select id="myPt" parameterType="_int" resultMap="MemberScheduleResultSet">
-		SELECT * FROM PT WHERE MEMBER_NO=#{memberNo}
+		SELECT * FROM PT WHERE MEMBER_NO=#{memberNo} ORDER BY SCHEDULE_TIME
 	</select>
 	
 	<!-- 트레이너 스케줄 조회 -->
 	<select id="myTPt" parameterType="_int" resultMap="TrainerScheduleResultSet">
-		SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{memberNo}
+		SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{memberNo} ORDER BY SCHEDULE_TIME
 	</select>
 	
 	
