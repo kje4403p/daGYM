@@ -223,5 +223,23 @@
 		AND PARENT_BOARD_NO = #{boardNo}
 		ORDER BY REPLY_NO DESC
 	</select>
+	
+	<update id="deleteReply" parameterType="_int">
+		UPDATE REPLY SET REPLY_STATUS = 'N'
+		WHERE REPLY_NO = #{replyNo}
+	</update>
+	
+	<select id="selectBest" parameterType="_int" resultMap="infoRs">
+		<![CDATA[
+		SELECT * FROM (
+		SELECT (SELECT COUNT(*) FROM LIKES WHERE BOARD.BOARD_NO = LIKES.BOARD_NO) LIKESCOUNT,
+		BOARD_NO, MEMBER_ID, BOARD_TITLE, BOARD_CONTENT, BOARD_ENROLL_DATE,
+		BOARD_MODIFY_DATE, VIEWS FROM BOARD 
+		JOIN MEMBER ON(BOARD_WRITER = MEMBER_NO)
+		WHERE BOARD_TYPE = #{boardType}
+		ORDER BY LIKESCOUNT DESC, BOARD_ENROLL_DATE DESC)
+		WHERE ROWNUM <= 3
+		]]>
+	</select>
   
 </mapper>

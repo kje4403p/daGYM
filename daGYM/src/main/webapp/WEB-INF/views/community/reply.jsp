@@ -147,6 +147,7 @@ function selectReplyList(){
 								.html("작성일 : " + rList[i].replyEnrollDt + "<br>");
 				
 				$div.append($rWriter).append($rDate);
+				var replyNo = rList[i].replyNo;
 				
 				
 				// 댓글 내용
@@ -161,7 +162,7 @@ function selectReplyList(){
 				if(rList[i].memberId == loginMemberId){
 					
 					var $showUpdate = $("<button>").addClass("btn btn-sm btn-primary ml-1").text("수정");
-					var $deleteReply = $("<button>").addClass("btn btn-sm btn-primary ml-1").text("삭제");
+					var $deleteReply = $("<button>").addClass("btn btn-sm btn-primary ml-1").attr("onclick","deleteReply("+ replyNo + ")").text("삭제");
 					$btnArea.append($showUpdate, $deleteReply);
 				}
 				
@@ -214,7 +215,6 @@ $("#addReply").on("click", function(){
 							"replyContent" : replyContent},
 					success : function(result){
 						alert(result);
-						console.log("성공했다");
 						$("#replyContent").val(""); // 기존 댓글 삭제
 						selectReplyList();
 					},error : function(){
@@ -224,6 +224,22 @@ $("#addReply").on("click", function(){
 		}
 	} 
 });
+
+function deleteReply(replyNo) {
+	if (confirm("댓글을 정말 삭제하시겠습니까?")){
+		var url = "deleteReply/"+replyNo;
+		$.ajax({
+			url : url,
+			type : "POST",
+			success : function(result) {
+				alert(result);
+				selectReplyList();
+			}, error : function(){
+				console.log("통신 실패");
+			}
+		})
+	}
+}
 
 //-----------------------------------------------------------------------------------------
 // 답글 버튼 클릭 동작

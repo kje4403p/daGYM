@@ -81,4 +81,14 @@ public class InfoDAO {
 		return sqlSession.selectList("eventMapper.selectReplys", boardNo);
 	}
 
+
+	public int deleteReply(int replyNo) {
+		return sqlSession.update("eventMapper.deleteReply", replyNo);
+	}
+
+
+	public List<Board> selectBest(int BOARD_TYPE) {
+		return sqlSession.selectList("eventMapper.selectBest", BOARD_TYPE);
+	}
+
 }

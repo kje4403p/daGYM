@@ -38,18 +38,14 @@ public class EventController {
 
 	@GetMapping("list")
 	public String eventList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp, Model model) {
-		long start = System.currentTimeMillis();
 
 		PageInfo pInfo = eventService.pagenation(BOARD_TYPE, cp, LIST);
-		long end = System.currentTimeMillis();
 
-		System.out.println((end - start)/1000 + "초");
 
 		List<Board> eventList = eventService.selectList(pInfo, LIST);
 
 		if (!eventList.isEmpty()) {
 			List<Attachment> thList = eventService.selectThumbnailList(eventList);
-			thList.stream().forEach(System.out::println);
 
 			model.addAttribute("thList",thList);
 		}

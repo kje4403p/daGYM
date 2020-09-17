@@ -54,14 +54,16 @@ public class InfoController {
 		map.put("sKey", sKey);
 		map.put("sVal", sVal);
 		
-		System.out.println(map.get("sKey"));
-		System.out.println(map.get("sVal"));
-
 		PageInfo pInfo = infoService.pagenation(cp, map, BOARD_TYPE);
 
 
 		List<Board> infoList = infoService.selectList(pInfo, map);
+		
+		System.out.println("BEST가져오기");
+		List<Board> bestInfoList = infoService.selectBest(BOARD_TYPE);
+		bestInfoList.forEach(System.out::println);
 
+		model.addAttribute("bestInfoList", bestInfoList);
 		model.addAttribute("infoList",infoList);
 		model.addAttribute("pInfo",pInfo);
 		
@@ -265,6 +267,22 @@ public class InfoController {
 		Gson gson = new GsonBuilder().setDateFormat("yy-MM-dd hh:mm").create();
 		
 		return gson.toJson(replyList);
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "deleteReply/{replyNo}",  produces="text/plain;Charset=UTF-8")
+	public String deleteReply(@PathVariable int replyNo) {
+		
+		int result = infoService.deleteReply(replyNo);
+		
+		String str = "댓글 삭제";
+		if (result == 1) {
+			str += "성공";
+		} else {
+			str += "실패"; 
+		}
+		return str;
+		
 	}
 	
 
