@@ -1,6 +1,7 @@
 package com.kh.dagym.serviceCenter.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,7 +56,7 @@ public interface ServiceBoard {
 	 * @param search
 	 * @return boardList
 	 */
-	List<Board> selectSearchList(PageInfo pInfo, Search search);
+	Map<String, Object> selectSearchList(PageInfo pInfo, Search search);
 
 	/** 게시글 등록 Service
 	 * @param board

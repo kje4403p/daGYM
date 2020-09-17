@@ -91,6 +91,7 @@ public class ServiceBoardImpl implements ServiceBoard{
 		if(type ==3) {
 			
 			int searchListCount = serviceDAO.getSearchListQnaCount(map);
+			pInfo.setPageInfo(cp, searchListCount, type);
 		}else {
 		
 			int searchListCount = serviceDAO.getSearchListCount(map);
@@ -117,11 +118,24 @@ public class ServiceBoardImpl implements ServiceBoard{
 
 	//faq 검색 목록 조회 Service구현
 	@Override
-	public List<Board> selectSearchList(PageInfo pInfo, Search search) {
+	public Map<String, Object> selectSearchList(PageInfo pInfo, Search search) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("search", search);
 		map.put("type", pInfo.getBoardType());
-		return serviceDAO.selectSearchList(pInfo,map);
+		
+		List<Board> bList = new ArrayList<Board>();
+		List<QnaBoard> qList = new ArrayList<QnaBoard>();
+		
+		if(pInfo.getBoardType()==3) {
+			
+			qList = serviceDAO.selectQnaSearchList(pInfo,map);
+			map.put("qList", qList);
+			
+		}else {
+			bList  =serviceDAO.selectSearchList(pInfo,map);
+			map.put("bList", bList);
+		}
+		return map;
 	}
 
 
