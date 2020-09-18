@@ -88,7 +88,6 @@
         var row = null;
         row = tbcal.insertRow();
         var cnt = 0;
- 
         // 1일 시작칸 찾기
         for (i = 0; i < nMonth.getDay(); i++) 
         {
@@ -97,14 +96,16 @@
         }
         // 달력 출력
         var arr = ${myPt};
-        var a =0;
         
-        	for (i = 1; i <= lastDate.getDate(); i++) // 1일부터 마지막 일까지
+        
+        	for (i = 1; i <= lastDate.getDate(); i++)
             { 
+        		var flag = true;
+        		
+        		console.log(lastDate.getDate());
             	time = "";
-            	
             	var tmpCnt = 0;
-        		for(j =0; j<arr.length; j++){ // 12바퀴 돌꺼고 
+        		for(j = 0; j<arr.length; j++){ // 40바퀴 돌꺼고 
                 	
                 	var tmp = new Date(arr[j].scheduleTime);
                 	var tmpYear = tmp.getFullYear();
@@ -115,32 +116,36 @@
                 	
                 	var tmpTime = tmp.getHours() + ":00";
                 	
-                	// console.log("현재 날짜 : " + tmpYear + "-" + tmpMonth + "-" + tmpDate);
                 	
-                	//console.log(tmpTime);
-                	
-        		    // 숫자를 정의해줌 
-	                
-	                if( tmpYMD == today.getFullYear() +"-"+ (today.getMonth()+1) +"-"+  i) 
-	                {
-	                	a += 1;
+	                if( tmpYMD == today.getFullYear() +"-"+ (today.getMonth()+1) +"-"+  i) {
 	                	
-	                	if(j % 2 == 0) time += "<div>"
-	                	console.log("시간 :" + tmpTime + "// 순서 :" + j);
+	                	var time2 = "";
+	                	
 	                	if(arr[j].scheduleStatus == "Y"){
-	                		time += "<span>"+ "<font color=blue>" + tmpTime + " " + "</span>"; // 예약 x
+	                		time2 = "<span>"+ "<font color=blue>" + tmpTime + " " + "</span>"; // 예약 x
 	                	}else{
-	                		time += "<span>"+ "<font color=red>" + tmpTime + " " + "</span>"; // 예약 o
+	                		time2 = "<span>"+ "<font color=red>" + tmpTime + " " + "</span>"; // 예약 o
 	                	}
 	                	
-	                	if(j % 2 == 1) time += "</div>";
+	                	if(flag){
+	                		time += "<div>" + time2;
+	                		flag = false
+	                	}else{
+	                		time += time2 +"</div>";
+	                		flag= true;
+	                	}
+	                	
 	                }
+	                
+	               
         		}
         		
-        		if(j % 2 == 0) time += "</div>";
+        		if(!flag){
+             		time += "</div>";
+             	}
+        		 
         		cell = row.insertCell();
                	cell.innerHTML = i+ "<br>" + time;
-        		//cell.innerHTML += "<br>"+d; // +"<br>"+ e +"<br>"+f;
 	         	
 	            cnt = cnt + 1;
                 if (cnt % 7 == 1) {//일요일 계산
