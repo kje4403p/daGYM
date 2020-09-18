@@ -264,4 +264,14 @@
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEMBER_GRADE = 'T'
 	</select>
+	
+	<!-- 휴면계정 -->
+	<update id="dormantAccount">
+		UPDATE MEMBER
+		SET MEMBER_STATUS='S'
+		<![CDATA[WHERE MEMBER_NO IN 
+				(SELECT MEMBER_NO 
+				FROM (SELECT MEMBER_NO, MAX(SCHEDULE_TIME) 
+					FROM PT GROUP BY MEMBER_NO HAVING MAX(SCHEDULE_TIME) <= (SYSDATE - 365)))]]>
+	</update>
 </mapper>

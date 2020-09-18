@@ -261,7 +261,7 @@ public class AdminController {
 	public String scheduleView(Model model) {
 		List<Trainer> tList = adminService.selectTList();
 		List<PT> sList = adminService.selectSList();
-		System.out.println(sList);
+
 		model.addAttribute("tList", tList);
 		model.addAttribute("sList", sList);
 
@@ -277,7 +277,6 @@ public class AdminController {
 			noList.add(tno[i]);
 		}
 		List<PT> sList = adminService.scheduleFilter(noList);
-		System.out.println("필터" + sList);
 		Gson gson = new GsonBuilder().create();
 		
 		return gson.toJson(sList);
