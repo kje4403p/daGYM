@@ -1,9 +1,12 @@
 .pagination {justify-content: center;}
+.side{height:100px; float:left;}
 #searchForm{position: relative;}
 #searchForm>*{top : 0;}
 .boardTitle > img{	width: 50px;height: 50px;}
      
 .board-list{ margin: 100px auto;}
+
+.table{width:70%;}
    
 #list-table td{cursor: pointer;}
    
@@ -28,16 +31,22 @@
 	}
 	#content-main{ margin: 100px auto;}
 	
-	.carousel-control-prev-icon {
+/* 	.carousel-control-prev-icon {
  		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
 	}
 	
 	.carousel-control-next-icon {
   		background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-	}
+	} */
 	
 #heart_div {width:50px; height:20px; }
 #heart {cursor:pointer; width: 20px; height: 90%;}
 
 .best {background-color: #A6F4E1;}
 .best-icon {background-color: #F2B61D ; color:white; padding:5px 5px;}
+
+body{background-color:#F2F2F2;}
+
+th:first-of-type{width:10%;}
+th:nth-of-type(2){width:45%;}
+th:nth-of-type(4){width:10%;}
