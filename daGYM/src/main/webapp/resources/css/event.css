@@ -1,8 +1,7 @@
  @CHARSET "utf-8";
 
-.pagination { justify-content: center };
-
-
+.pagination { justify-content: center; width:110%;}
+body {background-color:#E6E6E6 !important;}
 
 .event {width: 100%; padding-top:50px;}
 .event *{font-family: "InfinitySans-RegularA1"; box-sizing: content-box;}
@@ -40,25 +39,26 @@
 .eventList li .tit {overflow:hidden; height:60px; margin-top:5px; font-size:24px; line-height:30px; color:#232323; word-break:keep-all;}
 .eventList li .date {height:16px; padding-left:23px; margin-top:15px; color:#747474; line-height:16px; background: url(../img/event/event_date.png) no-repeat 0 50%;}
 .eventList li.none {width:1200px !important; margin-left:39px !important; background:none !important;}   */
+html,body{width:100%; height:100%;}
 
+#container{max-width:80% !important;}
 
 .view{
 	border-radius : 25px;
-	border: 1px solid #D8D8D8;
-	width: 320px;
+	border: 2px solid #D8D8D8;
+	width: 22%;
 	height: 400px;
 	display: inline-block;
-	margin: 10px 0px 20px 20px;
+	margin: 10px 25px 20px 30px;
 }
 .view p {padding-left:7px;}
 .thumb{
 	 border-radius : 25px;
-	 width: 320px;
+	 width: 100%;
      height: 70%;
 }
 .thumb img{
 	border-radius : 23px;
-	box-siz
 	width: 100%;
 	height: 100%;
 }
