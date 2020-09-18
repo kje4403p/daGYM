@@ -33,8 +33,10 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.trainer.model.service.TrainerService;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
+import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 @SessionAttributes({"loginMember"})
@@ -45,6 +47,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	JavaMailSender mailSender;
+	@Autowired
+	private TrainerService trainerService;
 	
 	//로그인 화면 전환 메소드
 	@RequestMapping("login")
@@ -177,10 +181,12 @@ public class MemberController {
 			// PT이용권/결제정보 화면 전환 메소드
 			@RequestMapping("myPassList/{type}")
 			public String memberPass(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
+			
 				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
 				com.kh.dagym.common.PageInfo pInfo = memberService.myPassPagination(type, cp, memberNo);
 				List<MyPass> MyPassList = memberService.MyPassList(memberNo,pInfo);
 				int trainerNo= MyPassList.get(0).getTrainerNo();
+				
 				model.addAttribute("myPassList", MyPassList);
 				model.addAttribute("pInfo",pInfo);
 				model.addAttribute("trainerNo",trainerNo);

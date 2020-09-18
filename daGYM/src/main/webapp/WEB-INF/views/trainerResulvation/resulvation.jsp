@@ -82,7 +82,16 @@ document.addEventListener('DOMContentLoaded', function() {
 				var eventFullDate = info.event.start;			  		
 				var scheduleTime =moment(eventFullDate).format('YY/MM/DD HH:mm:00.000000000');
 				var scheduleTime2 =moment(eventFullDate).format('YYYY/MM/DD HH:mm');
+				var schedule1=moment(eventFullDate).format('YYYYMMDD');
 			console.log(scheduleTime);
+			  var now = new Date();
+
+		      var year= now.getFullYear();
+		      var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+		      var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();	              
+		      var chan_val = year + mon + day;
+		      console.log(chan_val);
+			if(schedule1 >chan_val){		
 				if(confirm(scheduleTime2+" 예약 하시겠습니까?")){
 					if ("${classStatus.classCnt}">0){
 					$.ajax({
@@ -101,11 +110,15 @@ document.addEventListener('DOMContentLoaded', function() {
 						}
 					});
 					}else{
-						 swal("FAIL","PT이용권을 구매해야 합니다.");
+						alert("PT이용권을 구매해야 합니다.");
+		
 					}
 			
 				}
-			
+			}else{
+				alert("이미 지난 날짜입니다.");
+			}
+		
 			},
 				
 

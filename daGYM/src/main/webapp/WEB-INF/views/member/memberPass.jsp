@@ -5,15 +5,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+button{
+width:300px;
+  background:#1AAB8A;
+  color:#fff;
+  border:none;
+  position:relative;
+  height:30px;
+  font-size:1.6em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+button:hover{
+  background:#fff;
+  color:#1AAB8A;
+}
+button:before,button:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #1AAB8A;
+  transition:400ms ease all;
+}
+button:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+button:hover:before,button:hover:after{
+  width:100%;
+
+  transition:800ms ease all;
+}
+
+</style>
 </head>
 <body>
 <%@ include file="../common/header.jsp"%>
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
-        <div class="col-sm-5">
-                    <h1>이용권 및 결제정보</h1>
+        <div class="col-sm-6">
+    
                     <div class="row mb-3 form-row">
-                	<table class="table table-hover" id="table">
+                    <h1>이용권 및 결제정보</h1>
+                	<table class="table" id="table">
+                
                 		<tr>
                 			<td style ="text-align: center">결제 번호</td>
                 			<td style ="text-align: center">상품명</td>
@@ -40,7 +84,7 @@
                         	<td style ="text-align: center">${pass.trainerName}</td>
                         	<td style ="text-align: center">${pass.classCnt}</td>
                         	<td style ="text-align: center">
-                        	<button typd="button" id="review">리뷰 작성하기</button>
+                        	<button type="button" id="review">리뷰 작성하기</button>
                         		
                         	
                         	</td>
@@ -101,7 +145,45 @@
                 </c:if>
             </ul>
         </div>
+        
+        <br><br><br>
+        
+      
+                    <div class="row mb-5 form-row">
+                    <h1>예약</h1>
+                	<table class="table" id="table">
+                	
+                		<tr>
+ 
+                			<td style ="text-align: center">예약 시간</td>
+                			<td style ="text-align: center">트레이너 이름</td>
+                			<td style ="text-align: center">트레이너 전화번호</td>
+     						<td style ="text-align: center">Cancel</td>
+                		</tr>
+                		<c:choose>
+                        
+                        <c:when test="${empty myPassList}">
+		                     <tr>
+		                        <td colspan="6">결제내역이 없습니다.</td>
+		                     </tr>
+                 		 </c:when>
+                 		 <c:otherwise>
+                     	 <c:forEach var="pass" items="${myPassList}">
+                        <tr>
+                        	<td style ="text-align: center">${pass.merchantUid}</td>
+                        	<td style ="text-align: center">${pass.classNm} 회권</td>
+                        	<td style ="text-align: center">${pass.amount}</td>
+                        	<td style ="text-align: center">
+                        	<button type="button" id="review">예약취소하기</button>	        	
+                        	</td>
+                        </tr>
+                        </c:forEach>
+                        </c:otherwise>
+                        </c:choose>
+                	</table>
+                </div>
         </div>
+        
     </div>
 <script>
 	$("#review").on("click",function(){

@@ -77,6 +77,8 @@ public interface TrainerService {
 	 */
 	List<Review> selectReviews(int trainerNo);
 
+	int scheduleCancel(TrainerSchedule trainerSchedule);
+
 
 
 }
