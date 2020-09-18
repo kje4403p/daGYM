@@ -56,12 +56,6 @@
         var tbcal = document.getElementById("calendar"); // 테이블 달력을 만들 테이블
         var yearmonth = document.getElementById("yearmonth"); //  년도와 월 출력할곳
         var size = ${myPt.size()};
-        var a = 2020 //가져오는 년도
-        var b = 8 // 가져오는 월 +1
-        var c = 15 // 가져오는 일
-        var d = "" // 가져온시간
-        var e = "" // 가져온시간
-        var f = "" // 가져온시간
         yearmonth.innerHTML = today.getFullYear() + "년 "+ (today.getMonth() + 1) + "월"; //년도와 월 출력
         
         if(today.getMonth()+1==12) //  눌렀을 때 월이 넘어가는 곳
@@ -127,10 +121,11 @@
 	                		time2 = "<span>"+ "<font color=red>" + tmpTime + " " + "</span>"; // 예약 o
 	                	}
 	                	
-	                	if(flag){
+	                	if(flag){ 
 	                		time += "<div>" + time2;
 	                		flag = false
 	                	}else{
+	                
 	                		time += time2 +"</div>";
 	                		flag= true;
 	                	}

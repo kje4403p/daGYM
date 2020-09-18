@@ -88,7 +88,7 @@
 				<div>
 					<div class="float-right">
 						<a class="btn btn-primary" 
-							href="<c:url value="list/"><c:param name="cp" value="${param.cp}"/></c:url>">목록으로</a>
+							href="<c:url value="list"><c:param name="cp" value="${param.cp}"/></c:url>">목록으로</a>
 							<!-- 상세 주소 예시 : /1/500?cp=500 -->
 							<!-- 목록 주소 예시 : /list/1?cp=1 -->
 	                	

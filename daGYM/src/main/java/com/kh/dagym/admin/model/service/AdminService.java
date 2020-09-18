@@ -116,5 +116,10 @@ public interface AdminService {
 	 */
 	public abstract List<Integer> count();
 
+	/** 휴면계정 Service
+	 * @return result
+	 */
+	public abstract int dormantAccount();
+
 
 }

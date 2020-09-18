@@ -10,16 +10,18 @@
 <%@ include file="../common/header.jsp"%>
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
-        <div class="col-sm-5">
+        <div class="col-sm-10">
             <form method="POST" action="memberRemoveAction"
                 onsubmit="return validate();">
                     <h2>탈퇴약관</h2>
                     <div class="row mb-3 form-row">
                 	<table class="table table-hover">
                 		<tr><td></td>
-                			<td>회원 탈퇴시 1개월간 재가입이 불가능하며,<br>
-							남은 이용권은 환불이 불가 합니다.<br>
-							탈퇴시 이전 게시물은 삭제가 불가능하게 됩니다.<br><br>
+                			<td>
+                			▶ 탈퇴 신청 시 즉시 탈퇴 처리됩니다.<br>
+                			▶ 사용하고 계신 아이디는 탈퇴 후 재가입이 불가능합니다.<br>
+                			▶ 탈퇴 전 작성딘 게시물이나 댓글 등은 탈퇴 후 삭제가 불가능합니다.<br>
+                			▶ 구매한 이용권 환불 및 사용이 불가능합니다.<br>
 							동의합니다. <input id="removeCheck" type="checkbox">
 							</td>
 							<td></td>
