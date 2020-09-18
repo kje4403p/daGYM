@@ -10,8 +10,8 @@
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
-	<div class="contain board-list m-5">
 	<jsp:include page="sideMenu.jsp"/>
+	<div class="container board-list m-5" id="container">
         <div>
             <table class="table" id="list-table" style="width:70%;">
                 <thead>

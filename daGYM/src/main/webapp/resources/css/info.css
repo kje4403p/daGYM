@@ -6,7 +6,7 @@
      
 .board-list{ margin: 100px auto;}
 
-.table{width:70%;}
+
    
 #list-table td{cursor: pointer;}
    
@@ -45,7 +45,9 @@
 .best {background-color: #A6F4E1;}
 .best-icon {background-color: #F2B61D ; color:white; padding:5px 5px;}
 
-body{background-color:#F2F2F2;}
+body {background-color:#E6E6E6 !important;}
+.container{max-width:80% !important;}
+.table{width:80% !important; background-color:white;}
 
 th:first-of-type{width:10%;}
 th:nth-of-type(2){width:45%;}

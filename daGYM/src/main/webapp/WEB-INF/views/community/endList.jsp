@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +10,9 @@
   <link href="${contextPath }/resources/css/event.css" rel="stylesheet" />
 </head>
 <body>
-<%@ include file="../common/header.jsp" %>
-<div class="contain event m-5">
-   <jsp:include page="sideMenu.jsp"/>
+<jsp:include page="../common/header.jsp"/>
+ <jsp:include page="sideMenu.jsp"/>
+<div class="container event m-5">
 
 	<ul class="tabType1">
 		<li><a href="list">진행중 이벤트</a></li>
