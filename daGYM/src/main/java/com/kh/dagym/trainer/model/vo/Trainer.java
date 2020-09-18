@@ -3,6 +3,7 @@ package com.kh.dagym.trainer.model.vo;
 import java.sql.Date;
 
 public class Trainer {
+	
 	private int trainerNo;
 	private String memberId;
 	private String memberPwd;
@@ -17,6 +18,7 @@ public class Trainer {
 	private String trainerSNS;
 	private String trainerComment;
 	private String trainerAward;
+	private int reviewGrade;
 
 	public Trainer() {
 		// TODO Auto-generated constructor stub
@@ -153,6 +155,16 @@ public class Trainer {
 	public void setTrainerAward(String trainerAward) {
 		this.trainerAward = trainerAward;
 	}
+	
+	
+
+	public int getReviewGrade() {
+		return reviewGrade;
+	}
+
+	public void setReviewGrade(int reviewGrade) {
+		this.reviewGrade = reviewGrade;
+	}
 
 	@Override
 	public String toString() {
@@ -161,7 +173,11 @@ public class Trainer {
 				+ ", trainerCareer=" + trainerCareer + ", trainerMcnt=" + trainerMcnt + ", memberEnrollDate="
 				+ memberEnrollDate + ", memberStatus=" + memberStatus + ", trainerPrice=" + trainerPrice
 				+ ", trainerSNS=" + trainerSNS + ", trainerComment=" + trainerComment + ", trainerAward=" + trainerAward
-				+ "]";
+				+ ", reviewGrade=" + reviewGrade + "]";
 	}
+
+	
+	
+	
 
 }

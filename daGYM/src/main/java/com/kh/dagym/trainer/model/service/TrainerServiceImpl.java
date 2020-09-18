@@ -35,8 +35,21 @@ public class TrainerServiceImpl implements TrainerService{
 	
 	@Override
 	public List<Trainer> selectList() {
-		
-		return trainerDAO.selectList();
+		List<Trainer> tList = new ArrayList<Trainer>();
+		tList = trainerDAO.selectList();
+		if(tList != null) {
+			for(Trainer tr : tList) {
+				List<Integer> list = new ArrayList<Integer>();
+				list = trainerDAO.selectTrainerNo();
+				for(int i=0; i<list.size(); i++) {
+					if(list.get(i) == tr.getTrainerNo()) {
+						Trainer tt = trainerDAO.selectGrade(tr.getTrainerNo());
+						tr.setReviewGrade(tt.getReviewGrade());
+					}
+				}
+			}
+		}
+		return tList;
 	}
 
 	@Override
