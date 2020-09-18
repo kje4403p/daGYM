@@ -215,6 +215,12 @@ public class TrainerServiceImpl implements TrainerService{
 		public List<Review> selectReviews(int trainerNo) {
 			return trainerDAO.selectReviews(trainerNo);
 		}
+
+		@Override
+		public int scheduleCancel(TrainerSchedule trainerSchedule) {
+		
+			return trainerDAO.scheduleCancel(trainerSchedule);
+		}
 	
 
 }

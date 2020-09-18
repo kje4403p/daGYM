@@ -139,4 +139,8 @@ public class TrainerDAO {
 		return sqlSession.selectList("trainerMapper.selectReviews", trainerNo);
 	}
 
+	public int scheduleCancel(TrainerSchedule trainerSchedule) {
+		return sqlSession.delete("trainerMapper.scheduleCancel", trainerSchedule);
+	}
+
 }
