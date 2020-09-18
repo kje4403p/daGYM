@@ -21,7 +21,7 @@
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
-<body id="body1">
+<body>
 
 	<jsp:include page="../common/header.jsp" />
 	<%-- <%@include file="../common/header.jsp" %> --%>
@@ -75,7 +75,7 @@
 												<c:forEach var="at" items="${thList}" varStatus="status">
 													<c:if test="${not flag}">
 														<c:if test="${board.boardNo == at.parentBoardNo}">
-															<img src="${contextPath}/resources/img/serviceImg/img.png"/>
+															<img src="${contextPath}/resources/img/serviceImg/img.png"/ id="thumbnail">
 															  <c:set var="flag" value="true" />
 														</c:if>
 													</c:if>
@@ -265,6 +265,7 @@
 			
 			location.href="../${pInfo.boardType}/insert";
 		});
+		
 		
 		
 	</script>

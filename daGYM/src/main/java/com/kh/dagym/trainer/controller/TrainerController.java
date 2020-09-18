@@ -218,4 +218,15 @@ public class TrainerController {
 	
 	      return result+"";
 }
+	 
+	 @ResponseBody
+	 @RequestMapping(value="scheduleCancel/{trainerNo}",
+		produces="application/text; charset=utf-8;")
+		public String scheduleCancel(@PathVariable int trainerNo, Model model,TrainerSchedule trainerSchedule ,ClassStatus classStatus) {
+		 Member loginMember = (Member)model.getAttribute("loginMember");
+		 trainerSchedule.setTrainerNo(loginMember.getMemberNo());
+		int result = trainerService.scheduleCancel(trainerSchedule);
+	
+	      return result+"";
+}
 }

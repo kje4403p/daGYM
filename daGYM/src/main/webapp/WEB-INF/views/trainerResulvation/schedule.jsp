@@ -116,11 +116,32 @@ document.addEventListener('DOMContentLoaded', function() {
 						}
 					});
 				});
-		  }
-		 
+		  },
+		  eventClick: function(info,start) {
+				var eventFullDate = info.event.start;			  		
+				var scheduleTime =moment(eventFullDate).format('YY/MM/DD HH:mm:00.000000000');
+				var scheduleTime2 =moment(eventFullDate).format('YYYY/MM/DD HH:mm');
+			console.log(scheduleTime);
+				if(confirm(scheduleTime2+" 스케줄을 취소하시겠습니까?")){
 		
+					$.ajax({
+						url:"${contextPath}/trainer/scheduleCancel/${trainerNo}",
+						data: {"scheduleTime":scheduleTime},
+						success:function(result){
+							 location.reload();
+							 if(result>0){
+								alert("스케줄 취소 성공")
+							 }
 	
-		
+						},error:function(){
+							console.log("통신 실패");
+						}
+					});
+					
+			
+				}
+			
+			}
 	}); 
 
 	calendar.render(); 

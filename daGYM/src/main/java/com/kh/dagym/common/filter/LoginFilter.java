@@ -50,7 +50,7 @@ public class LoginFilter implements Filter{
 		// board 제외 목록 추가
 		//NOT_ALLOWED_PATH.addAll(Arrays.asList("/board/list/\\w", "/board/topViews/\\w", "/search/\\w"));
 		
-		NOT_ALLOWED_PATH.addAll(Arrays.asList("/intro", "/service/faq/4"));
+		NOT_ALLOWED_PATH.addAll(Arrays.asList("/intro", "/service/faq/4", "/service/4/\\w*"));
 		
 		HttpServletRequest req = (HttpServletRequest)request;
 		// HttpServletRequest는 ServletRequest의 자식이므로 강제 형변환 가능
@@ -65,7 +65,7 @@ public class LoginFilter implements Filter{
 		// 요청 경로 확인
 		//String path = req.getRequestURI().substring((req.getContextPath()+"/member/").length());
 		String path = req.getRequestURI().substring((req.getContextPath()).length());
-		
+		System.out.println(path);
 		// 로그인 여부 확인
 		boolean isLogin = ((Member)session.getAttribute("loginMember") != null);
 		

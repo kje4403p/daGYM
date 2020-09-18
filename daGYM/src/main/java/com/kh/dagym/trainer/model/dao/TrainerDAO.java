@@ -140,6 +140,7 @@ public class TrainerDAO {
 		return sqlSession.selectList("trainerMapper.selectReviews", trainerNo);
 	}
 
+
 	
 	/** 트레이너 리뷰 평점 조회 DAO
 	 * @param trainerNo
@@ -154,6 +155,11 @@ public class TrainerDAO {
 	 */
 	public List<Integer> selectTrainerNo() {
 		return sqlSession.selectList("trainerMapper.selectTrainerNo");
+	}
+	
+	public int scheduleCancel(TrainerSchedule trainerSchedule) {
+		return sqlSession.delete("trainerMapper.scheduleCancel", trainerSchedule);
+
 	}
 
 }

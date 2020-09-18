@@ -69,6 +69,10 @@
 	.pricing_price{
 	padding-top: 30%;
 	}
+	#about > a{
+	color:white;
+	}
+	
 	</style>
 	
 </head>
@@ -172,10 +176,10 @@
 			<!--End off container -->
 		
 			<c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
-			<button class="btn btn-outline-danger" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}')">스케줄 등록</button>
+				<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</a>
 			</c:if>
-			<c:if test="${loginMember.memberGrade == 'G'}">
-			<button class="btn btn-outline-danger" onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}')">트레이너 예약</button>
+			<c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
+				<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
 			</c:if>
 		</section>
   
