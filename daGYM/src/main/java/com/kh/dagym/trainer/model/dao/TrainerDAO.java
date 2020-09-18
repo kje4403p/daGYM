@@ -1,5 +1,6 @@
 package com.kh.dagym.trainer.model.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -138,9 +139,24 @@ public class TrainerDAO {
 	public List<Review> selectReviews(int trainerNo) {
 		return sqlSession.selectList("trainerMapper.selectReviews", trainerNo);
 	}
+	
+	/** 트레이너 리뷰 평점 조회 DAO
+	 * @param trainerNo
+	 * @return
+	 */
+	public Trainer selectGrade(int trainerNo) {
+		return sqlSession.selectOne("trainerMapper.selectReviewGrade", trainerNo);
+	}
+
+	/** 트레이너 넘버 조회 DAO
+	 * @return
+	 */
+	public List<Integer> selectTrainerNo() {
+		return sqlSession.selectList("trainerMapper.selectTrainerNo");
 
 	public int scheduleCancel(TrainerSchedule trainerSchedule) {
 		return sqlSession.delete("trainerMapper.scheduleCancel", trainerSchedule);
+
 	}
 
 }

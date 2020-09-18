@@ -53,7 +53,7 @@
                     <div class="single-trainer-item">  
                            <a class="trainerList" href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
                   </c:if>
-  
+  													
                      						<c:forEach items="${thList}" var="th">
 	                							<c:if test="${th.parentTrainerNo == trainer.trainerNo}">
 	                				
@@ -66,10 +66,13 @@
                         <div id="trainer-text" class="trainer-text">
                             <h5>${trainer.memberName}</h5>
                             <span>Trainer</span>
-                            <br><br>
+                            <br>
                             <p>Phone: ${trainer.memberPhone}</p>
                             <p>회원 수: ${trainer.trainerMcnt}</p>
                       	    <p>수상내역: ${trainer.trainerAward}</p>
+                      	    <p>평점: 
+                      	    <c:forEach var="i" begin="1" end="${trainer.reviewGrade}"> ★	</c:forEach>
+                      	     </p>
                         </div>
                         </a>
                       

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="trainerMapper">
-		<resultMap id="trainerResultSet" type="Trainer" >
-		
+
+	<resultMap id="trainerResultSet" type="Trainer" >
 		<id property="trainerNo" column="TRAINER_NO"/>
 		
 		<!-- DB 일반 컬럼에 해당하는 필드와 컬럼을 작성 -->
@@ -18,7 +18,9 @@
 		<result property="trainerPrice" column="TRAINER_PRICE" />
 		<result property="trainerSNS" column="TRAINER_SNS" />	
 		<result property="trainerAward" column="TRAINER_AWARD" />	
-		<result property="trainerComment" column="TRAINER_COMMENT" />		
+		<result property="trainerComment" column="TRAINER_COMMENT" />
+		<result property="reviewGrade" column="REVIEW_GRADE" />
+				
 	</resultMap>
 	
 	 <resultMap type="TrainerAttachment" id="trainerAttachmentResultSet">
@@ -52,8 +54,9 @@
 		<result property="memberId" column="MEMBER_ID"/>
 		
 	</resultMap>
+	
 	<select id="selectList" resultMap="trainerResultSet">
-SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
+		SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
 	</select>
 	
 	
@@ -171,7 +174,18 @@ SELECT * FROM DUAL
   		 WHERE TRAINER_NO=#{trainerNo} AND REVIEW_STATUS='Y'
   	</select>
   	
+
+  	<!-- 트레이너 리뷰 평점 조회  -->
+  	<select id="selectReviewGrade" parameterType="int" resultMap="trainerResultSet">
+  		SELECT ROUND(AVG(REVIEW_RATING)) AS REVIEW_GRADE FROM REVIEW WHERE TRAINER_NO = #{trainerNo} GROUP BY TRAINER_NO
+  	</select>
+  	
+  	<select id="selectTrainerNo" resultType="_int">
+  		SELECT TRAINER_NO FROM REVIEW GROUP BY TRAINER_NO
+  	</select>
+
   	<delete id="scheduleCancel"  parameterType="TrainerSchedule">
   	DELETE FROM TRAINER_SCHEDULE WHERE SCHEDULE_TIME=#{scheduleTime} AND SCHEDULE_STATUS='Y' AND TRAINER_NO=#{trainerNo}
   	</delete>
+
 </mapper>
