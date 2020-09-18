@@ -135,12 +135,17 @@ public class AdminDAO {
 		return sqlSession.selectList("adminMapper.scheduleFilter", noList);
 	}
 
+	// 회원수 세기 DAO
 	public Integer countMember() {
 		return sqlSession.selectOne("adminMapper.countMember");
 	}
-
 	public Integer countTrainer() {
 		return sqlSession.selectOne("adminMapper.countTrainer");
+	}
+
+	// 휴면계정 DAO
+	public int dormantAccount() {
+		return sqlSession.update("adminMapper.dormantAccount");
 	}
 
 

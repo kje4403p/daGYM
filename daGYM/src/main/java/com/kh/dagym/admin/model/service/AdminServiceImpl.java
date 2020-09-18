@@ -227,7 +227,13 @@ public class AdminServiceImpl implements AdminService {
 		
 		return count;
 	}
-	
+
+    // 휴면계정 Service 구현
+	@Transactional(rollbackFor = Exception.class)
+	@Override
+	public int dormantAccount() {
+		return adminDAO.dormantAccount();
+	}	
 	
 	
 	
@@ -261,6 +267,7 @@ public class AdminServiceImpl implements AdminService {
 
         return date + str + ext;
     }
+
 
 
 
