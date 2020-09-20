@@ -105,7 +105,6 @@ public class ServiceController {
 			
 			List<Attachment> files = serviceBoard.selectFaqFiles(boardNo);
 			
-			
 			if(!files.isEmpty()) {
 //				int i=0;
 //				for(Attachment at : files) {
@@ -124,12 +123,9 @@ public class ServiceController {
 			
 		}else {
 			map.put("board", board);
-			
 		}
 	}
-		
 		return gson.toJson(map);
-		
 	}
 	
 	//게시글 검색

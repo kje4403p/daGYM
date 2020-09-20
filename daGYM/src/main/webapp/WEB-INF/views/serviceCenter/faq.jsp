@@ -18,8 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resource/js/bootstrap.js"></script>
 </head>
-<body id="body1">
-
+<body>
 	<jsp:include page="../common/header.jsp" />
 	<%-- <%@include file="../common/header.jsp" %> --%>
 
@@ -34,7 +33,7 @@
 
 		<div id="right">
 
-			<div id="table1">
+			<div id="table1" >
 				<table id="table2">
 					<thead>
 						<tr>
@@ -203,7 +202,6 @@
 		$("#table2 td").on("click",function(e) {
 					$click=$(this);						
 					var boardNo = $(this).parent().children().eq(0).children().val();
-					
 					var this1 = $(this);
 					var boardUrl = "${contextPath}/service/${pInfo.boardType}/"
 							+ boardNo + "?cp=${pInfo.currentPage}";
@@ -235,25 +233,25 @@
 							
 							if(map.files[0]!= null){
 							var src = "${contextPath}"+map.files[0].filePath+"/"+map.files[0].fileChangeName;
-							$divin2 = $("<img>").prop("src",src);
+							$divin2 = $("<img>").attr({"src":src,"height":"300px","width":"300px"});
 							$divout.append($divin2,"<br>");
 							}
 							
 							if(map.files[1]!= null){
 							var src = "${contextPath}"+map.files[1].filePath+"/"+map.files[1].fileChangeName;
-							$divin3 = $("<img>").prop("src",src);
+							$divin3 = $("<img>").attr({"src":src,"height":"300px","width":"300px"});
 							$divout.append($divin3,"<br>");
 							}
 							
 							if(map.files[2]!= null){
 							var src = "${contextPath}"+map.files[2].filePath+"/"+map.files[2].fileChangeName;
-							$divin4 = $("<img>").prop("src",src);
+							$divin4 = $("<img>").attr({"src":src,"height":"300px","width":"300px"});
 							$divout.append($divin4,"<br>");
 							}
 							
 							if(map.files[3]!= null){
 							var src = "${contextPath}"+map.files[3].filePath+"/"+map.files[3].fileChangeName;
-							$divin5 = $("<img>").prop("src",src);
+							$divin5 = $("<img>").attr({"src":src,"height":"300px","width":"300px"});
 							$divout.append(	$divin5,"<br>");
 							}
 							

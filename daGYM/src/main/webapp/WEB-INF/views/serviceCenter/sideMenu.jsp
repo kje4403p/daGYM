@@ -33,8 +33,8 @@
 		</nav>
 	</div>
 	<div class="content">
-		<div class="header">Animated Side Navigation Menu</div>
-		<p>using only HTML and CSS</p>
+		<div class="header"></div>
+		<p></p>
 	</div>
 	<script>
 		function loginCheck(){
