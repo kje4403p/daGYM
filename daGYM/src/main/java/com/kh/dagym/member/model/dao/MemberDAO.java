@@ -221,5 +221,13 @@ public class MemberDAO {
 	 */
 	public List<TrainerSchedule> myTPt(int memberNo) {
 		return sqlSession.selectList("memberMapper.myTPt", memberNo);
+	}
+
+	/** 리뷰삭제 DAO
+	 * @param reviewNo 
+	 * @return result
+	 */
+	public int deleteReview(int reviewNo) {
+		return sqlSession.update("memberMapper.deleteReview", reviewNo);
 	}	
 }

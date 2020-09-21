@@ -227,5 +227,11 @@ public class MemberServiceImpl implements MemberService{
 			return memberDAO.myTPt(memberNo);
 		}
 
+		// 리뷰 삭제 Service 구현
+		@Override
+		public int deleteReview(int reviewNo) {
+			return memberDAO.deleteReview(reviewNo);
+		}
+
 		
 }

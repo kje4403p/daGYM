@@ -270,7 +270,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="main_pricing">
-						<div class="col-md-8 ml-md-auto mr-md-auto">
+						<div class="col-md-12 ml-md-auto mr-md-auto">
 							<div class="head_title text-center">
 								<h2>PT 결제</h2>
 								<div class="separator_auto"></div>
@@ -450,16 +450,18 @@
 		               		
 		               		</c:forEach>
 							
-							
-							
-		               
 		            </li>
 		            <li>|</li>
 		            <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
 		            <fmt:formatDate var="createDate" value="${review.reviewCreateDate}" pattern="yyyy-MM-dd"/>
 		            <li>${createDate }</li>
-		            <li>${review.reviewCreateDate}</li>
-					</ul>
+		            <li style="padding-left: 5px;">${review.reviewCreateDate}</li>
+				</ul>
+					<c:choose>
+						<c:when test="${loginMember.memberId == review.memberId }">
+						       <button type="button" id="${review.reviewNo }" class="delete-btn" >삭제</button>
+					 </c:when>
+					</c:choose>
 		       </div>
 		    </div>
 		  </div>
@@ -494,7 +496,34 @@
 
 	<script src="${contextPath}/resources/js/trainerView/plugins.js"></script>
 	<script src="${contextPath}/resources/js/trainerView/main.js"></script>
-	
+	<script>
+
+	$(".delete-btn").on("click",function(){
+		console.log("가나")
+		var no = $(this).attr("id")
+		console.log(no)
+		if(confirm("리뷰를 삭제하시겠습니까?")){
+			
+			$.ajax({
+				url : "${contextPath}/member/deleteReview",
+				data : {"reviewNo": no},
+				success : function(result){
+					if(result>0){
+						alert("리뷰가 삭제되었습니다.")
+						console.log("성공")
+						
+					}else{
+						alert("리뷰 삭제에 실패하였습니다.")
+						console.log("삭제노")
+					}
+				},error : function(){
+					console.log("실패")
+				}
+				
+			})
+		}
+	})
+	</script>
 </body>
 
 </html>

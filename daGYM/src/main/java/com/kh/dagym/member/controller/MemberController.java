@@ -469,6 +469,19 @@ public class MemberController {
 					return result+"";
 				}
 			
+				// 리뷰 삭제
+				@ResponseBody
+				@RequestMapping("deleteReview")
+				public String deleteReview(int reviewNo) {
+					System.out.println("리뷰넘버"+reviewNo);
+					int result = memberService.deleteReview(reviewNo);
+					if(result>0) {
+						result = 1;
+					}else {
+						result = 0;
+					}
+					return result+"";
+				}
 			
 			
 			
