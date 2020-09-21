@@ -162,4 +162,10 @@ public interface MemberService {
 	 * @return myPt
 	 */
 	List<TrainerSchedule> myTPt(int memberNo);
+
+	/** 리뷰 삭제 Service
+	 * @param reviewNo
+	 * @return result
+	 */
+	int deleteReview(int reviewNo);
 }

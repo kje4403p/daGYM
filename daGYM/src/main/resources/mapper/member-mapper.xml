@@ -200,6 +200,9 @@
 		SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{memberNo} ORDER BY SCHEDULE_TIME
 	</select>
 	
-	
+	<!-- 리뷰삭제 -->
+	<update id="deleteReview" parameterType="_int" >
+		UPDATE REVIEW SET REVIEW_STATUS = 'N' WHERE REVIEW_NO=#{reviewNo}
+	</update>
 	 
 </mapper>
