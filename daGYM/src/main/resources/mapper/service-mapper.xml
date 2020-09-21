@@ -367,6 +367,7 @@
   			(BOARD_TITLE LIKE #{sv} OR BOARD_CONTENT LIKE #{sv})
   		</otherwise>
   	</choose>
+  	AND MEMBER_ID = #{ search.memberId}
   		
   	</select>
   	
@@ -388,6 +389,7 @@
   			(BOARD_TITLE LIKE #{sv} OR BOARD_CONTENT LIKE #{sv})
   		</otherwise>
   	</choose>
+  	AND MEMBER_ID = #{search.memberId}
   	
   	</select>
 </mapper>

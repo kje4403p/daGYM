@@ -133,10 +133,15 @@ public class ServiceController {
 	public String search(@PathVariable int type,
 			@RequestParam(value="cp",required=false,defaultValue="1")int cp,
 			Search search, Model model){
+			
+			Member loginMember=(Member) model.getAttribute("loginMember");
+			search.setMemberId(loginMember.getMemberId());
 		
 			PageInfo pInfo = serviceBoard.pagination(type, cp,search);
 			Map<String, Object> map  = new HashMap<String, Object>();
 			map = serviceBoard.selectSearchList(pInfo,search);
+			
+			
 			
 			String url=null;
 			if(type ==3) {
@@ -316,7 +321,7 @@ public class ServiceController {
 	@RequestMapping("question/{type}/{boardNo}")
 	public String questView(@PathVariable int type,@PathVariable int boardNo,
 							Model model,RedirectAttributes rdAttr,HttpServletRequest request ) {
-		
+		System.out.println("ㄱㄷㄷㄱㄴ");
 		Board board = serviceBoard.selectQnaBoard(boardNo);
 		
 		String url = "serviceCenter/questionView";
