@@ -205,6 +205,7 @@
 		SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{memberNo} ORDER BY SCHEDULE_TIME
 	</select>
 	
+
 	<select id="cancel" parameterType="_int" resultMap="cancelResultSet">
 		SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO=(SELECT DISTINCT TRAINER_NO FROM PT WHERE MEMBER_NO=44)) AS MEMBER_NM,
 SCHEDULE_TIME,(SELECT MEMBER_PHONE FROM MEMBER WHERE MEMBER_NO=(SELECT DISTINCT TRAINER_NO FROM PT WHERE MEMBER_NO=44)) AS MEMBER_PHONE
@@ -216,6 +217,12 @@ ORDER BY SCHEDULE_TIME ASC
 	<delete id="reservationCancel" parameterType="reservationCancel">
 	DELETE FROM PT WHERE MEMBER_NO=#{memberNo} AND SCHEDULE_TIME=#{scheduleTime}
 	</delete>
+
+	<!-- 리뷰삭제 -->
+	<update id="deleteReview" parameterType="_int" >
+		UPDATE REVIEW SET REVIEW_STATUS = 'N' WHERE REVIEW_NO=#{reviewNo}
+	</update>
+
 	 
 	 <update id="plusCoupon"  parameterType="reservationCancel">
 		UPDATE CLASS_STATUS SET CLASS_CNT=CLASS_CNT+1 WHERE MEMBER_NO=#{memberNo}

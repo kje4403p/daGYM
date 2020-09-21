@@ -224,6 +224,7 @@ public class MemberDAO {
 		return sqlSession.selectList("memberMapper.myTPt", memberNo);
 	}
 
+
 	public List<reservationCancel> Cancel(int memberNo) {
 		return sqlSession.selectList("memberMapper.cancel", memberNo);
 	}
@@ -238,5 +239,13 @@ public class MemberDAO {
 
 	public int trainerSchedule(reservationCancel cancel) {
 		return sqlSession.update("memberMapper.trainerSchedule", cancel);
+	}
+	/** 리뷰삭제 DAO
+	 * @param reviewNo 
+	 * @return result
+	 */
+	public int deleteReview(int reviewNo) {
+		return sqlSession.update("memberMapper.deleteReview", reviewNo);
+
 	}	
 }

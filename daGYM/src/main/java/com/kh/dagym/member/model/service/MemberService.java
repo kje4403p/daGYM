@@ -164,7 +164,15 @@ public interface MemberService {
 	 */
 	List<TrainerSchedule> myTPt(int memberNo);
 
+
 	List<reservationCancel> Cancel(int memberNo);
 
 	int cancel(reservationCancel cancel);
+
+	/** 리뷰 삭제 Service
+	 * @param reviewNo
+	 * @return result
+	 */
+	int deleteReview(int reviewNo);
+
 }

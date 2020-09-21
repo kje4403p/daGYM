@@ -228,6 +228,7 @@ public class MemberServiceImpl implements MemberService{
 			return memberDAO.myTPt(memberNo);
 		}
 
+
 		@Override
 		public List<reservationCancel> Cancel(int memberNo) {
 			return memberDAO.Cancel(memberNo);
@@ -244,6 +245,12 @@ public class MemberServiceImpl implements MemberService{
 					}
 			}
 			return result;
+		}
+		// 리뷰 삭제 Service 구현
+		@Override
+		public int deleteReview(int reviewNo) {
+			return memberDAO.deleteReview(reviewNo);
+
 		}
 
 		
