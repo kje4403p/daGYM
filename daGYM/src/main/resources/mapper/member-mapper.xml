@@ -79,7 +79,12 @@
         <result property="scheduleTime" column="SCHEDULE_TIME"/>
         <result property="ptStatus" column="PT_STATUS"/>
     </resultMap>
-
+	
+	<resultMap type="reservationCancel" id="cancelResultSet">
+        <result property="scheduleTime" column="SCHEDULE_TIME"/>
+        <result property="memberName" column="MEMBER_NM"/>
+        <result property="memberPhone" column="MEMBER_PHONE"/>
+    </resultMap>
 	
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
@@ -200,6 +205,23 @@
 		SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{memberNo} ORDER BY SCHEDULE_TIME
 	</select>
 	
+	<select id="cancel" parameterType="_int" resultMap="cancelResultSet">
+		SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO=(SELECT DISTINCT TRAINER_NO FROM PT WHERE MEMBER_NO=44)) AS MEMBER_NM,
+SCHEDULE_TIME,(SELECT MEMBER_PHONE FROM MEMBER WHERE MEMBER_NO=(SELECT DISTINCT TRAINER_NO FROM PT WHERE MEMBER_NO=44)) AS MEMBER_PHONE
+FROM MEMBER JOIN PT USING (MEMBER_NO)
+WHERE MEMBER_NO=44
+ORDER BY SCHEDULE_TIME ASC
+	</select>
 	
+	<delete id="reservationCancel" parameterType="reservationCancel">
+	DELETE FROM PT WHERE MEMBER_NO=#{memberNo} AND SCHEDULE_TIME=#{scheduleTime}
+	</delete>
 	 
+	 <update id="plusCoupon"  parameterType="reservationCancel">
+		UPDATE CLASS_STATUS SET CLASS_CNT=CLASS_CNT+1 WHERE MEMBER_NO=#{memberNo}
+	 </update>
+	 
+	  <update id="trainerSchedule"  parameterType="reservationCancel">
+		UPDATE TRAINER_SCHEDULE SET SCHEDULE_STATUS='Y' WHERE SCHEDULE_TIME=#{scheduleTime}
+	 </update>
 </mapper>

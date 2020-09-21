@@ -15,6 +15,7 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.member.model.vo.reservationCancel;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
 import com.kh.dagym.trainer.model.vo.TrainerSchedule;
@@ -225,6 +226,24 @@ public class MemberServiceImpl implements MemberService{
 		@Override
 		public List<TrainerSchedule> myTPt(int memberNo) {
 			return memberDAO.myTPt(memberNo);
+		}
+
+		@Override
+		public List<reservationCancel> Cancel(int memberNo) {
+			return memberDAO.Cancel(memberNo);
+		}
+		
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int cancel(reservationCancel cancel) {
+			int result =  memberDAO.cancel(cancel);
+			if(result>0) {
+				int result2 =  memberDAO.plusCoupon(cancel);
+					if(result2>0) {
+						int result3 =  memberDAO.trainerSchedule(cancel);
+					}
+			}
+			return result;
 		}
 
 		

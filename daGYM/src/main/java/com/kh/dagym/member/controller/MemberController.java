@@ -33,6 +33,7 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.member.model.vo.reservationCancel;
 import com.kh.dagym.trainer.model.service.TrainerService;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
@@ -186,8 +187,9 @@ public class MemberController {
 				com.kh.dagym.common.PageInfo pInfo = memberService.myPassPagination(type, cp, memberNo);
 				List<MyPass> MyPassList = memberService.MyPassList(memberNo,pInfo);
 				int trainerNo= MyPassList.get(0).getTrainerNo();
-				
+				List<reservationCancel> cancel = memberService.Cancel(memberNo);
 				model.addAttribute("myPassList", MyPassList);
+				model.addAttribute("cancel", cancel);
 				model.addAttribute("pInfo",pInfo);
 				model.addAttribute("trainerNo",trainerNo);
 				return "member/memberPass";
@@ -470,7 +472,16 @@ public class MemberController {
 				}
 			
 			
-			
+				// 리뷰 작성 여부 확인
+				@ResponseBody
+				@RequestMapping("cancel")
+				public String cancel(Model model ,reservationCancel cancel) {
+					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+					cancel.setMemberNo(memberNo);
+					System.out.println(cancel.getScheduleTime());
+					int result = memberService.cancel(cancel);
+					return result+"";
+				}
 			
 			
 }

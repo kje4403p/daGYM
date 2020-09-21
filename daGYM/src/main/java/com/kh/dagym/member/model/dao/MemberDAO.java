@@ -13,6 +13,7 @@ import com.kh.dagym.member.model.vo.MyBoard;
 import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
+import com.kh.dagym.member.model.vo.reservationCancel;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
 import com.kh.dagym.trainer.model.vo.TrainerSchedule;
@@ -221,5 +222,21 @@ public class MemberDAO {
 	 */
 	public List<TrainerSchedule> myTPt(int memberNo) {
 		return sqlSession.selectList("memberMapper.myTPt", memberNo);
+	}
+
+	public List<reservationCancel> Cancel(int memberNo) {
+		return sqlSession.selectList("memberMapper.cancel", memberNo);
+	}
+
+	public int cancel(reservationCancel cancel) {
+		return sqlSession.delete("memberMapper.reservationCancel", cancel);
+	}
+
+	public int plusCoupon(reservationCancel cancel) {
+		return sqlSession.update("memberMapper.plusCoupon", cancel);
+	}
+
+	public int trainerSchedule(reservationCancel cancel) {
+		return sqlSession.update("memberMapper.trainerSchedule", cancel);
 	}	
 }

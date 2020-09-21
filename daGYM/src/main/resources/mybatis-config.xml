@@ -40,6 +40,7 @@
       <typeAlias type="com.kh.dagym.community.model.vo.BoardLikes" alias="BoardLikes"/>
       <typeAlias type="com.kh.dagym.trainer.model.vo.Review" alias="Review"/>
       <typeAlias type="com.kh.dagym.common.Reply" alias="Reply"/>
+      <typeAlias type="com.kh.dagym.member.model.vo.reservationCancel" alias="reservationCancel"/>
 	
    </typeAliases>
    

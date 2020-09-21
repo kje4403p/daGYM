@@ -151,13 +151,13 @@ button:hover:before,button:hover:after{
       
                     <div class="row mb-5 form-row">
                     <h1>예약</h1>
-                	<table class="table" id="table">
+                	<table class="table" id="table2">
                 	
                 		<tr>
- 
-                			<td style ="text-align: center">예약 시간</td>
+          	
                 			<td style ="text-align: center">트레이너 이름</td>
                 			<td style ="text-align: center">트레이너 전화번호</td>
+                			<td style ="text-align: center">예약 시간</td>
      						<td style ="text-align: center">Cancel</td>
                 		</tr>
                 		<c:choose>
@@ -168,13 +168,13 @@ button:hover:before,button:hover:after{
 		                     </tr>
                  		 </c:when>
                  		 <c:otherwise>
-                     	 <c:forEach var="pass" items="${myPassList}">
-                        <tr>
-                        	<td style ="text-align: center">${pass.merchantUid}</td>
-                        	<td style ="text-align: center">${pass.classNm} 회권</td>
-                        	<td style ="text-align: center">${pass.amount}</td>
+                     	 <c:forEach var="cancel" items="${cancel}">
+                        <tr>            
+                        	<td style ="text-align: center">${cancel.memberName}</td>
+                        	<td style ="text-align: center">${cancel.memberPhone}</td>
+                        	<td style ="text-align: center">${cancel.scheduleTime}</td>
                         	<td style ="text-align: center">
-                        	<button type="button" id="review">예약취소하기</button>	        	
+                        	<button type="button" name="close">예약취소하기</button>	        	
                         	</td>
                         </tr>
                         </c:forEach>
@@ -201,7 +201,36 @@ button:hover:before,button:hover:after{
 			
 			window.open(url, "리뷰작성", options);
 		
-	})
+	});
+	$("button[name=close]").on("click",function(){
+		if(confirm("정말 예약 취소하시겠습니까?")){
+			var checkBtn = $(this);
+			
+			var tr = checkBtn.parent().parent();
+			var td = tr.children();
+			
+	
+			var scheduleTime = td.eq(2).text();
+
+		
+			console.log(scheduleTime);
+		
+			$.ajax({
+				url : "${contextPath}/member/cancel",
+				data:{"scheduleTime":scheduleTime},
+				success : function(result){
+					console.log(result)
+					if(result>0){
+					location.reload();
+					alert("예약 취소 성공!!");
+					}
+				}, error : function(){
+					console.log("실패")
+				}	
+			})
+		}
+		
+	});
 	// 리뷰 작성 여부 확인하기
 	$(function(){
 		var $td = $("#table tr").eq(1).children().eq(6)
@@ -223,6 +252,6 @@ button:hover:before,button:hover:after{
 		
 	})
 </script>
-    <%@ include file="../common/footer.jsp"%><br>
+    <%@ include file="../common/footer.jsp"%>
 </body>
 </html>
