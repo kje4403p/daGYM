@@ -143,4 +143,19 @@ public class TrainerDAO {
 		return sqlSession.delete("trainerMapper.scheduleCancel", trainerSchedule);
 	}
 
+	/** 트레이너 리뷰 평점 조회 DAO
+	 * @param trainerNo
+	 * @return
+	 */
+	public Trainer selectGrade(int trainerNo) {
+		return sqlSession.selectOne("trainerMapper.selectReviewGrade", trainerNo);
+	}
+
+	/** 트레이너 넘버 조회 DAO
+	 * @return
+	 */
+	public List<Integer> selectTrainerNo() {
+		return sqlSession.selectList("trainerMapper.selectTrainerNo");
+	}
+
 }
