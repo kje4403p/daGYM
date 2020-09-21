@@ -19,37 +19,37 @@
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
         <div class="col-sm-5">
-                    <h1>내 글</h1>
+                    <h1>내 리뷰</h1>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard">내가 쓴글</button>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReply">내 댓글</button>
-                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReView">내 리뷰</button>
+                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReview">내 리뷰</button>
                     <br><br>
-                    <span style ="text-align: center">내 게시글 리스트 총 ${pInfo.listCount}개</span>
+                    <span style ="text-align: center">내 리뷰 리스트 총 ${pInfo.listCount}개</span>
                     <div class="row mb-3 form-row">
                     
                 <table class="table table-hover">
 
                     	<tr>
-                    		<td style ="text-align: center">게시판</td>
-                    		<td style ="text-align: center">제목</td>
+                    		<td style ="text-align: center">내용</td>
+                    		<td style ="text-align: center">평점</td>
                     		<td style ="text-align: center">날짜</td>
-                    		<td style ="text-align: center">조회</td>
+                    		<td style ="text-align: center">트레이너</td>
                         </tr>
                         
                         <c:choose>
                         
-                        <c:when test="${empty myBoardList}">
+                        <c:when test="${empty myReviewList}">
 		                     <tr>
-		                        <td colspan="6">작성하신 게시글이 없습니다.</td>
+		                        <td colspan="6">작성하신 리뷰가 없습니다.</td>
 		                     </tr>
                  		 </c:when>
                  		 <c:otherwise>
-                     	 <c:forEach var="board" items="${myBoardList}">
+                     	 <c:forEach var="review" items="${myReviewList}">
                         <tr>
-                        	<td style ="text-align: center">${board.boardCategory}</td>
-                        	<td style ="text-align: center">${board.boardTitle}</td>
-                        	<td style ="text-align: center">${board.boardModiftDate}</td>
-                        	<td style ="text-align: center">${board.views}</td>
+                        	<td style ="text-align: center">${review.reviewContent}</td>
+                        	<td style ="text-align: center">${review.reviewRating}</td>
+                        	<td style ="text-align: center">${review.reviewCreateDate}</td>
+                        	<td style ="text-align: center">${review.trainerNM}</td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
@@ -57,7 +57,7 @@
                 	</table>
                 </div>
                 <div class="my-4">
-		<c:set var="url" value="${contextPath}/member/myBoardList/${pInfo.boardType}?cp="></c:set>
+		<c:set var="url" value="${contextPath}/member/myReViewList/${pInfo.boardType}?cp="></c:set>
         	<ul class="pagination">
             	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize }">	
 	                <li>

@@ -175,4 +175,19 @@ public interface MemberService {
 	 */
 	int deleteReview(int reviewNo);
 
+	/** 내 리뷰 페이징 처리 Service
+	 * @param type
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
+	PageInfo myReviewPagination(int type, int cp, int memberNo);
+
+	/** 내 리뷰 Service
+	 * @param memberNo
+	 * @param pInfo
+	 * @return
+	 */
+	List<Review> myReviewList(int memberNo, PageInfo pInfo);
+
 }

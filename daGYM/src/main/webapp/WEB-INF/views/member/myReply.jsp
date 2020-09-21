@@ -23,6 +23,7 @@
                     <h1>내 댓글</h1>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard" >내가 쓴글</button>
                     <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReply">내 댓글</button>
+                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReView">내 리뷰</button>
                     <br><br>
                     <span style ="text-align: center">내 댓글 리스트 총 ${pInfo.listCount}개</span>
                     <div class="row mb-3 form-row">
@@ -112,6 +113,9 @@
 		});
 	    $("#myReply").on("click", function() {
 			location.href= "${contextPath}/member/myReplyList/1";
+		});
+	    $("#myReView").on("click", function() {
+			location.href= "${contextPath}/member/myReviewList/1";
 		});
     </script>
     <%@ include file="../common/footer.jsp"%><br>
