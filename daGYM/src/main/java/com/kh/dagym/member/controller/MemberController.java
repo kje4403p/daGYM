@@ -495,6 +495,17 @@ public class MemberController {
 					int result = memberService.cancel(cancel);
 					return result+"";
 				}
+				
+				// 내 리뷰 화면 전환 메소드
+				@RequestMapping("myReviewList/{type}")
+				public String myReview(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
+					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
+					com.kh.dagym.common.PageInfo pInfo = memberService.myReviewPagination(type, cp, memberNo);
+					List<Review> myReviewList = memberService.myReviewList(memberNo,pInfo);
+					model.addAttribute("myReviewList", myReviewList);
+					model.addAttribute("pInfo",pInfo);
+					return "member/myReview";
+			}
 			
 			
 }
