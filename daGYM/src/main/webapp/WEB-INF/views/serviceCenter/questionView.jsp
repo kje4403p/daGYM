@@ -57,7 +57,7 @@
 				<h6 class="mt-4">질문유형: [${board.qnaCode }]</h6>
 				
 				<!-- Title -->
-				<h3 class="mt-4"></h3>
+				<h3 class="mt-4"> ${board.boardTitle}</h3>
 	
 				<hr>
 

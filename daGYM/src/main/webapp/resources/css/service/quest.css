@@ -13,6 +13,10 @@
 	box-sizing: border-box;
 }
 
+#title{
+	font-size: 33px;
+}
+
 #left {
 	width: 15%;
 	height: 100%;
@@ -132,6 +136,7 @@ tbody>tr>td:last-child {
 
 #table2{
 	max-width: 1200px;
+	margin-top: 0px;
 }
 /* 검색창 */
 /* #searchInput, #searchBtn {
