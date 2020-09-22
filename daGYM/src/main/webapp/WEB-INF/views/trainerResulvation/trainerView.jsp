@@ -65,6 +65,7 @@
 	#price{
 	font-size: 30px;
 	font-weight: bold;
+	padding-top : 20px;
 	}
 	.pricing_price{
 	padding-top: 30%;
@@ -72,6 +73,10 @@
 	#about > a{
 	color:white;
 	}
+	.primary-btn{
+		border : none;
+	}
+	
 	
 	</style>
 	
@@ -307,7 +312,7 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="5"/>
 										</c:url>
-										<button onclick="window.open('${url}')" class="btn btn-primary" id="order">결제하기</button>
+										<button onclick="window.open('${url}')" class="primary-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
@@ -345,7 +350,7 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="10"/>
 										</c:url>
-											<button onclick="window.open('${url}')" class="btn btn-primary" id="order">결제하기</button>
+											<button onclick="window.open('${url}')" class="primary-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
@@ -381,7 +386,7 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="20"/>
 										</c:url>
-										<button onclick="window.open('${url}')" class="btn btn-primary" id="order">결제하기</button>
+										<button onclick="window.open('${url}')" class="primary-btn" id="order">결제하기</button>
 	
 			                    	</c:when>
 			                    	<c:otherwise>
@@ -510,11 +515,10 @@
 				success : function(result){
 					if(result>0){
 						alert("리뷰가 삭제되었습니다.")
-						console.log("성공")
-						
+						location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
 					}else{
 						alert("리뷰 삭제에 실패하였습니다.")
-						console.log("삭제노")
+						location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
 					}
 				},error : function(){
 					console.log("실패")
