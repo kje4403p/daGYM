@@ -329,9 +329,6 @@ function closeModal(){
 				console.log(result)
 				if(result>0){
 					$td.html("")
-					//$btn.attr("id","review")
-					//$btn.html("리뷰 작성")
-					//$td.append($btn);
 				}
 			}, error : function(){
 				console.log("실패")

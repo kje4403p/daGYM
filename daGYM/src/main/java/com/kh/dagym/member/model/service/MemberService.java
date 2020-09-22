@@ -1,3 +1,5 @@
+
+
 package com.kh.dagym.member.model.service;
 
 import java.util.List;
@@ -197,4 +199,12 @@ public interface MemberService {
 	 */
 	int changeStatus(int memberNo);
 
+  
+	/** 이메일 중복검사 Service
+	 * @param email
+	 * @return result
+	 */
+	int emailDupCheck(String email);
+
 }
+

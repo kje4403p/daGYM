@@ -269,6 +269,11 @@ public class MemberServiceImpl implements MemberService{
 			List<Review> myReviewList = memberDAO.myReviewList(memberNo,pInfo);
 			return myReviewList;
 		}
+		// 이메일 중복검사 Service 구현
+		@Override
+		public int emailDupCheck(String email) {
+			return memberDAO.emailDupCheck(email);
+		}
 
 		// 휴면계정 해제 Service 구현
 		@Transactional(rollbackFor = Exception.class)

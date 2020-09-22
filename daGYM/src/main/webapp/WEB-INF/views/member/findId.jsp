@@ -128,6 +128,7 @@
 					swal("아이디는 " +id + " 입니다.");
 				},error:function(){
 					console.log("실패");
+					swal("다시 입력해주세요.")
 				}
 				
 			})
