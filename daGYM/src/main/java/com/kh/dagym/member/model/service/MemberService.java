@@ -190,4 +190,11 @@ public interface MemberService {
 	 */
 	List<Review> myReviewList(int memberNo, PageInfo pInfo);
 
+
+	/** 휴면계정 해제 Service
+	 * @param memberNo
+	 * @return result
+	 */
+	int changeStatus(int memberNo);
+
 }

@@ -269,5 +269,12 @@ public class MemberServiceImpl implements MemberService{
 			List<Review> myReviewList = memberDAO.myReviewList(memberNo,pInfo);
 			return myReviewList;
 		}
+
+		// 휴면계정 해제 Service 구현
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int changeStatus(int memberNo) {
+			return memberDAO.changeStatus(memberNo);
+		}
 		
 }
