@@ -109,7 +109,7 @@
 	//  달력 정보를 저장하는 객체.
 	var calObj = { 
 			initialView: 'resourceTimeGridDay',
-			plugins: [ 'interaction', 'dayGrid', 'timeGrid' ],
+			plugins: [ 'interaction', 'dayGrid', 'timeGrid',  'moment'],
 			events: [
 				<c:forEach var="sList" items="${sList}">
 				 {	 
@@ -118,6 +118,7 @@
 				 },
 				 </c:forEach>
 				 ],
+			eventTimeFormat: { hour:'numeric' },
 			eventColor: "orange",
 			defaultView: 'dayGridMonth',
 			/* 상단 버튼 및 타이틀 구현 */
@@ -125,7 +126,7 @@
 					  center: 'title', 
 					  right: 'dayGridMonth,dayGridWeek,dayGridDay' 
 					}
-		};
+	};
 	
 	var calendar;
 	// 달력을 생성하는 함수

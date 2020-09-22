@@ -267,4 +267,12 @@ public class MemberDAO {
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		return sqlSession.selectList("memberMapper.myReviewList", memberNo,rowBounds);
 	}
+
+	/** 휴면계정 해제 DAO
+	 * @param memberNo
+	 * @return result
+	 */
+	public int changeStatus(int memberNo) {
+		return sqlSession.update("memberMapper.changeStatus", memberNo);
+	}
 }

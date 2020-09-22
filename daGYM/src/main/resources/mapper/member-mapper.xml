@@ -106,7 +106,7 @@
 	<select id="loginMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
 		WHERE MEMBER_ID=#{memberId}
-		AND MEMBER_STATUS='Y'
+		AND MEMBER_STATUS IN('Y', 'S')
 	</select>
 	
 	<!-- 아이디 중복체크 -->
@@ -254,4 +254,9 @@ ORDER BY SCHEDULE_TIME ASC
 	FROM REVIEW JOIN MEMBER ON(REVIEW_WRITER=MEMBER_NO)
 	WHERE REVIEW_STATUS = 'Y' AND REVIEW_WRITER = #{memberNo} ORDER BY REVIEW_NO
 	</select>
+	
+	<!-- 휴면계정 해제 -->
+	<update id="changeStatus" parameterType="_int">
+		UPDATE MEMBER SET MEMBER_STATUS='Y' WHERE MEMBER_NO=#{memberNo}
+	</update>
 </mapper>
