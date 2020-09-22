@@ -79,6 +79,12 @@ public interface TrainerService {
 
 	int scheduleCancel(TrainerSchedule trainerSchedule);
 
+	/** 거래번호 삭제 Service
+	 * @param merchantUid
+	 * @return result
+	 */
+	int deleteMerchantUid(int merchantUid);
+
 
 
 }

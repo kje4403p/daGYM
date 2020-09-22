@@ -152,6 +152,18 @@ public class TrainerController {
 		 return merchantUid;
 		 
 	 }
+	 
+	 // 결제번호 삭제
+	 
+	 @ResponseBody
+	 @RequestMapping("deleteMerchantUid")
+	 public String deleteMerchantUid(int merchantUid) {
+		 int result = trainerService.deleteMerchantUid(merchantUid);
+		 
+		 return result+"";
+		 
+	 }
+	 
 	 // 수강권 삽입
 	 @ResponseBody
 	 @RequestMapping("insertImpUid")
