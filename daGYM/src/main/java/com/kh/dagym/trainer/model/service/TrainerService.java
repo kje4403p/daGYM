@@ -79,6 +79,8 @@ public interface TrainerService {
 
 	int scheduleCancel(TrainerSchedule trainerSchedule);
 
+	List<PT> selectSchedule();
+
 
 
 }

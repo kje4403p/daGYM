@@ -214,12 +214,16 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public int insertResulvation(PT pt) {
 		int result = trainerDAO.insertResulvation(pt);
+
+	
+		
 		if(result>0) {
 			int result2= trainerDAO.updateClassCnt(pt.getMemberNo());
 				if(result2>0) {
 					int result3= trainerDAO.updateTrainerSchedule(pt);
 				}
 		}
+	
 		return result;
 	}
 	
@@ -233,6 +237,12 @@ public class TrainerServiceImpl implements TrainerService{
 		public int scheduleCancel(TrainerSchedule trainerSchedule) {
 		
 			return trainerDAO.scheduleCancel(trainerSchedule);
+		}
+
+		@Override
+		public List<PT> selectSchedule() {
+		
+			return  trainerDAO.selectSchedule();
 		}
 	
 

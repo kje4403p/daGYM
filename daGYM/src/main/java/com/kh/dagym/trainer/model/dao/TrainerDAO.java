@@ -158,4 +158,8 @@ public class TrainerDAO {
 		return sqlSession.selectList("trainerMapper.selectTrainerNo");
 	}
 
+	public List<PT> selectSchedule() {
+		return sqlSession.selectList("trainerMapper.selectSchedule2");
+	}
+
 }

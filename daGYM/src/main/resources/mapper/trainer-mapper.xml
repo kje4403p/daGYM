@@ -43,6 +43,7 @@
 	 <resultMap type="TrainerSchedule" id="TrainerScheduleResultSet">
         <result property="scheduleTime" column="SCHEDULE_TIME"/>
         <result property="trainerNo" column="TRAINER_NO"/>
+        <result property="scheduleStatus" column="SCHEDULE_STATUS"/>
     </resultMap>
     
       <resultMap type="Review" id="reviewResultSet">
@@ -54,6 +55,14 @@
 		<result property="memberId" column="MEMBER_ID"/>
 		
 	</resultMap>
+	
+	
+	<resultMap type="PT" id="PTResultSet">
+    	<result property="memberNo" column="MEMBER_NO"/>
+    	<result property="trainerNo" column="TRAINER_NO"/>
+        <result property="scheduleTime" column="SCHEDULE_TIME"/>
+        <result property="ptStatus" column="PT_STATUS"/>
+    </resultMap>
 	
 	<select id="selectList" resultMap="trainerResultSet">
 		SELECT * FROM TRAINER JOIN MEMBER ON(MEMBER_NO=TRAINER_NO)WHERE MEMBER_STATUS='Y'
@@ -149,7 +158,7 @@ SELECT * FROM DUAL
   	</insert>
   	
   	<select id="selectSchedule" parameterType="_int" resultMap="TrainerScheduleResultSet">
-  	SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{trainerNo} AND SCHEDULE_STATUS='Y'
+  	SELECT * FROM TRAINER_SCHEDULE WHERE TRAINER_NO=#{trainerNo}
   	</select>
   	
   	<insert id="insertResulvation" parameterType="PT">
@@ -187,5 +196,8 @@ SELECT * FROM DUAL
   	<delete id="scheduleCancel"  parameterType="TrainerSchedule">
   	DELETE FROM TRAINER_SCHEDULE WHERE SCHEDULE_TIME=#{scheduleTime} AND SCHEDULE_STATUS='Y' AND TRAINER_NO=#{trainerNo}
   	</delete>
-
+  	
+	<select id="selectSchedule2" resultMap="PTResultSet">
+		SELECT * FROM PT
+	</select>
 </mapper>
