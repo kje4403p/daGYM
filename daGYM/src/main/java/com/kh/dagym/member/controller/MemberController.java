@@ -296,12 +296,22 @@ public class MemberController {
 				String msg = null;
 				String status = null;
 				String text = null;
+				String url = null;
 				
 				if(loginMember!= null) {
-					model.addAttribute("loginMember", loginMember);
 					
 					Cookie cookie = new Cookie("saveId", member.getMemberId());
 					
+					if(loginMember.getMemberStatus().equals("S")) {
+						rdAttr.addFlashAttribute("memberNo", loginMember.getMemberNo());
+						status = "info";
+						msg = "해당 계정은 휴면 계정입니다.";
+						text = "휴면 계정을 해제하시려면 버튼을 누른 후 재로그인해주세요.";
+						url = "redirect:login";
+					} else {
+						model.addAttribute("loginMember", loginMember);
+						url = "redirect:/";
+					}
 					if(saveId != null) {
 						
 						cookie.setMaxAge(60*60*24*7);
@@ -314,13 +324,23 @@ public class MemberController {
 					status = "error";
 					msg = "로그인 실패";
 					text = "아이디 또는 비밀번호를 확인해주세요.";
+					url = "redirect:login";
 				}
 				rdAttr.addFlashAttribute("msg", msg);
 				rdAttr.addFlashAttribute("status", status);
 				rdAttr.addFlashAttribute("text", text);
 				
-				return "redirect:/";
+				return url;
 			}
+			
+			// 휴면 계정 해제하기
+			@ResponseBody
+			@RequestMapping("changeStatus")
+			public int changeStatus(int memberNo) {
+				int result = memberService.changeStatus(memberNo);
+				return result;
+			}
+			
 			// 인증번호 메일 보내기
 			@ResponseBody
 			@RequestMapping(value = "sendEmail", method=RequestMethod.GET)

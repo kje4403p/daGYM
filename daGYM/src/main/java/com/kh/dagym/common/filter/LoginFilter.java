@@ -45,7 +45,7 @@ public class LoginFilter implements Filter{
 		NOT_ALLOWED_PATH.add("/resources/.*");
 		
 		// member 제외 추가
-		NOT_ALLOWED_PATH.addAll(Arrays.asList("/member/login", "/member/logout", "/member/loginAction", "/member/signUp", "/member/signUpAction"));
+		NOT_ALLOWED_PATH.addAll(Arrays.asList("/member/login", "/member/logout", "/member/loginAction", "/member/signUp", "/member/signUpAction", "/member/changeStatus"));
 		
 		// board 제외 목록 추가
 		//NOT_ALLOWED_PATH.addAll(Arrays.asList("/board/list/\\w", "/board/topViews/\\w", "/search/\\w"));
