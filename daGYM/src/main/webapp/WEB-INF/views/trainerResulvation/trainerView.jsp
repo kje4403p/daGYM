@@ -510,11 +510,10 @@
 				success : function(result){
 					if(result>0){
 						alert("리뷰가 삭제되었습니다.")
-						console.log("성공")
-						
+						location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
 					}else{
 						alert("리뷰 삭제에 실패하였습니다.")
-						console.log("삭제노")
+						location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
 					}
 				},error : function(){
 					console.log("실패")
