@@ -106,6 +106,14 @@
 		AND MEMBER_STATUS='Y'
 	</select>
 	
+	<!-- 이메일 중복체크 -->
+	<select id="emailDupCheck" parameterType="string" resultType="_int">
+			SELECT COUNT(*) FROM MEMBER
+		WHERE MEMBER_EMAIL=#{memberEmail}
+		AND MEMBER_STATUS='Y'
+	</select>
+	
+	
 	<!-- 회원 비밀번호 확인용 -->
 	<select id="checkPwd" parameterType="_int" resultType="string">
 		SELECT MEMBER_PWD FROM MEMBER WHERE MEMBER_NO = #{memberNo}

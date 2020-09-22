@@ -283,6 +283,17 @@ public class MemberController {
 			@RequestMapping(value = "idDupCheck", method=RequestMethod.GET)
 			public String idDupCheck(String memberId) {
 				int result = memberService.idDupCheck(memberId);
+				
+				return result +"";
+			}
+			
+			// 이메일 중복체크
+			@ResponseBody
+			@RequestMapping("emailDup")
+			public String emailDupCheck(String email) {
+				System.out.println(email);
+				int result = memberService.emailDupCheck(email);
+				System.out.println("리절"+result);
 				return result +"";
 			}
 			

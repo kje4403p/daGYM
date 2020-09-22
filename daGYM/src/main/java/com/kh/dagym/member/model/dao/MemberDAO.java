@@ -247,5 +247,13 @@ public class MemberDAO {
 	public int deleteReview(int reviewNo) {
 		return sqlSession.update("memberMapper.deleteReview", reviewNo);
 
+	}
+
+	/** 이메일 중복검사 DAO
+	 * @param email
+	 * @return result
+	 */
+	public int emailDupCheck(String email) {
+		return sqlSession.selectOne("memberMapper.emailDupCheck", email);
 	}	
 }

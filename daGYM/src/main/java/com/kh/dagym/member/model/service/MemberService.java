@@ -175,4 +175,10 @@ public interface MemberService {
 	 */
 	int deleteReview(int reviewNo);
 
+	/** 이메일 중복검사 Service
+	 * @param email
+	 * @return result
+	 */
+	int emailDupCheck(String email);
+
 }

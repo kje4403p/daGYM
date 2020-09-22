@@ -252,6 +252,11 @@ public class MemberServiceImpl implements MemberService{
 			return memberDAO.deleteReview(reviewNo);
 
 		}
+		// 이메일 중복검사 Service 구현
+		@Override
+		public int emailDupCheck(String email) {
+			return memberDAO.emailDupCheck(email);
+		}
 
 		
 }

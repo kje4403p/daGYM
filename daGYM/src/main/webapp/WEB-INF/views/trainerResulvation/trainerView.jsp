@@ -76,6 +76,9 @@
 	.primary-btn{
 		border : none;
 	}
+	#order{
+		background-color: white;
+	}
 	
 	
 	</style>
@@ -93,31 +96,63 @@
 		<div class="container calendar-container">
 		
 				</div>
-			<div class="trainerImg">
-					<c:if test="${!empty files }">
-
-                            <c:forEach var="at" items="${files}" varStatus="vs">
-                                <c:set var="src" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
-
-                                <div class="carousel-item <c:if test="${vs.index == 0}"> active</c:if>">
-                                    <img width="370px" height="360px" src="${src}" />
-                                    <input type="hidden" value="${at.fileNo}">
-                                </div>
-                            </c:forEach>
-
-                </c:if>
-			</div>			
-			<div class="trainerName">
-				<div class="trainerInfo"> 
-				<hr>
-				<h4>이름:  ${trainer.memberName}</h4>
-				<hr>
-				<h4>번호:  ${trainer.memberPhone}</h4>
-				<hr>
-				<h4>입사일:  ${trainer.memberEnrollDate}</h4>
-				</div>
-				<hr>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="trainerImg">
+						<c:if test="${!empty files }">
+	
+	                            <c:forEach var="at" items="${files}" varStatus="vs">
+	                                <c:set var="src" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+	
+	                                <div class="carousel-item <c:if test="${vs.index == 0}"> active</c:if>">
+	                                    <img width="370px" height="360px" src="${src}" />
+	                                    <input type="hidden" value="${at.fileNo}">
+	                                </div>
+	                            </c:forEach>
+	
+	                </c:if>
+				</div>			
 			</div>
+			<div class="col-md-6">
+				<div class="trainerName">
+					<div class="about_accordion wow fadeIn">
+									<div id="faq_main_content" class="faq_main_content">
+										<h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
+										<div>
+											<div class="content">
+												<p>${trainer.trainerCareer}</p>
+											</div>
+										</div>
+										<!-- End off accordion item-1 -->
+	
+										<h6><i class="fa fa-angle-right"></i>수상내역</h6>
+										<div>
+											<div class="content">
+												<p>${trainer.trainerAward}</p>
+												</div>
+										</div>
+										<!-- End off accordion item-2 -->
+	
+										<h6> <i class="fa fa-angle-right"></i>PT 가격</h6>
+										<div>
+											<div class="content">
+												<p>10회당 ${trainer.trainerPrice}원</p>
+											</div>
+										</div>
+										<!-- End off accordion item-3 -->
+	
+										<h6><i class="fa fa-angle-right"></i>트레이너 SNS</h6>
+										<div>
+											<div class="content">
+											<a href="${trainer.trainerSNS}">${trainer.trainerSNS}</a>
+											</div>
+										</div>
+										<!-- End off accordion item-4 -->
+									</div>
+								</div>
+				</div>
+			</div>
+		</div>		
 		</section>
 
 		<!--End off Home Sections-->
@@ -138,54 +173,25 @@
 							</div>
 						</div>
 						<div class="col-md-6">
-							<div class="about_accordion wow fadeIn">
-								<div id="faq_main_content" class="faq_main_content">
-									<h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
-									<div>
-										<div class="content">
-											<p>${trainer.trainerCareer}</p>
-										</div>
-									</div>
-									<!-- End off accordion item-1 -->
-
-									<h6><i class="fa fa-angle-right"></i>수상내역</h6>
-									<div>
-										<div class="content">
-											<p>${trainer.trainerAward}</p>
-											</div>
-									</div>
-									<!-- End off accordion item-2 -->
-
-									<h6> <i class="fa fa-angle-right"></i>PT 가격</h6>
-									<div>
-										<div class="content">
-											<p>10회당 ${trainer.trainerPrice}원</p>
-										</div>
-									</div>
-									<!-- End off accordion item-3 -->
-
-									<h6><i class="fa fa-angle-right"></i>트레이너 SNS</h6>
-									<div>
-										<div class="content">
-										<a href="${trainer.trainerSNS}">${trainer.trainerSNS}</a>
-										</div>
-									</div>
-									<!-- End off accordion item-4 -->
-								</div>
-							</div>
+						
 						</div>
 					</div>
 				</div>
 				<!--End off row-->
 			</div>
 			<!--End off container -->
-		
-			<c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
-				<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</a>
-			</c:if>
-			<c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
-				<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
-			</c:if>
+			<div class="row">
+				<div class="col-md-6">
+				</div>
+				<div class="col-md-6">
+					<c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
+						<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</a>
+					</c:if>
+					<c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
+						<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
+					</c:if>
+				</div>
+			</div>
 		</section>
   
 
@@ -270,140 +276,121 @@
 		<!--End off Testimonial section -->
 
 			
-		<!--Pricing Section-->
-		<section id="pricing" class="pricing lightbg">
-			<div class="container">
-				<div class="row">
-					<div class="main_pricing">
-						<div class="col-md-12 ml-md-auto mr-md-auto">
-							<div class="head_title text-center">
-								<h2>PT 결제</h2>
-								<div class="separator_auto"></div>
-								<h4>환불은 불가능합니다...! 신중히 결제해주세요...!</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4 col-sm-12">
-						<div class="pricing_item">
-							<div class="pricing_head p-top-30 p-bottom-100 text-center">
-								<h3 class="text-uppercase">5회권</h3>
-							</div>
-							<div class="pricing_price_border text-center">
-								<div class="pricing_price">
-									<p id="price" class="text-white">${(trainer.trainerPrice)*5 }</p>
-									
-								</div>
-							</div>
-
-							<div class="pricing_body bg-white p-top-110 p-bottom-60">
-								<ul>
-									<li><i class="fa fa-check-circle text-primary"></i> <span>10</span> user</li>
-									<li class="disabled"><i class="fa fa-times-circle"></i> Unlimited Bandwidth</li>
-									<li class="disabled"><i class="fa fa-times-circle"></i> Full Statistics</li>
-
-								</ul>
-								<div class="pricing_btn text-center m-top-40">
-								
-								<c:set var="trainerNo" value="${trainer.trainerNo}"/>
+	 <section class="membership-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title">
+                        <h2>MEMBERSHIP PLANS</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="membership-item">
+                        <div class="mi-title">
+                            <h4>5회권</h4>
+                            <div class="triangle"></div>
+                        </div>
+                        <h2 class="mi-price">${(trainer.trainerPrice)*5 }</h2>
+                     
+                        	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
 									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="5"/>
 										</c:url>
-										<button onclick="window.open('${url}')" class="primary-btn" id="order">결제하기</button>
+					                       <button onclick="window.open('${url}')" class="primary-btn membership-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
 			                    	</c:otherwise>
 			                    	</c:choose>
-					
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End off col-md-4 -->
-
-					<div class="col-md-4 col-sm-12">
-						<div class="pricing_item sm-m-top-30">
-							<div class="pricing_top_border"></div>
-							<div class="pricing_head p-top-30 p-bottom-100 text-center">
-								<h3 class="text-uppercase">10회권</h3>
-							</div>
-							<div class="pricing_price_border text-center">
-								<div class="pricing_price">
-									<p id="price" class="text-white">${(trainer.trainerPrice)*10 }</p>
-								</div>
-							</div>
-
-							<div class="pricing_body bg-white p-top-110 p-bottom-60">
-								<ul>
-									<li><i class="fa fa-check-circle text-primary"></i> <span>50</span> user</li>
-									<li><i class="fa fa-check-circle text-primary"></i> Unlimited Bandwidth</li>
-									<li class="disabled"><i class="fa fa-times-circle"></i> Full Statistics</li>
-								</ul>
-								<div class="pricing_btn text-center m-top-40">
-									<c:set var="trainerNo" value="${trainer.trainerNo}"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="membership-item">
+                        <div class="mi-title">
+                            <h4>10회권</h4>
+                            <div class="triangle"></div>
+                        </div>
+                        <h2 class="mi-price">${(trainer.trainerPrice)*10 }</h2>
+                        <ul>
+                            <li>
+                                <p>Duration</p>
+                                <span>12 months</span>
+                            </li>
+                            <li>
+                                <p>Personal trainer</p>
+                                <span>01 person</span>
+                            </li>
+                            <li>
+                                <p>Amount of people</p>
+                                <span>01 person</span>
+                            </li>
+                            <li>
+                                <p>Number of visits</p>
+                                <span>Unlimited</span>
+                            </li>
+                        </ul>
+                       
+                        	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
 									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
-											<c:param name="classNm" value="10"/>
+											<c:param name="classNm" value="5"/>
 										</c:url>
-											<button onclick="window.open('${url}')" class="primary-btn" id="order">결제하기</button>
+					                       <button onclick="window.open('${url}')" class="primary-btn membership-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
 			                    	</c:otherwise>
 			                    	</c:choose>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End off col-md-4 -->
-
-					<div class="col-md-4 col-sm-12">
-						<div class="pricing_item sm-m-top-30">
-							<div class="pricing_head p-top-30 p-bottom-100 text-center">
-								<h3 class="text-uppercase">20회권</h3>
-							</div>
-							<div class="pricing_price_border text-center">
-								<div class="pricing_price">
-									<p id="price" class="text-white">${(trainer.trainerPrice)*20 }</p>
-								</div>
-							</div>
-
-							<div class="pricing_body bg-white p-top-110 p-bottom-60">
-								<ul>
-									<li><i class="fa fa-check-circle text-primary"></i> Unlimited Users</li>
-									<li><i class="fa fa-check-circle text-primary"></i> Unlimited Bandwidth</li>
-									<li><i class="fa fa-check-circle text-primary"></i> Full Statistics</li>
-								</ul>
-								<div class="pricing_btn text-center m-top-40">
-									<c:set var="trainerNo" value="${trainer.trainerNo}"/>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="membership-item">
+                        <div class="mi-title">
+                            <h4>20회권</h4>
+                            <div class="triangle"></div>
+                        </div>
+                        <h2 class="mi-price">${(trainer.trainerPrice)*20 }</h2>
+                        <ul>
+                            <li>
+                                <p>Duration</p>
+                                <span>12 months</span>
+                            </li>
+                            <li>
+                                <p>Personal trainer</p>
+                                <span>01 person</span>
+                            </li>
+                            <li>
+                                <p>Amount of people</p>
+                                <span>01 person</span>
+                            </li>
+                            <li>
+                                <p>Number of visits</p>
+                                <span>Unlimited</span>
+                            </li>
+                        </ul>
+                        
+                        	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
 									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
-											<c:param name="classNm" value="20"/>
+											<c:param name="classNm" value="5"/>
 										</c:url>
-										<button onclick="window.open('${url}')" class="primary-btn" id="order">결제하기</button>
-	
+					                       <button onclick="window.open('${url}')" class="primary-btn membership-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
 			                    	</c:otherwise>
 			                    	</c:choose>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- End off col-md-4 -->
-				</div>
-				<!--End off row-->
-			</div>
-			<!--End off container -->
-		</section>
-		<!--End off Pricing section -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 	
 		
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">

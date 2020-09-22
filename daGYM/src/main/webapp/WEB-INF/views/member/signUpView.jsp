@@ -260,6 +260,8 @@
 	});
 	
 	$email.on("input", function(){
+		console.log("이메일"+$email.val())
+		var email = $email.val();
 		var regExp =  /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/; // 4글자 아무단어 @ 아무단어 . * 3아무3
 		
 		if(!regExp.test($email.val())){
@@ -267,9 +269,25 @@
 			signUpCheck.email = false;
 			
 		}else{
-			$("#checkEmail").text("유효한 이메일입니다.").css("color","blue");
-			signUpCheck.email = true;
-			$("#emailCk-btn").prop("disabled", false)
+			$.ajax({
+				url : "${contextPath}/member/emailDup",
+				data : {"email" :email},
+				
+				success : function(result){
+					console.log("리절"+result)
+					if(result == 0 ){
+						
+						console.log(result)
+						$("#checkEmail").text("사용 가능한 이메일입니다.").css("color","blue");
+						signUpCheck.email = true;
+					}else{
+						$("#checkEmail").text("이미 사용중인 이메일입니다.").css("color","red");
+						signUpCheck.email = false;
+					}
+				},error:function(){
+					console.log("실패")
+				}
+			})
 			
 		}
 	});
