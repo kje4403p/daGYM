@@ -32,9 +32,11 @@
 		</div>
 
 		<div id="right">
+		
+		<span id ="title">자주묻는 질문</span>
 
 			<div id="table1" >
-				<table id="table2">
+				<table id="table2" class="table table-hover">
 					<thead>
 						<tr>
 							<th><c:if test="${flag}">번호</c:if></th>
@@ -153,7 +155,7 @@
 									integerOnly="true" /> <c:set var="next"
 									value="${operand2*5 + 1}" /> <a class="page-link" href="${url}${next}" aria-label="Next"><span aria-hidden="true">&gt;</span></a></li>
 
-							<li><a class="page-item" href="${url}${pInfo.maxPage}" aria-label="Next"><span aria-hidden="true">&gt;&gt;</span></a></li>
+							<li><a class="page-link" href="${url}${pInfo.maxPage}" aria-label="Next"><span aria-hidden="true">&gt;&gt;</span></a></li>
 						</c:if>
 					</ul>
 					</nav>

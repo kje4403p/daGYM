@@ -239,10 +239,16 @@ public class TrainerServiceImpl implements TrainerService{
 			return trainerDAO.scheduleCancel(trainerSchedule);
 		}
 
+
 		@Override
 		public List<PT> selectSchedule() {
 		
 			return  trainerDAO.selectSchedule();
+		}
+		// 거래번호 삭제 구현
+		@Override
+		public int deleteMerchantUid(int merchantUid) {
+			return trainerDAO.deleteMerchantUid(merchantUid);
 		}
 	
 

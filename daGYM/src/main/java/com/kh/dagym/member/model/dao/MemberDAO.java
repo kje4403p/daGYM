@@ -247,5 +247,24 @@ public class MemberDAO {
 	public int deleteReview(int reviewNo) {
 		return sqlSession.update("memberMapper.deleteReview", reviewNo);
 
-	}	
+	}
+
+	/** 내 리뷰 페이징 처리 DAO
+	 * @param memberNo
+	 * @return listCount
+	 */
+	public int getMyReviewListCount(int memberNo) {
+		return sqlSession.selectOne("memberMapper.MyReviewListCnt",memberNo);
+	}
+	
+	/** 내 리뷰 조회 Service DAO
+	 * @param memberNo
+	 * @param pInfo
+	 * @return myReviewList
+	 */
+	public List<Review> myReviewList(int memberNo, PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("memberMapper.myReviewList", memberNo,rowBounds);
+	}
 }

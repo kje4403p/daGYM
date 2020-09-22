@@ -158,8 +158,17 @@ public class TrainerDAO {
 		return sqlSession.selectList("trainerMapper.selectTrainerNo");
 	}
 
+
 	public List<PT> selectSchedule() {
 		return sqlSession.selectList("trainerMapper.selectSchedule2");
+	}
+	/** 거래번호 삭제 DAO
+	 * @param merchantUid
+	 * @return result
+	 */
+	public int deleteMerchantUid(int merchantUid) {
+		return sqlSession.delete("trainerMapper.deleteMerchantUid", merchantUid);
+
 	}
 
 }

@@ -85,6 +85,16 @@
         <result property="memberName" column="MEMBER_NM"/>
         <result property="memberPhone" column="MEMBER_PHONE"/>
     </resultMap>
+    
+     <resultMap type="Review" id="reviewResultSet">
+	
+		<id property="reviewNo" column="REVIEW_NO"/>
+		<result property="reviewContent" column="REVIEW_CONTENT"/>
+		<result property="reviewRating" column="REVIEW_RATING"/>
+		<result property="reviewCreateDate" column="REVIEW_CREATE_DT"/>
+		<result property="memberId" column="MEMBER_ID"/>
+		<result property="trainerNM" column="TRAINER_NM"/>
+	</resultMap>
 	
 	<!-- 회원가입 -->
 	<insert id="signUp" parameterType="Member">
@@ -231,4 +241,17 @@ ORDER BY SCHEDULE_TIME ASC
 	  <update id="trainerSchedule"  parameterType="reservationCancel">
 		UPDATE TRAINER_SCHEDULE SET SCHEDULE_STATUS='Y' WHERE SCHEDULE_TIME=#{scheduleTime}
 	 </update>
+	 
+	 
+	<!-- 내 리뷰 페이징 처리 -->
+	<select id="MyReviewListCnt" parameterType="_int" resultType = "_int">
+	SELECT COUNT(*) FROM REVIEW WHERE REVIEW_WRITER = #{memberNo} AND REVIEW_STATUS = 'Y' 
+	</select>
+	
+	<!-- 내 리뷰 조회 -->
+	<select id="myReviewList" parameterType="Review" resultMap="reviewResultSet">
+	SELECT REVIEW_CONTENT,REVIEW_RATING,REVIEW_CREATE_DT,(SELECT MEMBER_NM M FROM MEMBER WHERE MEMBER_NO=(SELECT DISTINCT TRAINER_NO FROM REVIEW WHERE REVIEW_WRITER=#{memberNo}))AS TRAINER_NM
+	FROM REVIEW JOIN MEMBER ON(REVIEW_WRITER=MEMBER_NO)
+	WHERE REVIEW_STATUS = 'Y' AND REVIEW_WRITER = #{memberNo} ORDER BY REVIEW_NO
+	</select>
 </mapper>

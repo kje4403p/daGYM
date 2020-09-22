@@ -253,5 +253,21 @@ public class MemberServiceImpl implements MemberService{
 
 		}
 
+		// 내 리뷰 조회 페이징 처리 Service 구현
+		@Override
+		public PageInfo myReviewPagination(int type, int cp, int memberNo) {
+			int listCount = memberDAO.getMyReviewListCount(memberNo);
+			pInfo.setLimit(10);
+			pInfo.setPageInfo(cp, listCount, type);		
+
+			return pInfo;
+		}
+
+		// 내 리뷰 조회  Service 구현
+		@Override
+		public List<Review> myReviewList(int memberNo, PageInfo pInfo) {
+			List<Review> myReviewList = memberDAO.myReviewList(memberNo,pInfo);
+			return myReviewList;
+		}
 		
 }

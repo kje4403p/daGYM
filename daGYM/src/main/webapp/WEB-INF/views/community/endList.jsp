@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="../common/header.jsp"/>
  <jsp:include page="sideMenu.jsp"/>
-<div class="container event m-5">
+<div class="container event m-5" id="container">
 
 	<ul class="tabType1">
 		<li><a href="list">진행중 이벤트</a></li>

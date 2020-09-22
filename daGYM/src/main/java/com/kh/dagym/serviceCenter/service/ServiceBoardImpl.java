@@ -80,7 +80,7 @@ public class ServiceBoardImpl implements ServiceBoard{
 		return board;
 	}
 
-	// 검색 조건이 추가된 faq페이징 처리 구현
+	// 검색 조건이 추가된 faq,qna페이징 처리 구현
 	@Override
 	public PageInfo pagination(int type, int cp, Search search) {
 		
@@ -345,9 +345,10 @@ public class ServiceBoardImpl implements ServiceBoard{
 	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public Board selectQnaBoard(int boardNo) {
+		
 		Board board = serviceDAO.selectQnaBoard(boardNo);
 		board.setBoardWriter(serviceDAO.selectMemberId(board.getBoardWriter()));
-		System.out.println(board.getBoardWriter()+"qqqq");
+		
 		if(board!= null) {
 			int result = serviceDAO.increaseCount2(boardNo);
 			
