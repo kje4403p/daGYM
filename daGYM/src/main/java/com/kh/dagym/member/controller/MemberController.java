@@ -506,6 +506,13 @@ public class MemberController {
 					model.addAttribute("pInfo",pInfo);
 					return "member/myReview";
 			}
-			
+				
+				@ResponseBody
+				@RequestMapping("rating")
+				public String rating(String rating,Model model) {
+					model.addAttribute("rating", rating);
+					System.out.println(rating);
+					return rating;
+			}
 			
 }

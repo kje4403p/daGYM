@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <%  String rating = (String)request.getParameter("rating");%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -250,8 +252,8 @@
 								  <a href="#" value="5">★</a>
 						 <p>
 
-                            <button class="btn btn-success btn-lg" type="button" id="submit" style="padding: 0;">작성</button>
-                            <button  class="btn btn-success btn-lg" id="close" onclick="closeModal();" style="padding: 0;"> 
+                            <button class="btn btn-success btn-lg" type="button" onclick="a();" id="submit" style="padding: 0;">작성</button>
+                            <button type="button" class="btn btn-success btn-lg" id="close" onclick="closeModal();" style="padding: 0;"> 
 										닫기
 							</button>
                         </div>
@@ -340,44 +342,54 @@ function closeModal(){
 	
 	// 리뷰작성
 	
-		$("#submit").click(function(){
-			var rating;
-			$('#star a').click(function(){
-				$(this).parent().children("a").removeClass("on");
-				$(this).addClass("on").prevAll("a").addClass("on"); 
-				console.log($(this).attr("value")); 
-				rating = $(this).attr("value")
-				console.log("별"+rating)
-			
-			console.log("별별별 "+ rating)
-			if(rating === undefined){
+
+	var rating="0";
+	$('#star a').click(function (){
+			$(this).parent().children("a").removeClass("on");
+			$(this).addClass("on").prevAll("a").addClass("on"); 
+			 rating = $(this).attr("value");
+	
+	});
+	
+	console.log("별"+rating);
+
+		function a(){
+			var content = $("#reviewContent").val();
+			console.log("별"+rating);
+			if(rating ==0){
 				alert("별점을 등록해주세요.")
+			}else if(content==""){
+				alert("내용을 입력해주세요.")
 			}else{
-				var $content = $("#reviewContent").val();
-				var url = "../insertReview"
-				var no = ${trainerNo}
-				console.log("트"+no)
-				console.log("별"+rating)
-					$.ajax({
-						url : url,
-						data :{"reviewContent": $content,"reviewRating" : rating, "trainerNo" : no },
-						
-						success : function(result){
-							console.log("성공")
-							if(result>0){
-								alert("리뷰가 등록되었습니다.");
-								window.close();
-							}else{
-								swal("리뷰 등록에 실패했습니다. 다시 작성해주세요.");
-							}
-						},error : function(){
-							console.log("실패")
-						}
-						
-					})
-			}
+			var url = "../insertReview";
+			var no = ${trainerNo};
+			
+			console.log("트"+no);
+			console.log("별"+rating);
+			console.log(content);
+			
+			$.ajax({
+				url : url,
+				data :{"reviewContent": content,"reviewRating" : rating, "trainerNo" : no },
+				
+				success : function(result){
+					console.log("성공")
+					if(result>0){
+						alert("리뷰가 등록되었습니다.");
+						closeModal();
+					}else{
+						swal("리뷰 등록에 실패했습니다. 다시 작성해주세요.");
+					}
+				},error : function(){
+					console.log("실패")
+				}
+				
 			});
-		})
+		
+			}
+		}
+	
+	
 	//	insertReview(rating);
 
 	/*
