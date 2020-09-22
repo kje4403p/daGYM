@@ -109,7 +109,7 @@
                         <input type="text" class="form-control" id="memberPhone" name="memberPhone" value="${loginMember.memberPhone }" required>
                         <div class="help-block with-errors"></div>
                     </div>
-                <button class="primary-btn" type="button" id="payment">결제</button>
+                <button class="primary-btn" type="button" id="payment"  style="border : none">결제</button>
                   
                     </div>
                 </div>
