@@ -121,7 +121,7 @@
                     <div class="log-line reg-form-1 no-margin">
                        
                         <div class="pull-right">
-                            <button type="submit" id="reg-submit" class="btn btn-md btn-success-filled btn-log" >회원가입</button>
+                            <button type="submit" id="reg-submit" class="primary-btn" style="border : none" >회원가입</button>
                             <div id="msgSubmit" class="h3 text-center hidden"></div>
                             <div class="clearfix"></div>
                         </div>
