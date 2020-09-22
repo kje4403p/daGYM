@@ -252,11 +252,34 @@ public class MemberServiceImpl implements MemberService{
 			return memberDAO.deleteReview(reviewNo);
 
 		}
+
+		// 내 리뷰 조회 페이징 처리 Service 구현
+		@Override
+		public PageInfo myReviewPagination(int type, int cp, int memberNo) {
+			int listCount = memberDAO.getMyReviewListCount(memberNo);
+			pInfo.setLimit(10);
+			pInfo.setPageInfo(cp, listCount, type);		
+
+			return pInfo;
+		}
+
+		// 내 리뷰 조회  Service 구현
+		@Override
+		public List<Review> myReviewList(int memberNo, PageInfo pInfo) {
+			List<Review> myReviewList = memberDAO.myReviewList(memberNo,pInfo);
+			return myReviewList;
+		}
 		// 이메일 중복검사 Service 구현
 		@Override
 		public int emailDupCheck(String email) {
 			return memberDAO.emailDupCheck(email);
 		}
 
+		// 휴면계정 해제 Service 구현
+		@Transactional(rollbackFor = Exception.class)
+		@Override
+		public int changeStatus(int memberNo) {
+			return memberDAO.changeStatus(memberNo);
+		}
 		
 }

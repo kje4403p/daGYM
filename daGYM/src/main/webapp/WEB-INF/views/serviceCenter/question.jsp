@@ -36,9 +36,9 @@
 		</div>
 
 		<div id="right">
-
+		<span id="title">1:1문의 게시판 </span>
 			<div id="table1">
-				<table id="table2">
+				<table id="table2" class="table table-hover">
 					<thead>
 						<tr>
 							<th>질문유형</th>
@@ -177,7 +177,7 @@
 									integerOnly="true" /> <c:set var="next"
 									value="${operand2*5 + 1}" /> <a class="page-link" href="${url}${next}" aria-label="Next"><span aria-hidden="true">&gt;</span></a></li>
 
-							<li><a class="page-item" aria-label="Next" href="${url}${pInfo.maxPage}"><span aria-hidden="true">&gt;&gt;</span></a></li>
+							<li><a class="page-link" aria-label="Next" href="${url}${pInfo.maxPage}"><span aria-hidden="true">&gt;&gt;</span></a></li>
 						</c:if>
 					</ul>
 					</nav>
@@ -235,7 +235,9 @@
 	
 		$("#table2 td").on("click",function(e) {
 			
+			
 			var boardNo = $(this).parent().children().eq(0).children().val();
+			
 			
 			var boardUrl="${contextPath}/service/question/${pInfo.boardType}/"+boardNo+"?cp=${pInfo.currentPage}";
 			

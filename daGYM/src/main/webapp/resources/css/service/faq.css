@@ -4,7 +4,10 @@
 body::-webkit-scrollbar { display:none; } */
 
 
-
+#title{
+	font-size: 33px;
+	text-align: center;
+}
 
 #d1 {
 	
@@ -130,6 +133,7 @@ tbody>tr>td:last-child {
 
 #table2{
 	max-width: 1200px;
+	margin-top: 0px;
 }
 /* 검색창 */
 

@@ -247,6 +247,7 @@ public class MemberDAO {
 	public int deleteReview(int reviewNo) {
 		return sqlSession.update("memberMapper.deleteReview", reviewNo);
 
+
 	}
 
 	/** 이메일 중복검사 DAO
@@ -256,4 +257,35 @@ public class MemberDAO {
 	public int emailDupCheck(String email) {
 		return sqlSession.selectOne("memberMapper.emailDupCheck", email);
 	}	
+
+
+	}
+
+	/** 내 리뷰 페이징 처리 DAO
+	 * @param memberNo
+	 * @return listCount
+	 */
+	public int getMyReviewListCount(int memberNo) {
+		return sqlSession.selectOne("memberMapper.MyReviewListCnt",memberNo);
+	}
+	
+	/** 내 리뷰 조회 Service DAO
+	 * @param memberNo
+	 * @param pInfo
+	 * @return myReviewList
+	 */
+	public List<Review> myReviewList(int memberNo, PageInfo pInfo) {
+		int offset = (pInfo.getCurrentPage() - 1) * pInfo.getLimit();
+		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
+		return sqlSession.selectList("memberMapper.myReviewList", memberNo,rowBounds);
+	}
+
+	/** 휴면계정 해제 DAO
+	 * @param memberNo
+	 * @return result
+	 */
+	public int changeStatus(int memberNo) {
+		return sqlSession.update("memberMapper.changeStatus", memberNo);
+	}
+
 }

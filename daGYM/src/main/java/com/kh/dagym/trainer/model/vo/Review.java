@@ -12,21 +12,14 @@ public class Review {
 	private int memberNo;
 	private int trainerNo;
 	private String memberId;
+	private String trainerNM;
 	
 	public Review() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	public Review(String reviewContent, int reviewRating, int memberNo, int trainerNo) {
-		super();
-		this.reviewContent = reviewContent;
-		this.reviewRating = reviewRating;
-		this.memberNo = memberNo;
-		this.trainerNo = trainerNo;
-	}
 
 	public Review(int reviewNo, String reviewContent, int reviewRating, Timestamp reviewCreateDate, String reviewStatus,
-			int memberNo, int trainerNo, String memberId) {
+			int memberNo, int trainerNo, String memberId, String trainerNM) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewContent = reviewContent;
@@ -36,6 +29,7 @@ public class Review {
 		this.memberNo = memberNo;
 		this.trainerNo = trainerNo;
 		this.memberId = memberId;
+		this.trainerNM = trainerNM;
 	}
 
 	public int getReviewNo() {
@@ -102,11 +96,19 @@ public class Review {
 		this.memberId = memberId;
 	}
 
+	public String getTrainerNM() {
+		return trainerNM;
+	}
+
+	public void setTrainerNM(String trainerNM) {
+		this.trainerNM = trainerNM;
+	}
+
 	@Override
 	public String toString() {
 		return "Review [reviewNo=" + reviewNo + ", reviewContent=" + reviewContent + ", reviewRating=" + reviewRating
 				+ ", reviewCreateDate=" + reviewCreateDate + ", reviewStatus=" + reviewStatus + ", memberNo=" + memberNo
-				+ ", trainerNo=" + trainerNo + ", memberName=" + memberId + ", toString()=" + super.toString() + "]";
+				+ ", trainerNo=" + trainerNo + ", memberId=" + memberId + ", trainerNM=" + trainerNM + "]";
 	}
 	
 	

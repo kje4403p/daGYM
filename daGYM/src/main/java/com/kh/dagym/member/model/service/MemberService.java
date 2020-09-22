@@ -1,3 +1,5 @@
+
+
 package com.kh.dagym.member.model.service;
 
 import java.util.List;
@@ -175,6 +177,29 @@ public interface MemberService {
 	 */
 	int deleteReview(int reviewNo);
 
+	/** 내 리뷰 페이징 처리 Service
+	 * @param type
+	 * @param cp
+	 * @param memberNo
+	 * @return
+	 */
+	PageInfo myReviewPagination(int type, int cp, int memberNo);
+
+	/** 내 리뷰 Service
+	 * @param memberNo
+	 * @param pInfo
+	 * @return
+	 */
+	List<Review> myReviewList(int memberNo, PageInfo pInfo);
+
+
+	/** 휴면계정 해제 Service
+	 * @param memberNo
+	 * @return result
+	 */
+	int changeStatus(int memberNo);
+
+  
 	/** 이메일 중복검사 Service
 	 * @param email
 	 * @return result
@@ -182,3 +207,4 @@ public interface MemberService {
 	int emailDupCheck(String email);
 
 }
+
