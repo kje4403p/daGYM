@@ -50,7 +50,7 @@ public class LoginFilter implements Filter{
 		// board 제외 목록 추가
 		//NOT_ALLOWED_PATH.addAll(Arrays.asList("/board/list/\\w", "/board/topViews/\\w", "/search/\\w"));
 		
-		NOT_ALLOWED_PATH.addAll(Arrays.asList("/intro", "/service/faq/4", "/service/4/\\w*", "/member/findIdView", "/member/findId","/member/findPwView", "/member/findPw"));
+		NOT_ALLOWED_PATH.addAll(Arrays.asList("/intro", "/service/faq/4", "/service/4/\\w*", "/member/findIdView", "/member/findId","/member/findPwView", "/member/findPw","/member/sendEmail"));
 		
 		HttpServletRequest req = (HttpServletRequest)request;
 		// HttpServletRequest는 ServletRequest의 자식이므로 강제 형변환 가능

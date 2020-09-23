@@ -292,8 +292,8 @@
                             <h4>5회권</h4>
                             <div class="triangle"></div>
                         </div>
-                        <h2 class="mi-price">${(trainer.trainerPrice)*5 }</h2>
-                     
+                        <h2 class="mi-price">${(trainer.trainerPrice)*5 }원</h2>
+                   
                         	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
 									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
@@ -314,25 +314,8 @@
                             <h4>10회권</h4>
                             <div class="triangle"></div>
                         </div>
-                        <h2 class="mi-price">${(trainer.trainerPrice)*10 }</h2>
-                        <ul>
-                            <li>
-                                <p>Duration</p>
-                                <span>12 months</span>
-                            </li>
-                            <li>
-                                <p>Personal trainer</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Amount of people</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Number of visits</p>
-                                <span>Unlimited</span>
-                            </li>
-                        </ul>
+                        <h2 class="mi-price">${(trainer.trainerPrice)*10 }원</h2>
+                       
                        
                         	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
@@ -354,25 +337,8 @@
                             <h4>20회권</h4>
                             <div class="triangle"></div>
                         </div>
-                        <h2 class="mi-price">${(trainer.trainerPrice)*20 }</h2>
-                        <ul>
-                            <li>
-                                <p>Duration</p>
-                                <span>12 months</span>
-                            </li>
-                            <li>
-                                <p>Personal trainer</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Amount of people</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Number of visits</p>
-                                <span>Unlimited</span>
-                            </li>
-                        </ul>
+                        <h2 class="mi-price">${(trainer.trainerPrice)*20 }원</h2>
+                        
                         
                         	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
@@ -392,7 +358,7 @@
         </div>
     </section>
 	
-		
+		<br><br>
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
