@@ -69,20 +69,7 @@ hr{
 }
 
 
-/* 답글 */
-.reply2-li{
-	padding-left: 50px;  
-}
 
-.reply2Area{
-	padding-top : 30px;
-	width : 80%;
-}
-
-.reply2Content{
-	resize: none;  
-	width : 100%; 
-}
 
 </style>
 <div id="reply-area ">
@@ -95,6 +82,7 @@ hr{
 				<td id="replyBtnArea">
 					<button class="btn btn-primary" id="addReply">댓글<br>등록</button>
 				</td>
+				
 			</tr>
 		</table>
 	</div>
@@ -161,7 +149,7 @@ function selectReplyList(){
 				// 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
 				if(rList[i].memberId == loginMemberId){
 					
-					var $showUpdate = $("<button>").addClass("btn btn-sm btn-primary ml-1").text("수정");
+					var $showUpdate = $("<button>").addClass("btn btn-sm btn-primary ml-1").attr("onclick","selectReply("+ replyNo + ")").text("수정");
 					var $deleteReply = $("<button>").addClass("btn btn-sm btn-primary ml-1").attr("onclick","deleteReply("+ replyNo + ")").text("삭제");
 					$btnArea.append($showUpdate, $deleteReply);
 				}
@@ -178,7 +166,7 @@ function selectReplyList(){
 				$replyListArea.append($li).append($hr);
 			});
 			
-		}, error : function(request, status, error){
+			}, error : function(request, status, error){
 			 	console.log("ajax 통신 오류");
 				console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	        
@@ -233,7 +221,6 @@ function deleteReply(replyNo) {
 			type : "POST",
 			success : function(result) {
 				alert(result);
-				selectReplyList();
 			}, error : function(){
 				console.log("통신 실패");
 			}
@@ -241,81 +228,66 @@ function deleteReply(replyNo) {
 	}
 }
 
-//-----------------------------------------------------------------------------------------
-// 답글 버튼 클릭 동작
-/* function addReply2Area(el, parentReplyNo){
-	// 답글 작성 영역이 여러 개 생기지 않도록 처리
-	var check = cancelReply2();
-	
-	var replyWriter = $(el).parent().prev().prev().children("a").text();
-	
-	if(check){
-		var $div = $("<div>").addClass("reply2Area");
-		var $textArea = $("<textarea rows='3'>").addClass("reply2Content").attr("placeholder", replyWriter + "님께 답글 작성하기");
-		var $btnArea = $("<div>").addClass("btnArea");
-		
-		var $insertBtn = $("<button>").addClass("btn btn-sm btn-primary ml-1").text("등록").attr("onclick", "addReply2(this, " + parentReplyNo + ", \'" + replyWriter + "\')");
-		var $cancelBtn = $("<button>").addClass("btn btn-sm btn-secondary ml-1 reply-cancel").text("취소").attr("onclick", "cancelReply2()");
-		
-		$btnArea.append($insertBtn,$cancelBtn);
-		
-		$div.append($textArea, $btnArea);  
-		$(el).parent().after($div);
-	}
-	
-	$(".reply2Content").focus();
-}
-
-
-//-----------------------------------------------------------------------------------------
-// 답글 등록
-function addReply2(el, parentReplyNo, replyWriter){
-	console.log($(el).parent().prev().val());
-	console.log(parentReplyNo);
-	console.log(replyWriter);
-	
-	var replyContent = $(el).parent().prev().val();
-	var memberId = "${loginMember.memberNo}";
-	
+function selectReply(replyNo) {
+	var url = "updateReply/" +replyNo;
+	console.log(replyNo);
 	$.ajax({
-		url : "${contextPath}/reply/insertReply2/${board.boardNo}",
-		data : {"replyContent" : replyContent,
-				"parentReplyNo" : parentReplyNo,
-				"memberId" : memberId},
-		dataType : "text",
-		success : function(result){
-			alert(result);
-			
-			selectReplyList();
-		},error : function(){
+		url : url,
+		data : replyNo,
+		type : "GET",
+		success : function(content){
+			updateReplyForm(replyNo, content);
+		}, error : function(){
 			console.log("통신 실패");
 		}
-	});  
+	})
 }
 
-//-----------------------------------------------------------------------------------------
-// 답글 취소
-function cancelReply2(){
+function updateReplyForm(replyNo, content) {
 	
-	// 다른 답글이 작성된 상태로  새로운 답글이 클릭된 경우 
-	// 이미 작성된 답글을 삭제할 것이지 확인하는 작업.
-	var tmp = $(".reply2Area").children("textArea").val();
 	
-	if(tmp == "" || tmp == undefined){
-		$(".reply2Area").remove();
-		
-		return true;
-		
-	}else{
-		var cancelConfirm = confirm("작성된 댓글 내용이 사라집니다. 취소 하시겠습니까?");
-		
-		if(cancelConfirm){
-			$(".reply2Area").remove();
-		}
-		
-		return cancelConfirm;
-	}
+	var $replyListArea = $("#"+replyNo+" .rContent").parent();
 	
-} */
+	$("#"+replyNo+" .rContent").detach();
+	$("#"+replyNo+" .btnArea").detach();
+	
+
+	$cancel = $("<div>").addClass("btn btn-sm btn-light mb-2").attr("onclick","selectReplyList()").text("수정취소");
+	$rContent = $("<textarea>").css({'resize':'none', 'width': '100%', 'height':'100px'}).val(content);
+	
+	var replyContent = $rContent.val();
+	
+	var $btnArea = $("<div>").addClass("btnArea");
+	/* var $updateBtn = $("<div>").addClass("btn btn-sm btn-primary ml-1").attr("onclick","updateReply("+replyNo + ",'"+replyContent +"')").text("수정완료"); */
+	var $updateBtn = $("<div>").addClass("btn btn-sm btn-primary ml-1").attr("onclick","updateReply("+replyNo + ",'"+replyContent +"', this)").text("수정완료");
+	
+	
+	$btnArea.append($updateBtn);
+	
+	
+	$replyListArea.append($cancel).append($rContent).append($updateBtn);
+	
+	
+}
+
+function updateReply (replyNo, replyContent, el) {
+	var url = "updateReply";
+	
+	var sendData = {'replyNo': replyNo, 'replyContent' : $(el).prev().val()};
+	$.ajax({
+		url : url,
+		type : "POST",
+		data : sendData,
+		success : function(result){
+			selectReplyList();
+		},
+		
+	    error:function(){
+	    	console.log("통신 실패");
+	    }
+
+	})
+}
+
 
 </script>

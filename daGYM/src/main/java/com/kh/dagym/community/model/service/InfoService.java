@@ -61,4 +61,16 @@ public interface InfoService {
 	 */
 	List<Board> selectBest(int BOARD_TYPE);
 
+	/** 선택한 댓글 불러오기
+	 * @param replyNo
+	 * @return String
+	 */
+	String selectReply(int replyNo);
+
+	/** 댓글 수정하기
+	 * @param reply
+	 * @return int
+	 */
+	int updateReply(Reply reply);
+
 }

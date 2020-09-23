@@ -91,4 +91,14 @@ public class InfoDAO {
 		return sqlSession.selectList("eventMapper.selectBest", BOARD_TYPE);
 	}
 
+
+	public String selectReply(int replyNo) {
+		return sqlSession.selectOne("eventMapper.selectReply", replyNo);
+	}
+
+
+	public int updateReply(Reply reply) {
+		return sqlSession.update("eventMapper.updateReply", reply);
+	}
+
 }
