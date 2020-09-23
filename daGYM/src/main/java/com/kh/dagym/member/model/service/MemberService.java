@@ -149,10 +149,10 @@ public interface MemberService {
 
 	
 	/** 리뷰 작성 여부확인
-	 * @param memberNo
+	 * @param mUid
 	 * @return result
 	 */
-	int checkReview(int memberNo);
+	int checkReview(int mUid);
 	
 	/** 마이페이지 회원 스케줄 Service
 	 * @param memberNo
@@ -205,6 +205,8 @@ public interface MemberService {
 	 * @return result
 	 */
 	int emailDupCheck(String email);
+
+	//List<Review> reviewList(int memberNo);
 
 }
 
