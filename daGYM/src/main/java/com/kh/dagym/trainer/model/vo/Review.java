@@ -1,5 +1,6 @@
 package com.kh.dagym.trainer.model.vo;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Review {
@@ -7,7 +8,7 @@ public class Review {
 	private int reviewNo;
 	private String reviewContent;
 	private int reviewRating;
-	private Timestamp reviewCreateDate;
+	private Date reviewCreateDate;
 	private String reviewStatus;
 	private int memberNo;
 	private int trainerNo;
@@ -20,7 +21,7 @@ public class Review {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Review(int reviewNo, String reviewContent, int reviewRating, Timestamp reviewCreateDate, String reviewStatus,
+	public Review(int reviewNo, String reviewContent, int reviewRating, Date reviewCreateDate, String reviewStatus,
 			int memberNo, int trainerNo, String memberId, String trainerNM, String merchantUid) {
 		super();
 		this.reviewNo = reviewNo;
@@ -66,11 +67,11 @@ public class Review {
 		this.reviewRating = reviewRating;
 	}
 
-	public Timestamp getReviewCreateDate() {
+	public Date getReviewCreateDate() {
 		return reviewCreateDate;
 	}
 
-	public void setReviewCreateDate(Timestamp reviewCreateDate) {
+	public void setReviewCreateDate(Date reviewCreateDate) {
 		this.reviewCreateDate = reviewCreateDate;
 	}
 
