@@ -46,7 +46,7 @@
                      	 <c:forEach var="review" items="${myReviewList}">
                         <tr>
                         	<td style ="text-align: center">${review.reviewContent}</td>
-                        	<td style ="text-align: center">${review.reviewRating}</td>
+                        	<td style ="text-align: center">${review.reviewRating}/5</td>
                         	<td style ="text-align: center">${review.reviewCreateDate}</td>
                         	<td style ="text-align: center">${review.trainerNM}</td>
                         </tr>

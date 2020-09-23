@@ -18,8 +18,12 @@
                 	<table class="table table-hover" >
                 		<h1> 정보 변경 </h1>
                 		<tr>
-                			<td>* 아이디 </td>
+                			<td>아이디 </td>
                 			<td>${loginMember.memberId}</td>
+                		</tr>
+                		<tr>
+                			<td>이메일</td>
+                			<td>${loginMember.memberEmail}</td> 
                 		</tr>
                 		<tr>
                 			<td>* 비밀번호  </td> 	
@@ -50,16 +54,6 @@
                 			<input id="memberPhone" name="memberPhone" value="${loginMember.memberPhone}">
                 			<span id="checkPhone">&nbsp;</span>
                 			</td> 
-                		</tr>
-                		<tr>
-                			<td>* 이메일 </td>
-                			<td>
-                			<input id="memberEmail" name="memberEmail" type="email" value="${loginMember.memberEmail}">
-                			<button class="btn btn-info" type="button" name="emailCheck" id="emailCk-btn" onclick="sendEmail();" disabled >이메일 인증</button>
-                			<span id="checkEmail">&nbsp;</span><br>
-                        	<input type="text" id="code" name="code"  placeholder="인증번호">
-                        	<span id="checkCode">&nbsp;</span>
-                			</td>
                 		</tr>
                 		<tr>
                 			<td></td>
