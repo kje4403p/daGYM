@@ -20,6 +20,7 @@
     
     #calendar td{
     	vertical-align: top;
+    	width:100px;
     }
     
     #successFall{
