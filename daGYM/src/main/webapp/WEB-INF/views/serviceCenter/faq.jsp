@@ -39,6 +39,7 @@
 				<table id="table2" class="table table-hover">
 					<thead>
 						<tr>
+							<th></th>
 							<th><c:if test="${flag}">번호</c:if></th>
 							<th>제목</th>
 							<th>작성자</th>
@@ -58,7 +59,7 @@
 								<c:forEach var="board" items="${bList}"  varStatus="status">
 									<div>
 										<tr>
-										
+											<td><img src="${contextPath}/resources/img/serviceImg/q.png"></td>
 											<td> <c:if test="${flag}">${board.boardNo}</c:if>
 												<c:choose>
 												<c:when test="${flag2}">
@@ -203,7 +204,7 @@
 
 		$("#table2 td").on("click",function(e) {
 					$click=$(this);						
-					var boardNo = $(this).parent().children().eq(0).children().val();
+					var boardNo = $(this).parent().children().eq(1).children().val();
 					var this1 = $(this);
 					var boardUrl = "${contextPath}/service/${pInfo.boardType}/"
 							+ boardNo + "?cp=${pInfo.currentPage}";
@@ -230,6 +231,11 @@
 								height : "auto%",
 								width : "100%"
 							});
+							
+							var src = "${contextPath}/resources/img/serviceImg/a.png";
+							$imgA = $("<img>").attr("src",src);
+							$imgA.css({"margin-right":"900px","margin-top": "10px"});
+							$divout.append($imgA);
 							
 							if(map.files != null){
 							
