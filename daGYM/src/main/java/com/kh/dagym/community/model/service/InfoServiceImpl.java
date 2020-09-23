@@ -105,6 +105,18 @@ public class InfoServiceImpl implements InfoService{
 	public List<Board> selectBest(int BOARD_TYPE) {
 		return infoDAO.selectBest(BOARD_TYPE);
 	}
+	
+	
+	@Override
+	public String selectReply(int replyNo) {
+		return infoDAO.selectReply(replyNo);
+	}
+	
+	@Transactional
+	@Override
+	public int updateReply(Reply reply) {
+		return infoDAO.updateReply(reply);
+	}
 
 
 	// 크로스 사이트 스크립트 방지 메소드

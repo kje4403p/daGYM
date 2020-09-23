@@ -73,9 +73,7 @@
 				<!-- Content -->
 				<div id="board-content">
 					<% pageContext.setAttribute("newLine", "\n"); %>
-			        <% pageContext.setAttribute("newLine", "\n"); %>
                     ${fn:replace(board.boardContent,newLine,"<br>") }
-				    ${board.boardContent }
 				</div>
 				
 				<div id="heart_div">
