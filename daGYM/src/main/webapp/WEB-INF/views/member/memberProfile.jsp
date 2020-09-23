@@ -11,12 +11,12 @@
     <%@ include file="../common/header.jsp"%>
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
-        <div class="col-sm-7">
+        <div class="col-sm-7" style="left:150px;">
             <form action="updateAction" method="POST"
                 onsubmit="return validate();">
-                    <h1>회원정보</h1>
                     <div class="row mb-3 form-row">
-                	<table class="table table-hover">
+                	<table class="table table-hover" >
+                		<h1> 정보 변경 </h1>
                 		<tr>
                 			<td>* 아이디 </td>
                 			<td>${loginMember.memberId}</td>
@@ -55,7 +55,7 @@
                 			<td>* 이메일 </td>
                 			<td>
                 			<input id="memberEmail" name="memberEmail" type="email" value="${loginMember.memberEmail}">
-                			<button type="button" name="emailCheck" id="emailCk-btn" onclick="sendEmail();" disabled >이메일 인증</button>
+                			<button class="btn btn-info" type="button" name="emailCheck" id="emailCk-btn" onclick="sendEmail();" disabled >이메일 인증</button>
                 			<span id="checkEmail">&nbsp;</span><br>
                         	<input type="text" id="code" name="code"  placeholder="인증번호">
                         	<span id="checkCode">&nbsp;</span>
@@ -63,7 +63,7 @@
                 		</tr>
                 		<tr>
                 			<td></td>
-                			<td><button>확인</button> <button type="reset" id="reset">취소</button>
+                			<td><button class="btn btn-info">확인</button> <button class="btn btn-info" type="reset" id="reset">취소</button>
                 		</tr>
                 	</table>
                 </div>
@@ -90,9 +90,6 @@
     	var $reset = $("#reset");
     $pwd.on("input", function(){
 		var regExp = /^[A-Za-z0-9]{6,12}$/;
-		console.log($("#memberPwd").val())
-		console.log("22 : " + $pwd2.val())
-		
 		if(!regExp.test($("#memberPwd").val())){
 			$("#checkPwd").text("비밀번호 형식이 유효하지 않습니다.").css("color", "red");
 			signUpCheck.pwd1 = false;
@@ -103,11 +100,9 @@
 		}
 		
 		if(!signUpCheck.pwd1 && $pwd2.val().length > 0){
-			console.log("불일치")
 			$pwd2.val("");
 			$pwd1.focus();
 		}else if(signUpCheck.pwd1 && $pwd2.val().length > 0){
-			console.log("일치")
 			if($pwd1.val().trim() != $pwd2.val().trim()){
 				$("#checkPwd2").text("비밀번호 불일치").css("color","red");
 				signUpCheck.pwd2 = false;
@@ -121,7 +116,6 @@
     
     $name.on("input", function(){
 		var regExp = /^[가-힣]{2,}$/;
-		console.log("이름 " + $name.val())
 		if(!regExp.test($name.val())){
 			$("#checkName").text("한글 두 글자 이상을 입력하세요.").css("color", "red");
 			signUpCheck.name = false;

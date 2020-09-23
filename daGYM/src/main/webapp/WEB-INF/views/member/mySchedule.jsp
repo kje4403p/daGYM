@@ -14,7 +14,7 @@
     {
         border:1px solid #BDBDBD;
         text-align:center;
-        width:1000px;
+        width:1300px;
         height: 800px;
     }
     
@@ -168,10 +168,9 @@
     <%@ include file="../common/header.jsp"%>
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
-        <div class="col-sm-5">
+        <div class="col-sm-7">
             <form method="POST"
                 onsubmit="return validate();">
-                    <h1>내 스케줄</h1>
                     <div id="successFall">
                     <c:if test="${loginMember.memberGrade == 'T'}">
                     <label id="success">, --예약 완료--</label> <label id="fall">--예약 없음--</label><br>
