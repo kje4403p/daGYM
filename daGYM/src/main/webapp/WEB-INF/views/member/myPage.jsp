@@ -20,7 +20,7 @@
 	#profile,#pass,#Students,#remove{
 		/* border:3px solid black; */
 		border-radius : 50px;
-		background-color : RGB(197,254,254);
+		background-color : rgb(255,157,159);
 		
 		width : 370px;
 		height: 150px;
@@ -29,7 +29,7 @@
 	
 	#profile:hover,#pass:hover,#Students:hover,#remove:hover{
 		cursor:pointer;
-		background-color : RGB(141,254,254);
+		background-color : RGB(255,185,187);
 	}
 	
 	#space{
@@ -46,7 +46,7 @@
 			<form method="POST" onsubmit="return validate();">
 				
 				<br>
-				<div class="row mb-5 form-row">
+				<div class="row mb-5 form-row" style="margin-left: 150px;">
 					<br>
 					<table>
 					<tr>
@@ -64,9 +64,6 @@
 							</td>
 							<c:choose>
 								<c:when test="${empty loginMember }">
-									<a href="${contextPath}/member/login"
-										class="primary-btn signup-btn">Login</a>
-
 								</c:when>
 								<c:otherwise>
 									<c:if test="${loginMember.memberGrade == 'G'}">
@@ -88,11 +85,12 @@
 									</c:if>
 								</c:otherwise>
 							</c:choose>
-
+							<c:if test="${loginMember.memberGrade == 'G'}">
 							<td id="remove" style="text-align: center;">회원 탈퇴<br>
 								<i class="fas fa-user-times fa-3x"></i>
 								<br>남은 헬스이용권은 환불되지 않습니다.
 							</td>
+							</c:if>
 							<td id="space">
 							</td>
 						</tr>
