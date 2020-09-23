@@ -67,9 +67,9 @@
 								</c:when>
 								<c:otherwise>
 									<c:if test="${loginMember.memberGrade == 'G'}">
-										<td id="pass" style="text-align: center;">PT이용권/결제정보<br>
+										<td id="pass" style="text-align: center;">PT이용권/결제정보/리뷰등록/예약취소<br>
 											<i class="fas fa-money-check-alt fa-3x"></i>
-											<br>PT이용권 및 결제정보를 확인 할 수 있습니다.
+											<br>PT이용권,결제정보등 확인 할 수 있습니다.
 										</td>
 										<td id="space">
 										

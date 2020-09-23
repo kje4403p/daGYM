@@ -10,12 +10,13 @@ public class MyReply {
 	private String rerlyContent;
 	private Date rerlyEnrollDt;
 	private char replyStatus;
+	private int rarentBoardType;
 	
 	public MyReply() {
 	}
 
 	public MyReply(int replyNo, int rarentBoardNo, String rarentBoardTitle, int rerlyMemberNo, String rerlyContent,
-			Date rerlyEnrollDt, char replyStatus) {
+			Date rerlyEnrollDt, char replyStatus, int rarentBoardType) {
 		super();
 		this.replyNo = replyNo;
 		this.rarentBoardNo = rarentBoardNo;
@@ -24,6 +25,7 @@ public class MyReply {
 		this.rerlyContent = rerlyContent;
 		this.rerlyEnrollDt = rerlyEnrollDt;
 		this.replyStatus = replyStatus;
+		this.rarentBoardType = rarentBoardType;
 	}
 
 	public int getReplyNo() {
@@ -82,10 +84,22 @@ public class MyReply {
 		this.replyStatus = replyStatus;
 	}
 
+	public int getRarentBoardType() {
+		return rarentBoardType;
+	}
+
+	public void setRarentBoardType(int rarentBoardType) {
+		this.rarentBoardType = rarentBoardType;
+	}
+
 	@Override
 	public String toString() {
 		return "MyReply [replyNo=" + replyNo + ", rarentBoardNo=" + rarentBoardNo + ", rarentBoardTitle="
 				+ rarentBoardTitle + ", rerlyMemberNo=" + rerlyMemberNo + ", rerlyContent=" + rerlyContent
-				+ ", rerlyEnrollDt=" + rerlyEnrollDt + ", replyStatus=" + replyStatus + "]";
+				+ ", rerlyEnrollDt=" + rerlyEnrollDt + ", replyStatus=" + replyStatus + ", rarentBoardType="
+				+ rarentBoardType + "]";
 	}
+
+	
+	
 }

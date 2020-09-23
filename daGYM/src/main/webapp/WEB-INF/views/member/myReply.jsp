@@ -24,15 +24,17 @@
                     <button class="btn btn-info" id="myReply">내 댓글</button>
                     <button class="btn btn-info" id="myReView">내 리뷰</button>
                     <br><br>
-                    <span style ="text-align: center">내 댓글 리스트 총 ${pInfo.listCount}개</span>
+                    <span style ="text-align: center">내 댓글 리스트 총 ${pInfo.listCount}개 </span>
                     <div class="row mb-3 form-row">
                     
-                <table class="table table-hover">
+                <table id="list-table" class="table table-hover">
 
                     	<tr>
-                    		<td style ="text-align: center">게시글 제목</td>
-                    		<td style ="text-align: center">댓글 내용</td>
-                    		<td style ="text-align: center">작성일</td>
+                    		<th style ="text-align: center; display:none;">게시글 번호</th>
+                    		<th style ="text-align: center; display:none;">게시글 타입</th>
+                    		<th style ="text-align: center">게시글 제목</th>
+                    		<th style ="text-align: center">댓글 내용</th>
+                    		<th style ="text-align: center">작성일</th>
                         </tr>
                         <c:choose>
                         
@@ -44,6 +46,8 @@
                  		 <c:otherwise>
                      	 <c:forEach var="reply" items="${myReplyList}">
                         <tr>
+                        	<td style ="text-align: center; display:none;">${reply.rarentBoardNo}</td>
+                        	<td style ="text-align: center; display:none;">${reply.rarentBoardType}</td>
                         	<td style ="text-align: center">${reply.rarentBoardTitle}</td>
                         	<td style ="text-align: center">${reply.rerlyContent}</td>
                         	<td style ="text-align: center">${reply.rerlyEnrollDt}</td>
@@ -107,6 +111,22 @@
     </div>
     
     <script>
+    $(function(){
+        $("#list-table td").on("click", function(){
+           var boardNo = $(this).parent().children().eq(0).text();
+           var boardUrl = "";
+           if($(this).parent().children().eq(1).text() == "2"){
+           		boardUrl = "${contextPath}/info/"+ boardNo + "?cp=${pInfo.currentPage}";
+           }else if($(this).parent().children().eq(1).text() == "4"){
+        		boardUrl = "${contextPath}/service/faq/4";
+           }else if($(this).parent().children().eq(1).text() == "3"){
+        	   	boardUrl = "${contextPath}/service/question/3/"+ boardNo + "?cp=${pInfo.currentPage}";
+           }else if($(this).parent().children().eq(1).text() == "1"){
+        	   	boardUrl = "${contextPath}/event/"+ boardNo + "?cp=${pInfo.currentPage}";
+           }
+        location.href = boardUrl;
+        });
+     });
 	    $("#myBoard").on("click", function() {
 			location.href= "${contextPath}/member/myBoardList/1";
 		});
