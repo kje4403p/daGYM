@@ -4,9 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Molla - Bootstrap eCommerce Template</title>
 <title>Insert title here</title>
+
 <style type="text/css">
 	          /* The Modal (background) */
 	.searchModal {
@@ -94,7 +97,6 @@
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
         <div class="col-sm-6">
-    
                     <div class="row mb-3 form-row">
                     <h1>이용권 및 결제정보</h1>
                 	<table class="table" id="table">
@@ -134,57 +136,7 @@
                         </c:choose>
                 	</table>
                 </div>
-                <div class="my-4">
-		<c:set var="url" value="${contextPath}/member/myPassList/${pInfo.boardType}?cp="></c:set>
-        	<ul class="pagination">
-            	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize }">	
-	                <li>
-	                	<!-- 맨 처음으로(<<) -->
-	                    <a class="page-link text-primary" href="${url}1">&lt;&lt;</a>
-	                </li>
-	                
-	                <li>
-                      <!-- 이전으로(<) -->
-                      <!-- prev 생성 식 : (현재페이지-1) / 페이징바 사이즈(10) * 10 -->
-                      <!-- fmt 태그를 이용한 소수점 제거 -->
-                      <fmt:parseNumber var="operand1" value="${(pInfo.currentPage-1)/pInfo.pagingBarSize}" integerOnly="true"/>
-                      <c:set var="prev" value="${operand1 * 5}"/>
-                      
-                         <%-- <a class="page-link text-primary" href="${pInfo.boardType}?cp=${prev}">&lt;</a> --%>
-                         <a class="page-link text-primary" href="${url}${prev}">&lt;</a>
-                   </li>
-                </c:if>
-                
-                <!-- 10개의 페이지 목록 -->
-                <c:forEach var="p" begin="${pInfo.startPage }" end="${pInfo.endPage }">
-                	<c:choose>
-                		<c:when test="${p == pInfo.currentPage}">
-            				<li><a class="page-link">${p }</a></li>
-                		</c:when>
-                		<c:otherwise>
-		               		<li>
-<%-- 		               			<a class="page-link text-primary" href="${pInfo.boardType }?cp=${p}">${p}</a> --%>
-		               			<a class="page-link text-primary" href="${url}${p}">${p}</a>
-		                	</li>
-                		</c:otherwise>
-					</c:choose>               
-                </c:forEach>
-                <!-- 다음 페이지로(>) -->
-                <!-- next 생성 식 : (현재 페이지 + 9) / 10 * 10 + 1 -->
-                <c:if test="${pInfo.maxPage > pInfo.endPage}">
-	                <li>
-	                	<fmt:parseNumber var="operand2" value="${(pInfo.currentPage + pInfo.pagingBarSize - 1)/pInfo.pagingBarSize} " integerOnly="true"/>
-	                	<c:set var="next" value="${operand2 * pInfo.pagingBarSize + 1 }"/>
-						<a class="page-link text-primary" href="${url}${next}">&gt;</a>
-	                </li>
-	                
-	                <!-- 맨 끝으로(>>) -->
-	                <li>
-	                    <a class="page-link text-primary" href="${url}${pInfo.maxPage}">&gt;&gt;</a>
-	                </li>
-                </c:if>
-            </ul>
-        </div>
+             
         
         <br><br><br>
         
@@ -223,7 +175,6 @@
                 	</table>
                 </div>
         </div>
-        
     </div>
     <div id='calendar'></div>
      <div id="modal" class="searchModal">
@@ -240,6 +191,7 @@
 						<div class="col-sm-12">
 							<form accept-charset="UTF-8" action="insertReview" method="post">
                         <input id="ratings-hidden" name="rating" type="hidden"> 
+                        <input id="mUid" name="merchantUid" type="hidden" value="">
                         <textarea class="form-control animated" cols="50" id="reviewContent" name="reviewContent" placeholder="Enter your review here..." rows="5"></textarea>
         				<p id="mUid"></p>
                         <div class="text-right">
@@ -274,31 +226,23 @@ function closeModal(){
 
 
 	$(document).ready(function (){
-		console.log("rkskek")
 		var size = $("#table tr").length;
-		console.log("size"+size)
 		var memberNo = ${loginMember.memberNo}
 		for(var i=0 ; i<size-1 ; i++){
 			var mUid=$("table tr").eq(i+1).children().eq(0).text(); // 결제번호
-			console.log(i+"+"+mUid)
 			var $btn = $("table tr").eq(i+1).children().eq(6); // 버튼영역
-			console.log("번호"+mUid);
-			var $button=$("<button>").addClass("btn btn-primary btn-sm ml-1 reviewbtn").attr({"name":"review","type":"button"}).text("리뷰작성하기"); // 버튼
+			var $button=$("<button>").addClass("btn btn-primary btn-rounded reviewbtn").attr({"name":"review","type":"button"}).text("리뷰작성하기"); // 버튼
 			(function(i){
 				$.ajax({
 					url : "${contextPath}/member/checkReview",
 					data : {"mUid" : mUid},
 					async: false,
 					success : function(result){
-						console.log("성공"+result)
 					
 						if(result>0){
-							console.log(i+"+리절트"+result)
 							$btn.html("");
-							console.log("muid"+mUid)
 						}else{
 							$btn.append($button);
-							console.log(i+"+리절"+result);
 							}
 						
 					},error : function(){
@@ -310,9 +254,12 @@ function closeModal(){
 			
 			
 		}
+		
 		$(".reviewbtn").on("click",function(){
+			var mUid = $(this).parent().parent().children().eq(0).text();
+			console.log("uid"+mUid)
 			 $('#modal').show();
-			console.log("모달")
+			$("#mUid").val(mUid)
 		})
 		
 		
@@ -364,7 +311,8 @@ function closeModal(){
 
 		function a(){
 			var content = $("#reviewContent").val();
-			var merchatUid = $
+			var merchatUid = $("#mUid").val()
+			console.log("번호" + merchatUid)
 			if(rating ==0){
 				alert("별점을 등록해주세요.")
 			}else if(content==""){
@@ -375,12 +323,13 @@ function closeModal(){
 			
 			$.ajax({
 				url : url,
-				data :{"reviewContent": content,"reviewRating" : rating, "trainerNo" : no },
+				data :{"reviewContent": content,"reviewRating" : rating, "trainerNo" : no ,"merchantUid":merchatUid},
 				
 				success : function(result){
 					if(result>0){
 						alert("리뷰가 등록되었습니다.");
 						closeModal();
+						location.reload();
 					}else{
 						swal("리뷰 등록에 실패했습니다. 다시 작성해주세요.");
 					}

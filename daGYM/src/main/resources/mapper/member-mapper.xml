@@ -205,7 +205,7 @@
 	</select>
 	<!-- 리뷰등록 -->
 	<insert id="insertReview" parameterType="Review">
-		INSERT INTO REVIEW VALUES(#{reviewNo}, #{reviewContent}, #{reviewRating}, SYSDATE, 'Y', #{memberNo}, #{trainerNo})
+		INSERT INTO REVIEW VALUES(#{reviewNo}, #{reviewContent}, #{reviewRating}, SYSDATE, 'Y', #{memberNo}, #{trainerNo},#{merchantUid})
 	 </insert>
 	 
 	<!-- 리뷰 작성 여부 확인 -->
