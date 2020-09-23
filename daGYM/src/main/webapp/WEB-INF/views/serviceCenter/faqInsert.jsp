@@ -177,6 +177,18 @@
 			$("#content").focus();
 			return false;
 		}
+		
+		var content = $("#content").val();
+		var ban = ["개새끼","시발"];
+		
+		for (var i=0; i<ban.length; i++){
+			if(content.indexOf(ban[i]) != -1){
+				alert("욕설을 포함 하고 있습니다.");
+				$("#content").val("");
+				return false;
+			}
+		} 
+		
 	}
 	
 	 // 이미지 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수

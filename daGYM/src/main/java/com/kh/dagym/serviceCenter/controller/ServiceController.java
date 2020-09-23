@@ -170,8 +170,8 @@ public class ServiceController {
 	public String insertView(@PathVariable int type,Model model) {
 		System.out.println(type+"aa");
 		model.addAttribute("type", type);
-		
 		return "serviceCenter/faqInsert";
+		
 	}
 	
 	//게시글 등록

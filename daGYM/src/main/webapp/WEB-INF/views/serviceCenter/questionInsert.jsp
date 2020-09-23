@@ -120,9 +120,14 @@
 	<jsp:include page="../common/footer.jsp"/>
 
 	<script>
-
+	
 		// 유효성 검사
 		function validate() {
+			
+			var content = $("#content").text();
+			alert(content);
+			alert("제목을 입력해 주세요.");
+			
 			if ($("#title").val().trim().length == 0) {
 				alert("제목을 입력해 주세요.");
 				$("#title").focus();
@@ -132,8 +137,20 @@
 			if ($("#content").val().trim().length == 0) {
 				alert("내용을 입력해 주세요.");
 				$("#content").focus();
+			
 				return false;
 			}
+			
+			var content = $("#content").text();
+			var ban = ["관리자","개"];
+			
+			for (var i=0; i<ban.length; i++){
+				if(content.indexOf(ban[i]) != -1){
+					alert("욕금지");
+					return false;
+				}
+			} 
+			
 		}
 		
 		 // 이미지 공간을 클릭할 때 파일 첨부 창이 뜨도록 설정하는 함수

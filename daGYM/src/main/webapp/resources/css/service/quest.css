@@ -15,6 +15,7 @@
 
 #title{
 	font-size: 33px;
+	margin-left : 500px;
 }
 
 #left {
@@ -136,7 +137,7 @@ tbody>tr>td:last-child {
 
 #table2{
 	max-width: 1200px;
-	margin-top: 0px;
+	margin-top: 200px;
 }
 /* 검색창 */
 /* #searchInput, #searchBtn {
@@ -144,6 +145,7 @@ tbody>tr>td:last-child {
 	margin-left: 60%;
 }
 */
+
  input[type=text]{
 	border:5px solid #aaa;
 	border-radius:4px;
@@ -161,12 +163,12 @@ input[type=text]:focus{
 
 #search{
 	margin-top:50px;
-	margin-left: 390px;
+	margin-left: 450px;
 	
 }
 
 #newInsert{
-	margin-left : 1120px;
+	margin-left : 1220px;
 	font-weight: bold;
 	color: black;
 }
@@ -174,14 +176,14 @@ input[type=text]:focus{
 /* 페이징바 */
 #pagingbar{
  	position: absolute;
-	margin-left:500px;
+	margin-left:650px;
 	margin-top: 5px;
 	float: left;
 }
 
 #searcharea{
 position: absolute;
-	left:42% ;
+	left:45% ;
 	margin-top: 10px;
 }
 

@@ -1,5 +1,4 @@
 
-
 package com.kh.dagym.member.model.service;
 
 import java.util.List;
@@ -207,4 +206,3 @@ public interface MemberService {
 	int emailDupCheck(String email);
 
 }
-
