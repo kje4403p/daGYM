@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 
 <!doctype html>
 
@@ -292,15 +294,15 @@
                             <h4>5회권</h4>
                             <div class="triangle"></div>
                         </div>
-                        <h2 class="mi-price">${(trainer.trainerPrice)*5 }</h2>
-                     
+                            <h2 class="mi-price"> <fmt:formatNumber value="${(trainer.trainerPrice)*5 }" pattern="#,###원" /></h2>
+                   
                         	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
 									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="5"/>
 										</c:url>
-					                       <button onclick="window.open('${url}')" class="primary-btn membership-btn" id="order">결제하기</button>
+					                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
@@ -314,25 +316,8 @@
                             <h4>10회권</h4>
                             <div class="triangle"></div>
                         </div>
-                        <h2 class="mi-price">${(trainer.trainerPrice)*10 }</h2>
-                        <ul>
-                            <li>
-                                <p>Duration</p>
-                                <span>12 months</span>
-                            </li>
-                            <li>
-                                <p>Personal trainer</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Amount of people</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Number of visits</p>
-                                <span>Unlimited</span>
-                            </li>
-                        </ul>
+                            <h2 class="mi-price"> <fmt:formatNumber value="${(trainer.trainerPrice)*10 }" pattern="#,###원" /></h2>
+                       
                        
                         	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
@@ -340,7 +325,7 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="5"/>
 										</c:url>
-					                       <button onclick="window.open('${url}')" class="primary-btn membership-btn" id="order">결제하기</button>
+					                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
@@ -354,25 +339,10 @@
                             <h4>20회권</h4>
                             <div class="triangle"></div>
                         </div>
-                        <h2 class="mi-price">${(trainer.trainerPrice)*20 }</h2>
-                        <ul>
-                            <li>
-                                <p>Duration</p>
-                                <span>12 months</span>
-                            </li>
-                            <li>
-                                <p>Personal trainer</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Amount of people</p>
-                                <span>01 person</span>
-                            </li>
-                            <li>
-                                <p>Number of visits</p>
-                                <span>Unlimited</span>
-                            </li>
-                        </ul>
+                       
+
+                        <h2 class="mi-price"> <fmt:formatNumber value="${(trainer.trainerPrice)*20 }" pattern="#,###원" /></h2>
+                        
                         
                         	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
 								<c:choose>
@@ -380,7 +350,7 @@
 											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
 											<c:param name="classNm" value="5"/>
 										</c:url>
-					                       <button onclick="window.open('${url}')" class="primary-btn membership-btn" id="order">결제하기</button>
+					                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
@@ -392,7 +362,7 @@
         </div>
     </section>
 	
-		
+		<br><br>
 		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
