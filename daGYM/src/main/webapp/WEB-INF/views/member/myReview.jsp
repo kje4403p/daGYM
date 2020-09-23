@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>내 글</title>
+<title>내 리뷰</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
@@ -29,10 +29,10 @@
                 <table class="table table-hover">
 
                     	<tr>
+                    		<td style ="text-align: center">트레이너</td>
                     		<td style ="text-align: center">내용</td>
                     		<td style ="text-align: center">평점</td>
                     		<td style ="text-align: center">날짜</td>
-                    		<td style ="text-align: center">트레이너</td>
                         </tr>
                         
                         <c:choose>
@@ -45,10 +45,10 @@
                  		 <c:otherwise>
                      	 <c:forEach var="review" items="${myReviewList}">
                         <tr>
+                        	<td style ="text-align: center">${review.trainerNM}</td>
                         	<td style ="text-align: center">${review.reviewContent}</td>
                         	<td style ="text-align: center">${review.reviewRating}/5</td>
                         	<td style ="text-align: center">${review.reviewCreateDate}</td>
-                        	<td style ="text-align: center">${review.trainerNM}</td>
                         </tr>
                         </c:forEach>
                         </c:otherwise>
