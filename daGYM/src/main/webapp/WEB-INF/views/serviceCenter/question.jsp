@@ -13,7 +13,7 @@
 
 </style>
 <link rel="stylesheet" href="${contextPath}/resources/css/service/quest.css" />
-
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
 
   <meta charset="utf-8">
     <title>Animated Sidebar Menu | CodingLab</title>
@@ -36,7 +36,7 @@
 		</div>
 
 		<div id="right">
-		<span id="title">1:1문의 게시판 </span>
+		<span id="title">1:1 문의 게시판 </span>
 			<div id="table1">
 				<table id="table2" class="table table-hover">
 					<thead>
@@ -49,7 +49,7 @@
 							<th>답변여부</th>
 						</tr>
 					</thead>
-
+					
 					<tbody>
 						<c:choose>
 							<c:when test="${empty bList}">
@@ -208,7 +208,7 @@
 	</div>
 
 	
-
+	
 
 
 	<jsp:include page="../common/footer.jsp" />
@@ -253,7 +253,7 @@
 			var $sKey=$("select[name='sKey']");
 			
 			if($sVal.val().trim().length == 0){
-				searchUrl="${pInfo.boardType}";
+				searchUrl="${contextPath}/service/question/${pInfo.boardType}";
 			}else{
 				
 				searchUrl+="../search/${pInfo.boardType}?";

@@ -14,6 +14,7 @@
 	
 
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${contextPath}/resources/css/service/faq.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="/resource/js/bootstrap.js"></script>
