@@ -205,6 +205,7 @@ public interface MemberService {
 	 */
 	int emailDupCheck(String email);
 
+
 	//List<Review> reviewList(int memberNo);
 
 }
