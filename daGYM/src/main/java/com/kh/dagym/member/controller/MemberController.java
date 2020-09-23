@@ -291,6 +291,7 @@ public class MemberController {
 			@ResponseBody
 			@RequestMapping("emailDup")
 			public String emailDupCheck(String email) {
+				System.out.println("가나다라");
 				System.out.println(email);
 				int result = memberService.emailDupCheck(email);
 				System.out.println("리절"+result);
@@ -495,10 +496,10 @@ public class MemberController {
 				// 리뷰 작성 여부 확인
 				@ResponseBody
 				@RequestMapping("checkReview")
-				public String checkReview(Model model) {
+				public String checkReview(Model model, int mUid) {
 					int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
 					
-					int result = memberService.checkReview(memberNo);
+					int result = memberService.checkReview(mUid);
 					return result+"";
 				}
 			

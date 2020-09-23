@@ -6,7 +6,7 @@
 
 
 <head>
-	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,8 +14,7 @@
 <meta name="keywords" content="bootstrap ui kit, bootstrap components, html5 / css3 ui kit, web ui kit" />
 <meta name="author" content="KingStudio.ro">
 
-<!-- favicon -->
-<link rel="icon" href="${contextPath}/resources/images/favicon.png">
+
 <!-- page title -->
 <title>회원가입</title>
 
@@ -43,6 +42,7 @@
 	#signUp > div{
 		margin : 0 auto;
 	}
+
 	#register-form{
 		width : 500px;
 		margin-top : 30px;

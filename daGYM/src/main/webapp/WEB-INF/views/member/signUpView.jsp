@@ -5,7 +5,7 @@
 
 
 <head>
-
+<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -262,6 +262,7 @@
 	$email.on("input", function(){
 		console.log("이메일"+$email.val())
 		var email = $email.val();
+
 		var regExp =  /^[\w]{4,}@[\w]+(\.[\w]+){1,3}$/; // 4글자 아무단어 @ 아무단어 . * 3아무3
 		
 		if(!regExp.test($email.val())){

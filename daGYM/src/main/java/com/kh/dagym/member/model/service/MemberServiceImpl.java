@@ -212,8 +212,8 @@ public class MemberServiceImpl implements MemberService{
 
 		// 리뷰 작성 여부 확인 
 		@Override
-		public int checkReview(int memberNo) {
-			return memberDAO.checkReview(memberNo);
+		public int checkReview(int mUid) {
+			return memberDAO.checkReview(mUid);
 		}
 		
 		// 마이페이지 회원 스케줄 Service 구현
@@ -281,5 +281,7 @@ public class MemberServiceImpl implements MemberService{
 		public int changeStatus(int memberNo) {
 			return memberDAO.changeStatus(memberNo);
 		}
+
+		
 		
 }
