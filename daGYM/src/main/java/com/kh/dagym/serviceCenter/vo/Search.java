@@ -7,6 +7,7 @@ public class Search {
 	private String[] ct;
 	private String sKey;
 	private String sVal;
+	private String memberId;
 	
 	public Search() {
 		// TODO Auto-generated constructor stub
@@ -35,11 +36,24 @@ public class Search {
 	public void setsVal(String sVal) {
 		this.sVal = sVal;
 	}
+	
+	
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 
 	@Override
 	public String toString() {
-		return "Search [ct=" + Arrays.toString(ct) + ", sKey=" + sKey + ", sVal=" + sVal + "]";
+		return "Search [ct=" + Arrays.toString(ct) + ", sKey=" + sKey + ", sVal=" + sVal + ", memberId=" + memberId
+				+ "]";
 	}
+
+	
 
 	
 

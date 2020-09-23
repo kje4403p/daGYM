@@ -1,9 +1,11 @@
+<%@page import="com.kh.dagym.trainer.model.vo.PT"%>
 <%@page import="com.kh.dagym.trainer.model.vo.TrainerSchedule"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%List<TrainerSchedule> schedule = (List<TrainerSchedule>)request.getAttribute("schedule");%>
+    <%List<TrainerSchedule> schedule = (List<TrainerSchedule>)request.getAttribute("schedule");
+        List<PT> pt2 = (List<PT>)request.getAttribute("pt2");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -65,15 +67,25 @@ document.addEventListener('DOMContentLoaded', function() {
 			 <%
 			 for(int i=0; i<schedule.size(); i++){
 				 TrainerSchedule sd = (TrainerSchedule)schedule.get(i);
+				 String a =sd.getScheduleStatus();
+				 if(a.equals("Y")){
 			 %>
 				
-			 {	
-			
+			 {	 
 					
-				 start: "<%=sd.getScheduleTime()%>"
-						
-		
+				 start:"<%=sd.getScheduleTime()%>",
+				 color:"#8BBDFF"
+				
 			 },
+			 
+			 <%}else{%>
+			 {	 
+					
+				 start:"<%=sd.getScheduleTime()%>",
+				 color:"#FF6C6C"
+			 },
+			 
+			 <%}%>
 			 
 			 <%}%>
 			 ],
@@ -95,9 +107,12 @@ document.addEventListener('DOMContentLoaded', function() {
 					
 					
 					var scheduleTime2 = date+" "+item;
-					console.log(scheduleTime2);
+			
 					var scheduleTime =moment(scheduleTime2).format('YY/MM/DD HH:mm:00.000000000');
-					console.log(scheduleTime);
+			
+				
+				
+					 
 					$.ajax({
 						url:"${contextPath}/trainer/trainerSchedule/${trainerNo}",
 						data: {"scheduleTime":scheduleTime},
@@ -121,7 +136,26 @@ document.addEventListener('DOMContentLoaded', function() {
 				var eventFullDate = info.event.start;			  		
 				var scheduleTime =moment(eventFullDate).format('YY/MM/DD HH:mm:00.000000000');
 				var scheduleTime2 =moment(eventFullDate).format('YYYY/MM/DD HH:mm');
+				var scheduleTime3 =moment(scheduleTime2).format('YYYY-MM-DD HH:mm:00');
 			console.log(scheduleTime);
+			
+		      <%  for(int i=0; i<pt2.size(); i++){
+					 PT s = (PT)pt2.get(i);
+					 String a = s.getScheduleTime();
+					System.out.println(a);
+				 %>
+		 	
+			 var a = "<%=a%>";
+			 console.log(a);
+			 console.log(scheduleTime3);
+			 if(a==scheduleTime3){
+					alert("이미 예약되어 취소할 수 없습니다.");
+					return false;
+				}
+			 
+			 <%}%>
+			 
+			 
 				if(confirm(scheduleTime2+" 스케줄을 취소하시겠습니까?")){
 		
 					$.ajax({
