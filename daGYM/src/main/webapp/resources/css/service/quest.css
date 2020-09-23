@@ -2,6 +2,17 @@
 
 #body1{
 	height:1300px;
+	
+}
+
+#zindex{
+	position: absolute;
+	z-index: 2;
+	height:200px;
+	width:200px;
+	border: 1px solid black;
+	margin-top: -500px;
+	margin-left: 400px;
 }
 
 #d1 {
@@ -16,6 +27,8 @@
 #title{
 	font-size: 33px;
 	margin-left : 500px;
+	font-family: 'Noto Serif KR', serif;
+	text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
 }
 
 #left {
@@ -137,7 +150,8 @@ tbody>tr>td:last-child {
 
 #table2{
 	max-width: 1200px;
-	margin-top: 200px;
+	margin-top: 50px;
+	margin-left: 20px;
 }
 /* 검색창 */
 /* #searchInput, #searchBtn {
@@ -154,8 +168,8 @@ tbody>tr>td:last-child {
 	padding:8px;
 	box-sizing:border-box;
 	transition:.3s;
-	
 }
+
 input[type=text]:focus{
 	border-color:dodgerBlue;
 	box-sizing: 0 0 50px 0 dodgerBlue;
@@ -163,12 +177,11 @@ input[type=text]:focus{
 
 #search{
 	margin-top:50px;
-	margin-left: 450px;
-	
+	margin-left: 380px;
 }
 
 #newInsert{
-	margin-left : 1220px;
+	margin-left : 1150px;
 	font-weight: bold;
 	color: black;
 }
@@ -176,7 +189,7 @@ input[type=text]:focus{
 /* 페이징바 */
 #pagingbar{
  	position: absolute;
-	margin-left:650px;
+	margin-left:550px;
 	margin-top: 5px;
 	float: left;
 }

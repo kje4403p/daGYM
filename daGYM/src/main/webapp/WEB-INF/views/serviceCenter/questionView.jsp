@@ -54,7 +54,14 @@
 			<div id="board-area">
 
 				<!-- Category -->
-				<h6 class="mt-4">질문유형: [${board.qnaCode }]</h6>
+				<h6 class="mt-4">질문유형:
+					<c:choose>
+						<c:when test="${board.qnaCode ==1 }">운동</c:when>
+						<c:when test="${board.qnaCode ==2 }">식단</c:when>
+						<c:when test="${board.qnaCode ==3 }">이용관련</c:when>
+						<c:otherwise>결제/환불</c:otherwise>
+					</c:choose>
+				</h6>
 				
 				<!-- Title -->
 				<h3 class="mt-4"> ${board.boardTitle}</h3>
