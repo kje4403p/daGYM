@@ -191,7 +191,13 @@ document.addEventListener('DOMContentLoaded', function() {
 <div id='calendar'></div>
 
 </body>
+
 <script>
+opener.parent.location="${contextPath}/member/mySchedule";
+
+	opener.parent.location.reload();
+
 
 </script>
+
 </html>

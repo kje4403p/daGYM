@@ -35,6 +35,12 @@
     	color: blue;
     	float: right;
     }
+    #reservation{
+    	margin-left: 1141px;
+    }
+  #reservation > a{
+  color:white;
+  }
 </style>
 <script language="javascript">
     var today = new Date(); // 오늘 날짜
@@ -177,8 +183,13 @@
 					</c:if>                    
                     </div>
                     <div class="row mb-3 form-row">
-                    
+                    <div id="reservation">
+                   		 <c:if test="${loginMember.memberGrade == 'G'}">
+							<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${classStatus.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
+						 </c:if>
+					</div>
                 <table align="" id="calendar">
+      		
                     	<tr>
                     	<td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
             			<td colspan="5" align="center" id="yearmonth"></td>
@@ -198,9 +209,8 @@
             </form>
         </div>
     </div>
-    <script>
-    	
-    </script>
+    
     <%@ include file="../common/footer.jsp"%><br>
 </body>
+	
 </html>
