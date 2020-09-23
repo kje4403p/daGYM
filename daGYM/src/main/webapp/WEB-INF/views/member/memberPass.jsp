@@ -125,7 +125,6 @@
                         	<td style ="text-align: center">${pass.trainerName}</td>
                         	<td style ="text-align: center">${pass.classCnt}</td>
                         	<td style ="text-align: center">
-                        	<button type="button" id="review" name="review">리뷰 작성하기</button>
                         		
                         	
                         	</td>
@@ -242,7 +241,7 @@
 							<form accept-charset="UTF-8" action="insertReview" method="post">
                         <input id="ratings-hidden" name="rating" type="hidden"> 
                         <textarea class="form-control animated" cols="50" id="reviewContent" name="reviewContent" placeholder="Enter your review here..." rows="5"></textarea>
-        
+        				<p id="mUid"></p>
                         <div class="text-right">
                         <P id="star" name="reviewRating"> <!-- 부모 -->
 								<a href="#" value="1">★</a> <!-- 자식들-->
@@ -250,7 +249,7 @@
 								  <a href="#" value="3">★</a> 
 								  <a href="#" value="4">★</a> 
 								  <a href="#" value="5">★</a>
-						 <p>
+						 </p>
 
                             <button class="btn btn-success btn-lg" type="button" onclick="a();" id="submit" style="padding: 0;">작성</button>
                             <button type="button" class="btn btn-success btn-lg" id="close" onclick="closeModal();" style="padding: 0;"> 
@@ -273,23 +272,55 @@ function closeModal(){
 	$('#modal').hide();
 };
 
-	$("button[name=review]").on("click",function(){
-	console.log("가나다")
-	//	window.screen.width
-	//	window.screen.height
-		
-	//	var popupWidth = 500;
-	//	var popupHeight = 300;
-		
-	//	var popupX = (window.screen.width/2)-(popupWidth/2);
-	//	var popupY=(window.screen.height/2)-(popupHeight/2);
+
+	$(document).ready(function (){
+		console.log("rkskek")
+		var size = $("#table tr").length;
+		console.log("size"+size)
 		var memberNo = ${loginMember.memberNo}
-			var url = "${contextPath }/member/${trainerNo}/review";
-			var options = "width=500, height=300, resizable=no, scrollbars=no";
+		for(var i=0 ; i<size-1 ; i++){
+			var mUid=$("table tr").eq(i+1).children().eq(0).text(); // 결제번호
+			console.log(i+"+"+mUid)
+			var $btn = $("table tr").eq(i+1).children().eq(6); // 버튼영역
+			console.log("번호"+mUid);
+			var $button=$("<button>").addClass("btn btn-primary btn-sm ml-1 reviewbtn").attr({"name":"review","type":"button"}).text("리뷰작성하기"); // 버튼
+			(function(i){
+				$.ajax({
+					url : "${contextPath}/member/checkReview",
+					data : {"mUid" : mUid},
+					async: false,
+					success : function(result){
+						console.log("성공"+result)
+					
+						if(result>0){
+							console.log(i+"+리절트"+result)
+							$btn.html("");
+							console.log("muid"+mUid)
+						}else{
+							$btn.append($button);
+							console.log(i+"+리절"+result);
+							}
+						
+					},error : function(){
+						console.log("실패")
+					}
+				})
 			
-			$('#modal').show();
+				})(i)
 			
-	});
+			
+		}
+		$(".reviewbtn").on("click",function(){
+			 $('#modal').show();
+			console.log("모달")
+		})
+		
+		
+	})
+	
+			
+			
+	
 	$("button[name=close]").on("click",function(){
 		if(confirm("정말 예약 취소하시겠습니까?")){
 			var checkBtn = $(this);
@@ -319,25 +350,7 @@ function closeModal(){
 		}
 		
 	});
-	// 리뷰 작성 여부 확인하기
-	$(function(){
-		var $td = $("#table tr").eq(1).children().eq(6)
-		var $btn =$("<button>"); 
-		$.ajax({
-			url : "${contextPath}/member/checkReview",
-			success : function(result){
-				console.log(result)
-				if(result>0){
-					$td.html("")
-				}
-			}, error : function(){
-				console.log("실패")
-			}	
-		})
-		
-	})
 	
-	// 리뷰작성
 	
 
 	var rating="0";
@@ -348,11 +361,10 @@ function closeModal(){
 	
 	});
 	
-	console.log("별"+rating);
 
 		function a(){
 			var content = $("#reviewContent").val();
-			console.log("별"+rating);
+			var merchatUid = $
 			if(rating ==0){
 				alert("별점을 등록해주세요.")
 			}else if(content==""){
@@ -361,16 +373,11 @@ function closeModal(){
 			var url = "../insertReview";
 			var no = ${trainerNo};
 			
-			console.log("트"+no);
-			console.log("별"+rating);
-			console.log(content);
-			
 			$.ajax({
 				url : url,
 				data :{"reviewContent": content,"reviewRating" : rating, "trainerNo" : no },
 				
 				success : function(result){
-					console.log("성공")
 					if(result>0){
 						alert("리뷰가 등록되었습니다.");
 						closeModal();
@@ -387,39 +394,6 @@ function closeModal(){
 		}
 	
 	
-	//	insertReview(rating);
-
-	/*
-	$("#submit").click(function insertReview(rating){
-		console.log("lating" + rating)
-		if(rating.length ==0){
-			alert("별점을 등록해주세요")
-		}
-		var $content = $("#reviewContent").val();
-		var url = "../insertReview"
-		var no = ${trainerNo}
-		console.log("트"+no)
-		console.log("별"+rating)
-			$.ajax({
-				url : url,
-				data :{"reviewContent": $content,"reviewRating" : rating, "trainerNo" : no },
-				
-				success : function(result){
-					console.log("성공")
-					if(result>0){
-						alert("리뷰가 등록되었습니다.");
-						window.close();
-					}else{
-						swal("리뷰 등록에 실패했습니다. 다시 작성해주세요.");
-					}
-				},error : function(){
-					console.log("실패")
-				}
-				
-			})
-	
-	})
-*/
 
 </script>
     <%@ include file="../common/footer.jsp"%>

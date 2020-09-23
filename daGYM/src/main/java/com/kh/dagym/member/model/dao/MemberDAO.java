@@ -205,8 +205,8 @@ public class MemberDAO {
 	 * @param memberNo
 	 * @return result
 	 */
-	public int checkReview(int memberNo) {
-		return sqlSession.selectOne("memberMapper.checkReview", memberNo);
+	public int checkReview(int mUid) {
+		return sqlSession.selectOne("memberMapper.checkReview", mUid);
 	}
 
 	/** 회원 스케줄 조회 DAO
