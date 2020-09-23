@@ -35,6 +35,7 @@ import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
 import com.kh.dagym.member.model.vo.reservationCancel;
 import com.kh.dagym.trainer.model.service.TrainerService;
+import com.kh.dagym.trainer.model.vo.ClassStatus;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
 import com.kh.dagym.trainer.model.vo.Trainer;
@@ -102,14 +103,18 @@ public class MemberController {
 			public String myScheduleView(Model model) {
 				int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
 				String memberGrade =  ((Member)model.getAttribute("loginMember")).getMemberGrade();
+				 Member loginMember = (Member)model.getAttribute("loginMember");
 				if (memberGrade.equals("G")) {
 					List<PT> myPt = memberService.myPt(memberNo);
+					List<Trainer> trainerList = trainerService.selectList();
+					Trainer trainer = trainerService.selectTrainer(trainerList.get(0).getTrainerNo());
+					ClassStatus classStatus= trainerService.selectClassStatus(loginMember.getMemberNo());
 					model.addAttribute("myPt",myPt);
 					
+					model.addAttribute("trainer",trainer);
+					model.addAttribute("classStatus",classStatus);
 				}else if(memberGrade.equals("T")) {
 					List<TrainerSchedule> myPt = memberService.myTPt(memberNo);
-					 for (int i = 0; i < myPt.size(); i++) {
-						  }
 					model.addAttribute("myPt",myPt);
 				}
 				return "member/mySchedule";
