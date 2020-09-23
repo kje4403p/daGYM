@@ -117,13 +117,15 @@ document.addEventListener('DOMContentLoaded', function() {
 		      <%  for(int i=0; i<pt2.size(); i++){
 					 PT s = (PT)pt2.get(i);
 					 String a = s.getScheduleTime();
+					 int b = s.getTrainerNo();
 					System.out.println(a);
 				 %>
 		 	
 			 var a = "<%=a%>";
+			 var b = "<%=b%>";
 			 console.log(a);
 			 console.log(scheduleTime3);
-			 if(a==scheduleTime3){
+			 if(a==scheduleTime3&&b==${trainerNo}){
 					alert("이미 예약되어있는 시간입니다.");
 					return false;
 				}
