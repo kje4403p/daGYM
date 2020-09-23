@@ -26,13 +26,13 @@
                     <span style ="text-align: center">내 리뷰 리스트 총 ${pInfo.listCount}개</span>
                     <div class="row mb-3 form-row">
                     
-                <table class="table table-hover">
-
+                <table id="list-table" class="table table-hover">
                     	<tr>
-                    		<td style ="text-align: center">트레이너</td>
-                    		<td style ="text-align: center">내용</td>
-                    		<td style ="text-align: center">평점</td>
-                    		<td style ="text-align: center">날짜</td>
+                    		<th style ="text-align: center; display:none;">트레이너번호</th>
+                    		<th style ="text-align: center">트레이너</th>
+                    		<th style ="text-align: center">내용</th>
+                    		<th style ="text-align: center">평점</th>
+                    		<th style ="text-align: center">날짜</th>
                         </tr>
                         
                         <c:choose>
@@ -45,6 +45,7 @@
                  		 <c:otherwise>
                      	 <c:forEach var="review" items="${myReviewList}">
                         <tr>
+                        	<td style ="text-align: center; display:none;">${review.trainerNo}</td>
                         	<td style ="text-align: center">${review.trainerNM}</td>
                         	<td style ="text-align: center">${review.reviewContent}</td>
                         	<td style ="text-align: center">${review.reviewRating}/5</td>
@@ -56,7 +57,7 @@
                 	</table>
                 </div>
                 <div class="my-4">
-		<c:set var="url" value="${contextPath}/member/myReViewList/${pInfo.boardType}?cp="></c:set>
+		<c:set var="url" value="${contextPath}/member/myReviewList/${pInfo.boardType}?cp="></c:set>
         	<ul class="pagination">
             	<c:if test="${pInfo.currentPage > pInfo.pagingBarSize }">	
 	                <li>
@@ -109,6 +110,14 @@
         </div>
     </div>
     <script>
+    $(function(){
+        $("#list-table td").on("click", function(){
+           var trainerNo = $(this).parent().children().eq(0).text();
+           var boardUrl = "";
+           boardUrl = "${contextPath}/trainer/trainerView/"+ trainerNo + "?cp=${pInfo.currentPage}" + "#content2";
+        location.href = boardUrl;
+        });
+     });
 	    $("#myBoard").on("click", function() {
 	    	location.href= "${contextPath}/member/myBoardList/1";
 		});

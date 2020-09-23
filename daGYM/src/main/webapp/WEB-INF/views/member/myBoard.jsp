@@ -26,13 +26,13 @@
                     <span style ="text-align: center">내 게시글 리스트 총 ${pInfo.listCount}개</span>
                     <div class="row mb-3 form-row">
                     
-                <table class="table table-hover">
-
+                <table id="list-table" class="table table-hover">
                     	<tr>
-                    		<td style ="text-align: center">게시판</td>
-                    		<td style ="text-align: center">제목</td>
-                    		<td style ="text-align: center">날짜</td>
-                    		<td style ="text-align: center">조회</td>
+                    		<th style ="text-align: center; display:none;">번호</th>
+                    		<th style ="text-align: center">게시판</th>
+                    		<th style ="text-align: center">제목</th>
+                    		<th style ="text-align: center">날짜</th>
+                    		<th style ="text-align: center">조회</th>
                         </tr>
                         
                         <c:choose>
@@ -45,6 +45,7 @@
                  		 <c:otherwise>
                      	 <c:forEach var="board" items="${myBoardList}">
                         <tr>
+                        	<td style ="text-align: center; display:none;">${board.boardNo}</td>
                         	<td style ="text-align: center">${board.boardCategory}</td>
                         	<td style ="text-align: center">${board.boardTitle}</td>
                         	<td style ="text-align: center">${board.boardModiftDate}</td>
@@ -109,6 +110,24 @@
         </div>
     </div>
     <script>
+    
+	    $(function(){
+	        $("#list-table td").on("click", function(){
+	           var boardNo = $(this).parent().children().eq(0).text();
+	           var boardUrl = "";
+	           if($(this).parent().children().eq(1).text() == "정보"){
+	           		boardUrl = "${contextPath}/info/"+ boardNo + "?cp=${pInfo.currentPage}";
+	           }else if($(this).parent().children().eq(1).text() == "FAQ"){
+	        		boardUrl = "${contextPath}/service/faq/4";
+	           }else if($(this).parent().children().eq(1).text() == "QNA"){
+	        	   	boardUrl = "${contextPath}/service/question/3/"+ boardNo + "?cp=${pInfo.currentPage}";
+	           }else if($(this).parent().children().eq(1).text() == "이벤트"){
+	        	   	boardUrl = "${contextPath}/event/"+ boardNo + "?cp=${pInfo.currentPage}";
+	           }
+	        location.href = boardUrl;
+	        });
+	     });
+	    
 	    $("#myBoard").on("click", function() {
 	    	location.href= "${contextPath}/member/myBoardList/1";
 		});
