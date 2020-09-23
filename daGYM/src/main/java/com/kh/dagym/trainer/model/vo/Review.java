@@ -13,13 +13,15 @@ public class Review {
 	private int trainerNo;
 	private String memberId;
 	private String trainerNM;
+	private String merchantUid;
 	
+
 	public Review() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public Review(int reviewNo, String reviewContent, int reviewRating, Timestamp reviewCreateDate, String reviewStatus,
-			int memberNo, int trainerNo, String memberId, String trainerNM) {
+			int memberNo, int trainerNo, String memberId, String trainerNM, String merchantUid) {
 		super();
 		this.reviewNo = reviewNo;
 		this.reviewContent = reviewContent;
@@ -30,8 +32,16 @@ public class Review {
 		this.trainerNo = trainerNo;
 		this.memberId = memberId;
 		this.trainerNM = trainerNM;
+		this.merchantUid = merchantUid;
 	}
 
+	public String getMerchantUid() {
+		return merchantUid;
+	}
+	
+	public void setMerchantUid(String merchantUid) {
+		this.merchantUid = merchantUid;
+	}
 	public int getReviewNo() {
 		return reviewNo;
 	}

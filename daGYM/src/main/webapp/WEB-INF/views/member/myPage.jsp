@@ -21,6 +21,7 @@
 		/* border:3px solid black; */
 		border-radius : 50px;
 		background-color : RGB(197,254,254);
+		
 		width : 370px;
 		height: 150px;
 		font-family: MaplestoryOTFBold;

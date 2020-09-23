@@ -18,11 +18,10 @@
     <%@ include file="../common/header.jsp"%>
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
-        <div class="col-sm-5">
-                    <h1>내 글</h1>
-                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myBoard">내가 쓴글</button>
-                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReply">내 댓글</button>
-                    <button class="w3-button w3-white w3-border w3-border-red w3-round-large" id="myReView">내 리뷰</button>
+        <div class="col-sm-6"  style="left:150px;">
+                    <button class="btn btn-info" id="myBoard">내가 쓴글</button>
+                    <button class="btn btn-info" id="myReply">내 댓글</button>
+                    <button class="btn btn-info" id="myReView">내 리뷰</button>
                     <br><br>
                     <span style ="text-align: center">내 게시글 리스트 총 ${pInfo.listCount}개</span>
                     <div class="row mb-3 form-row">
@@ -40,7 +39,7 @@
                         
                         <c:when test="${empty myBoardList}">
 		                     <tr>
-		                        <td colspan="6">작성하신 게시글이 없습니다.</td>
+		                        <td colspan="6" style ="text-align: center">작성하신 게시글이 없습니다.</td>
 		                     </tr>
                  		 </c:when>
                  		 <c:otherwise>

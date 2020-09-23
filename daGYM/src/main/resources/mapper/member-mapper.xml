@@ -205,12 +205,12 @@
 	</select>
 	<!-- 리뷰등록 -->
 	<insert id="insertReview" parameterType="Review">
-		INSERT INTO REVIEW VALUES(#{reviewNo}, #{reviewContent}, #{reviewRating}, SYSDATE, 'Y', #{memberNo}, #{trainerNo} ,#{t})
+		INSERT INTO REVIEW VALUES(#{reviewNo}, #{reviewContent}, #{reviewRating}, SYSDATE, 'Y', #{memberNo}, #{trainerNo},#{merchantUid})
 	 </insert>
 	 
 	<!-- 리뷰 작성 여부 확인 -->
 	<select id="checkReview" parameterType="_int" resultType="_int">
-		SELECT COUNT(*) FROM REVIEW WHERE REVIEW_WRITER=#{memberNo}
+			SELECT COUNT(*)	 FROM REVIEW WHERE MERCHANT_UID=#{mUid}
 	</select>
 	
 	<!-- 회원 스케줄 조회 -->
