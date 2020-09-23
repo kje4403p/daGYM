@@ -103,7 +103,6 @@
             { 
         		var flag = true;
         		
-        		console.log(lastDate.getDate());
             	time = "";
             	var tmpCnt = 0;
         		for(j = 0; j<arr.length; j++){ // 40바퀴 돌꺼고 
