@@ -180,7 +180,7 @@
 	
 	<!-- 내 수강생 조회 페이징 처리 -->
 	<select id="MyStudentsListCnt" parameterType="_int" resultType = "_int">
-		SELECT COUNT(*) FROM CLASS_STATUS WHERE TRAINER_NO = 127 AND CLASS_CNT > 0
+		SELECT COUNT(*) FROM CLASS_STATUS WHERE TRAINER_NO = #{memberNo} AND CLASS_CNT > 0
 	</select>
 	
 	<!-- 내 수강생 조회 -->
