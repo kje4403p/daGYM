@@ -1,8 +1,6 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
-
 	<resultMap id="memberResultSet" type="Member" >
 	
 		<!-- DB 기본키에 해당하는 필드와 컬럼을 작성 property : 자바필드명, column : DB컬럼 -->
@@ -276,3 +274,4 @@ ORDER BY SCHEDULE_TIME ASC
       
    </update>
 
+</mapper>
