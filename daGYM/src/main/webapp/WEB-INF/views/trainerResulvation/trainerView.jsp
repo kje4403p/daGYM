@@ -87,8 +87,10 @@
    #order{
       background-color: white;
    }
-   
-   
+   .trainerName{
+      padding-top: 50px;
+   }
+       
    </style>
    
 </head>
@@ -101,12 +103,12 @@
                
    
       <section id="hello" class="home bg-mega">
-      <div class="container calendar-container">
-      
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-md-1">
             </div>
-      <div class="row">
-         <div class="col-md-6">
-            <div class="trainerImg">
+            <div class="col-md-5">
+                  <div class="trainerImg">
                   <c:if test="${!empty files }">
    
                                <c:forEach var="at" items="${files}" varStatus="vs">
@@ -119,10 +121,10 @@
                                </c:forEach>
    
                    </c:if>
-            </div>         
-         </div>
-         <div class="col-md-6">
-            <div class="trainerName">
+            </div>   
+            </div>
+            <div class="col-md-5">
+                  <div class="trainerName">
                <div class="about_accordion wow fadeIn">
                            <div id="faq_main_content" class="faq_main_content">
                               <h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
@@ -161,8 +163,11 @@
                            </div>
                         </div>
             </div>
+            </div>
+            <div class="col-md-1">
+            </div>
          </div>
-      </div>      
+      </div>   
       </section>
 
       <!--End off Home Sections-->
@@ -427,7 +432,6 @@
                   <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
                   <fmt:formatDate var="createDate" value="${review.reviewCreateDate}" pattern="yyyy-MM-dd"/>
                   <li>${createDate }</li>
-                  <li style="padding-left: 5px;">${review.reviewCreateDate}</li>
             </ul>
                <c:choose>
                   <c:when test="${loginMember.memberId == review.memberId }">
@@ -522,9 +526,11 @@
          })
       }
    })
-   
-   $('#test_modal').on('show.bs.modal', function (e) {
+   var reviewNo="0";
+   $('#myModal').on('show.bs.modal', function (e) {
        var data = $(e.relatedTarget).data('test');
+       console.log("리뷰리뷰"+data)
+       reviewNo=data;
    });
 
       var rating="0";
@@ -542,22 +548,22 @@
       }else if(content==""){
          alert("내용을 입력해주세요.")
       }else{
-      var url = "../updateReview";
+      var url = "${contextPath}/member/updateReview";
       
       
-      console.log("리뷰번호"+no)
+      console.log("리뷰번호"+reviewNo)
       
       $.ajax({
          url : url,
-         data :{"reviewContent": content,"reviewRating" : rating, "reviewNo":no},
+         data :{"reviewContent": content,"reviewRating" : rating, "reviewNo":reviewNo},
          
          success : function(result){
             if(result>0){
-               alert("리뷰가 등록되었습니다.");
+               alert("리뷰가 수정되었습니다.");
                closeModal();
                location.reload();
             }else{
-               swal("리뷰 등록에 실패했습니다. 다시 작성해주세요.");
+               swal("리뷰 수정에 실패했습니다. 다시 작성해주세요.");
             }
          },error : function(){
             console.log("실패")
