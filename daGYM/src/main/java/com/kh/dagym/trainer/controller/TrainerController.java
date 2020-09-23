@@ -152,6 +152,18 @@ public class TrainerController {
 		 return merchantUid;
 		 
 	 }
+	 
+	 // 결제번호 삭제
+	 
+	 @ResponseBody
+	 @RequestMapping("deleteMerchantUid")
+	 public String deleteMerchantUid(int merchantUid) {
+		 int result = trainerService.deleteMerchantUid(merchantUid);
+		 
+		 return result+"";
+		 
+	 }
+	 
 	 // 수강권 삽입
 	 @ResponseBody
 	 @RequestMapping("insertImpUid")
@@ -178,6 +190,8 @@ public class TrainerController {
 		public String schedule(@PathVariable int trainerNo, Model model) {
 		 	model.addAttribute("trainerNo",trainerNo);
 			List<TrainerSchedule> schedule = trainerService.selectSchedule(trainerNo);
+			List<PT> pt2 = trainerService.selectSchedule();
+			model.addAttribute("pt2",pt2);
 	 		model.addAttribute("schedule",schedule);
 			return "trainerResulvation/schedule";
 		}
@@ -201,8 +215,9 @@ public class TrainerController {
 			List<TrainerSchedule> schedule = trainerService.selectSchedule(trainerNo);
 			 Member loginMember = (Member)model.getAttribute("loginMember");
 	 		model.addAttribute("schedule",schedule);
+			List<PT> pt2 = trainerService.selectSchedule();
 	 		classStatus= trainerService.selectClassStatus(loginMember.getMemberNo());
-			  System.out.println(classStatus);
+	 		model.addAttribute("pt2",pt2);
 			model.addAttribute("classStatus",classStatus);
 	 		return "trainerResulvation/resulvation";
 		}
@@ -214,6 +229,7 @@ public class TrainerController {
 		 Member loginMember = (Member)model.getAttribute("loginMember");
 		 pt.setMemberNo(loginMember.getMemberNo());
 		 System.out.println(pt);
+
 		int result = trainerService.insertResulvation(pt);
 	
 	      return result+"";

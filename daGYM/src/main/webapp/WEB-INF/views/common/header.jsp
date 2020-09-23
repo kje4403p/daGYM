@@ -29,10 +29,41 @@
 </head>
 <body>
 <c:if test="${!empty msg }">
-		<script>
-			swal({icon : "${status}",title : "${msg}", text : "${text}"});
-			
-		</script>
+	<c:choose>
+		<c:when test="${status == 'info'}">
+			<script>
+				swal({icon : "${status}",title : "${msg}", text : "${text}", 
+					buttons: {cancel : "취소", catch: {text : "휴면 계정 해제", value: "catch"}}})
+				.then((value) => {
+					switch(value) {
+					case "catch":
+						$.ajax({
+							url : "changeStatus",
+							data : {"memberNo" : ${memberNo}},
+							success : function(result) {
+								if(result > 0) {
+									swal("휴면 계정이 해제되었습니다. 재로그인 부탁드립니다.");
+								} else {
+									swal("휴면 계정 해제 시 오류가 발생하였습니다.");
+								}
+							}, error : function() {
+								console.log("통신 실해");
+							}
+						});
+						break;
+					
+					default:
+						swal("취소하셨습니다.");
+					}
+				});
+			</script>
+		</c:when>
+		<c:otherwise>
+			<script>
+				swal({icon : "${status}",title : "${msg}", text : "${text}"});
+			</script>
+		</c:otherwise>
+	</c:choose>
 		<c:remove var="msg"/>
 		<c:remove var="status"/>
 		<c:remove var="text"/>

@@ -1,3 +1,4 @@
+
 package com.kh.dagym.member.model.dao;
 
 import java.util.List;
@@ -247,7 +248,19 @@ public class MemberDAO {
 	public int deleteReview(int reviewNo) {
 		return sqlSession.update("memberMapper.deleteReview", reviewNo);
 
+
 	}
+
+	/** 이메일 중복검사 DAO
+	 * @param email
+	 * @return result
+	 */
+	public int emailDupCheck(String email) {
+		return sqlSession.selectOne("memberMapper.emailDupCheck", email);
+	}	
+
+
+
 
 	/** 내 리뷰 페이징 처리 DAO
 	 * @param memberNo
@@ -267,4 +280,14 @@ public class MemberDAO {
 		RowBounds rowBounds = new RowBounds(offset, pInfo.getLimit());
 		return sqlSession.selectList("memberMapper.myReviewList", memberNo,rowBounds);
 	}
+
+	/** 휴면계정 해제 DAO
+	 * @param memberNo
+	 * @return result
+	 */
+	public int changeStatus(int memberNo) {
+		return sqlSession.update("memberMapper.changeStatus", memberNo);
+	}
+
 }
+

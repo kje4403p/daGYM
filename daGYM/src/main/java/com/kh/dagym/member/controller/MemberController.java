@@ -283,6 +283,17 @@ public class MemberController {
 			@RequestMapping(value = "idDupCheck", method=RequestMethod.GET)
 			public String idDupCheck(String memberId) {
 				int result = memberService.idDupCheck(memberId);
+				
+				return result +"";
+			}
+			
+			// 이메일 중복체크
+			@ResponseBody
+			@RequestMapping("emailDup")
+			public String emailDupCheck(String email) {
+				System.out.println(email);
+				int result = memberService.emailDupCheck(email);
+				System.out.println("리절"+result);
 				return result +"";
 			}
 			
@@ -296,12 +307,22 @@ public class MemberController {
 				String msg = null;
 				String status = null;
 				String text = null;
+				String url = null;
 				
 				if(loginMember!= null) {
-					model.addAttribute("loginMember", loginMember);
 					
 					Cookie cookie = new Cookie("saveId", member.getMemberId());
 					
+					if(loginMember.getMemberStatus().equals("S")) {
+						rdAttr.addFlashAttribute("memberNo", loginMember.getMemberNo());
+						status = "info";
+						msg = "해당 계정은 휴면 계정입니다.";
+						text = "휴면 계정을 해제하시려면 버튼을 누른 후 재로그인해주세요.";
+						url = "redirect:login";
+					} else {
+						model.addAttribute("loginMember", loginMember);
+						url = "redirect:/";
+					}
 					if(saveId != null) {
 						
 						cookie.setMaxAge(60*60*24*7);
@@ -314,13 +335,23 @@ public class MemberController {
 					status = "error";
 					msg = "로그인 실패";
 					text = "아이디 또는 비밀번호를 확인해주세요.";
+					url = "redirect:login";
 				}
 				rdAttr.addFlashAttribute("msg", msg);
 				rdAttr.addFlashAttribute("status", status);
 				rdAttr.addFlashAttribute("text", text);
 				
-				return "redirect:/";
+				return url;
 			}
+			
+			// 휴면 계정 해제하기
+			@ResponseBody
+			@RequestMapping("changeStatus")
+			public int changeStatus(int memberNo) {
+				int result = memberService.changeStatus(memberNo);
+				return result;
+			}
+			
 			// 인증번호 메일 보내기
 			@ResponseBody
 			@RequestMapping(value = "sendEmail", method=RequestMethod.GET)
@@ -506,6 +537,13 @@ public class MemberController {
 					model.addAttribute("pInfo",pInfo);
 					return "member/myReview";
 			}
-			
+				
+				@ResponseBody
+				@RequestMapping("rating")
+				public String rating(String rating,Model model) {
+					model.addAttribute("rating", rating);
+					System.out.println(rating);
+					return rating;
+			}
 			
 }

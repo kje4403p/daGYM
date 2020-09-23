@@ -1,9 +1,12 @@
+<%@page import="com.kh.dagym.trainer.model.vo.PT"%>
 <%@page import="com.kh.dagym.trainer.model.vo.TrainerSchedule"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%List<TrainerSchedule> schedule = (List<TrainerSchedule>)request.getAttribute("schedule");%>
+    <%List<TrainerSchedule> schedule = (List<TrainerSchedule>)request.getAttribute("schedule");
+    List<PT> pt2 = (List<PT>)request.getAttribute("pt2");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,46 +66,78 @@ document.addEventListener('DOMContentLoaded', function() {
 			 <%
 			 for(int i=0; i<schedule.size(); i++){
 				 TrainerSchedule sd = (TrainerSchedule)schedule.get(i);
+				 String a =sd.getScheduleStatus();
+		
+				 if(a.equals("Y")){
 			 %>
 			
 			 {	 
 				
-				 start:"<%=sd.getScheduleTime()%>"
-					
+				 start:"<%=sd.getScheduleTime()%>",
+				 color:"#8BBDFF"
+				
 			 },
 			 
-			 <%}%>
+			 <%}else{%>
+			 {	 
+					
+				 start:"<%=sd.getScheduleTime()%>",
+				 color:"#FF6C6C"
+			 },
+			 
+				 <%}%>
+		 <%}%>
 			 ],
 				eventTimeFormat: {
 					hour:'numeric'
 					  
 					   },
-			 eventColor: "orange",
-			 eventClick: function(info,start) {
+					 
+			 eventClick: function(info,start,a) {
+			
+				 
 				var eventFullDate = info.event.start;			  		
 				var scheduleTime =moment(eventFullDate).format('YY/MM/DD HH:mm:00.000000000');
 				var scheduleTime2 =moment(eventFullDate).format('YYYY/MM/DD HH:mm');
+				var scheduleTime3 =moment(eventFullDate).format('YYYY-MM-DD HH:mm:00');
 				var schedule1=moment(eventFullDate).format('YYYYMMDD');
-			console.log(scheduleTime);
+			
 			  var now = new Date();
 
 		      var year= now.getFullYear();
 		      var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
 		      var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();	              
 		      var chan_val = year + mon + day;
-		      console.log(chan_val);
-			if(schedule1 >chan_val){		
+		
+		 	
+	
+		      <%  for(int i=0; i<pt2.size(); i++){
+					 PT s = (PT)pt2.get(i);
+					 String a = s.getScheduleTime();
+					System.out.println(a);
+				 %>
+		 	
+			 var a = "<%=a%>";
+			 console.log(a);
+			 console.log(scheduleTime3);
+			 if(a==scheduleTime3){
+					alert("이미 예약되어있는 시간입니다.");
+					return false;
+				}
+			 
+			 <%}%>
+	
+			if(schedule1 >chan_val){
 				if(confirm(scheduleTime2+" 예약 하시겠습니까?")){
 					if ("${classStatus.classCnt}">0){
 					$.ajax({
 						url:"${contextPath}/trainer/resulvation/${trainerNo}",
 						data: {"scheduleTime":scheduleTime},
 						success:function(result2){
+						
 							 location.reload();
 							if(result2>0){
 								alert("예약성공");
-							}else{
-								alert("이미 예약되어있는 시간입니다.");
 							}
 	
 						},error:function(){
@@ -119,7 +154,9 @@ document.addEventListener('DOMContentLoaded', function() {
 				alert("이미 지난 날짜입니다.");
 			}
 		
-			},
+			
+			
+			 },
 				
 
 		defaultView: 'dayGridMonth',
