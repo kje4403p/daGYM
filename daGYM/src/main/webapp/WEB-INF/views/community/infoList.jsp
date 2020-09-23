@@ -132,11 +132,9 @@
 	                </li>
 	                
 	                <li>
-	                	<!-- 이전으로(<) -->
-	                	<!-- prev 생성 식 : (현재 페이지 - 1) / 페이징바 사이즈(10) * 10 -->
-	                	<!-- fmt태그를 이용한 소수점 제거 -->
+	                	
 	                	<fmt:parseNumber var="operand1" value="${(pInfo.currentPage -1)/pInfo.pagingBarSize}" integerOnly="true"/>
-	                	<c:set var="prev" value="${operand1 * 10 }"></c:set>
+	                	<c:set var="prev" value="${operand1 * pInfo.pagingBarSize}"></c:set>
                    		<a class="page-link text-primary" href="${url}${prev}">&lt;</a>
 	                </li>
                 </c:if>
@@ -158,8 +156,6 @@
                 
                 
                 
-                <!-- 다음 페이지로(>) -->
-                <!-- next 생성 식 : (현재 페이지 + 9) / 10 * 10 + 1 -->
                 <c:if test="${pInfo.maxPage > pInfo.endPage}">
 	                <li>
 	                	<fmt:parseNumber var="operand2" value="${(pInfo.currentPage + pInfo.pagingBarSize - 1)/pInfo.pagingBarSize}" integerOnly="true"/>
@@ -217,17 +213,6 @@
 		var $sKey = $("select[name='sKey']");
 		var $sVal = $("input[name='sVal']");
 		
-		
-		// 1) 검색에 필요한 카테고리 또는 검색어가 입력 되었는지 확인
-		// - 입력이 되지 않은 경우 -> 해당 게시판 첫 페이지로 돌아가는 url
-		// - 하나라도 입력된 경우 -> 검색 url 생성(쿼리스트링 조합 작업 필요) 
-		
-		// 선택된 카테고리의 개수가 0이고, 입력된 검색어의 길이가 0인경우
-		// == 카테고리 체크 x, 검색어 입력 x 상태로 검색버튼을 클릭한 경우
-		// -> 해당 게시판의 첫 페이지로 이동
-/* 		if ($sVal.val().trim().length == 0) {
-			location.reload();
-		}  */
 		
 		if ($sVal.val().trim().length <= 1) {
 			alert("두 글자 이상 입력해주세요");

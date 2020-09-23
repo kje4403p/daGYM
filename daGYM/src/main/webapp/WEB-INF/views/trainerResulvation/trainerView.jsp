@@ -7,276 +7,291 @@
 
 <html>
 <head>
-	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
+   <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
-	<title>Rage Freebie HTML5 Landing page</title>
-	<meta name="description" content="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Rage Freebie HTML5 Landing page</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!--Google Font link-->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
-
-
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/slick.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/slick-theme.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/animate.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/fonticons.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/font-awesome.min.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/bootstrap.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/magnific-popup.css">
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/bootsnav.css">
+   <!--Google Font link-->
+   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 
 
-	<!--For Plugins external css-->
-	<!--<link rel="stylesheet" href="assets/css/plugins.css" />-->
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/slick.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/slick-theme.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/animate.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/fonticons.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/font-awesome.min.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/bootstrap.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/magnific-popup.css">
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/bootsnav.css">
 
-	<!--Theme custom css -->
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/style.css">
-	<!--<link rel="stylesheet" href="assets/css/colors/maron.css">-->
 
-	<!--Theme Responsive css-->
-	<link rel="stylesheet" href="${contextPath}/resources/css/trainerView/responsive.css" />
+   <!--For Plugins external css-->
+   <!--<link rel="stylesheet" href="assets/css/plugins.css" />-->
 
-	<script src="${contextPath}/resources/js/trainerView/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-	
+   <!--Theme custom css -->
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/style.css">
+   <!--<link rel="stylesheet" href="assets/css/colors/maron.css">-->
 
-	<style>
-	.trainerImg{
-	float: left;
-	margin-top: 50px;
-	}
-	.trainerInfo{
-	text-align: center;
-	padding-top: 150px;
-	}
-	#about{
-	clear: both;
-	}
-	hr{
-	background-color:white;
-	}
-	.hello{
-	background-color: gray;
-	}
-	#hello{
-	margin: 0 auto;
-	width: 1200px;
-	}
-	#price{
-	font-size: 30px;
-	font-weight: bold;
-	padding-top : 20px;
-	}
-	.pricing_price{
-	padding-top: 30%;
-	}
-	#about > a{
-	color:white;
-	}
-	.primary-btn{
-		border : none;
-	}
-	#order{
-		background-color: white;
-	}
-	
-	
-	</style>
-	
+   <!--Theme Responsive css-->
+   <link rel="stylesheet" href="${contextPath}/resources/css/trainerView/responsive.css" />
+
+   <script src="${contextPath}/resources/js/trainerView/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+   
+
+   <style>
+   #star a{ 
+   text-decoration: none; color: gray;
+    } 
+    #star a.on{
+     color: red;
+      }
+   .trainerImg{
+   float: left;
+   margin-top: 50px;
+   }
+   .trainerInfo{
+   text-align: center;
+   padding-top: 150px;
+   }
+   #about{
+   clear: both;
+   }
+   hr{
+   background-color:white;
+   }
+   .hello{
+   background-color: gray;
+   }
+   #hello{
+   margin: 0 auto;
+   width: 1200px;
+   }
+   #price{
+   font-size: 30px;
+   font-weight: bold;
+   padding-top : 20px;
+   }
+   .pricing_price{
+   padding-top: 30%;
+   }
+   #about > a{
+   color:white;
+   }
+   .primary-btn{
+      border : none;
+   }
+   #order{
+      background-color: white;
+   }
+   .trainerName{
+      padding-top: 50px;
+   }
+       
+   </style>
+   
 </head>
 
 <body data-spy="scroll" data-target=".navbar-collapse">
 <jsp:include page="../common/header.jsp"/>
 
-	<div class="culmn">
-				
-					
-	
-		<section id="hello" class="home bg-mega">
-		<div class="container calendar-container">
-		
-				</div>
-		<div class="row">
-			<div class="col-md-6">
-				<div class="trainerImg">
-						<c:if test="${!empty files }">
-	
-	                            <c:forEach var="at" items="${files}" varStatus="vs">
-	                                <c:set var="src" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
-	
-	                                <div class="carousel-item <c:if test="${vs.index == 0}"> active</c:if>">
-	                                    <img width="370px" height="360px" src="${src}" />
-	                                    <input type="hidden" value="${at.fileNo}">
-	                                </div>
-	                            </c:forEach>
-	
-	                </c:if>
-				</div>			
-			</div>
-			<div class="col-md-6">
-				<div class="trainerName">
-					<div class="about_accordion wow fadeIn">
-									<div id="faq_main_content" class="faq_main_content">
-										<h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
-										<div>
-											<div class="content">
-												<p>${trainer.trainerCareer}</p>
-											</div>
-										</div>
-										<!-- End off accordion item-1 -->
-	
-										<h6><i class="fa fa-angle-right"></i>수상내역</h6>
-										<div>
-											<div class="content">
-												<p>${trainer.trainerAward}</p>
-												</div>
-										</div>
-										<!-- End off accordion item-2 -->
-	
-										<h6> <i class="fa fa-angle-right"></i>PT 가격</h6>
-										<div>
-											<div class="content">
-												<p>10회당 ${trainer.trainerPrice}원</p>
-											</div>
-										</div>
-										<!-- End off accordion item-3 -->
-	
-										<h6><i class="fa fa-angle-right"></i>트레이너 SNS</h6>
-										<div>
-											<div class="content">
-											<a href="${trainer.trainerSNS}">${trainer.trainerSNS}</a>
-											</div>
-										</div>
-										<!-- End off accordion item-4 -->
-									</div>
-								</div>
-				</div>
-			</div>
-		</div>		
-		</section>
+   <div class="culmn">
+            
+               
+   
+      <section id="hello" class="home bg-mega">
+      <div class="container-fluid">
+         <div class="row">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5">
+                  <div class="trainerImg">
+                  <c:if test="${!empty files }">
+   
+                               <c:forEach var="at" items="${files}" varStatus="vs">
+                                   <c:set var="src" value="${contextPath}${at.filePath}/${at.fileChangeName}"/>
+   
+                                   <div class="carousel-item <c:if test="${vs.index == 0}"> active</c:if>">
+                                       <img width="370px" height="360px" src="${src}" />
+                                       <input type="hidden" value="${at.fileNo}">
+                                   </div>
+                               </c:forEach>
+   
+                   </c:if>
+            </div>   
+            </div>
+            <div class="col-md-5">
+                  <div class="trainerName">
+               <div class="about_accordion wow fadeIn">
+                           <div id="faq_main_content" class="faq_main_content">
+                              <h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
+                              <div>
+                                 <div class="content">
+                                    <p>${trainer.trainerCareer}</p>
+                                 </div>
+                              </div>
+                              <!-- End off accordion item-1 -->
+   
+                              <h6><i class="fa fa-angle-right"></i>수상내역</h6>
+                              <div>
+                                 <div class="content">
+                                    <p>${trainer.trainerAward}</p>
+                                    </div>
+                              </div>
+                              <!-- End off accordion item-2 -->
+   
+                              <h6> <i class="fa fa-angle-right"></i>PT 가격</h6>
+                              <div>
+                                 <div class="content">
+                                    <p>5회당 ${trainer.trainerPrice*5}원</p>
+                                    <p>10회당 ${trainer.trainerPrice*10}원</p>
+                                    <p>20회당 ${trainer.trainerPrice*20}원</p>
+                                 </div>
+                              </div>
+                              <!-- End off accordion item-3 -->
+   
+                              <h6><i class="fa fa-angle-right"></i>트레이너 SNS</h6>
+                              <div>
+                                 <div class="content">
+                                 <a href="${trainer.trainerSNS}">${trainer.trainerSNS}</a>
+                                 </div>
+                              </div>
+                              <!-- End off accordion item-4 -->
+                           </div>
+                        </div>
+            </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+         </div>
+      </div>   
+      </section>
 
-		<!--End off Home Sections-->
+      <!--End off Home Sections-->
 
 
-		<!--About Sections-->
-		<section id="about" class="about roomy-100">
-			<div class="container">
-				<div class="row">
-					<div class="main_about">
-						<div class="col-md-6">
-							<div class="about_content">
-								<h2>트레이너 한마디!</h2>
-								<div class="separator_left"></div>
+      <!--About Sections-->
+      <section id="about" class="about roomy-100">
+         <div class="container">
+            <div class="row">
+               <div class="main_about">
+                  <div class="col-md-6">
+                     <div class="about_content">
+                        <h2>트레이너 한마디!</h2>
+                        <div class="separator_left"></div>
 
-								<p>${trainer.trainerComment}</p>
-							
-							</div>
-						</div>
-						<div class="col-md-6">
-						
-						</div>
-					</div>
-				</div>
-				<!--End off row-->
-			</div>
-			<!--End off container -->
-			<div class="row">
-				<div class="col-md-6">
-				</div>
-				<div class="col-md-6">
-					<c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
-						<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</a>
-					</c:if>
-					
-				</div>
-			</div>
-		</section>
+                        <p>${trainer.trainerComment}</p>
+                     
+                     </div>
+                  </div>
+                  <div class="col-md-6">
+                  
+                  </div>
+               </div>
+            </div>
+            <!--End off row-->
+         </div>
+         <!--End off container -->
+         <div class="row">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+               <c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
+                  <a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</a>
+               </c:if>
+               <c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
+                  <a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
+               </c:if>
+            </div>
+         </div>
+      </section>
   
 
 
 
-		<!--Testimonial Section-->
-		<section id="testimonial" class="testimonial fix">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row">
-					<div class="main_testimonial col-sm-8 ml-sm-auto mr-sm-auto">
-						<div class="head_title text-center roomy-100">
-							<h2 class="text-white">OUR TESTIMONIALS</h2>
-						</div>
-					</div>
+      <!--Testimonial Section-->
+      <section id="testimonial" class="testimonial fix">
+         <div class="overlay"></div>
+         <div class="container">
+            <div class="row">
+               <div class="main_testimonial col-sm-8 ml-sm-auto mr-sm-auto">
+                  <div class="head_title text-center roomy-100">
+                     <h2 class="text-white">OUR TESTIMONIALS</h2>
+                  </div>
+               </div>
 
 
-					<div class="testimonial_slid text-center">
-						<div class="testimonial_item">
-							<div class="col-sm-10 mr-sm-auto ml-sm-auto">
-								<p class="text-white">환불은 불가능합니다...! 신중히 결제해주세요...!</p>
+               <div class="testimonial_slid text-center">
+                  <div class="testimonial_item">
+                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
+                        <p class="text-white">환불은 불가능합니다...! 신중히 결제해주세요...!</p>
 
-								<div class="test_authour m-top-30">
-									<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-							</div>
-						</div>
-						<div class="testimonial_item">
-							<div class="col-sm-10 mr-sm-auto ml-sm-auto">
-								<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                        <div class="test_authour m-top-30">
+                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="testimonial_item">
+                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
+                        <p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
 
-								<div class="test_authour m-top-30">
-									<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-							</div>
-						</div>
-						<div class="testimonial_item">
-							<div class="col-sm-10 mr-sm-auto ml-sm-auto">
-								<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                        <div class="test_authour m-top-30">
+                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="testimonial_item">
+                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
+                        <p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
 
-								<div class="test_authour m-top-30">
-									<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-							</div>
-						</div>
-						<div class="testimonial_item">
-							<div class="col-sm-10 mr-sm-auto ml-sm-auto">
-								<p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
+                        <div class="test_authour m-top-30">
+                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="testimonial_item">
+                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
+                        <p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
 
-								<div class="test_authour m-top-30">
-									<h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-							</div>
-						</div>
-					</div>
+                        <div class="test_authour m-top-30">
+                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                           <i class="fa fa-star"></i>
+                        </div>
+                     </div>
+                  </div>
+               </div>
 
-				</div>
-				<!--End off row-->
-			</div>
-			<!--End off container -->
-		</section>
-		<!--End off Testimonial section -->
+            </div>
+            <!--End off row-->
+         </div>
+         <!--End off container -->
+      </section>
+      <!--End off Testimonial section -->
 
-			
-	 <section class="membership-section spad">
+         
+    <section class="membership-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -294,18 +309,18 @@
                         </div>
                             <h2 class="mi-price"> <fmt:formatNumber value="${(trainer.trainerPrice)*5 }" pattern="#,###원" /></h2>
                    
-                        	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
-								<c:choose>
-									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
-											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
-											<c:param name="classNm" value="5"/>
-										</c:url>
-					                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
-			                    	</c:when>
-			                    	<c:otherwise>
-			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
-			                    	</c:otherwise>
-			                    	</c:choose>
+                           <c:set var="trainerNo" value="${trainer.trainerNo}"/>
+                        <c:choose>
+                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+                                 <c:url var="url" value="../paymentView/${trainer.trainerNo }">
+                                 <c:param name="classNm" value="5"/>
+                              </c:url>
+                                      <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
+                                </c:when>
+                                <c:otherwise>
+                                다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+                                </c:otherwise>
+                                </c:choose>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -317,18 +332,18 @@
                             <h2 class="mi-price"> <fmt:formatNumber value="${(trainer.trainerPrice)*10 }" pattern="#,###원" /></h2>
                        
                        
-                        	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
-								<c:choose>
-									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
-											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
-											<c:param name="classNm" value="5"/>
-										</c:url>
-					                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
-			                    	</c:when>
-			                    	<c:otherwise>
-			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
-			                    	</c:otherwise>
-			                    	</c:choose>
+                           <c:set var="trainerNo" value="${trainer.trainerNo}"/>
+                        <c:choose>
+                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+                                 <c:url var="url" value="../paymentView/${trainer.trainerNo }">
+                                 <c:param name="classNm" value="5"/>
+                              </c:url>
+                                      <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
+                                </c:when>
+                                <c:otherwise>
+                                다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+                                </c:otherwise>
+                                </c:choose>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -342,147 +357,241 @@
                         <h2 class="mi-price"> <fmt:formatNumber value="${(trainer.trainerPrice)*20 }" pattern="#,###원" /></h2>
                         
                         
-                        	<c:set var="trainerNo" value="${trainer.trainerNo}"/>
-								<c:choose>
-									<c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
-											<c:url var="url" value="../paymentView/${trainer.trainerNo }">
-											<c:param name="classNm" value="5"/>
-										</c:url>
-					                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
-			                    	</c:when>
-			                    	<c:otherwise>
-			                    	다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
-			                    	</c:otherwise>
-			                    	</c:choose>
+                           <c:set var="trainerNo" value="${trainer.trainerNo}"/>
+                        <c:choose>
+                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+                                 <c:url var="url" value="../paymentView/${trainer.trainerNo }">
+                                 <c:param name="classNm" value="5"/>
+                              </c:url>
+                                      <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
+                                </c:when>
+                                <c:otherwise>
+                                다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+                                </c:otherwise>
+                                </c:choose>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-	
-		<br><br>
-		<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-		<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   
+      <br><br>
+      <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+      <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
-		 <div class="section-title">
-	                        <h2 id="content2">REVIEW</h2>
-	     </div>
-		<c:choose>
-			<c:when test="${empty reviews }">
-					<div class="container">
-		
-		   <div class="well">
-		      <div class="media">
-		      
-		  		<a class="pull-left" href="#">
-		  		</a>
-		  		<div class="media-body">
-		    		<h4 class="media-heading"></h4>
-		          <p class="text-center">작성된 리뷰가 없습니다.</p>
-		         
-		       </div>
-		    </div>
-		  </div>
-		</div>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var="review" items="${reviews }">
-					<div class="container">
-		
-		   <div class="well">
-		      <div class="media">
-		      
-		  		<a class="pull-left" href="#">
-		  		</a>
-		  		<div class="media-body">
-		    		<h4 class="media-heading"></h4>
-		          <p class="text-right">By ${review.memberId }</p>
-		          <p>${review.reviewContent }</p>
-		          <ul class="list-inline list-unstyled">
-		            <li>
-		               <c:set var="rating" value="${review.reviewRating }"/>
-		               		<c:forEach var="i" begin="1" end="${rating}">
-		                        <span class="glyphicon glyphicon-star"></span>
-		               		</c:forEach>
-		               		<c:forEach var="i" begin="1" end="${5-rating}" >
-		                        <span class="glyphicon glyphicon-star-empty"></span>
-		               		
-		               		</c:forEach>
-							
-		            </li>
-		            <li>|</li>
-		            <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
-		            <fmt:formatDate var="createDate" value="${review.reviewCreateDate}" pattern="yyyy-MM-dd"/>
-		            <li>${createDate }</li>
-		            <li style="padding-left: 5px;">${review.reviewCreateDate}</li>
-				</ul>
-					<c:choose>
-						<c:when test="${loginMember.memberId == review.memberId }">
-						       <button type="button" id="${review.reviewNo }" class="delete-btn" >삭제</button>
-					 </c:when>
-					</c:choose>
-		       </div>
-		    </div>
-		  </div>
-		</div>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
+      <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+       <div class="section-title">
+                           <h2 id="content2">REVIEW</h2>
+        </div>
+      <c:choose>
+         <c:when test="${empty reviews }">
+               <div class="container">
+      
+         <div class="well">
+            <div class="media">
+            
+              <a class="pull-left" href="#">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"></h4>
+                <p class="text-center">작성된 리뷰가 없습니다.</p>
+               
+             </div>
+          </div>
+        </div>
+      </div>
+         </c:when>
+         <c:otherwise>
+            <c:forEach var="review" items="${reviews }">
+               <div class="container">
+      
+         <div class="well">
+            <div class="media">
+            
+              <a class="pull-left" href="#">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading"></h4>
+                <input id="reviewNo" type="hidden" value="${review.reviewNo }">
+                <p class="text-right">By ${review.memberId }</p>
+                <p>${review.reviewContent }</p>
+                
+                <ul class="list-inline list-unstyled">
+                  <li>
+                     <c:set var="rating" value="${review.reviewRating }"/>
+                           <c:forEach var="i" begin="1" end="${rating}">
+                              <span class="glyphicon glyphicon-star"></span>
+                           </c:forEach>
+                           <c:forEach var="i" begin="1" end="${5-rating}" >
+                              <span class="glyphicon glyphicon-star-empty"></span>
+                           
+                           </c:forEach>
+                     
+                  </li>
+                  <li>|</li>
+                  <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
+                  <fmt:formatDate var="createDate" value="${review.reviewCreateDate}" pattern="yyyy-MM-dd"/>
+                  <li>${createDate }</li>
+            </ul>
+               <c:choose>
+                  <c:when test="${loginMember.memberId == review.memberId }">
+                         <button type="button" id="${review.reviewNo }" class="delete-btn" >삭제</button>
+                         <button type="button" class="update-btn"   data-test='${review.reviewNo }' data-toggle="modal" data-target="#myModal" >수정</button>
+                </c:when>
+               </c:choose>
+             </div>
+          </div>
+        </div>
+      </div>
+            </c:forEach>
+         </c:otherwise>
+      </c:choose>
+    <!-- Modal -->
+      <div class="modal fade" id="myModal" role="dialog">
+          <div class="modal-dialog">
+          
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+              </div>
+              <div class="modal-body">
+                 <form accept-charset="UTF-8" action="insertReview" method="post">
+                        <input id="ratings-hidden" name="rating" type="hidden"> 
+                        <input id="reviewNo"  type="hidden" value="">
+                        <textarea class="form-control animated" cols="50" id="reviewContent" name="reviewContent" placeholder="Enter your review here..." rows="5"></textarea>
+                        <div class="text-right">
+                        <P id="star" name="reviewRating"> <!-- 부모 -->
+                        <a href="#" value="1">★</a> <!-- 자식들-->
+                         <a href="#" value="2">★</a>
+                          <a href="#" value="3">★</a> 
+                          <a href="#" value="4">★</a> 
+                          <a href="#" value="5">★</a>
+                   </p>
+
+                        </div>
+                <button type="button" class="btn btn-default" onclick="a();" id="update" >수정</button>
+                    </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+
+
+
 <jsp:include page="../common/footer.jsp"/>
 
-		<!-- scroll up-->
-		<div class="scrollup">
-			<a href="#"><i class="fa fa-chevron-up"></i></a>
-		</div>
-		<!-- End off scroll up -->
+      <!-- scroll up-->
+      <div class="scrollup">
+         <a href="#"><i class="fa fa-chevron-up"></i></a>
+      </div>
+      <!-- End off scroll up -->
 
 
 
-	</div>
+   </div>
 
-	<!-- JS includes -->
-
-	<script src="${contextPath}/resources/js/trainerView/vendor/jquery-1.11.2.min.js"></script>
-	<script src="${contextPath}/resources/js/trainerView/vendor/popper.min.js"></script>
-	<script src="${contextPath}/resources/js/trainerView/vendor/bootstrap.min.js"></script>
-
-	<script src="${contextPath}/resources/js/trainerView/jquery.magnific-popup.js"></script>
-	<script src="${contextPath}/resources/js/trainerView/slick.min.js"></script>
-	<script src="${contextPath}/resources/js/trainerView/jquery.collapse.js"></script>
-	<script src="${contextPath}/resources/js/trainerView/bootsnav.js"></script>
+   <!-- JS includes -->
+   <script>
+   function closeModal(){
+      $('#modal').hide();
+   };
 
 
+   $(".delete-btn").on("click",function(){
+      console.log("가나")
+      var no = $(this).attr("id")
+      console.log(no)
+      if(confirm("리뷰를 삭제하시겠습니까?")){
+         
+         $.ajax({
+            url : "${contextPath}/member/deleteReview",
+            data : {"reviewNo": no},
+            success : function(result){
+               if(result>0){
+                  alert("리뷰가 삭제되었습니다.")
+                  location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
+               }else{
+                  alert("리뷰 삭제에 실패하였습니다.")
+                  location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
+               }
+            },error : function(){
+               console.log("실패")
+            }
+            
+         })
+      }
+   })
+   var reviewNo="0";
+   $('#myModal').on('show.bs.modal', function (e) {
+       var data = $(e.relatedTarget).data('test');
+       console.log("리뷰리뷰"+data)
+       reviewNo=data;
+   });
 
-	<script src="${contextPath}/resources/js/trainerView/plugins.js"></script>
-	<script src="${contextPath}/resources/js/trainerView/main.js"></script>
-	<script>
+      var rating="0";
+   $('#star a').click(function (){
+         $(this).parent().children("a").removeClass("on");
+         $(this).addClass("on").prevAll("a").addClass("on"); 
+          rating = $(this).attr("value");
+   
+   });
+   
+   function a(){
+      var content = $("#reviewContent").val();
+      if(rating ==0){
+         alert("별점을 등록해주세요.")
+      }else if(content==""){
+         alert("내용을 입력해주세요.")
+      }else{
+      var url = "${contextPath}/member/updateReview";
+      
+      
+      console.log("리뷰번호"+reviewNo)
+      
+      $.ajax({
+         url : url,
+         data :{"reviewContent": content,"reviewRating" : rating, "reviewNo":reviewNo},
+         
+         success : function(result){
+            if(result>0){
+               alert("리뷰가 수정되었습니다.");
+               closeModal();
+               location.reload();
+            }else{
+               swal("리뷰 수정에 실패했습니다. 다시 작성해주세요.");
+            }
+         },error : function(){
+            console.log("실패")
+         }
+         
+      });
+   
+      }
+   }
 
-	$(".delete-btn").on("click",function(){
-		console.log("가나")
-		var no = $(this).attr("id")
-		console.log(no)
-		if(confirm("리뷰를 삭제하시겠습니까?")){
-			
-			$.ajax({
-				url : "${contextPath}/member/deleteReview",
-				data : {"reviewNo": no},
-				success : function(result){
-					if(result>0){
-						alert("리뷰가 삭제되었습니다.")
-						location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
-					}else{
-						alert("리뷰 삭제에 실패하였습니다.")
-						location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}"
-					}
-				},error : function(){
-					console.log("실패")
-				}
-				
-			})
-		}
-	})
-	</script>
+   
+   </script>
+   <script src="${contextPath}/resources/js/trainerView/vendor/jquery-1.11.2.min.js"></script>
+   <script src="${contextPath}/resources/js/trainerView/vendor/popper.min.js"></script>
+   <script src="${contextPath}/resources/js/trainerView/vendor/bootstrap.min.js"></script>
+
+   <script src="${contextPath}/resources/js/trainerView/jquery.magnific-popup.js"></script>
+   <script src="${contextPath}/resources/js/trainerView/slick.min.js"></script>
+   <script src="${contextPath}/resources/js/trainerView/jquery.collapse.js"></script>
+   <script src="${contextPath}/resources/js/trainerView/bootsnav.js"></script>
+
+
+
+   <script src="${contextPath}/resources/js/trainerView/plugins.js"></script>
+   <script src="${contextPath}/resources/js/trainerView/main.js"></script>
+
+
+   
 </body>
 
 </html>

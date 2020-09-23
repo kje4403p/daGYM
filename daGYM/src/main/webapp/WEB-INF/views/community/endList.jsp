@@ -18,34 +18,6 @@
 		<li><a href="list">진행중 이벤트</a></li>
 		<li class="on"><a href="end-list">종료된 이벤트</a></li>
 	</ul>
-<%-- 	<ul class="eventList mx-auto">
-		<c:choose>
-			<c:when test="${empty eventList }">
-				<tr><td colspan="6">존재하는 게시글이 없습니다.</td></tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach var="event" items="${eventList }">
-					<li>
-						<a class="view" href="${event.boardNo}?cp=${pInfo.currentPage}"> 
-							<p class="thumb" >
-	               				<c:forEach items="${thList}" var="th">
-               					<c:if test="${th.parentBoardNo == event.boardNo}">
-               						<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}"/>
-               						<img src="${src}">
-               					</c:if>
-               					</c:forEach>
-							</p>
-							<p class="ing" >종료</p>
-							<p class="tit">${event.boardTitle }</p>
-							<fmt:formatDate var='startDate' value="${event.startDate}" pattern="yy-MM-dd" />
-							<fmt:formatDate var='endDate' value="${event.endDate}" pattern="yy-MM-dd" />
-							<p class="date">${startDate } ~ ${endDate }</p>
-						</a>
-					</li>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-	</ul> --%>
 	
 				<c:choose>
 			<c:when test="${empty eventList }">
@@ -93,7 +65,7 @@
 	                	<!-- prev 생성 식 : (현재 페이지 - 1) / 페이징바 사이즈(10) * 10 -->
 	                	<!-- fmt태그를 이용한 소수점 제거 -->
 	                	<fmt:parseNumber var="operand1" value="${(pInfo.currentPage -1)/pInfo.pagingBarSize}" integerOnly="true"/>
-	                	<c:set var="prev" value="${operand1 * 10 }"></c:set>
+	                	<c:set var="prev" value="${operand1 * pInfo.pagingBarSize}"></c:set>
                    		<a class="page-link text-primary" href="${url}${prev}">&lt;</a>
 	                </li>
                 </c:if>

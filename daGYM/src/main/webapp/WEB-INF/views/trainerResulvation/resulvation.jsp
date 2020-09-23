@@ -51,8 +51,35 @@ float: right;
 .search-modal-content{
 background-color: #fcf8e3;
 }
+#a1{
+margin-right:10px;
+margin-top:30px;
+float:left;
+}
+#a2{
+float:left;
+}
+#calendar{
+clear: both;
+}
 
-        </style>
+#b1{
+margin-top:30px;
+margin-right:10px;
+float:left;
+}
+#b2{
+float:left;
+}
+
+#a{
+margin-left: 1100px;
+}
+#b{
+clear:both;
+margin-left: 1100px;
+}
+     </style>
         
 <script>
 
@@ -75,6 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			 {	 
 				
 				 start:"<%=sd.getScheduleTime()%>",
+				 
 				 color:"#8BBDFF"
 				
 			 },
@@ -187,7 +215,17 @@ document.addEventListener('DOMContentLoaded', function() {
 		<c:remove var="status"/>
 		<c:remove var="text"/>
 	</c:if>
-
+<div id="a">
+	<div id="a1" style="background-color: #8BBDFF;  width:50px; height:10px;">
+	</div>
+	<div id="a2"><h4>예약 가능</h4></div>
+	</div>
+<div id="b">
+	<div id="b1" style="background-color: #FF6C6C;  width:50px; height:10px;">
+	</div>
+	<div id="b2"><h4>예약 불가</h4></div>
+</div>
+<br><br><br>
 <div id='calendar'></div>
 
 </body>

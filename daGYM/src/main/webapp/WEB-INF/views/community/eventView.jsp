@@ -110,7 +110,6 @@
 					<% pageContext.setAttribute("newLine", "\n"); %>
 			        <% pageContext.setAttribute("newLine", "\n"); %>
                     ${fn:replace(board.boardContent,newLine,"<br>") }
-				    ${board.boardContent }
 				</div>
 
 				<hr>

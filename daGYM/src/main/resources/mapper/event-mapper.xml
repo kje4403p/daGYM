@@ -242,5 +242,18 @@
 		AND LIKESCOUNT > 0
 		]]>
 	</select>
+	
+	<select id="selectReply" parameterType="_int" resultType="string">
+		SELECT REPLY_CONTENT
+		FROM REPLY
+		WHERE REPLY_NO = #{replyNo}
+	</select>
+	
+	<update id="updateReply" parameterType="Reply">
+		UPDATE REPLY
+		SET REPLY_CONTENT = #{replyContent}
+		WHERE REPLY_NO = #{replyNo}
+
+	</update>
   
 </mapper>
