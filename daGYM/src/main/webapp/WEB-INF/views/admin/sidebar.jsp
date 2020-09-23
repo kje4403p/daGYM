@@ -43,7 +43,7 @@
   </div>
   <ul class="nav">
     <li class="nav-item nav-category">
-      <span class="nav-link">Navigation</span>
+      <span class="nav-link ml-5">▷ 상세 메뉴 ◁</span>
     </li>
     <li class="nav-item menu-items">
       <a class="nav-link" href="${contextPath}/admin/schedule">
