@@ -280,6 +280,7 @@
 						
 						console.log(result)
 						$("#checkEmail").text("사용 가능한 이메일입니다.").css("color","blue");
+						$('#emailCk-btn').removeAttr('disabled');
 						signUpCheck.email = true;
 					}else{
 						$("#checkEmail").text("이미 사용중인 이메일입니다.").css("color","red");
