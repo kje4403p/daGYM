@@ -60,7 +60,8 @@ background-color: #fcf8e3;
 document.addEventListener('DOMContentLoaded', function() { 
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, { 
-		  initialView: 'resourceTimeGridDay',
+		 initialView: 'timeGridWeek',
+		 editable: true,
 		  plugins: [ 'interaction', 'dayGrid','timeGrid',  'moment' ],
 		 events: [
 			 <%
@@ -92,7 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
 					hour:'numeric'
 					  
 					   },
-					 
+           eventMouseOver: function(){
+        	   cursor: pointer;
+           },
 			 eventClick: function(info,start,a) {
 			
 				 

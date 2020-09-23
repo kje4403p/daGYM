@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		  initialView: 'resourceTimeGridDay',
 		plugins: [ 'interaction', 'dayGrid','timeGrid',  'moment' ],
 	
-		
+		 editable: true,
 		 events: [
 			 <%
 			 for(int i=0; i<schedule.size(); i++){
