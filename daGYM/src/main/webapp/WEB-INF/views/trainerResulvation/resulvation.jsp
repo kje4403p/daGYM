@@ -52,7 +52,7 @@ float: right;
 background-color: #fcf8e3;
 }
 
-        </style>
+     </style>
         
 <script>
 
@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			 {	 
 				
 				 start:"<%=sd.getScheduleTime()%>",
+				 
 				 color:"#8BBDFF"
 				
 			 },
@@ -187,7 +188,9 @@ document.addEventListener('DOMContentLoaded', function() {
 		<c:remove var="status"/>
 		<c:remove var="text"/>
 	</c:if>
-
+<div style="background-color: #8BBDFF;  width:400px; height:10px;">
+</div>
+<p> 예약 가능</p>
 <div id='calendar'></div>
 
 </body>
