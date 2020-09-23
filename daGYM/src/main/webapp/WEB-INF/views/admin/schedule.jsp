@@ -17,37 +17,6 @@
 <script class="cssdesk" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.0/moment.min.js" type="text/javascript"></script>
 
 <style>
-	/* The Modal (background) */
-	.searchModal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 10; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0,0,0); /* Fallback color */
-	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-	}
-	/* Modal Content/Box */
-	.search-modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 70%; /* Could be more or less, depending on screen size */
-	}
-	.searchModal{
-	text-align: center;
-	}
-	#close{
-	float: right;
-	}
-	.search-modal-content{
-	background-color: #fcf8e3;
-	}
-	
 	#parent {
 	background-color: white;
 	color: black;}
@@ -118,7 +87,7 @@
 				 },
 				 </c:forEach>
 				 ],
-			eventTimeFormat: { hour:'numeric' },
+			eventTimeFormat: { hour:'numeric', meridiem: 'short' },
 			eventColor: "orange",
 			defaultView: 'dayGridMonth',
 			/* 상단 버튼 및 타이틀 구현 */
@@ -158,7 +127,6 @@
 					arr.push(obj);
 				}
 				calObj.events = arr;
-				
 				
 				calendar = new FullCalendar.Calendar(calendarEl, calObj);
 				calendar.render();
