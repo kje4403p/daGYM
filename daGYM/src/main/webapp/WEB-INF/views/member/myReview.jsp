@@ -112,10 +112,15 @@
     <script>
     $(function(){
         $("#list-table td").on("click", function(){
-           var trainerNo = $(this).parent().children().eq(0).text();
-           var boardUrl = "";
-           boardUrl = "${contextPath}/trainer/trainerView/"+ trainerNo + "?cp=${pInfo.currentPage}" + "#content2";
-        location.href = boardUrl;
+        	if ($(this).parent().children().eq(0).text() == "작성하신 리뷰가 없습니다.")
+        	{
+        		return false;
+        	}
+           	var trainerNo = $(this).parent().children().eq(0).text();
+          	var boardUrl = "";
+           	boardUrl = "${contextPath}/trainer/trainerView/"+ trainerNo + "?cp=${pInfo.currentPage}" + "#content2";
+        	location.href = boardUrl;
+        	
         });
      });
 	    $("#myBoard").on("click", function() {

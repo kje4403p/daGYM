@@ -113,6 +113,10 @@
     <script>
     $(function(){
         $("#list-table td").on("click", function(){
+        	if ($(this).parent().children().eq(0).text() == "작성하신 댓글이 없습니다.")
+        	{
+        		return false;
+        	}
            var boardNo = $(this).parent().children().eq(0).text();
            var boardUrl = "";
            if($(this).parent().children().eq(1).text() == "2"){
