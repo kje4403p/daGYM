@@ -43,6 +43,19 @@
    
 
    <style>
+   
+   @font-face { 
+	font-family: 'GmarketSansBold';
+   	 src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff');
+     font-weight: normal; 
+     font-style: normal;
+    }
+    body{
+    	font-family: GmarketSansBold;
+    }
+    #about > div.container > div > div > div:nth-child(1) > div > h2{
+    	font-weight: 900; 
+    }
    #star a{ 
    text-decoration: none; color: gray;
     } 
@@ -135,6 +148,7 @@
                   <div class="trainerName">
                <div class="about_accordion wow fadeIn">
                            <div id="faq_main_content" class="faq_main_content">
+                          	
                               <h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
                               <div>
                                  <div class="content">
@@ -171,54 +185,32 @@
                            </div>
                         </div>
             </div>
-            </div>
-            <div class="col-md-1">
-            </div>
-         </div>
-      </div>   
-      </section>
-
-      <!--End off Home Sections-->
-
-
-      <!--About Sections-->
-      <section id="about" class="about roomy-100">
-         <div class="container">
-            <div class="row">
-               <div class="main_about">
-                  <div class="col-md-6">
-                     <div class="about_content">
-                        <h2>트레이너 한마디!</h2>
-                        <div class="separator_left"></div>
-
-                        <p>${trainer.trainerComment}</p>
-                     
-                     </div>
-                  </div>
-                  <div class="col-md-6">
-                  
-                  </div>
-               </div>
-            </div>
-            <!--End off row-->
-         </div>
-         <!--End off container -->
-         <div class="row">
+                <div class="col-md-1">
+              <div class="row">
             <div class="col-md-6">
             </div>
             <div class="col-md-6">
-            <div class="membership-item a">
                 <c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
+            <div class="membership-item a">
                   <button  class="primary-btn membership-btn"  onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</button>
                </c:if>
                <c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
                   <button  class="primary-btn membership-btn"  onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</button>
-               </c:if>
                </div>
+               </c:if>
             </div>
+            </div>
+            </div>
+            
+        
          </div>
+      </div>   
+      
       </section>
-  
+
+      <!--End off Home Sections-->
+
+<br><br>
 
 
 
@@ -229,68 +221,20 @@
             <div class="row">
                <div class="main_testimonial col-sm-8 ml-sm-auto mr-sm-auto">
                   <div class="head_title text-center roomy-100">
-                     <h2 class="text-white">OUR TESTIMONIALS</h2>
+                     <h2 class="text-white">트레이너 한마디!</h2>
                   </div>
                </div>
 
 
                <div class="testimonial_slid text-center">
+                 
                   <div class="testimonial_item">
                      <div class="col-sm-10 mr-sm-auto ml-sm-auto">
-                        <p class="text-white">환불은 불가능합니다...! 신중히 결제해주세요...!</p>
-
-                        <div class="test_authour m-top-30">
-                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
+                         <p>${trainer.trainerComment}</p>
                      </div>
                   </div>
-                  <div class="testimonial_item">
-                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
-                        <p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-
-                        <div class="test_authour m-top-30">
-                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="testimonial_item">
-                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
-                        <p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-
-                        <div class="test_authour m-top-30">
-                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="testimonial_item">
-                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
-                        <p class="text-white">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </p>
-
-                        <div class="test_authour m-top-30">
-                           <h6 class="text-white m-bottom-20">JOHN DOE - THEMEFOREST USER</h6>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                           <i class="fa fa-star"></i>
-                        </div>
-                     </div>
-                  </div>
+                
+                
                </div>
 
             </div>
@@ -328,7 +272,7 @@
                                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
                                 </c:when>
                                 <c:otherwise>
-                                다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+                               <p> 다른 트레이너 이용권을 모두 사용해야<br> 결제하실 수  있습니다.</p>
                                 </c:otherwise>
                                 </c:choose>
                     </div>
@@ -351,7 +295,7 @@
                                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
                                 </c:when>
                                 <c:otherwise>
-                                다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+                               <p> 다른 트레이너 이용권을 모두 사용해야 <br>결제하실 수  있습니다.</p>
                                 </c:otherwise>
                                 </c:choose>
                     </div>
@@ -376,7 +320,7 @@
                                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
                                 </c:when>
                                 <c:otherwise>
-                                다른 트레이너 이용권을 모두 사용해야 결제하실 수  있습니다.
+                                <p> 다른 트레이너 이용권을 모두 사용해야<br> 결제하실 수  있습니다.</p>
                                 </c:otherwise>
                                 </c:choose>
                     </div>
@@ -414,7 +358,10 @@
          <c:otherwise>
             <c:forEach var="review" items="${reviews }">
                <div class="container">
-      
+      <div class="row">
+		<div class="col-md-2">
+		</div>
+		<div class="col-md-8">
          <div class="well">
             <div class="media">
             
@@ -424,7 +371,7 @@
                 <h4 class="media-heading"></h4>
                 <input id="reviewNo" type="hidden" value="${review.reviewNo }">
                 <p class="text-right">By ${review.memberId }</p>
-                <p>${review.reviewContent }</p>
+                <p style="text-align: center">${review.reviewContent }</p>
                 
                 <ul class="list-inline list-unstyled">
                   <li>
@@ -439,19 +386,27 @@
                      
                   </li>
                   <li>|</li>
+                  
                   <jsp:useBean id="now" class="java.util.Date"></jsp:useBean>
                   <fmt:formatDate var="createDate" value="${review.reviewCreateDate}" pattern="yyyy-MM-dd"/>
                   <li>${createDate }</li>
-            </ul>
+                  <li>
+            
                <c:choose>
                   <c:when test="${loginMember.memberId == review.memberId }">
-                         <button type="button" id="${review.reviewNo }" class="delete-btn" >삭제</button>
-                         <button type="button" class="update-btn"   data-test='${review.reviewNo }' data-toggle="modal" data-target="#myModal" >수정</button>
+                  <li>|</li>
+                      <li>   <button type="button" id="${review.reviewNo }" class="delete-btn" >삭제</button>
+                         <button type="button" class="update-btn"   data-test='${review.reviewNo }' data-toggle="modal" data-target="#myModal" >수정</button></li>
                 </c:when>
                </c:choose>
+               </ul>
              </div>
           </div>
         </div>
+        </div>
+		<div class="col-md-2">
+		</div>
+	</div>
       </div>
             </c:forEach>
          </c:otherwise>

@@ -10,13 +10,14 @@
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <style>
+/*
 	@font-face {
     font-family: 'MaplestoryOTFBold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 	}
-
+*/
 	#profile,#pass,#Students,#remove{
 		/* border:3px solid black; */
 		border-radius : 50px;
@@ -24,7 +25,7 @@
 		
 		width : 370px;
 		height: 150px;
-		font-family: MaplestoryOTFBold;
+		font-family: GmarketSansBold;
 	}
 	
 	#profile:hover,#pass:hover,#Students:hover,#remove:hover{
@@ -50,7 +51,6 @@
 					<br>
 					<table>
 					<tr>
-						<td colspan="6"><h1 style ="font-family: MaplestoryOTFBold; text-align: center;">내 정보</h1></td>
 					</tr>
 						<tr>
 							<td id="profile" style="text-align: center;">회원정보<br>

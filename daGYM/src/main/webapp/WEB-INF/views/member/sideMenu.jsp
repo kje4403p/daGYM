@@ -2,21 +2,21 @@
     pageEncoding="UTF-8"%>
 <% String bbbsId = (String)request.getAttribute("bbsId"); %>
 <style>
-
+/*
 	@font-face {
     font-family: 'MaplestoryOTFBold';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/MaplestoryOTFBold.woff') format('woff');
     font-weight: normal;
     font-style: normal;
-	}
-	
+	} */
+	@font-face { font-family: 'GmarketSansBold'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff') format('woff'); font-weight: normal; font-style: normal; }
 	#side > li{
 		/* border-radius : 50px; */
 		text-align: center;
 		width: 200px;
 		/* background-color: rgb(197,254,254); */
 		/* color : rgb(5,148,216); */
-		font-family: MaplestoryOTFBold;
+		font-family: GmarketSansBold;
 	}
 	
 	#side > li:hover{
