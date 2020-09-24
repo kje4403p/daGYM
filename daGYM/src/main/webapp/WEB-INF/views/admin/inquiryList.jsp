@@ -168,13 +168,13 @@
 						
 						<hr>
 						<label id="label-title" class="modal-left">답변 내용 입력</label> <br>
-						<textarea name="replyContent" cols="50" rows="5" style="resize: none; margin-bottom: 20px;" class="modal-left"></textarea> 
+						<textarea name="replyContent" cols="50" rows="5" style="resize: none; margin-bottom: 20px;" class="modal-left" required></textarea> 
 						<br>
 					
 						<div class="modal-footer" style="clear: both; margin-bottom: 20px;">
 							<input type="hidden" name="parentBoardNo" id="parentBoardNo">
 					        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-					        <button type="submit" class="btn btn-primary" id=requestBtn>요청</button>
+					        <button type="submit" class="btn btn-primary" id=requestBtn>완료</button>
 					    </div>
 					</form>
                 </div>

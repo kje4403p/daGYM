@@ -1,9 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="com.kh.dagym.admin.model.vo.PT"%>
-<%@page import="java.util.List"%>
-<%List<PT> sList = (List<PT>)request.getAttribute("sList");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,7 +36,7 @@
 		            <div class="panel-body">
 		                <div class="col-lg-6">
 		                	<span>
-		                		<h3>트레이너 선택</h3>
+		                		<h4>트레이너 선택</h4>
 		                    	<c:forEach var="trainer" items="${tList}">
 			                        <input type="checkbox" name="trainerName" id="${trainer.trainerNo}" value="${trainer.trainerNo}" checked><label for="${trainer.trainerNo}">${trainer.trainerName}</label>
 		                    		&nbsp;&nbsp;
