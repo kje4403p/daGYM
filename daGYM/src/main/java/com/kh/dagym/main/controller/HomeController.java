@@ -39,7 +39,6 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping("/eventViews")
 	public String eventViews() {
-		System.out.println("이벤트");
 		List<Attachment> list = homeService.eventViews();
 		
 		
