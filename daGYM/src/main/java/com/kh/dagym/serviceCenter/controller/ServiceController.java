@@ -1,5 +1,6 @@
 package com.kh.dagym.serviceCenter.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -187,6 +188,16 @@ public class ServiceController {
 		board.setBoardType(type);
 		board.setBoardWriter(loginMember.getMemberNo()+"");
 		
+		
+		 //-----------------------------------------Summernote-----------------------------------------
+		// name속성 값이 "images"인 파라미터 자체가 전달되지 않아 images 리스트가 생성되지 않아
+				// images.add(0, thumbnail); 코드 진행 시 NullPointerException이 발생함.
+		if(images.isEmpty()) { 
+			images = new ArrayList<>();
+		}
+		//--------------------------------------------------------------------------------------------
+		
+		
 		images.add(0, thumbnail);
 		
 		String savePath = request.getSession().getServletContext().getRealPath("resources/uploadImages");
@@ -336,6 +347,21 @@ public class ServiceController {
 		model.addAttribute("board", board);
 		return url;
 	}
+	
+	//-----------------------------------------Summernote-----------------------------------------
+		// Summernote 이미지 업로드
+		@ResponseBody
+		@RequestMapping("{type}/insertImage")
+		public String insertImage(@PathVariable int type,  HttpServletRequest request,
+				@RequestParam(value="uploadFile", required=false) MultipartFile uploadFile) {
+			
+			String savePath =  request.getSession().getServletContext().getRealPath("resources/infoImages/");
+			
+			Map<String, String> result = serviceBoard.insertImage(uploadFile, savePath);
+			return new Gson().toJson(result);
+		}
+		//--------------------------------------------------------------------------------------------
+		
 	
 	//queset게시글 등록
 	

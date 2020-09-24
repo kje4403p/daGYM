@@ -1,6 +1,9 @@
 package com.kh.dagym.member.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,8 +19,10 @@ import com.kh.dagym.member.model.vo.MyPass;
 import com.kh.dagym.member.model.vo.MyReply;
 import com.kh.dagym.member.model.vo.MyStudents;
 import com.kh.dagym.member.model.vo.reservationCancel;
+import com.kh.dagym.trainer.model.dao.TrainerDAO;
 import com.kh.dagym.trainer.model.vo.PT;
 import com.kh.dagym.trainer.model.vo.Review;
+import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerSchedule;
 
 @Service //Service 레이어, 비지니스 로직 처리를 하는 클래스임을 명시 + Bean 등록
@@ -31,6 +36,9 @@ public class MemberServiceImpl implements MemberService{
    
    @Autowired
    private PageInfo pInfo;
+   
+   @Autowired
+	private TrainerDAO trainerDAO;
 
    // 회원가입 Service 구현
    @Transactional(rollbackFor = Exception.class)
@@ -202,7 +210,31 @@ public class MemberServiceImpl implements MemberService{
       @Transactional(rollbackFor = Exception.class)
       @Override
       public int insertReview(Review review) {
-         return memberDAO.insertReview(review);
+    	  
+    	  int result = memberDAO.insertReview(review);
+    	  
+    	  if(result>0) {
+    		  List<Trainer> tList = new ArrayList<Trainer>();
+    			tList = trainerDAO.selectList();
+    			if(tList != null) {
+    				for(Trainer tr : tList) {
+    					List<Integer> list = new ArrayList<Integer>();
+    					list = trainerDAO.selectTrainerNo();
+    					for(int i=0; i<list.size(); i++) {
+    						if(list.get(i) == tr.getTrainerNo()) {
+    							Trainer tt = trainerDAO.selectGrade(tr.getTrainerNo());
+    							tr.setReviewGrade(tt.getReviewGrade());
+    							Map<String, Object> map = new HashMap<String, Object>();
+    							map.put("trainerNo", tr.getTrainerNo());
+    							map.put("trainerGrade", tr.getReviewGrade());
+    							 result = trainerDAO.updateGrade(map);
+    						}
+    					}
+    				}
+    			}
+    	  }
+    	  
+    	  return result;
       }
       // 다음 리뷰번호 받아오기
       @Override
@@ -287,7 +319,31 @@ public class MemberServiceImpl implements MemberService{
       @Transactional(rollbackFor = Exception.class)
       @Override
       public int updateReview(Review review) {
-         return memberDAO.updateReview(review);
+    	  
+    	  int result = memberDAO.updateReview(review);
+    			  
+    			  if(result>0) {
+    	    		  List<Trainer> tList = new ArrayList<Trainer>();
+    	    			tList = trainerDAO.selectList();
+    	    			if(tList != null) {
+    	    				for(Trainer tr : tList) {
+    	    					List<Integer> list = new ArrayList<Integer>();
+    	    					list = trainerDAO.selectTrainerNo();
+    	    					for(int i=0; i<list.size(); i++) {
+    	    						if(list.get(i) == tr.getTrainerNo()) {
+    	    							Trainer tt = trainerDAO.selectGrade(tr.getTrainerNo());
+    	    							tr.setReviewGrade(tt.getReviewGrade());
+    	    							Map<String, Object> map = new HashMap<String, Object>();
+    	    							map.put("trainerNo", tr.getTrainerNo());
+    	    							map.put("trainerGrade", tr.getReviewGrade());
+    	    							result = trainerDAO.updateGrade(map);
+    	    						}
+    	    					}
+    	    				}
+    	    			}
+    	    	  }
+    	  
+         return result;
       }
 
       

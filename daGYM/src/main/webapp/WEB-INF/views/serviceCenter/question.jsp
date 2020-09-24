@@ -36,7 +36,14 @@
 		</div>
 
 		<div id="right">
-		<span id="title">1:1 문의 게시판 </span>
+		<!-- <span id="title">1:1 문의 게시판 </span> -->
+		<div class="container">
+		  <!-- <div class="neon">Neon </div> -->
+		 <div class="flux">qna</div>
+		 
+		 
+		</div>
+	
 			<div id="table1">
 				<table id="table2" class="table table-hover">
 					<thead>

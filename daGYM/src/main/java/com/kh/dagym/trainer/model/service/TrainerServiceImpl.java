@@ -45,6 +45,10 @@ public class TrainerServiceImpl implements TrainerService{
 					if(list.get(i) == tr.getTrainerNo()) {
 						Trainer tt = trainerDAO.selectGrade(tr.getTrainerNo());
 						tr.setReviewGrade(tt.getReviewGrade());
+						Map<String, Object> map = new HashMap<String, Object>();
+						map.put("trainerNo", tr.getTrainerNo());
+						map.put("trainerGrade", tr.getReviewGrade());
+						int result = trainerDAO.updateGrade(map);
 					}
 				}
 			}

@@ -186,7 +186,7 @@ SELECT * FROM DUAL
 
   	<!-- 트레이너 리뷰 평점 조회  -->
   	<select id="selectReviewGrade" parameterType="int" resultMap="trainerResultSet">
-  		SELECT ROUND(AVG(REVIEW_RATING)) AS REVIEW_GRADE FROM REVIEW WHERE TRAINER_NO = #{trainerNo} GROUP BY TRAINER_NO
+  		SELECT ROUND(AVG(REVIEW_RATING)) AS REVIEW_GRADE FROM REVIEW WHERE TRAINER_NO = #{trainerNo} AND REVIEW_STATUS = 'Y' GROUP BY TRAINER_NO
   	</select>
   	
   	<select id="selectTrainerNo" resultType="_int">
@@ -206,5 +206,8 @@ SELECT * FROM DUAL
   		DELETE FROM PAYMENT WHERE MERCHANT_UID=#{merchantUid}
   	</delete>
 
+	<update id="updateGrade" parameterType="map">
+		UPDATE TRAINER SET TRAINER_GRADE = #{trainerGrade} WHERE TRAINER_NO = #{trainerNo}
+	</update>
 
 </mapper>
