@@ -171,4 +171,11 @@ public class TrainerDAO {
 
 	}
 
+	public int updateGrade(Map<String, Object> map) {
+		
+		return sqlSession.update("trainerMapper.updateGrade", map);
+	}
+
+	
+
 }

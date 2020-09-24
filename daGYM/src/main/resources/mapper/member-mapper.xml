@@ -272,7 +272,6 @@ ORDER BY SCHEDULE_TIME ASC
    <!-- 리뷰 수정 -->
    <update id="updateReview" parameterType="Review">
       UPDATE REVIEW SET REVIEW_CONTENT = #{reviewContent}, REVIEW_RATING=#{reviewRating} WHERE REVIEW_NO=#{reviewNo}
-      
    </update>
 
 

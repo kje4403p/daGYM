@@ -34,7 +34,9 @@
 
 		<div id="right">
 		
-		<span id ="title">자주묻는 질문</span>
+		<!-- <span id ="title">자주묻는 질문</span> -->
+		 <div class="neon">FAQ </div> 
+		 <!--  <div class="flux">1:1 qna </div> -->
 
 			<div id="table1" >
 				<table id="table2" class="table table-hover">

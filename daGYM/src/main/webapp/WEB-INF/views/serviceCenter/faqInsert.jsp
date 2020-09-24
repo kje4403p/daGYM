@@ -37,7 +37,9 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-
+<!------------------ Summernote ------------------>
+<link rel="stylesheet" href="${contextPath}/resources/summernote/css/summernote-lite.css">
+<!------------------------------------------------>
 
 
 </head>
@@ -45,6 +47,12 @@
 
 	<jsp:include page="../common/header.jsp" />
 	<%-- <%@include file="../common/header.jsp" %> --%>
+	
+	<!------------------ Summernote ------------------>
+	<script src="${contextPath}/resources/summernote/js/summernote-lite.js"></script>
+	<script src="${contextPath}/resources/summernote/js/summernote-ko-KR.js"></script>
+	<script src="${contextPath}/resources/summernote/js/summernote.js"></script>
+	<!------------------------------------------------>
 
 	<div id="d1">
 
@@ -65,7 +73,7 @@
 				encType="multipart/form-data" onsubmit="return validate();">
 
 				<div class="mb-2">
-				 <c:if test="${type == 3}">
+			
 					<label class="input-group-addon mr-3 insert-label">질문유형</label> 
 					<select	class="custom-select" id="category" name="qnaCode" style="width: 150px;">
 						<option value="1">운동</option>
@@ -73,7 +81,7 @@
 						<option value="3">이용관련</option>
 						<option value="4">결제/환불</option>
 					</select>
-				</c:if>
+			
 				</div>
 				<div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">제목</label> 
@@ -103,7 +111,7 @@
 					</div>
 				</div>
 
-				<div class="form-inline mb-2">
+				<!-- <div class="form-inline mb-2">
 					<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
 					<div class="mr-2 boardImg" id="contentImgArea1">
 						<img id="contentImg1" width="150" height="150">
@@ -116,7 +124,27 @@
 					<div class="mr-2 boardImg" id="contentImgArea3">
 						<img id="contentImg3" width="150" height="150">
 					</div>
-				</div>
+				</div> -->
+				
+				<!------------------ Summernote ------------------>
+				
+					
+					<div class="form-inline mb-2">
+						<label class="input-group-addon mr-3 insert-label">업로드<br>이미지</label>
+						<div class="mr-2 boardImg" id="contentImgArea1">
+							<img id="contentImg1" width="150" height="150">
+						</div>
+	
+						<div class="mr-2 boardImg" id="contentImgArea2">
+							<img id="contentImg2" width="150" height="150">
+						</div>
+	
+						<div class="mr-2 boardImg" id="contentImgArea3">
+							<img id="contentImg3" width="150" height="150">
+						</div>
+					</div>
+				
+				<!------------------------------------------------>
 
 
 				<!-- 파일 업로드 하는 부분 -->
@@ -125,9 +153,18 @@
 						- input 요소 하나에 둘 이상의 값을 입력할 수 있음을 명시 (파일 여러개 선택 가능)
 					 -->
 					<input type="file" id="img1" name="thumbnail" onchange="LoadImg(this,1)"> 
-					<input type="file" id="img2" name="images" onchange="LoadImg(this,2)">
+					<!-- <input type="file" id="img2" name="images" onchange="LoadImg(this,2)">
 					<input type="file" id="img3" name="images" onchange="LoadImg(this,3)"> 
-					<input type="file" id="img4" name="images" onchange="LoadImg(this,4)">
+					<input type="file" id="img4" name="images" onchange="LoadImg(this,4)"> -->
+					
+						<!------------------ Summernote ------------------>
+						
+						<input type="file" id="img2" name="images" onchange="LoadImg(this,2)">
+						<input type="file" id="img3" name="images" onchange="LoadImg(this,3)"> 
+						<input type="file" id="img4" name="images" onchange="LoadImg(this,4)">
+				
+					<!------------------------------------------------>	
+					
 					<!-- images는 LIst로 넘어가고 썸네일은 썸네일로 서버로 넘어가기 때문에 2개를 받아야됨. -->
 				</div>
 
@@ -135,8 +172,18 @@
 					<div>
 						<label for="content">내용</label>
 					</div>
-					<textarea class="form-control" id="content" name="boardContent"
-						rows="10" style="resize: none;"></textarea>
+				<!-- 	<textarea class="form-control" id="content" name="boardContent"
+						rows="10" style="resize: none;"></textarea> -->
+						
+						<!------------------ Summernote ------------------>
+				
+						
+				
+						<textarea class="form-control" id="summernote" name="boardContent"></textarea>
+				
+				
+					<!------------------------------------------------>	
+						
 				</div>
 
 
