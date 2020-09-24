@@ -45,18 +45,18 @@
    <style>
    @import url(https://fonts.googleapis.com/css?family=BenchNine:700);
 .snip1535 {
-  background-color: #c47135;
+  background-color: #FD9F28;
   border: none;
   color: #ffffff;
   cursor: pointer;
   display: inline-block;
   font-family: 'BenchNine', Arial, sans-serif;
   font-size: 1em;
-  font-size: 22px;
+  font-size: 15px;
   line-height: 1em;
   margin: 15px 40px;
   outline: none;
-  padding: 12px 40px 10px;
+  padding: 12px 20px 10px;
   position: relative;
   text-transform: uppercase;
   font-weight: 700;
@@ -74,7 +74,7 @@
   width: 24px;
 }
 .snip1535:before {
-  border-color: #c47135;
+  border-color: #FD9F28;
   border-right-width: 2px;
   border-top-width: 2px;
   right: -5px;
@@ -82,14 +82,14 @@
 }
 .snip1535:after {
   border-bottom-width: 2px;
-  border-color: #c47135;
+  border-color: #FD9F28;
   border-left-width: 2px;
   bottom: -5px;
   left: -5px;
 }
 .snip1535:hover,
 .snip1535.hover {
-  background-color: #F29661;
+  background-color: #FD9F28;
 }
 .snip1535:hover:before,
 .snip1535.hover:before,
@@ -97,6 +97,10 @@
 .snip1535.hover:after {
   height: 100%;
   width: 100%;
+}
+
+#hello > div > div > div:nth-child(3) > div.trainerName > div.row > div:nth-child(1){
+	text-align:center;
 }
    @font-face { 
 	font-family: 'GmarketSansBold';
@@ -165,6 +169,10 @@
    #about > div.row > div:nth-child(2) > div > button{
    height: 50px;
    }
+   
+   .culmn *{
+   font-family: 'GmarketSansBold';
+   }
        
    </style>
    
@@ -202,8 +210,9 @@
                   <div class="trainerName">
                           
                           	  <div class="row" style="padding-bottom: 10px;">
-            <div class="col-md-6">
-            	 <img  src="${contextPath}/resources/images/dagym/트레이너.png" /><h3 style="display : inline">${trainer.memberName}</h3>
+            <div class="col-md-6" style="top: 15px;">
+            
+            	 <img  src="${contextPath}/resources/images/dagym/트레이너.png" /><h3 style="display : inline; padding-left: 10px; font-family: 'GmarketSansBold'">${trainer.memberName}</h3>
             </div>
             <div class="col-md-6">
                 <c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
@@ -427,7 +436,7 @@
                 <h4 class="media-heading"></h4>
                 <input id="reviewNo" type="hidden" value="${review.reviewNo }">
                 <p class="text-right">By ${review.memberId }</p>
-                <p style="text-align: center">${review.reviewContent }</p>
+                <p >${review.reviewContent }</p>
                 
                 <ul class="list-inline list-unstyled">
                   <li>
