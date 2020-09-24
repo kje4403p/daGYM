@@ -93,6 +93,7 @@
       <result property="reviewRating" column="REVIEW_RATING"/>
       <result property="reviewCreateDate" column="REVIEW_CREATE_DT"/>
       <result property="memberId" column="MEMBER_ID"/>
+      <result property="trainerNo" column="TRAINER_NO"/>
       <result property="trainerNM" column="TRAINER_NM"/>
    </resultMap>
    
@@ -140,11 +141,11 @@
       UPDATE MEMBER SET MEMBER_STATUS = 'N' WHERE MEMBER_NO = #{memberNo}
    </update>
    
-   <!-- 내 댓글 조회 -->
-   <select id="myReplyList" parameterType="MyReply" resultMap="myReplyResultSet">
-      SELECT REPLY_NO, BOARD_TITLE, REPLY_CONTENT, REPLY_ENROLL_DT, REPLY_STATUS FROM REPLY 
-      JOIN BOARD ON(PARENT_BOARD_NO=BOARD_NO)WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS ='Y' ORDER BY REPLY_NO DESC
-   </select>
+	<!-- 내 댓글 조회 -->
+ 	<select id="myReplyList" parameterType="MyReply" resultMap="myReplyResultSet">
+		SELECT REPLY_NO, BOARD_TITLE, REPLY_CONTENT, REPLY_ENROLL_DT, REPLY_STATUS, PARENT_BOARD_NO, BOARD_TYPE FROM REPLY 
+ 		JOIN BOARD ON(PARENT_BOARD_NO=BOARD_NO)WHERE REPLY_MEMBER_NO = #{rerlyMemberNo} AND REPLY_STATUS ='Y' ORDER BY REPLY_NO DESC
+ 	</select>
    
    <!-- 내 댓글 페이징 처리 -->
    <select id="MyReplyListCount" parameterType="_int" resultType = "_int">
@@ -256,11 +257,11 @@ ORDER BY SCHEDULE_TIME ASC
    </select>
    
    <!-- 내 리뷰 조회 -->
-   <select id="myReviewList" parameterType="Review" resultMap="reviewResultSet">
-   SELECT REVIEW_CONTENT,REVIEW_RATING,REVIEW_CREATE_DT,(SELECT MEMBER_NM M FROM MEMBER WHERE MEMBER_NO=(SELECT DISTINCT TRAINER_NO FROM REVIEW WHERE REVIEW_WRITER=#{memberNo}))AS TRAINER_NM
-   FROM REVIEW JOIN MEMBER ON(REVIEW_WRITER=MEMBER_NO)
-   WHERE REVIEW_STATUS = 'Y' AND REVIEW_WRITER = #{memberNo} ORDER BY REVIEW_NO
-   </select>
+ 	<select id="myReviewList" parameterType="Review" resultMap="reviewResultSet">
+	SELECT REVIEW_CONTENT,REVIEW_RATING,REVIEW_CREATE_DT,TRAINER_NO,(SELECT MEMBER_NM M FROM MEMBER WHERE MEMBER_NO=(SELECT DISTINCT TRAINER_NO FROM REVIEW WHERE REVIEW_WRITER=#{memberNo}))AS TRAINER_NM
+ 	FROM REVIEW JOIN MEMBER ON(REVIEW_WRITER=MEMBER_NO)
+ 	WHERE REVIEW_STATUS = 'Y' AND REVIEW_WRITER = #{memberNo} ORDER BY REVIEW_NO
+ 	</select>
    
    <!-- 휴면계정 해제 -->
    <update id="changeStatus" parameterType="_int">
@@ -274,4 +275,6 @@ ORDER BY SCHEDULE_TIME ASC
       
    </update>
 
+
 </mapper>
+

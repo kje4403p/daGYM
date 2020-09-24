@@ -90,6 +90,14 @@
    .trainerName{
       padding-top: 50px;
    }
+   #about > div.row > div:nth-child(2) > div{
+   width: 160px;
+  height: 46px;
+ 
+   }
+   #about > div.row > div:nth-child(2) > div > button{
+   height: 50px;
+   }
        
    </style>
    
@@ -199,12 +207,14 @@
             <div class="col-md-6">
             </div>
             <div class="col-md-6">
-               <c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
-                  <a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</a>
+            <div class="membership-item a">
+                <c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
+                  <button  class="primary-btn membership-btn"  onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</button>
                </c:if>
                <c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
-                  <a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
+                  <button  class="primary-btn membership-btn"  onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</button>
                </c:if>
+               </div>
             </div>
          </div>
       </section>
