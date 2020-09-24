@@ -113,6 +113,10 @@
     
 	    $(function(){
 	        $("#list-table td").on("click", function(){
+	        	if ($(this).parent().children().eq(0).text() == "작성하신 게시글이 없습니다.")
+	        	{
+	        		return false;
+	        	}
 	           var boardNo = $(this).parent().children().eq(0).text();
 	           var boardUrl = "";
 	           if($(this).parent().children().eq(1).text() == "정보"){
@@ -123,6 +127,8 @@
 	        	   	boardUrl = "${contextPath}/service/question/3/"+ boardNo + "?cp=${pInfo.currentPage}";
 	           }else if($(this).parent().children().eq(1).text() == "이벤트"){
 	        	   	boardUrl = "${contextPath}/event/"+ boardNo + "?cp=${pInfo.currentPage}";
+	           }else{
+	        	   boardUrl = "아님";	        	   
 	           }
 	        location.href = boardUrl;
 	        });
