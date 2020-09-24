@@ -22,16 +22,7 @@
 		<result property="endDate" column="END_DATE"/>
 	</resultMap>
 	
-	 <resultMap type="TrainerAttachment" id="trainerAttachmentResultSet">
-        <id property="fileNo" column="FILE_NO"/>
-        <result property="parentTrainerNo" column="PARENT_TRAINER_NO"/>
-        <result property="fileOriginName" column="FILE_ORIGIN_NAME"/>
-        <result property="fileChangeName" column="FILE_CHANGE_NAME"/>
-        <result property="filePath" column="FILE_PATH"/>
-        <result property="fileLevel" column="FILE_LEVEL"/>
-    </resultMap>
-    
-    
+
 	<select id="eventViews" resultMap="attachmentResultSet">
 		SELECT * FROM ATTACHMENT 
 		WHERE BOARD_NO IN (SELECT * FROM(SELECT BOARD_NO FROM BOARD WHERE BOARD_TYPE=1 AND END_DATE>SYSDATE AND BOARD_STATUS='Y' ORDER BY BOARD_NO DESC)
@@ -41,15 +32,9 @@
 	</select>
 	<select id="eventTitle" resultMap="boardResultSet">
 		SELECT * FROM BOARD WHERE BOARD_NO IN(SELECT * FROM(SELECT BOARD_NO FROM BOARD WHERE BOARD_TYPE=1 AND END_DATE>SYSDATE AND BOARD_STATUS='Y' ORDER BY BOARD_NO DESC)
-		 <![CDATA[ WHERE ROWNUM<=3)]]>
+		 <![CDATA[ WHERE ROWNUM<=3 )  ORDER BY BOARD_NO DESC]]>
 	</select>
   
    
-	<select id="trainerViews" resultMap="trainerAttachmentResultSet">
-		SELECT * FROM TRAINER_ATTACHMENT 
-		WHERE BOARD_NO IN (SELECT * FROM(SELECT BOARD_NO FROM BOARD WHERE BOARD_TYPE=1 AND END_DATE>SYSDATE AND BOARD_STATUS='Y' ORDER BY BOARD_NO DESC)
-		  <![CDATA[
-		WHERE ROWNUM<=3 AND FILE_LEVEL=0 ) ORDER BY BOARD_NO DESC
-		]]>
-	</select>
+
 </mapper>

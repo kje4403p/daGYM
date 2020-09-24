@@ -87,6 +87,10 @@ public interface TrainerService {
 	 */
 	int deleteMerchantUid(int merchantUid);
 
+	List<Trainer> bestList();
+
+	List<TrainerAttachment> bestThumbnailList(List<Trainer> trainerList);
+
 
 
 

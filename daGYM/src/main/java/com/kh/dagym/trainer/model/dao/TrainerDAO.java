@@ -176,6 +176,14 @@ public class TrainerDAO {
 		return sqlSession.update("trainerMapper.updateGrade", map);
 	}
 
+	public List<TrainerAttachment> bestThumbnailList(List<Trainer> trainerList) {
+		return sqlSession.selectList("trainerMapper.bestThumbnailList", trainerList);
+	}
+
+	public List<Trainer> bestList() {
+		return sqlSession.selectList("trainerMapper.bestList",null);
+	}
+
 	
 
 }

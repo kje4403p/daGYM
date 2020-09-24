@@ -18,19 +18,33 @@ import com.google.gson.GsonBuilder;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.common.Attachment;
 import com.kh.dagym.main.model.service.HomeService;
+import com.kh.dagym.trainer.model.service.TrainerService;
+import com.kh.dagym.trainer.model.vo.Trainer;
 import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 
 @Controller // 프레젠테이션 레이어, 웹 앱 View에서 전달받은 요청, 전달할 응답을 처리하는 클래스 라는 걸 명시 + Bean 등록
 public class HomeController {
 	@Autowired
 	private HomeService homeService;
+	@Autowired
+	private TrainerService trainerService;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
+	public String home(Model model) {
 		System.out.println("main 요청"); // 메인controller거치는지 확인.
 		// .. : 상위
 		// . : 현재
 		// xxx/ : 하위
+		List<Trainer> trainerList = trainerService.bestList();
+		
+		if(!trainerList.isEmpty()) {
+	         List<TrainerAttachment> thList = trainerService.bestThumbnailList(trainerList);
+	         model.addAttribute("thList",thList);
+	      }
+		
+		model.addAttribute("trainerList",trainerList);
+
+		
 		return "../../main";
 	}
 	@RequestMapping("/intro")
@@ -60,16 +74,5 @@ public class HomeController {
 		
 	}
 	
-	@ResponseBody
-	@RequestMapping("/trainerViews")
-	public String trainerViews() {
 	
-		List<TrainerAttachment> list = homeService.trainerViews();
-		
-		
-		Gson gson = new GsonBuilder().create();
-		
-		return gson.toJson(list);
-		
-	}
 }

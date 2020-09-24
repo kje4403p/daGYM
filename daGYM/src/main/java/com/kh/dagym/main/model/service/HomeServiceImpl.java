@@ -26,10 +26,6 @@ public class HomeServiceImpl implements HomeService{
 		return homeDAO.eventTitle();
 	}
 
-	@Override
-	public List<TrainerAttachment> trainerViews() {
-		
-		return homeDAO.trainerViews();
-	}
+
 	
 }

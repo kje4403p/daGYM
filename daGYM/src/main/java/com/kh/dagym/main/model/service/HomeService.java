@@ -12,6 +12,5 @@ public interface HomeService {
 
 	List<Board> eventTitle();
 
-	List<TrainerAttachment> trainerViews();
 
 }

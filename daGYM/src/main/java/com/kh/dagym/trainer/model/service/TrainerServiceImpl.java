@@ -254,6 +254,16 @@ public class TrainerServiceImpl implements TrainerService{
 		public int deleteMerchantUid(int merchantUid) {
 			return trainerDAO.deleteMerchantUid(merchantUid);
 		}
+
+		@Override
+		public List<Trainer> bestList() {
+			return trainerDAO.bestList();
+		}
+
+		@Override
+		public List<TrainerAttachment> bestThumbnailList(List<Trainer> trainerList) {
+			return trainerDAO.bestThumbnailList(trainerList);
+		}
 	
 
 }

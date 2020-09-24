@@ -22,7 +22,4 @@ public class HomeDAO {
 		return sqlSession.selectList("homeMapper.eventTitle",null);
 	}
 
-	public List<TrainerAttachment> trainerViews() {
-		return sqlSession.selectList("homeMapper.trainerViews",null);
-	}
 }

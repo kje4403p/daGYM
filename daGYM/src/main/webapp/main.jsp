@@ -1,11 +1,13 @@
+<%@page import="com.kh.dagym.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% Member loginMember = (Member)request.getAttribute("loginMember"); %>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
    
-    
+    <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
     <!-- context Pathë¥¼ í  ë¡ ì  í ¸ ì  ì²´ì  ì   ê° ë ¨í   ì ¬ì ©í   ì   ì  ë  ë¡  ë³ ì   ì  ì ¸ -->
    
    
@@ -20,7 +22,9 @@
  	text-align: center;
  	margin: 0 auto;
  	}
- 	
+ 	 #trainer{
+ padding-bottom: 100px;
+ }
    </style>
 </head>
 
@@ -103,7 +107,7 @@
    
    
     <!-- Testimonial Section Begin -->
-    <section class="testimonial-section spad">
+    <section class="trainer-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -148,13 +152,19 @@
                     </div>
                 </div>
             </div>-->
-             <div class="row">
+           <div class="row">
               <c:forEach var="trainer" items="${trainerList}">
             
                 <div id="trainer" class="col-lg-4 col-md-6">
-               
+                  <c:if test="${loginMember==null}">
+                
+                    <div class="single-trainer-item">  
+                        <a class="trainerList" href="${contextPath}/member/login">            
+                  </c:if>
+                  <c:if test="${loginMember!=null}">
                     <div class="single-trainer-item">  
                            <a class="trainerList" href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
+                  </c:if>
   													
                      						<c:forEach items="${thList}" var="th">
 	                							<c:if test="${th.parentTrainerNo == trainer.trainerNo}">
@@ -173,7 +183,7 @@
                             <p>회원 수: ${trainer.trainerMcnt}</p>
                       	    <p>수상내역: ${trainer.trainerAward}</p>
                       	    <p>평점: 
-                        <c:forEach var="i" begin="1" end="${trainer.reviewGrade}"> ★	</c:forEach>
+                      	    <c:forEach var="i" begin="1" end="${trainer.trainerGrade}"> ★	</c:forEach>
                       	     </p>
                         </div>
                         </a>
@@ -259,7 +269,7 @@
     $(function(){
     	eventViews();
     	titleViews();
-    	trainerViews();
+
     })
     	function eventViews(){
     	
@@ -284,29 +294,7 @@
     		})
     		
     	}
-    function trainerViews(){
-    	
-		$.ajax({
-			url : "${contextPath}/trainerViews",
-			dataType : "JSON",
-			success : function(list){
-				$.each(list,function(index, item){
-					console.log(list)
-					src="<%=request.getContextPath()%>/resources/uploadImages/"+item.fileChangeName; 
-					var boardNo = item.parentBoardNo;
-					console.log("넘버"+boardNo)
-					$("#event"+index).attr("src",src)
-					
-					$("#event"+index).on("click",function(){
-						location.href= "${contextPath}/event/"+boardNo 
-					})
-				})
-			}, error : function(){
-				console.log("통신실패")
-			}
-		})
-		
-	}
+    
     function titleViews(){
 		$.ajax({
 			url : "${contextPath}/eventTitle",
@@ -331,5 +319,13 @@
     </script>
        
 </body>
-
+<script>
+	$(".trainerList").on("click",function(event){
+		if(<%=loginMember%>==null){
+		
+		location.href="${contextPath}/trainer/trainerView/${trainer.trainerNo}";
+		}
+	});
+		
+	</script>
 </html>
