@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.common.Attachment;
 import com.kh.dagym.main.model.dao.HomeDAO;
+import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 
 @Service
 public class HomeServiceImpl implements HomeService{
@@ -24,4 +25,11 @@ public class HomeServiceImpl implements HomeService{
 		// TODO Auto-generated method stub
 		return homeDAO.eventTitle();
 	}
+
+	@Override
+	public List<TrainerAttachment> trainerViews() {
+		
+		return homeDAO.trainerViews();
+	}
+	
 }

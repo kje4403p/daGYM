@@ -16,9 +16,9 @@
    	 width : 360px;
    	}
  
- 	.services-item{
+ 	.w{
  	text-align: center;
- 
+ 	margin: 0 auto;
  	}
  	
    </style>
@@ -45,7 +45,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="about-text">
-                        <h2>운동 효율 증가</h2>
+                        <h2>DAGYM이 필요한 이유</h2>
                         <p class="first-para">If you don’t make time for exercise, you’ll probably have to make time for illness. <br> -Robin Sharma-</p>
                         <p class="first-para">운동을 위해 시간 내지 않으면,병 때문에 시간을 내야하게 될지도 모른다. <br>로빈 샤모</p>
                         <p class="first-para">It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable. <br> -Socrates-</p>
@@ -72,25 +72,25 @@
                             <div class="col-md-6">
                                 <div class="services-item bg-gray">
                                     <img src="resources/img/services/service-icon-1.png" alt="">
-                                    <br><br><h4>Strategies</h4>
-                                 
+                                    <h4 style="margin-top: 10px;">몸 상태 체크하기</h4>
+                                    <p style="font-size: 14px">본격적인 운동을 시작하기 전 내 몸의 상태부터 확인하자. 이는 단순히 몸무게,인바디 수치 확인하는 것만이 아니다. 관절 상태나 운동 피로도등을 사전에 확인하여 내 몸에 맞는 운동의 종류와 강도를 파악하는 것이 중요하다.</p>
                                 </div>
                                 <div class="services-item bg-gray pd-b">
-                                    <img src="resources/img/services/service-icon-3.png"  alt="">
-                                    <h4>Workout</h4>
-                                  
+                                    <img src="resources/img/services/service-icon-3.png" alt="">
+                                    <h4 style="margin-top: 10px;">여러 사람과 함께 하기</h4>
+                                    <p style="font-size: 14px">다른 사람과 함께 운동하는 것은 동기 부여도 쉽고 혼자 운동할 때 보다 흥미를 느낄 수 있어 흔히 추천하는 방법이다. 단, 가까운 친구나 가족처럼 너무 편한 사람과 함께 운동하면 포기가 더 쉬워지니 오히려 역효과가 날 수 있다.</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="services-item">
-                                    <img src="resources/img/services/service-icon-2.png"  alt="">
-                                    <h4>Yoga</h4>
-                                    
+                                    <img src="resources/img/services/service-icon-2.png" alt="">
+                                    <h4 style="margin-top: 10px;">운동 계획은 장기에서 단기로</h4>
+                                    <p style="font-size: 14px">목표를 가지고 운동하면 동기 부여도 될 뿐 아니라 운동의 세부적인 계획을 짜는 데도 도움이 된다. 먼저 1년 정도의 장기적인 계획을 세우자. 체중 감량, 운동 관련 자격증 등 꾸준히 시간을 들여야 하는 목표를 정하는 것이 중요하다.</p>
                                 </div>
                                 <div class="services-item pd-b">
                                     <img src="resources/img/services/service-icon-4.png" alt="">
-                                    <h4>Weight Loss</h4>
-                        
+                                    <h4 style="margin-top: 30px;">매일 조금씩 할 수 있는 운동 찾기</h4>
+                                    <p style="font-size: 14px">운동에 시간을 투자하는 것이 부담스럽다면 매일 짧은 시간이라도 할 수 있는 운동을 시도해보자. 대표적으로는 플랭크나 스쿼트 같은 근육 강화 운동이 있다.</p>
                                 </div>
                             </div>
                         </div>
@@ -99,67 +99,8 @@
             </div>
         </div>
     </section>
-    <!-- Services Section End -->
 
-    <!-- Classes Section Begin -->
-    <section class="classes-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <h2>UNLIMITED CLASSES</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="row classes-slider owl-carousel">
-                <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-1.jpg">
-                        <div class="si-text">
-                            <h4>Yoga</h4>
-                            <span><i class="fa fa-user"></i> Ryan Knight</span>
-                        </div>
-                    </div>
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-4.jpg">
-                        <div class="si-text">
-                            <h4>Karate</h4>
-                            <span><i class="fa fa-user"></i> Kevin McCormick</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-2.jpg">
-                        <div class="si-text">
-                            <h4>Running</h4>
-                            <span><i class="fa fa-user"></i> Randy Rivera</span>
-                        </div>
-                    </div>
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-5.jpg">
-                        <div class="si-text">
-                            <h4>Dance</h4>
-                            <span><i class="fa fa-user"></i> Russell Lane</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-3.jpg">
-                        <div class="si-text">
-                            <h4>Personal Training</h4>
-                            <span><i class="fa fa-user"></i> Cole Robertson</span>
-                        </div>
-                    </div>
-                    <div class="single-class-item set-bg" data-setbg="resources/img/classes/classes-6.jpg">
-                        <div class="si-text">
-                            <h4>Weight Loss</h4>
-                            <span><i class="fa fa-user"></i> Ryan Scott</span>
-                        </div>
-                    </div>
-                </div>
-               
-            </div>
-        </div>
-    </section>
-    <!-- Classes Section End -->
-
+   
    
     <!-- Testimonial Section Begin -->
     <section class="testimonial-section spad">
@@ -167,11 +108,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>success stories</h2>
+                        <h2>Best Trainer</h2>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-10 offset-lg-1">
                     <div class="testimonial-slider owl-carousel">
                         <div class="testimonial-item">
@@ -206,6 +147,41 @@
                         </div>
                     </div>
                 </div>
+            </div>-->
+             <div class="row">
+              <c:forEach var="trainer" items="${trainerList}">
+            
+                <div id="trainer" class="col-lg-4 col-md-6">
+               
+                    <div class="single-trainer-item">  
+                           <a class="trainerList" href="${contextPath}/trainer/trainerView/${trainer.trainerNo}">
+  													
+                     						<c:forEach items="${thList}" var="th">
+	                							<c:if test="${th.parentTrainerNo == trainer.trainerNo}">
+	                				
+	                								<c:set var="src" value="${contextPath}${th.filePath}/${th.fileChangeName}" />
+	                							
+	                									<img width="370px" height="360px" src="${src}">
+	                							</c:if>
+	                						</c:forEach>
+	                						
+                        <div id="trainer-text" class="trainer-text">
+                            <h5>${trainer.memberName}</h5>
+                            <span>Trainer</span>
+                            <br>
+                            <p>Phone: ${trainer.memberPhone}</p>
+                            <p>회원 수: ${trainer.trainerMcnt}</p>
+                      	    <p>수상내역: ${trainer.trainerAward}</p>
+                      	    <p>평점: 
+                        <c:forEach var="i" begin="1" end="${trainer.reviewGrade}"> ★	</c:forEach>
+                      	     </p>
+                        </div>
+                        </a>
+                      
+                    </div>
+                </div>
+            
+          		 </c:forEach>            
             </div>
         </div>
     </section>
@@ -218,9 +194,8 @@
                 <div class="col-lg-6">
                     <div class="banner-text">
                         <h2>Get training today</h2>
-                        <p>Gimply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                            industryÃ¢Â Â s standard.</p>
-                        <a href="#" class="primary-btn banner-btn">Contact Now</a>
+                        <p>지금 바로 훌륭한 트레이너들을 만나보세요!</p>
+                        <a href="${contextPath}/trainer/trainerList" class="primary-btn banner-btn">Contact Now</a>
                     </div>
                 </div>
                 <div class="col-lg-5">
@@ -284,6 +259,7 @@
     $(function(){
     	eventViews();
     	titleViews();
+    	trainerViews();
     })
     	function eventViews(){
     	
@@ -308,6 +284,29 @@
     		})
     		
     	}
+    function trainerViews(){
+    	
+		$.ajax({
+			url : "${contextPath}/trainerViews",
+			dataType : "JSON",
+			success : function(list){
+				$.each(list,function(index, item){
+					console.log(list)
+					src="<%=request.getContextPath()%>/resources/uploadImages/"+item.fileChangeName; 
+					var boardNo = item.parentBoardNo;
+					console.log("넘버"+boardNo)
+					$("#event"+index).attr("src",src)
+					
+					$("#event"+index).on("click",function(){
+						location.href= "${contextPath}/event/"+boardNo 
+					})
+				})
+			}, error : function(){
+				console.log("통신실패")
+			}
+		})
+		
+	}
     function titleViews(){
 		$.ajax({
 			url : "${contextPath}/eventTitle",

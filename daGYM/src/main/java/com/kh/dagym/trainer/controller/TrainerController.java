@@ -48,6 +48,8 @@ public class TrainerController {
 		return "trainerResulvation/trainerList";
 	}
 	
+
+
 	//트레이너 상세 조회
 
 	@RequestMapping("trainerView/{trainerNo}")

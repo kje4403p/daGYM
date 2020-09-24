@@ -18,6 +18,7 @@ import com.google.gson.GsonBuilder;
 import com.kh.dagym.admin.model.vo.Board;
 import com.kh.dagym.common.Attachment;
 import com.kh.dagym.main.model.service.HomeService;
+import com.kh.dagym.trainer.model.vo.TrainerAttachment;
 
 @Controller // 프레젠테이션 레이어, 웹 앱 View에서 전달받은 요청, 전달할 응답을 처리하는 클래스 라는 걸 명시 + Bean 등록
 public class HomeController {
@@ -59,4 +60,16 @@ public class HomeController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping("/trainerViews")
+	public String trainerViews() {
+	
+		List<TrainerAttachment> list = homeService.trainerViews();
+		
+		
+		Gson gson = new GsonBuilder().create();
+		
+		return gson.toJson(list);
+		
+	}
 }
