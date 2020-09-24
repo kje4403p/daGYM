@@ -26,7 +26,7 @@
 </style>
 <script>
 </script>
-<div id="sideSet" class="col-sm-2 mt-1" style="left : 20px;">
+<div id="sideSet" class="col-sm-2 mt-1" style="padding-left : 80px;">
 	<h3 style ="font-family: MaplestoryOTFBold; color:rgb(253,159,40);">마이페이지</h3>
 	<br>
 	<ul id="side" class="list-group">

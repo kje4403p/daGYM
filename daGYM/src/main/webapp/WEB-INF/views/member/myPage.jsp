@@ -38,13 +38,14 @@
 	}
 </style>
 </head>
-<body>
+<body >
 	<%@ include file="../common/header.jsp"%>
 	
-	<div class="row my-5">
+	<div class="row my-5" style="height:500px;">
 		<%@ include file="sideMenu.jsp"%>
 		<div class="col-sm-10">
-			<form method="POST" onsubmit="return validate();">
+			<form method="POST" onsubmit="return validate();" style="padding-top: 80px;">
+	
 				
 				<br>
 				<div class="row mb-5 form-row" style="margin-left: 150px;">

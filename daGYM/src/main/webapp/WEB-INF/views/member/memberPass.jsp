@@ -89,7 +89,9 @@
 	 #star a.on{
 	  color: red;
 	   }
-	
+	*{
+	  font-family: 'GmarketSansBold';
+	}
 </style>
 </head>
 <body>
@@ -98,7 +100,7 @@
         <%@ include file="sideMenu.jsp"%>
         <div class="col-sm-6">
                     <div class="row mb-3 form-row">
-                    <h1>이용권 및 결제정보</h1>
+                    <img id="logo" src="${contextPath}/resources/images/dagym/이용권.png" style="width:400px;"alt="">
                 	<table class="table" id="table">
                 
                 		<tr>
@@ -142,7 +144,7 @@
         
       
                     <div class="row mb-5 form-row">
-                    <h1>예약</h1>
+                    <img id="logo" src="${contextPath}/resources/images/dagym/예약.png" style="width:200px;"alt="">
                 	<table class="table" id="table2">
                 	
                 		<tr>
