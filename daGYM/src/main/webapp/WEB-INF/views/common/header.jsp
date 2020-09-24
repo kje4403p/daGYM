@@ -25,7 +25,12 @@
     <link rel="stylesheet" href="${contextPath}/resources/css/style.css" type="text/css">
 	<!-- swal -->
 	 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<style>
+	#logo{
+		 width : 150px;
+	}
 
+</style>
 </head>
 <body>
 <c:if test="${!empty msg }">
@@ -73,7 +78,7 @@
         <div class="container">
             <div class="logo">
                 <a href="${contextPath}">
-                    <img src="${contextPath}/resources/img/logo3.png" alt="" width="150px">
+                    <img id="logo" src="${contextPath}/resources/img/logo3.png" alt="">
                 </a>
             </div>
             <div class="nav-menu">
@@ -89,6 +94,7 @@
                 <c:choose>
                 		<c:when test="${empty loginMember }">
                 			 <a href="${contextPath}/member/login" class="primary-btn signup-btn">Login</a>
+                			  <a href="${contextPath}/member/signUp" class="primary-btn signup-btn">Sign Up</a>
                 			
                 		</c:when>
                 		<c:otherwise>

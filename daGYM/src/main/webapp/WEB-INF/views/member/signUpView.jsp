@@ -19,7 +19,7 @@
 <title>회원가입</title>
 
 <!-- css -->
-<link href="${contextPath}/resources/css/king-ui.css" rel="stylesheet">
+  <link href="${contextPath}/resources/css/king-ui.css" rel="stylesheet">
 <link href="${contextPath}/resources/css/animate.css" rel="stylesheet">
 <!-- fonts -->
 <link href='https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700' rel='stylesheet' type='text/css'>
@@ -39,7 +39,7 @@
 	#register-form{
 	width : 100%;}
 	body > header > div > div.logo > a > img{
-	width : 150px;}
+	width : 150px ;!important  } 
 	#signUp > div{
 		margin : 0 auto;
 	}
