@@ -84,6 +84,7 @@
 	<select id="selectMList" resultMap="memberResultSet">
 		SELECT * FROM MEMBER
 		WHERE MEMBER_STATUS='Y'
+		AND MEMBER_GRADE='G'
 		AND NOT EXISTS (SELECT 1 FROM TRAINER WHERE MEMBER_NO = TRAINER_NO)
 		ORDER BY MEMBER_NO
 	</select>
@@ -258,11 +259,13 @@
 	<select id="countMember" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEMBER_GRADE = 'G'
+		AND MEMBER_STATUS = 'Y'
 	</select>
 	
 	<select id="countTrainer" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
 		WHERE MEMBER_GRADE = 'T'
+		AND MEMBER_STATUS = 'Y'
 	</select>
 	
 	<!-- 휴면계정 -->
