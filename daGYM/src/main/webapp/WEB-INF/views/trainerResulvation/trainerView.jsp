@@ -265,7 +265,7 @@
                    
                            <c:set var="trainerNo" value="${trainer.trainerNo}"/>
                         <c:choose>
-                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0}">
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
                                  <c:param name="classNm" value="5"/>
                               </c:url>
@@ -288,7 +288,7 @@
                        
                            <c:set var="trainerNo" value="${trainer.trainerNo}"/>
                         <c:choose>
-                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0}">
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
                                  <c:param name="classNm" value="5"/>
                               </c:url>
@@ -313,7 +313,7 @@
                         
                            <c:set var="trainerNo" value="${trainer.trainerNo}"/>
                         <c:choose>
-                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus==null}">
+                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0}">
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
                                  <c:param name="classNm" value="5"/>
                               </c:url>

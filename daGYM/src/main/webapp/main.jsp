@@ -15,6 +15,12 @@
    	 height : 240px;
    	 width : 360px;
    	}
+ 
+ 	.services-item{
+ 	text-align: center;
+ 
+ 	}
+ 	
    </style>
 </head>
 
@@ -31,22 +37,19 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="about-pic">
-                        <img src="resources/img/about-pic.jpg" alt="">
-                        <a href="https://www.youtube.com/watch?v=SlPhMPnQ58k" class="play-btn video-popup">
+                        <img src="resources/img/about-pic2.jpg" style="height:400px;"alt="">
+                        <a href="https://www.youtube.com/watch?v=FsTkLYaUh_o" class="play-btn video-popup">
                             <img src="resources/img/play.png" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="about-text">
-                        <h2>Story About Us</h2>
-                        <p class="first-para">Lorem ipsum proin gravida nibh vel velit auctor aliquet. Aenean pretium
-                            sollicitudin, nascetur auci elit consequat ipsutissem niuis sed odio sit amet nibh vulputate
-                            cursus a amet.</p>
-                        <p class="second-para">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, gravida
-                            quam semper libero sit amet. Etiam rhoncus. Maecenas tempus, tellus eget condimentum
-                            rhoncus, gravida quam semper libero sit amet.</p>
-                        <a href="#" class="primary-btn">Read More</a>
+                        <h2>운동 효율 증가</h2>
+                        <p class="first-para">If you don’t make time for exercise, you’ll probably have to make time for illness. <br> -Robin Sharma-</p>
+                        <p class="first-para">운동을 위해 시간 내지 않으면,병 때문에 시간을 내야하게 될지도 모른다. <br>로빈 샤모</p>
+                        <p class="first-para">It is a shame for a man to grow old without seeing the beauty and strength of which his body is capable. <br> -Socrates-</p>
+                        <p class="first-para">사람이 자신의 몸이 가질 수 있는 아름다움과 강함을 알지 못하고 늙어 버리는 것은 안타까운 일이다.<br>소크라테스</p>
                     </div>
                 </div>
             </div>
@@ -69,29 +72,25 @@
                             <div class="col-md-6">
                                 <div class="services-item bg-gray">
                                     <img src="resources/img/services/service-icon-1.png" alt="">
-                                    <h4>Strategies</h4>
-                                    <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
-                                        montes.</p>
+                                    <br><br><h4>Strategies</h4>
+                                 
                                 </div>
                                 <div class="services-item bg-gray pd-b">
-                                    <img src="resources/img/services/service-icon-3.png" alt="">
+                                    <img src="resources/img/services/service-icon-3.png"  alt="">
                                     <h4>Workout</h4>
-                                    <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
-                                        montes.</p>
+                                  
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="services-item">
-                                    <img src="resources/img/services/service-icon-2.png" alt="">
+                                    <img src="resources/img/services/service-icon-2.png"  alt="">
                                     <h4>Yoga</h4>
-                                    <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
-                                        montes.</p>
+                                    
                                 </div>
                                 <div class="services-item pd-b">
                                     <img src="resources/img/services/service-icon-4.png" alt="">
                                     <h4>Weight Loss</h4>
-                                    <p>Aenean massa. Cum sociis Theme et natoque penatibus et magnis dis part urient
-                                        montes.</p>
+                        
                                 </div>
                             </div>
                         </div>
