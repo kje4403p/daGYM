@@ -50,7 +50,8 @@ public class LoginFilter implements Filter{
 		// board 제외 목록 추가
 		//NOT_ALLOWED_PATH.addAll(Arrays.asList("/board/list/\\w", "/board/topViews/\\w", "/search/\\w"));
 		
-		NOT_ALLOWED_PATH.addAll(Arrays.asList("/intro", "/service/faq/4", "/service/4/\\w*", "/member/findIdView", "/member/findId","/member/findPwView", "/member/findPw","/member/sendEmail"));
+		NOT_ALLOWED_PATH.addAll(Arrays.asList("/intro", "/service/faq/4", "/service/4/\\w*", "/member/findIdView", "/member/findId","/member/findPwView", "/member/findPw","/member/sendEmail", "/event/\\w*","/eventViews","/eventTitle",
+				"/trainer/trainerList","/service/faq/style.css"));
 		
 		HttpServletRequest req = (HttpServletRequest)request;
 		// HttpServletRequest는 ServletRequest의 자식이므로 강제 형변환 가능
@@ -86,7 +87,7 @@ public class LoginFilter implements Filter{
 			chain.doFilter(request, response);
 		}else {
 			session.setAttribute("msg", "로그인 후 이용해 주세요");
-			res.sendRedirect(req.getContextPath()); // 메인페이지로 이동
+			res.sendRedirect(req.getContextPath()+"/member/login"); // 메인페이지로 이동
 		}
 	}
 
