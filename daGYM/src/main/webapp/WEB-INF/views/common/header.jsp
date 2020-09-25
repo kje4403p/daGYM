@@ -10,7 +10,7 @@
     <meta name="keywords" content="Gutim, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Gutim | Template</title>
+	<title>DAGYM</title>
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 	 <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
