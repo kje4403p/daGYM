@@ -207,64 +207,68 @@
             </div>   
             </div>
             <div class="col-md-5">
-                  <div class="trainerName">
-                          
-                          	  <div class="row" style="padding-bottom: 10px;">
-            <div class="col-md-6" style="top: 15px;">
-            
-            	 <img  src="${contextPath}/resources/images/dagym/트레이너.png" /><h3 style="display : inline; padding-left: 10px; font-family: 'GmarketSansBold'">${trainer.memberName}</h3>
-            </div>
-            <div class="col-md-6">
-                <c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
-            <div class="membership-item a">
-                  <button  class="snip1535 hover"  onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</button>
-               </c:if>
-               <c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
-                  <button   class="snip1535 hover"  onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</button>
-               </div>
-               </c:if>
-            </div>
-               <div class="about_accordion wow fadeIn">
-                           <div id="faq_main_content" class="faq_main_content">
-                              <h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
-                              <div>
-                                 <div class="content">
-                                    <p>${trainer.trainerCareer}</p>
-                                 </div>
-                              </div>
-                              <!-- End off accordion item-1 -->
-   
-                              <h6><i class="fa fa-angle-right"></i>수상내역</h6>
-                              <div>
-                                 <div class="content">
-                                    <p>${trainer.trainerAward}</p>
-                                    </div>
-                              </div>
-                              <!-- End off accordion item-2 -->
-   
-                              <h6> <i class="fa fa-angle-right"></i>PT 가격</h6>
-                              <div>
-                                 <div class="content">
-                                    <p>5회당 ${trainer.trainerPrice*5}원</p>
-                                    <p>10회당 ${trainer.trainerPrice*10}원</p>
-                                    <p>20회당 ${trainer.trainerPrice*20}원</p>
-                                 </div>
-                              </div>
-                              <!-- End off accordion item-3 -->
-   
-                              <h6><i class="fa fa-angle-right"></i>트레이너 SNS</h6>
-                              <div>
-                                 <div class="content">
-                                 <a href="${trainer.trainerSNS}">${trainer.trainerSNS}</a>
-                                 </div>
-                              </div>
-                              <!-- End off accordion item-4 -->
-                           </div>
-                        </div>
-            </div>
-                <div class="col-md-1">
-             
-            </div>
+	            <div class="trainerName" >
+	                          
+		             <div class="row" style="padding-bottom: 10px;">
+		             <div class="col-md-6 mb-5" style="top: 15px;">
+		            
+		            	 <img  src="${contextPath}/resources/images/dagym/트레이너.png" /><h3 style="display : inline; padding-left: 10px; font-family: 'GmarketSansBold'">${trainer.memberName}</h3>
+		            </div>
+		            <div class="col-md-6">
+		                <c:if test="${loginMember.memberGrade == 'T' && loginMember.memberNo==trainer.trainerNo}">
+		            	
+		                  		<button  class="snip1535 hover"  onclick="window.open('${contextPath}/trainer/schedule/${trainer.trainerNo}','스케줄 등록','width=1300,height=850,left=200,top=100')">스케줄 등록</button>
+		              		
+		               </c:if>
+		               <c:if test="${loginMember.memberGrade == 'G' && trainer.trainerNo==classStatus.trainerNo}">
+		                 
+		                 	 <button   class="snip1535 hover"  onclick="window.open('${contextPath}/trainer/trainerResulvation/${trainer.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</button>
+		              	
+		               </c:if>
+		             
+		            </div>
+		            </div>
+	               <div class="about_accordion wow fadeIn">
+	                           <div id="faq_main_content" class="faq_main_content">
+	                              <h6><i class="fa fa-angle-right"></i>자격 및 경력사항 </h6>
+	                              <div>
+	                                 <div class="content">
+	                                    <p>${trainer.trainerCareer}</p>
+	                                 </div>
+	                              </div>
+	                              <!-- End off accordion item-1 -->
+	   
+	                              <h6><i class="fa fa-angle-right"></i>수상내역</h6>
+	                              <div>
+	                                 <div class="content">
+	                                    <p>${trainer.trainerAward}</p>
+	                                    </div>
+	                              </div>
+	                              <!-- End off accordion item-2 -->
+	   
+	                              <h6> <i class="fa fa-angle-right"></i>PT 가격</h6>
+	                              <div>
+	                                 <div class="content">
+	                                    <p>5회당 ${trainer.trainerPrice*5}원</p>
+	                                    <p>10회당 ${trainer.trainerPrice*10}원</p>
+	                                    <p>20회당 ${trainer.trainerPrice*20}원</p>
+	                                 </div>
+	                              </div>
+	                              <!-- End off accordion item-3 -->
+	   
+	                              <h6><i class="fa fa-angle-right"></i>트레이너 SNS</h6>
+	                              <div>
+	                                 <div class="content">
+	                                 <a href="${trainer.trainerSNS}">${trainer.trainerSNS}</a>
+	                                 </div>
+	                              </div>
+	                              <!-- End off accordion item-4 -->
+	                           </div>
+	                        </div>
+	            </div>
+	                <div class="col-md-1">
+	             
+	           		 </div>
             </div>
             
         
@@ -610,6 +614,11 @@
        $(this).removeClass("hover");
      }
    );
+   
+   $("#btn").on("click",function(){
+	   alert("수강권 결제 후 예약해주세요. ")
+	   
+   })
 
    
    </script>
