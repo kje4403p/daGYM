@@ -24,7 +24,7 @@
     }
     
     #successFall{
-    	width:1000px;
+    	width:1450px;
     }
     #success {
     	color: red;
@@ -189,7 +189,7 @@
 							<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${classStatus.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
 						 </c:if>
 					</div>
-                <table align="" id="calendar">
+                <table align="" id="calendar" style="margin-left: 160px;">
       		
                     	<tr>
                     	<td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>
