@@ -143,7 +143,7 @@ SELECT * FROM DUAL
   	</update>
   	
   	<select id="selectClassStatus" parameterType="_int" resultMap="classStatusResultSet" >
-  	SELECT * FROM CLASS_STATUS WHERE MEMBER_NO=#{memberNo}
+  	SELECT * FROM CLASS_STATUS WHERE MEMBER_NO=#{memberNo} AND CLASS_CNT!=0
   	</select>
   	
   	<!-- 회원수증가 -->
