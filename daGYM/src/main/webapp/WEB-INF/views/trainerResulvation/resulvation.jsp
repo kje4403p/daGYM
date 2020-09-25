@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>트레이너 예약</title>
 <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <link href='${contextPath}/resources/fullcalendar/packages/daygrid/main.css' rel='stylesheet' />

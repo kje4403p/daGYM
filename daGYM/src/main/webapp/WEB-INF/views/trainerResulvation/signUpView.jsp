@@ -16,7 +16,7 @@
 
 
 <!-- page title -->
-<title>회원가입</title>
+<title>트레이너 회원가입</title>
 
 <!-- css -->
 

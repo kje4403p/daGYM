@@ -8,7 +8,7 @@
 	<c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>트레이너 리스트</title>
 <style>
  #trainer{
  padding-bottom: 100px;

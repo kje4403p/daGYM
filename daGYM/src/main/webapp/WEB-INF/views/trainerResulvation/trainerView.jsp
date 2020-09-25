@@ -9,7 +9,7 @@
 <head>
    <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
-   <title>트레이너 상세조회</title>
+   <title>트레이너 조회</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
