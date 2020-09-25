@@ -116,7 +116,7 @@
                         
                         <c:when test="${empty myPassList}">
 		                     <tr>
-		                        <td colspan="6">결제내역이 없습니다.</td>
+		                        <td style ="text-align: center" colspan="6">결제내역이 없습니다.</td>
 		                     </tr>
                  		 </c:when>
                  		 <c:otherwise>
@@ -158,7 +158,7 @@
                         
                         <c:when test="${empty myPassList}">
 		                     <tr>
-		                        <td colspan="6">결제내역이 없습니다.</td>
+		                        <td colspan="6" style ="text-align: center">결제내역이 없습니다.</td>
 		                     </tr>
                  		 </c:when>
                  		 <c:otherwise>
