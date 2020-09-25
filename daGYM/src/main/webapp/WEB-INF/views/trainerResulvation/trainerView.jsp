@@ -173,7 +173,7 @@
    .culmn *{
    font-family: 'GmarketSansBold';
    }
-       
+     
    </style>
    
 </head>

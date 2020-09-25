@@ -100,7 +100,7 @@
 			$(".updateTrainer").on("click", function() {
 				var trainerNo = $(this).parent().parent().children().eq(0).text();
 				
-				swal("비밀번호를 입력하세요.", {
+				swal("수정하려면 비밀번호를 입력하세요.", {
 					  content: {
 						  element : "input",
 						  attributes : {
@@ -129,11 +129,39 @@
 			});
 			
 			$(".deleteTrainer").on("click", function() {
-				if(confirm("정말 탈퇴시키시겠습니까 ?")) {
+				/* if(confirm("정말 탈퇴시키시겠습니까 ?")) {
 					var trainerNo = $(this).parent().parent().children().eq(0).text();
 					
 					location.href = "deleteTrainer/" + trainerNo;
-				}
+				} */
+				var trainerNo = $(this).parent().parent().children().eq(0).text();
+				
+				swal("탈퇴시키려면 비밀번호를 입력하세요.", {
+					  content: {
+						  element : "input",
+						  attributes : {
+							  type : "password"
+						  }
+					}
+				})
+				.then((value) => {
+					if(value != null) {
+						$.ajax({
+							url : "pwdCheck",
+							data : {"trainerNo" : trainerNo, "trainerPwd" : value},
+							dataType : "JSON",
+							success : function(result) {
+								if(result == 1) {
+									location.href = "deleteTrainer/" + trainerNo;
+								} else {
+									swal("비밀번호가 틀렸습니다.");
+								}
+							}, error : function() {
+								console.log("통신 실패");
+							}
+						});
+					}
+				});
 			});
 		});
 		
