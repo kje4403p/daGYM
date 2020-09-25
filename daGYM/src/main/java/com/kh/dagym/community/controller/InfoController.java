@@ -292,16 +292,7 @@ public class InfoController {
 
 	@ResponseBody
 	@PostMapping(value = "updateReply")
-	public int updateReply(HttpServletRequest request) {
-		System.out.println("실행");
-		int replyNo = Integer.parseInt(request.getParameter("replyNo"));
-		String replyContent = request.getParameter("replyContent");
-
-
-		Reply reply = new Reply(); reply.setReplyNo(replyNo);
-		reply.setReplyContent(replyContent);
-
-		System.out.println(reply);
+	public int updateReply(Reply reply) {
 
 		int result = infoService.updateReply(reply);
 

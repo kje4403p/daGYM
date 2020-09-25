@@ -48,9 +48,9 @@
 		</c:choose>
 	
 	<hr>
-    <c:if test="${loginMember.memberGrade eq 'A'}">
+<%--     <c:if test="${loginMember.memberGrade eq 'A'}">
 		<a class="btn btn-primary float-right" href="insert?boardType=1">글쓰기</a>
-	</c:if>
+	</c:if> --%>
 	
 	<div class="my-4">
 		<c:set var="url" value="${contextPath}/event/list?cp="></c:set>
