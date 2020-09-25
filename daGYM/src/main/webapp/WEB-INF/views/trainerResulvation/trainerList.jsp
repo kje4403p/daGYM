@@ -13,6 +13,10 @@
  #trainer{
  padding-bottom: 100px;
  }
+ 
+ #trainer-text p:nth-child(4) ,#trainer-text p:nth-child(6)  {
+	line-height: 5px;
+}
 
 </style>
 </head>
@@ -66,12 +70,20 @@
                         <div id="trainer-text" class="trainer-text">
                             <h5>${trainer.memberName}</h5>
                             <span>Trainer</span>
-                            <br>
+                            
                             <p>Phone: ${trainer.memberPhone}</p>
                             <p>회원 수: ${trainer.trainerMcnt}</p>
                       	    <p>수상내역: ${trainer.trainerAward}</p>
                       	    <p>평점: 
-                      	    <c:forEach var="i" begin="1" end="${trainer.reviewGrade}"> ★	</c:forEach>
+                      	   	<c:choose>
+                    	   	 <c:when test="${trainer.reviewGrade != 0}">
+                    	   	   <c:forEach var="i" begin="1" end="${trainer.reviewGrade}"> ★	</c:forEach>
+                    	  	 </c:when>
+                    	  	 <c:otherwise>
+                    	  	 	평점 없음
+                    	  	 </c:otherwise>
+                      	   	</c:choose>
+                      	   
                       	     </p>
                         </div>
                         </a>
