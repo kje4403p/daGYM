@@ -221,6 +221,7 @@ function deleteReply(replyNo) {
 			type : "POST",
 			success : function(result) {
 				alert(result);
+				selectReplyList();
 			}, error : function(){
 				console.log("통신 실패");
 			}
