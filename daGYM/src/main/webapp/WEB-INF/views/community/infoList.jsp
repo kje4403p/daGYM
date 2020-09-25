@@ -39,8 +39,8 @@
 	                			<td>
                						<jsp:useBean id="now" class="java.util.Date"/>
                						<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/>
-               						<fmt:formatDate var="createDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd"/>
-               						<fmt:formatDate var="createTime" value="${board.boardEnrollDate}" pattern="hh:mm:ss"/>
+               						<fmt:formatDate var="createDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd kk:mm"/>
+               						<fmt:formatDate var="createTime" value="${board.boardEnrollDate}" pattern="kk:mm"/>
 	                				<c:choose>
 	                					<c:when test="${today == createDate }">
 	                						${createTime }
@@ -70,8 +70,8 @@
 		                			<td>
 <%-- 		                			    <jsp:useBean id="now" class="java.util.Date"/>
                 						<fmt:formatDate var="today" value="${now}" pattern="yyyy-MM-dd"/> --%>
-                						<fmt:formatDate var="createDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd"/>
-                						<fmt:formatDate var="createTime" value="${board.boardEnrollDate}" pattern="hh:mm:ss"/> 
+                						<fmt:formatDate var="createDate" value="${board.boardEnrollDate}" pattern="yyyy-MM-dd kk:mm"/>
+                						<fmt:formatDate var="createTime" value="${board.boardEnrollDate}" pattern="kk:mm"/> 
 		                				<c:choose>
 		                					<c:when test="${today == createDate }">
 		                						${createTime }
