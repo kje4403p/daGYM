@@ -9,7 +9,7 @@
 <head>
    <c:set var="contextPath" value="${pageContext.servletContext.contextPath}" scope="application" />
 
-   <title>Rage Freebie HTML5 Landing page</title>
+   <title>트레이너 상세조회</title>
    <meta name="description" content="">
    <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -298,9 +298,7 @@
                <div class="testimonial_slid text-center">
                  
                   <div class="testimonial_item">
-                     <div class="col-sm-10 mr-sm-auto ml-sm-auto">
-                         <p>${trainer.trainerComment}</p>
-                     </div>
+                        <p style="font-size:23px;">${trainer.trainerComment}</p>
                   </div>
                 
                 
@@ -361,7 +359,7 @@
                         <c:choose>
                            <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0 || classStatus.classCnt==null }">
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
-                                 <c:param name="classNm" value="5"/>
+                                 <c:param name="classNm" value="10"/>
                               </c:url>
                                     <c:if test="${loginMember.memberGrade == 'G'}">
                                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
@@ -388,7 +386,7 @@
                         <c:choose>
                            <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0 || classStatus.classCnt==null}">
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
-                                 <c:param name="classNm" value="5"/>
+                                 <c:param name="classNm" value="20"/>
                               </c:url>
                                     <c:if test="${loginMember.memberGrade == 'G'}">
                                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
@@ -404,7 +402,7 @@
         </div>
     </section>
    
-      <br><br>
+      <br><br><br><br><br><br>
       <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
       <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
@@ -498,7 +496,7 @@
                  <form accept-charset="UTF-8" action="insertReview" method="post">
                         <input id="ratings-hidden" name="rating" type="hidden"> 
                         <input id="reviewNo"  type="hidden" value="">
-                        <textarea class="form-control animated" cols="50" id="reviewContent" name="reviewContent" placeholder="Enter your review here..." rows="5"></textarea>
+                        <textarea class="form-control animated" cols="50" id="reviewContent" name="reviewContent" placeholder="내용을 입력해주세요." rows="5"></textarea>
                         <div class="text-right">
                         <P id="star" name="reviewRating"> <!-- 부모 -->
                         <a href="#" value="1">★</a> <!-- 자식들-->
