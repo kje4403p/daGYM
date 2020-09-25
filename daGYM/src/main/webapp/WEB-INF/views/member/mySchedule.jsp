@@ -150,10 +150,11 @@
 	         	
 	            cnt = cnt + 1;
                 if (cnt % 7 == 1) {//일요일 계산
-                    cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
+                    cell.innerHTML = "<font color=#FF9090>" + i + time//일요일에 색
+                    
                 }
                 if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                    cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
+                    cell.innerHTML = "<font color=#7ED5E4>" + i + time//토요일에 색
                     row = calendar.insertRow();// 줄 추가
                 }
                 if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
