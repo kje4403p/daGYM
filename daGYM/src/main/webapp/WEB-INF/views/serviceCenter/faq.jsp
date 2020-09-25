@@ -7,13 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Faq 게시판</title>
 
 <style>
 
-	
 
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${contextPath}/resources/css/service/faq.css" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -34,9 +34,8 @@
 
 		<div id="right">
 		
-		<!-- <span id ="title">자주묻는 질문</span> -->
-		 <div class="neon">FAQ </div> 
-		 <!--  <div class="flux">1:1 qna </div> -->
+		<span id ="title">FAQ </span>
+		
 
 			<div id="table1" >
 				<table id="table2" class="table table-hover">

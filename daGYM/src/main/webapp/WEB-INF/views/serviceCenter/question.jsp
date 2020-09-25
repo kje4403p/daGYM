@@ -7,11 +7,12 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Qna게시판</title>
 
 <style>
 
 </style>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${contextPath}/resources/css/service/quest.css" />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600&display=swap" rel="stylesheet">
 
@@ -36,10 +37,9 @@
 		</div>
 
 		<div id="right">
-		<!-- <span id="title">1:1 문의 게시판 </span> -->
+		<span id="title">QNA </span>
 		<div class="container">
-		  <!-- <div class="neon">Neon </div> -->
-		 <div class="flux">qna</div>
+		
 		 
 		 
 		</div>
