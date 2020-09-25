@@ -83,7 +83,7 @@
 		INSERT ALL INTO MEMBER VALUES(#{trainerNo}, #{memberId}, #{memberPwd},
 		 #{memberName},#{memberPhone},#{memberEmail}, DEFAULT, DEFAULT, 'T')
          INTO TRAINER VALUES(#{trainerNo},#{trainerCareer},DEFAULT,#{trainerPrice},
-         #{trainerSNS},#{trainerComment},#{trainerAward})
+         #{trainerSNS},#{trainerComment},#{trainerAward},DEFAULT)
 SELECT * FROM DUAL
 	</insert>
 	

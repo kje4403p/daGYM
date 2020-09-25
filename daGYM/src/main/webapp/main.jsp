@@ -25,6 +25,12 @@
  	 #trainer{
  padding-bottom: 100px;
  }
+ h4{
+ text-align: center;
+ }
+ body > section.trainer-section.spad{
+ padding-bottom: 100px;
+ }
    </style>
 </head>
 

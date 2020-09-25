@@ -19,7 +19,7 @@
     <%@ include file="../common/header.jsp"%>
     <div class="row my-5">
         <%@ include file="sideMenu.jsp"%>
-        <div class="col-sm-5">
+        <div class="col-sm-6" style="left:150px;">
                     <h1>내 수강생 조회</h1>
                     <br><br>
                     <span style ="text-align: center">수강생 총 ${pInfo.listCount}명</span>

@@ -24,7 +24,7 @@
     }
     
     #successFall{
-    	width:1000px;
+    	width:1450px;
     }
     #success {
     	color: red;
@@ -150,10 +150,11 @@
 	         	
 	            cnt = cnt + 1;
                 if (cnt % 7 == 1) {//일요일 계산
-                    cell.innerHTML = "<font color=#FF9090>" + i//일요일에 색
+                    cell.innerHTML = "<font color=#FF9090>" + i + time//일요일에 색
+                    
                 }
                 if (cnt % 7 == 0) { // 1주일이 7일 이므로 토요일 계산
-                    cell.innerHTML = "<font color=#7ED5E4>" + i//토요일에 색
+                    cell.innerHTML = "<font color=#7ED5E4>" + i + time//토요일에 색
                     row = calendar.insertRow();// 줄 추가
                 }
                 if(today.getFullYear()==date.getFullYear()&&today.getMonth()==date.getMonth()&&i==date.getDate()) 
@@ -188,7 +189,7 @@
 							<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${classStatus.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
 						 </c:if>
 					</div>
-                <table align="" id="calendar">
+                <table align="" id="calendar" style="margin-left: 160px;">
       		
                     	<tr>
                     	<td><font size=1%; color="#B3B6B3"><label onclick="beforem()" id="before" ></label></font></td>

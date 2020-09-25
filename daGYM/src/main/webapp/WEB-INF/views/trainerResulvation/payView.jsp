@@ -77,7 +77,7 @@
                     
                     <label>트레이너 </label>
                     	
-                       <input  type="text" class="form-control" id="trainerName" name="trainerName" value="${trainer.memberName}" required data-error="*Please fill out this field">
+                       <input  type="text" class="form-control" id="trainerName" name="trainerName" value="${trainer.memberName}" required data-error="*Please fill out this field" disabled>
                         <div class="help-block with-errors"></div>
                     </div>
                     
@@ -85,23 +85,23 @@
                     
                     <label>회수 </label>
                     	
-                       <input  type="text" class="form-control" id="name" name="classNm" value="${classNm}" required data-error="*Please fill out this field">
+                       <input  type="text" class="form-control" id="name" name="classNm" value="${classNm}" required data-error="*Please fill out this field" disabled>
                         <div class="help-block with-errors"></div>
                     </div>
                     
                     <div class="form-group">
                      <label>결제할 금액</label>
-                        <input type="text" class="form-control" id="amount" name="amount" value="${trainer.trainerPrice}" required data-error="*Please fill out this field">
+                        <input type="text" class="form-control" id="amount" name="amount" value="${trainer.trainerPrice}" required data-error="*Please fill out this field" disabled>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
                      <label>주문자명</label>
-                        <input type="text" class="form-control" id="memberName" value="${loginMember.memberName }"  required>
+                        <input type="text" class="form-control" id="memberName" value="${loginMember.memberName }"  disabled>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">
                       <label>주문자 Email</label>
-                        <input type="text" class="form-control" id="memberEmail" name="memberEmail" value="${loginMember.memberEmail }"  required>
+                        <input type="text" class="form-control" id="memberEmail" name="memberEmail" value="${loginMember.memberEmail }"  disabled>
                         <div class="help-block with-errors"></div>
                     </div>
                     <div class="form-group">

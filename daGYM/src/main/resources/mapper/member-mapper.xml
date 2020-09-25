@@ -168,11 +168,20 @@
    </select>
    
    <!-- 이용권 및 결제정보 -->
-   <select id="myPassList" parameterType="MyPass" resultMap="myPassResultSet">
-      SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO IN (SELECT TRAINER_NO FROM PAYMENT WHERE MEMBER_NO=#{memberNo}))as MEMBER_NM,MERCHANT_UID,CLASS_NM,AMOUNT,PAYMENT_DATE,CLASS_CNT, PAYMENT.TRAINER_NO 
+   <!-- <select id="myPassList" parameterType="MyPass" resultMap="myPassResultSet">
+      SELECT (SELECT MEMBER_NM FROM MEMBER WHERE MEMBER_NO IN (SELECT B.TRAINER_NO FROM PAYMENT B JOIN CLASS_STATUS C ON(B.MEMBER_NO=C.MEMBER_NO) WHERE B.MEMBER_NO=#{memberNo} AND C.CLASS_CNT >= 1))as MEMBER_NM,MERCHANT_UID,CLASS_NM,AMOUNT,PAYMENT_DATE,CLASS_CNT, PAYMENT.TRAINER_NO 
       FROM PAYMENT JOIN CLASS_STATUS USING(MEMBER_NO) JOIN MEMBER USING(MEMBER_NO)
       WHERE MEMBER_NO=#{memberNo}
+   </select> -->
+   
+   
+   <select id="myPassList" parameterType="MyPass" resultMap="myPassResultSet">
+      	SELECT M.MEMBER_NM, P.*, J.CLASS_CNT FROM PAYMENT P
+		JOIN MEMBER M ON(M.MEMBER_NO=P.TRAINER_NO) JOIN CLASS_STATUS J ON(J.MEMBER_NO=P.MEMBER_NO)
+		WHERE P.TRAINER_NO IN (SELECT TRAINER_NO FROM CLASS_STATUS WHERE MEMBER_NO=#{memberNo})
+		AND P.MEMBER_NO = #{memberNo} AND J.TRAINER_NO = P.TRAINER_NO
    </select>
+   
    
    <!-- 아이디찾기 -->
    <select id="findId" parameterType="string" resultType="string">
