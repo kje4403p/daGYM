@@ -274,7 +274,7 @@
 							
 							$divout.append($divin);
 							
-							if(loginMember == $click.parent().children().eq(2).text().trim()){
+							if(loginMember == $click.parent().children().eq(3).text().trim()){
 								/* var url = "location.href="'+$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val()+'""; */
 									var updateUrl = "location.href="+"'../faq/"+  +$("#bType").val()+"/"+boardNo+"/update?cp="+$("#cp").val()+"'";
 									var deleteUrl = "location.href="+"'"+  +$("#bType").val()+"/"+boardNo+"/delete?cp="+$("#cp").val()+"'";

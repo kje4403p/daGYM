@@ -453,5 +453,6 @@ body {
 }
 
 .flux{
-	margin-left: 0px;
+	margin-left: -200px;
+	width: 150px;
 }
