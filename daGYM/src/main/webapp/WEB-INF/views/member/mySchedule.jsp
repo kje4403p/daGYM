@@ -185,8 +185,16 @@
                     </div>
                     <div class="row mb-3 form-row">
                     <div id="reservation">
-                   		 <c:if test="${loginMember.memberGrade == 'G'}">
+                    <c:set var="1" value="${classStatus.classCnt}"/>
+                    	 <script>
+                   		 console.log(1);
+                   		 </script>
+                   		 <c:if test="${loginMember.memberGrade == 'G' &&  classStatus!=null}">
+                   	
 							<a  class="primary-btn signup-btn" onclick="window.open('${contextPath}/trainer/trainerResulvation/${classStatus.trainerNo}','트레이너 예약','width=1300,height=850,left=200,top=100')">트레이너 예약</a>
+						 </c:if>
+						  <c:if test="${loginMember.memberGrade == 'G' && classStatus.classCnt==null}">
+						
 						 </c:if>
 					</div>
                 <table align="" id="calendar" style="margin-left: 160px;">

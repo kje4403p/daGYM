@@ -112,7 +112,7 @@ public class MemberController {
                model.addAttribute("myPt",myPt);
                model.addAttribute("trainer",trainer);
                model.addAttribute("classStatus",classStatus);
-               
+              
             }else if(memberGrade.equals("T")) {
                List<TrainerSchedule> myPt = memberService.myTPt(memberNo);
                 for (int i = 0; i < myPt.size(); i++) {
