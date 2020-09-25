@@ -189,16 +189,19 @@ public class MemberController {
          // PT이용권/결제정보 화면 전환 메소드
          @RequestMapping("myPassList/{type}")
          public String memberPass(@PathVariable int type, @RequestParam(value="cp", required = false, defaultValue = "1") int cp, Model model) {
-         
+        	int trainerNo = 0;
             int memberNo =  ((Member)model.getAttribute("loginMember")).getMemberNo();
             com.kh.dagym.common.PageInfo pInfo = memberService.myPassPagination(type, cp, memberNo);
             List<MyPass> MyPassList = memberService.MyPassList(memberNo,pInfo);
-            int trainerNo= MyPassList.get(0).getTrainerNo();
+            if (MyPassList.size() != 0) {
+            	trainerNo= MyPassList.get(0).getTrainerNo();
+            	model.addAttribute("trainerNo",trainerNo);
+            }
             List<reservationCancel> cancel = memberService.Cancel(memberNo);
             model.addAttribute("myPassList", MyPassList);
             model.addAttribute("cancel", cancel);
             model.addAttribute("pInfo",pInfo);
-            model.addAttribute("trainerNo",trainerNo);
+            
             return "member/memberPass";
          }
          

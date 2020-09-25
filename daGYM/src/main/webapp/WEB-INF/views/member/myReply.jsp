@@ -40,7 +40,7 @@
                         
                         <c:when test="${empty myReplyList}">
 		                     <tr>
-		                        <td colspan="6">작성하신 댓글이 없습니다.</td>
+		                        <td style ="text-align: center" colspan="6">작성하신 댓글이 없습니다.</td>
 		                     </tr>
                  		 </c:when>
                  		 <c:otherwise>
