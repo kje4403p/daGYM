@@ -103,6 +103,7 @@
                 	<table class="table" id="table">
                 
                 		<tr>
+                			<td>트레이너 번호</td>
                 			<td style ="text-align: center">결제 번호</td>
                 			<td style ="text-align: center">상품명</td>
                 			<td style ="text-align: center">결제 금액</td>
@@ -121,6 +122,7 @@
                  		 <c:otherwise>
                      	 <c:forEach var="pass" items="${myPassList}">
                         <tr>
+                        	<td>${pass.trainerNo}</td>
                         	<td style ="text-align: center">${pass.merchantUid}</td>
                         	<td style ="text-align: center">${pass.classNm} 회권</td>
                         	<td style ="text-align: center">${pass.amount}</td>
@@ -225,13 +227,15 @@ function closeModal(){
 	$('#modal').hide();
 };
 
+var trNo="";
 
 	$(document).ready(function (){
 		var size = $("#table tr").length;
 		var memberNo = ${loginMember.memberNo}
 		for(var i=0 ; i<size-1 ; i++){
-			var mUid=$("table tr").eq(i+1).children().eq(0).text(); // 결제번호
-			var $btn = $("table tr").eq(i+1).children().eq(6); // 버튼영역
+	
+			var mUid=$("table tr").eq(i+1).children().eq(1).text(); // 결제번호
+			var $btn = $("table tr").eq(i+1).children().eq(7); // 버튼영역
 			var $button=$("<button>").addClass("btn btn-primary btn-rounded reviewbtn").attr({"name":"review","type":"button"}).text("리뷰작성하기"); // 버튼
 			(function(i){
 				$.ajax({
@@ -250,17 +254,19 @@ function closeModal(){
 						console.log("실패")
 					}
 				})
-			
 				})(i)
 			
 			
 		}
 		
 		$(".reviewbtn").on("click",function(){
-			var mUid = $(this).parent().parent().children().eq(0).text();
+			trNo = $(this).parent().parent().children().eq(0).text();
+			var mUid = $(this).parent().parent().children().eq(1).text();
 			console.log("uid"+mUid)
+			console.log("trNo :" + trNo)
 			 $('#modal').show();
-			$("#mUid").val(mUid)
+			$("#mUid").val(mUid);
+			$("#trNo").val(trNo);
 		})
 		
 		
@@ -320,8 +326,9 @@ function closeModal(){
 				alert("내용을 입력해주세요.")
 			}else{
 			var url = "../insertReview";
-			var no = ${trainerNo};
-			
+			var no = trNo;
+			console.log(merchatUid);
+			console.log(no);
 			$.ajax({
 				url : url,
 				data :{"reviewContent": content,"reviewRating" : rating, "trainerNo" : no ,"merchantUid":merchatUid},
