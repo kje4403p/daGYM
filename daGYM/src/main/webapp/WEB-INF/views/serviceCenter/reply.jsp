@@ -92,13 +92,13 @@ hr{
 	<!-- 댓글 작성 부분 -->
 	<div class="replyWrite">
 		<table align="center">
-			<tr>
+			<!-- <tr>
 				<td id="replyContentArea"><textArea rows="3" id="replyContent"></textArea>
 				</td>
 				<td id="replyBtnArea">
 					<button class="btn btn-primary" id="addReply">댓글<br>등록</button>
 				</td>
-			</tr>
+			</tr> -->
 		</table>
 	</div>
 
@@ -171,11 +171,11 @@ function selectReplyList(){
 				var $btnArea = $("<div>").addClass("btnArea");
 				
 				// 로그인 되어 있는 경우에 답글 버튼 추가
-				if(loginMemberId != ""){
+				/* if(loginMemberId != ""){
 					// ** 추가되는 댓글에 onclick 이벤트를 부여하여 버튼 클릭 시 답글창을 생성하는 함수를 이벤트 핸들러로 추가함. 
 					var $reply2 = $("<button>").addClass("btn btn-sm btn-primary ml-1 reply2").text("답글").attr("onclick", "addReply2Area(this, "+rList[i].parentReplyNo+")");
 					$btnArea.append($reply2);																	//onclick="addReply2Area(this,1)"  // 답글 작성 창 추가
-				}
+				} */
 				
 				// 현재 댓글의 작성자와 로그인한 멤버의 아이디가 같을 때 버튼 추가
 				if(rList[i].memberId == loginMemberId){
