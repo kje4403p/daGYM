@@ -44,5 +44,6 @@ public class ClassStatus {
 	public String toString() {
 		return "ClassStatus [memberNo=" + memberNo + ", trainerNo=" + trainerNo + ", classCnt=" + classCnt + "]";
 	}
-	
+
+
 }

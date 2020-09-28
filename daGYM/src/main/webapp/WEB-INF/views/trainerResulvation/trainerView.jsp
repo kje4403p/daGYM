@@ -332,7 +332,7 @@
                    
                            <c:set var="trainerNo" value="${trainer.trainerNo}"/>
                         <c:choose>
-                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0 || classStatus.classCnt==null}">
+                           <c:when test="${(classStatus.trainerNo == trainer.trainerNo && classStatus.classCnt==0 )|| classStatus.classCnt==null}">
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
                                  <c:param name="classNm" value="5"/>
                               </c:url>
@@ -357,7 +357,7 @@
                        
                            <c:set var="trainerNo" value="${trainer.trainerNo}"/>
                         <c:choose>
-                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0 || classStatus.classCnt==null }">
+                           <c:when test="${(classStatus.trainerNo == trainer.trainerNo && classStatus.classCnt==0 ) || classStatus.classCnt==null }">
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
                                  <c:param name="classNm" value="10"/>
                               </c:url>
@@ -384,14 +384,17 @@
                         
                            <c:set var="trainerNo" value="${trainer.trainerNo}"/>
                         <c:choose>
-                           <c:when test="${classStatus.trainerNo == trainer.trainerNo || classStatus.classCnt==0 || classStatus.classCnt==null}">
+                           <c:when test="${(classStatus.trainerNo == trainer.trainerNo && classStatus.classCnt==0 )|| classStatus.classCnt==null}">
+                           	
                                  <c:url var="url" value="../paymentView/${trainer.trainerNo }">
                                  <c:param name="classNm" value="20"/>
                               </c:url>
+                            
                                     <c:if test="${loginMember.memberGrade == 'G'}">
                                       <button onclick="location.href='${url}' " class="primary-btn membership-btn" id="order">결제하기</button>
                                </c:if>
                                 </c:when>
+                                
                                 <c:otherwise>
                                 <p> 다른 트레이너 이용권을 모두 사용해야<br> 결제하실 수  있습니다.</p>
                                 </c:otherwise>
