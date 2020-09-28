@@ -221,6 +221,8 @@ public class MemberServiceImpl implements MemberService{
     					List<Integer> list = new ArrayList<Integer>();
     					list = trainerDAO.selectTrainerNo();
     					for(int i=0; i<list.size(); i++) {
+    						System.out.println("list.get(i) : "  + list.get(i));
+    						
     						if(list.get(i) == tr.getTrainerNo()) {
     							Trainer tt = trainerDAO.selectGrade(tr.getTrainerNo());
     							tr.setReviewGrade(tt.getReviewGrade());

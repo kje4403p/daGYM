@@ -66,7 +66,6 @@ public class LoginFilter implements Filter{
 		// 요청 경로 확인
 		//String path = req.getRequestURI().substring((req.getContextPath()+"/member/").length());
 		String path = req.getRequestURI().substring((req.getContextPath()).length());
-		System.out.println(path);
 		// 로그인 여부 확인
 		boolean isLogin = ((Member)session.getAttribute("loginMember") != null);
 		
