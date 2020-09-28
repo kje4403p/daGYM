@@ -184,6 +184,12 @@ public class TrainerDAO {
 		return sqlSession.selectList("trainerMapper.bestList",null);
 	}
 
+
+
+	public int deleteCoupon(int memberNo) {
+		return sqlSession.delete("trainerMapper.deleteCoupon",memberNo);
+	}
+
 	
 
 }

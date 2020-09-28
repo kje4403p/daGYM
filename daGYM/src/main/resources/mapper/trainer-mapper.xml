@@ -232,4 +232,7 @@ WHERE ROWNUM<=3 AND FILE_LEVEL=0  )ORDER BY TRAINER_GRADE DESC
 
 	</select>
   
+  <delete id="deleteCoupon" parameterType="_int">
+ 	DELETE FROM CLASS_STATUS WHERE MEMBER_NO=#{memberNo} AND CLASS_CNT=0
+  </delete>
 </mapper>

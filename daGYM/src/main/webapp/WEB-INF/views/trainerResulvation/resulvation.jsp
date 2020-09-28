@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			 var a = "<%=a%>";
 			 var b = "<%=b%>";
 			 console.log(a);
-			 console.log(scheduleTime3);
+		
 			 if(a==scheduleTime3&&b==${trainerNo}){
 					alert("이미 예약되어있는 시간입니다.");
 					return false;
@@ -236,6 +236,9 @@ opener.parent.location="${contextPath}/member/mySchedule";
 
 	opener.parent.location.reload();
 
+	opener.parent.location="${contextPath}/trainer/trainerView/${trainerNo}";
+
+	opener.parent.location.reload();
 
 </script>
 

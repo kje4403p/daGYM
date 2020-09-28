@@ -125,6 +125,15 @@ public class TrainerController {
 	 public String paymentView(@PathVariable int trainerNo, @RequestParam("classNm") int classNm,
 				Model model	) {
 		// 트레이너 가격, 이름 조회
+		 Member loginMember = (Member)model.getAttribute("loginMember");
+		 int memberNo= loginMember.getMemberNo();
+		int result = trainerService.deleteCoupon(memberNo);
+		   
+	      String status = null;
+	      String msg = null;
+	      
+			
+		
 		Trainer trainer = trainerService.selectTrainer(trainerNo);
 		int price = trainer.getTrainerPrice();
 		
@@ -133,8 +142,39 @@ public class TrainerController {
 		model.addAttribute("trainer",trainer);
 		model.addAttribute("classNm",classNm);
 		model.addAttribute("price", trainer.getTrainerPrice());
+		
 		return "trainerResulvation/payView";
 		}
+	 
+	 @RequestMapping("paymentView2/{trainerNo}")
+	 public String paymentView2(@PathVariable int trainerNo, @RequestParam("classNm") int classNm,
+				Model model	) {
+		// 트레이너 가격, 이름 조회
+		 Member loginMember = (Member)model.getAttribute("loginMember");
+		 int memberNo= loginMember.getMemberNo();
+		int result = trainerService.deleteCoupon(memberNo);
+		   
+	      String status = null;
+	      String msg = null;
+	      
+		if(result>0) {
+			
+		
+		Trainer trainer = trainerService.selectTrainer(trainerNo);
+		int price = trainer.getTrainerPrice();
+		
+		trainer.setTrainerPrice(price*classNm);
+		
+		model.addAttribute("trainer",trainer);
+		model.addAttribute("classNm",classNm);
+		model.addAttribute("price", trainer.getTrainerPrice());
+		}else {
+			  status= "error";
+		        msg = "트레이너 등록 실패";
+		}
+		return "trainerResulvation/payView";
+		}
+	 
 	 
 	 // 결제하기
 	 @ResponseBody

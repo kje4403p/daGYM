@@ -91,6 +91,8 @@ public interface TrainerService {
 
 	List<TrainerAttachment> bestThumbnailList(List<Trainer> trainerList);
 
+	int deleteCoupon(int memberNo);
+
 
 
 

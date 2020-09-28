@@ -170,6 +170,7 @@ public class TrainerServiceImpl implements TrainerService{
 	@Override
 	public int insertCoupon(Payment payment) {
 		int result = trainerDAO.insertCoupon(payment);
+		
 		return result;
 	}
 	// 거래 고유번호 삽입 구현
@@ -263,6 +264,11 @@ public class TrainerServiceImpl implements TrainerService{
 		@Override
 		public List<TrainerAttachment> bestThumbnailList(List<Trainer> trainerList) {
 			return trainerDAO.bestThumbnailList(trainerList);
+		}
+
+		@Override
+		public int deleteCoupon(int memberNo) {
+			return trainerDAO.deleteCoupon(memberNo);
 		}
 	
 
